@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TokenTestComponent } from './components/token-test/token-test.component';
-import { ApiTestComponent } from './components/api-test/api-test.component';
+import { FirebaseTokenTestComponent } from './components/firebase-token-test/firebase-token-test.component';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +11,7 @@ import { ApiTestComponent } from './components/api-test/api-test.component';
       </header>
       
       <main class="app-main">
-        <app-token-test></app-token-test>
-        <app-api-test></app-api-test>
+        <app-firebase-token-test></app-firebase-token-test>
         <router-outlet></router-outlet>
       </main>
     </div>
@@ -37,7 +35,7 @@ import { ApiTestComponent } from './components/api-test/api-test.component';
     }
   `],
   standalone: true,
-  imports: [RouterOutlet, TokenTestComponent, ApiTestComponent]
+  imports: [RouterOutlet, FirebaseTokenTestComponent]
 })
 export class App {
   protected readonly title = signal('warranty-tracker-web');

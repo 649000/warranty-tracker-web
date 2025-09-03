@@ -7,8 +7,3 @@ export const routes: Routes = [
   { path: 'companies', component: CompanyListComponent },
   { path: '**', redirectTo: '' }
 ];
-```
-
-We also need to update your app.config.ts to include FormsModule:
-
-src/app/app.config.ts

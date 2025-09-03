@@ -18,7 +18,7 @@ import { RouterLink } from '@angular/router';
       <div class="info-section">
         <h2>Getting Started</h2>
         <p>Welcome to the Warranty Tracker application. Use the navigation links above to manage your warranties and claims.</p>
-        <p>Don't forget to set your Firebase token in the token testing component for authenticated requests.</p>
+        <p>Use the Firebase Token component to sign in and retrieve your authentication token for API requests.</p>
       </div>
     </div>
   `,
@@ -62,6 +62,3 @@ import { RouterLink } from '@angular/router';
 export class DashboardComponent {
   constructor() { }
 }
-```
-
-src/app/components/company/company-list/company-list.component.ts
