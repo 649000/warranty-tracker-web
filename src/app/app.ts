@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TokenTestComponent } from './components/token-test/token-test.component';
+import { ApiTestComponent } from './components/api-test/api-test.component';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { TokenTestComponent } from './components/token-test/token-test.component
       
       <main class="app-main">
         <app-token-test></app-token-test>
+        <app-api-test></app-api-test>
         <router-outlet></router-outlet>
       </main>
     </div>
@@ -35,18 +37,8 @@ import { TokenTestComponent } from './components/token-test/token-test.component
     }
   `],
   standalone: true,
-  imports: [RouterOutlet, TokenTestComponent]
+  imports: [RouterOutlet, TokenTestComponent, ApiTestComponent]
 })
 export class App {
   protected readonly title = signal('warranty-tracker-web');
 }
-```
-
-These changes will:
-1. Create a dashboard component with navigation links
-2. Create a company list component with search functionality
-3. Update your routes to include these components
-4. Add FormsModule to your app config for ngModel support
-5. Update your main app component to include the token test component and router outlet
-
-You can now navigate to `/` for the dashboard and `/companies` to see the company list. The components are designed to work without authentication enforcement, allowing for easy local testing.

@@ -1,7 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-// Import provideHttpClient
 import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { routes } from './app.routes';
 
@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    // Add provideHttpClient to the providers array
-    provideHttpClient()
+    provideHttpClient(),
+    FormsModule
   ]
 };
