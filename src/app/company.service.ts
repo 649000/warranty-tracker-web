@@ -20,9 +20,8 @@ export class CompanyService extends BaseApiService<Company, number> {
     super(http, 'http://localhost:8080/api', 'company');
   }
 
-  // You can add company-specific methods here if needed
-  // For example, if there's a special endpoint like /api/company/search
-  // searchCompanies(query: string): Observable<Company[]> {
-  //   return this.http.get<Company[]>(`${this.baseUrl}/${this.endpoint}/search?query=${query}`);
-  // }
+  // Search companies by name
+  searchCompanies(name: string): Observable<Company[]> {
+    return this.http.get<Company[]>(`${this.baseUrl}/${this.endpoint}/search?name=${name}`);
+  }
 }
