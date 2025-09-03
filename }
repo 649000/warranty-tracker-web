@@ -1,0 +1,4 @@
+
+Let's also update the dashboard component to include a link to the token testing instructions:
+
+src/app/components/dashboard/dashboard.component.ts
