@@ -1,6 +1,7 @@
-import { Injectable, signal, computed, Signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, signal, computed, Signal, inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TokenService } from './token.service';
 
 /**
  * A generic base service for handling common CRUD operations.
@@ -13,6 +14,9 @@ import { Observable } from 'rxjs';
 export class BaseApiService<T, ID> {
   protected readonly baseUrl: string;
   protected readonly endpoint: string;
+  
+  // Inject TokenService to access token
+  protected readonly tokenService = inject(TokenService);
 
   // Generic signal for storing a list of entities
   private readonly _entities = signal<T[]>([]);
@@ -32,29 +36,43 @@ export class BaseApiService<T, ID> {
   // Expose HttpClient instance for use in subclasses
   protected readonly http: HttpClient;
 
+  // Helper method to create headers with auth token if available
+  protected getHeaders(includeAuth: boolean = true): HttpHeaders {
+    let headers = new HttpHeaders();
+    
+    if (includeAuth) {
+      const token = this.tokenService.token();
+      if (token) {
+        headers = headers.set('Authorization', `Bearer ${token}`);
+      }
+    }
+    
+    return headers;
+  }
+
   // Method to fetch all entities
-  getAll(): Observable<T[]> {
-    return this.http.get<T[]>(`${this.baseUrl}/${this.endpoint}`);
+  getAll(includeAuth: boolean = true): Observable<T[]> {
+    return this.http.get<T[]>(`${this.baseUrl}/${this.endpoint}`, { headers: this.getHeaders(includeAuth) });
   }
 
   // Method to fetch a single entity by ID
-  getById(id: ID): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${this.endpoint}/${id}`);
+  getById(id: ID, includeAuth: boolean = true): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${this.endpoint}/${id}`, { headers: this.getHeaders(includeAuth) });
   }
 
   // Method to create a new entity
-  create(entity: Omit<T, 'id'>): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}/${this.endpoint}`, entity);
+  create(entity: Omit<T, 'id'>, includeAuth: boolean = true): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}/${this.endpoint}`, entity, { headers: this.getHeaders(includeAuth) });
   }
 
   // Method to update an existing entity
-  update(entity: T & { id: ID }): Observable<T> {
-    return this.http.put<T>(`${this.baseUrl}/${this.endpoint}/${entity.id}`, entity);
+  update(entity: T & { id: ID }, includeAuth: boolean = true): Observable<T> {
+    return this.http.put<T>(`${this.baseUrl}/${this.endpoint}/${entity.id}`, entity, { headers: this.getHeaders(includeAuth) });
   }
 
   // Method to delete an entity
-  delete(id: ID): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${this.endpoint}/${id}`);
+  delete(id: ID, includeAuth: boolean = true): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${this.endpoint}/${id}`, { headers: this.getHeaders(includeAuth) });
   }
 
   // Getter for the entities signal (read-only)
@@ -63,8 +81,8 @@ export class BaseApiService<T, ID> {
   }
 
   // Example method to load entities into the signal (to be called by subclasses)
-  protected loadEntities(): void {
-    this.getAll().subscribe({
+  protected loadEntities(includeAuth: boolean = true): void {
+    this.getAll(includeAuth).subscribe({
       next: (entities) => this._entities.set(entities),
       error: (error) => console.error(`Error loading ${this.endpoint}:`, error)
     });

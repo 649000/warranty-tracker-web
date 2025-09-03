@@ -20,12 +20,37 @@ export class UserService extends BaseApiService<User, number> {
   }
 
   // Create user (POST /api/user)
-  createUser(user: Omit<User, 'id'>): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/${this.endpoint}`, user);
+  createUser(user: Omit<User, 'id'>, includeAuth: boolean = true): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/${this.endpoint}`, user, { 
+      headers: this.getHeaders(includeAuth) 
+    });
   }
 
   // Update user (PUT /api/user)
-  updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/${this.endpoint}`, user);
+  updateUser(user: User, includeAuth: boolean = true): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/${this.endpoint}`, user, { 
+      headers: this.getHeaders(includeAuth) 
+    });
+  }
+  
+  // Override base methods to support token handling
+  getAll(includeAuth: boolean = true): Observable<User[]> {
+    return super.getAll(includeAuth);
+  }
+  
+  getById(id: number, includeAuth: boolean = true): Observable<User> {
+    return super.getById(id, includeAuth);
+  }
+  
+  create(user: Omit<User, 'id'>, includeAuth: boolean = true): Observable<User> {
+    return super.create(user, includeAuth);
+  }
+  
+  update(user: User, includeAuth: boolean = true): Observable<User> {
+    return super.update(user, includeAuth);
+  }
+  
+  delete(id: number, includeAuth: boolean = true): Observable<void> {
+    return super.delete(id, includeAuth);
   }
 }

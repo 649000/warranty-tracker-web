@@ -22,39 +22,74 @@ export class WarrantyService extends BaseApiService<Warranty, number> {
   }
 
   // Get user's warranties by status
-  getWarrantiesByStatus(status: string): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/status/${status}`);
+  getWarrantiesByStatus(status: string, includeAuth: boolean = true): Observable<Warranty[]> {
+    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/status/${status}`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
   }
 
   // Get user's expiring warranties
-  getExpiringWarranties(days: number): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/expiring?days=${days}`);
+  getExpiringWarranties(days: number, includeAuth: boolean = true): Observable<Warranty[]> {
+    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/expiring?days=${days}`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
   }
 
   // --- Admin endpoints ---
 
   // Get all warranties (admin only)
-  getAllWarranties(): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/all`);
+  getAllWarranties(includeAuth: boolean = true): Observable<Warranty[]> {
+    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/all`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
   }
 
   // Get warranties by user ID (admin only)
-  getWarrantiesByUserId(userId: number): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/user/${userId}`);
+  getWarrantiesByUserId(userId: number, includeAuth: boolean = true): Observable<Warranty[]> {
+    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/user/${userId}`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
   }
 
   // Get warranties by company ID (admin only)
-  getWarrantiesByCompanyId(companyId: number): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/company/${companyId}`);
+  getWarrantiesByCompanyId(companyId: number, includeAuth: boolean = true): Observable<Warranty[]> {
+    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/company/${companyId}`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
   }
 
   // Get expired warranties (admin only)
-  getExpiredWarranties(): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/expired`);
+  getExpiredWarranties(includeAuth: boolean = true): Observable<Warranty[]> {
+    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/expired`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
   }
 
   // Get expiring warranties by date range (admin only)
-  getExpiringWarrantiesByDateRange(startDate: string, endDate: string): Observable<Warranty[]> {
-    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/expiring?startDate=${startDate}&endDate=${endDate}`);
+  getExpiringWarrantiesByDateRange(startDate: string, endDate: string, includeAuth: boolean = true): Observable<Warranty[]> {
+    return this.http.get<Warranty[]>(`${this.baseUrl}/${this.endpoint}/admin/expiring?startDate=${startDate}&endDate=${endDate}`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
+  }
+  
+  // Override base methods to support token handling
+  getAll(includeAuth: boolean = true): Observable<Warranty[]> {
+    return super.getAll(includeAuth);
+  }
+  
+  getById(id: number, includeAuth: boolean = true): Observable<Warranty> {
+    return super.getById(id, includeAuth);
+  }
+  
+  create(warranty: Omit<Warranty, 'id'>, includeAuth: boolean = true): Observable<Warranty> {
+    return super.create(warranty, includeAuth);
+  }
+  
+  update(warranty: Warranty, includeAuth: boolean = true): Observable<Warranty> {
+    return super.update(warranty, includeAuth);
+  }
+  
+  delete(id: number, includeAuth: boolean = true): Observable<void> {
+    return super.delete(id, includeAuth);
   }
 }

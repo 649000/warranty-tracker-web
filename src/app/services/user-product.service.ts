@@ -22,7 +22,30 @@ export class UserProductService extends BaseApiService<UserProduct, number> {
   }
 
   // Get user's products by product ID
-  getUserProductsByProductId(productId: number): Observable<UserProduct[]> {
-    return this.http.get<UserProduct[]>(`${this.baseUrl}/${this.endpoint}/product/${productId}`);
+  getUserProductsByProductId(productId: number, includeAuth: boolean = true): Observable<UserProduct[]> {
+    return this.http.get<UserProduct[]>(`${this.baseUrl}/${this.endpoint}/product/${productId}`, { 
+      headers: this.getHeaders(includeAuth) 
+    });
+  }
+  
+  // Override base methods to support token handling
+  getAll(includeAuth: boolean = true): Observable<UserProduct[]> {
+    return super.getAll(includeAuth);
+  }
+  
+  getById(id: number, includeAuth: boolean = true): Observable<UserProduct> {
+    return super.getById(id, includeAuth);
+  }
+  
+  create(userProduct: Omit<UserProduct, 'id'>, includeAuth: boolean = true): Observable<UserProduct> {
+    return super.create(userProduct, includeAuth);
+  }
+  
+  update(userProduct: UserProduct, includeAuth: boolean = true): Observable<UserProduct> {
+    return super.update(userProduct, includeAuth);
+  }
+  
+  delete(id: number, includeAuth: boolean = true): Observable<void> {
+    return super.delete(id, includeAuth);
   }
 }
