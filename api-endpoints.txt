@@ -1,0 +1,54 @@
+# Warranty Tracker API Endpoints
+
+## User Endpoints
+POST /api/user - Create user
+PUT /api/user - Update user
+
+## Company Endpoints
+GET /api/company - Get all companies
+GET /api/company/{id} - Get company by ID
+GET /api/company/search?name={name} - Search companies by name
+POST /api/company - Create company (admin only)
+PUT /api/company/{id} - Update company (admin only)
+DELETE /api/company/{id} - Delete company (admin only)
+
+## Product Endpoints
+GET /api/product - Get all products
+GET /api/product/{id} - Get product by ID
+GET /api/product/search?name={name}&brand={brand}&modelNumber={modelNumber} - Search products
+POST /api/product - Create product (admin only)
+PUT /api/product/{id} - Update product (admin only)
+DELETE /api/product/{id} - Delete product (admin only)
+
+## User Product Endpoints
+GET /api/user-product - Get user's products
+GET /api/user-product/{id} - Get user product by ID
+GET /api/user-product/product/{productId} - Get user's products by product ID
+POST /api/user-product - Create user product
+PUT /api/user-product/{id} - Update user product
+DELETE /api/user-product/{id} - Delete user product
+
+## Warranty Endpoints
+GET /api/warranty - Get user's warranties
+GET /api/warranty/{id} - Get warranty by ID
+GET /api/warranty/status/{status} - Get user's warranties by status
+GET /api/warranty/expiring?days={days} - Get user's expiring warranties
+POST /api/warranty - Create warranty
+PUT /api/warranty/{id} - Update warranty
+DELETE /api/warranty/{id} - Delete warranty
+
+## Warranty Admin Endpoints
+GET /api/warranty/admin/all - Get all warranties (admin only)
+GET /api/warranty/admin/user/{userId} - Get warranties by user ID (admin only)
+GET /api/warranty/admin/company/{companyId} - Get warranties by company ID (admin only)
+GET /api/warranty/admin/expired - Get expired warranties (admin only)
+GET /api/warranty/admin/expiring?startDate={startDate}&endDate={endDate} - Get expiring warranties (admin only)
+
+## Claim Endpoints
+GET /api/claim - Get user's claims
+GET /api/claim/{id} - Get claim by ID
+GET /api/claim/warranty/{warrantyId} - Get claims by warranty ID
+GET /api/claim/status/{status} - Get user's claims by status
+POST /api/claim - Create claim
+PUT /api/claim/{id} - Update claim
+DELETE /api/claim/{id} - Delete claim
