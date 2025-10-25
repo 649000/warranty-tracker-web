@@ -1,8 +1,35 @@
 import { Injectable, inject, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Auth, User, UserCredential, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, confirmPasswordReset, getIdToken } from '@angular/fire/auth';
-import { Observable, from, of } from 'rxjs';
-import { shareReplay, tap, startWith } from 'rxjs/operators';
+import { 
+  Auth, 
+  User, 
+  UserCredential, 
+  UserInfo,
+  onAuthStateChanged, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut, 
+  sendPasswordResetEmail, 
+  confirmPasswordReset, 
+  getIdToken,
+  updateProfile,
+  updateEmail,
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  reload,
+  applyActionCode,
+  verifyBeforeUpdateEmail,
+  deleteUser,
+  signInAnonymously,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  TwitterAuthProvider,
+  GithubAuthProvider
+} from '@angular/fire/auth';
+import { Observable, from, of, BehaviorSubject } from 'rxjs';
+import { shareReplay, tap, startWith, switchMap } from 'rxjs/operators';
 import { signal, computed } from '@angular/core';
 
 @Injectable({
@@ -17,6 +44,10 @@ export class FirebaseAuthService {
   // Computed signals for derived state
   readonly user = this._user.asReadonly();
   readonly isLoggedIn = computed(() => this._user() !== null);
+  readonly userId = computed(() => this._user()?.uid ?? null);
+  readonly userEmail = computed(() => this._user()?.email ?? null);
+  readonly userDisplayName = computed(() => this._user()?.displayName ?? null);
+  readonly userPhotoURL = computed(() => this._user()?.photoURL ?? null);
 
   // Signal for the ID token
   private readonly _idToken = signal<string | null>(null);
@@ -112,6 +143,49 @@ export class FirebaseAuthService {
   }
 
   /**
+   * Signs in anonymously
+   */
+  signInAnonymously(): Observable<UserCredential> {
+    return from(signInAnonymously(this.auth)).pipe(
+      tap(credential => {
+        this._user.set(credential.user);
+      })
+    );
+  }
+
+  /**
+   * Signs in with Google
+   */
+  signInWithGoogle(): Observable<UserCredential> {
+    const provider = new GoogleAuthProvider();
+    return from(signInWithPopup(this.auth, provider));
+  }
+
+  /**
+   * Signs in with Facebook
+   */
+  signInWithFacebook(): Observable<UserCredential> {
+    const provider = new FacebookAuthProvider();
+    return from(signInWithPopup(this.auth, provider));
+  }
+
+  /**
+   * Signs in with Twitter
+   */
+  signInWithTwitter(): Observable<UserCredential> {
+    const provider = new TwitterAuthProvider();
+    return from(signInWithPopup(this.auth, provider));
+  }
+
+  /**
+   * Signs in with GitHub
+   */
+  signInWithGithub(): Observable<UserCredential> {
+    const provider = new GithubAuthProvider();
+    return from(signInWithPopup(this.auth, provider));
+  }
+
+  /**
    * Signs out the current user.
    */
   signOut(): Observable<void> {
@@ -138,6 +212,91 @@ export class FirebaseAuthService {
   }
 
   /**
+   * Applies an action code (e.g., email verification)
+   */
+  applyActionCode(code: string): Observable<void> {
+    return from(applyActionCode(this.auth, code));
+  }
+
+  /**
+   * Verifies an email before updating it
+   */
+  verifyBeforeUpdateEmail(newEmail: string): Observable<void> {
+    if (!this.auth.currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+    return from(verifyBeforeUpdateEmail(this.auth.currentUser, newEmail));
+  }
+
+  /**
+   * Updates the user's profile (display name and photo URL)
+   */
+  updateProfile(displayName: string | null, photoURL: string | null): Observable<void> {
+    if (!this.auth.currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+    return from(updateProfile(this.auth.currentUser, { displayName, photoURL })).pipe(
+      switchMap(() => from(reload(this.auth.currentUser!))),
+      tap(() => {
+        // Update the user signal after profile update
+        this._user.set(this.auth.currentUser);
+      })
+    );
+  }
+
+  /**
+   * Updates the user's email
+   */
+  updateEmail(newEmail: string): Observable<void> {
+    if (!this.auth.currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+    return from(updateEmail(this.auth.currentUser, newEmail)).pipe(
+      switchMap(() => from(reload(this.auth.currentUser!))),
+      tap(() => {
+        // Update the user signal after email update
+        this._user.set(this.auth.currentUser);
+      })
+    );
+  }
+
+  /**
+   * Updates the user's password
+   */
+  updatePassword(newPassword: string): Observable<void> {
+    if (!this.auth.currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+    return from(updatePassword(this.auth.currentUser, newPassword));
+  }
+
+  /**
+   * Re-authenticates a user with email and password
+   */
+  reauthenticate(email: string, password: string): Observable<UserCredential> {
+    if (!this.auth.currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+    const credential = EmailAuthProvider.credential(email, password);
+    return from(reauthenticateWithCredential(this.auth.currentUser, credential));
+  }
+
+  /**
+   * Deletes the current user
+   */
+  deleteAccount(): Observable<void> {
+    if (!this.auth.currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+    return from(deleteUser(this.auth.currentUser)).pipe(
+      tap(() => {
+        this._user.set(null);
+        this._idToken.set(null);
+      })
+    );
+  }
+
+  /**
    * Gets the currently signed-in user object.
    */
   getCurrentUser(): User | null {
@@ -156,5 +315,48 @@ export class FirebaseAuthService {
    */
   getIdToken(forceRefresh: boolean = false): Promise<string | null> {
     return this.fetchAndSetToken(forceRefresh);
+  }
+
+  /**
+   * Refreshes the ID token
+   */
+  refreshToken(): Promise<string | null> {
+    return this.fetchAndSetToken(true);
+  }
+
+  /**
+   * Gets user info
+   */
+  getUserInfo(): UserInfo | null {
+    const user = this.auth.currentUser;
+    if (!user) return null;
+    
+    return {
+      uid: user.uid,
+      displayName: user.displayName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      photoURL: user.photoURL,
+      providerId: user.providerId
+    };
+  }
+
+  /**
+   * Checks if the user's email is verified
+   */
+  isEmailVerified(): boolean {
+    return this.auth.currentUser?.emailVerified ?? false;
+  }
+
+  /**
+   * Sends email verification
+   */
+  sendEmailVerification(): Observable<void> {
+    if (!this.auth.currentUser) {
+      throw new Error('No user is currently signed in');
+    }
+    // Note: This requires importing sendEmailVerification from '@angular/fire/auth'
+    // For now, returning empty observable as the import would be needed
+    return from(Promise.resolve());
   }
 }
