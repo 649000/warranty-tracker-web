@@ -1,14 +1,36 @@
 // Component to protect routes that require authentication
-// Currently unused - will be implemented later
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAuth } from '../context/auth.context';
+import { useRouter } from 'next/navigation';
+import { Loader } from './Loader';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  // For now, just render children without protection
+  const { isAuthenticated, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, loading, router]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return <>{children}</>;
 }
