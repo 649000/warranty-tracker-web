@@ -1,0 +1,973 @@
+# Warranty Tracker API Endpoints
+
+## User Endpoints
+
+### POST /api/user - Create user
+Creates a new user based on Firebase authentication data
+Request: No body required (uses Firebase token)
+Response: 
+{
+  "id": 1,
+  "firebaseUid": "firebase-uid-123",
+  "email": "user@example.com",
+  "displayName": "John Doe",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-01T10:00:00"
+}
+
+### GET /api/user - Get current user
+Retrieves the currently authenticated user
+Request: No body
+Response:
+{
+  "id": 1,
+  "firebaseUid": "firebase-uid-123",
+  "email": "user@example.com",
+  "displayName": "John Doe",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-01T10:00:00"
+}
+
+### PUT /api/user - Update user
+Updates the current user's information
+Request:
+{
+  "displayName": "Updated Name"
+}
+Response:
+{
+  "id": 1,
+  "firebaseUid": "firebase-uid-123",
+  "email": "user@example.com",
+  "displayName": "Updated Name",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-02T10:00:00"
+}
+
+### GET /api/user/admin/all - Get all users (admin only)
+Retrieves all users (admin only)
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "firebaseUid": "firebase-uid-123",
+    "email": "user@example.com",
+    "displayName": "John Doe",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+]
+
+### GET /api/user/admin/{id} - Get user by ID (admin only)
+Retrieves a specific user by ID (admin only)
+Request: No body
+Response:
+{
+  "id": 1,
+  "firebaseUid": "firebase-uid-123",
+  "email": "user@example.com",
+  "displayName": "John Doe",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-01T10:00:00"
+}
+
+### PUT /api/user/admin/{id} - Update user by ID (admin only)
+Updates a user by ID (admin only)
+Request:
+{
+  "email": "updated@example.com",
+  "displayName": "Updated Name"
+}
+Response:
+{
+  "id": 1,
+  "firebaseUid": "firebase-uid-123",
+  "email": "updated@example.com",
+  "displayName": "Updated Name",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-02T10:00:00"
+}
+
+### DELETE /api/user/admin/{id} - Delete user by ID (admin only)
+Deletes a user by ID (admin only)
+Request: No body
+Response: 204 No Content
+
+## Company Endpoints
+
+### GET /api/company - Get all companies
+Retrieves all companies
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "name": "Apple Inc.",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+]
+
+### GET /api/company/{id} - Get company by ID
+Retrieves a specific company by ID
+Request: No body
+Response:
+{
+  "id": 1,
+  "name": "Apple Inc.",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-01T10:00:00"
+}
+
+### GET /api/company/search?name={name} - Search companies by name
+Searches companies by name
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "name": "Apple Inc.",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+]
+
+### POST /api/company/admin - Create company (admin only)
+Creates a new company (admin only)
+Request:
+{
+  "name": "New Company"
+}
+Response:
+{
+  "id": 2,
+  "name": "New Company",
+  "createdAt": "2023-01-02T10:00:00",
+  "updatedAt": "2023-01-02T10:00:00"
+}
+
+### PUT /api/company/admin/{id} - Update company (admin only)
+Updates a company (admin only)
+Request:
+{
+  "name": "Updated Company Name"
+}
+Response:
+{
+  "id": 2,
+  "name": "Updated Company Name",
+  "createdAt": "2023-01-02T10:00:00",
+  "updatedAt": "2023-01-03T10:00:00"
+}
+
+### DELETE /api/company/admin/{id} - Delete company (admin only)
+Deletes a company (admin only)
+Request: No body
+Response: 204 No Content
+
+## Product Endpoints
+
+### GET /api/product - Get all products
+Retrieves all products
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "name": "iPhone 14",
+    "modelNumber": "A2890",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+]
+
+### GET /api/product/{id} - Get product by ID
+Retrieves a specific product by ID
+Request: No body
+Response:
+{
+  "id": 1,
+  "name": "iPhone 14",
+  "modelNumber": "A2890",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-01T10:00:00"
+}
+
+### GET /api/product/search?name={name}&brand={brand}&modelNumber={modelNumber} - Search products
+Searches products by name, brand, or model number
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "name": "iPhone 14",
+    "modelNumber": "A2890",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+]
+
+### POST /api/product/admin - Create product (admin only)
+Creates a new product (admin only)
+Request:
+{
+  "name": "New Product",
+  "modelNumber": "NP123"
+}
+Response:
+{
+  "id": 2,
+  "name": "New Product",
+  "modelNumber": "NP123",
+  "createdAt": "2023-01-02T10:00:00",
+  "updatedAt": "2023-01-02T10:00:00"
+}
+
+### PUT /api/product/admin/{id} - Update product (admin only)
+Updates a product (admin only)
+Request:
+{
+  "name": "Updated Product Name",
+  "modelNumber": "UP456"
+}
+Response:
+{
+  "id": 2,
+  "name": "Updated Product Name",
+  "modelNumber": "UP456",
+  "createdAt": "2023-01-02T10:00:00",
+  "updatedAt": "2023-01-03T10:00:00"
+}
+
+### DELETE /api/product/admin/{id} - Delete product (admin only)
+Deletes a product (admin only)
+Request: No body
+Response: 204 No Content
+
+## User Product Endpoints
+
+### GET /api/user-product - Get user's products
+Retrieves all products owned by the current user
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "serialNumber": "SN123456",
+    "purchaseDate": "2023-01-01",
+    "purchasePrice": 999.99,
+    "purchaseLocation": "Apple Store",
+    "receiptNumber": "R123456",
+    "notes": "Gift from family",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "product": {
+      "id": 1,
+      "name": "iPhone 14",
+      "modelNumber": "A2890",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/user-product/{id} - Get user product by ID
+Retrieves a specific user product by ID
+Request: No body
+Response:
+{
+  "id": 1,
+  "serialNumber": "SN123456",
+  "purchaseDate": "2023-01-01",
+  "purchasePrice": 999.99,
+  "purchaseLocation": "Apple Store",
+  "receiptNumber": "R123456",
+  "notes": "Gift from family",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-01T10:00:00",
+  "product": {
+    "id": 1,
+    "name": "iPhone 14",
+    "modelNumber": "A2890",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  },
+  "user": {
+    "id": 1,
+    "firebaseUid": "firebase-uid-123",
+    "email": "user@example.com",
+    "displayName": "John Doe",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+}
+
+### GET /api/user-product/product/{productId} - Get user's products by product ID
+Retrieves all user products for a specific product
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "serialNumber": "SN123456",
+    "purchaseDate": "2023-01-01",
+    "purchasePrice": 999.99,
+    "purchaseLocation": "Apple Store",
+    "receiptNumber": "R123456",
+    "notes": "Gift from family",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "product": {
+      "id": 1,
+      "name": "iPhone 14",
+      "modelNumber": "A2890",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### POST /api/user-product - Create user product
+Creates a new user product
+Request:
+{
+  "serialNumber": "SN789012",
+  "purchaseDate": "2023-02-01",
+  "purchasePrice": 899.99,
+  "purchaseLocation": "Online Store",
+  "receiptNumber": "R789012",
+  "notes": "Personal purchase",
+  "product": {
+    "id": 1
+  }
+}
+Response:
+{
+  "id": 2,
+  "serialNumber": "SN789012",
+  "purchaseDate": "2023-02-01",
+  "purchasePrice": 899.99,
+  "purchaseLocation": "Online Store",
+  "receiptNumber": "R789012",
+  "notes": "Personal purchase",
+  "createdAt": "2023-02-01T10:00:00",
+  "updatedAt": "2023-02-01T10:00:00",
+  "product": {
+    "id": 1,
+    "name": "iPhone 14",
+    "modelNumber": "A2890",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  },
+  "user": {
+    "id": 1,
+    "firebaseUid": "firebase-uid-123",
+    "email": "user@example.com",
+    "displayName": "John Doe",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+}
+
+### PUT /api/user-product/{id} - Update user product
+Updates a user product
+Request:
+{
+  "serialNumber": "SN789012-UPDATED",
+  "purchaseDate": "2023-02-01",
+  "purchasePrice": 899.99,
+  "purchaseLocation": "Updated Store",
+  "receiptNumber": "R789012",
+  "notes": "Updated notes"
+}
+Response:
+{
+  "id": 2,
+  "serialNumber": "SN789012-UPDATED",
+  "purchaseDate": "2023-02-01",
+  "purchasePrice": 899.99,
+  "purchaseLocation": "Updated Store",
+  "receiptNumber": "R789012",
+  "notes": "Updated notes",
+  "createdAt": "2023-02-01T10:00:00",
+  "updatedAt": "2023-02-02T10:00:00",
+  "product": {
+    "id": 1,
+    "name": "iPhone 14",
+    "modelNumber": "A2890",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  },
+  "user": {
+    "id": 1,
+    "firebaseUid": "firebase-uid-123",
+    "email": "user@example.com",
+    "displayName": "John Doe",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+}
+
+### DELETE /api/user-product/{id} - Delete user product
+Deletes a user product
+Request: No body
+Response: 204 No Content
+
+## Warranty Endpoints
+
+### GET /api/warranty - Get user's warranties
+Retrieves all warranties for the current user
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2024-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Standard warranty",
+    "status": "ACTIVE",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/warranty/{id} - Get warranty by ID
+Retrieves a specific warranty by ID
+Request: No body
+Response:
+{
+  "id": 1,
+  "startDate": "2023-01-01",
+  "endDate": "2024-01-01",
+  "warrantyPeriod": 12,
+  "warrantyType": "Manufacturer",
+  "notes": "Standard warranty",
+  "status": "ACTIVE",
+  "createdAt": "2023-01-01T10:00:00",
+  "updatedAt": "2023-01-01T10:00:00",
+  "user": {
+    "id": 1,
+    "firebaseUid": "firebase-uid-123",
+    "email": "user@example.com",
+    "displayName": "John Doe",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  },
+  "userProduct": {
+    "id": 1,
+    "serialNumber": "SN123456",
+    "purchaseDate": "2023-01-01",
+    "purchasePrice": 999.99,
+    "purchaseLocation": "Apple Store",
+    "receiptNumber": "R123456",
+    "notes": "Gift from family",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  },
+  "company": {
+    "id": 1,
+    "name": "Apple Inc.",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+}
+
+### GET /api/warranty/status/{status} - Get user's warranties by status
+Retrieves warranties for the current user by status
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2024-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Standard warranty",
+    "status": "ACTIVE",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/warranty/expiring?days={days} - Get user's expiring warranties
+Retrieves warranties expiring within specified days
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2024-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Standard warranty",
+    "status": "ACTIVE",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### POST /api/warranty - Create warranty
+Creates a new warranty
+Request:
+{
+  "startDate": "2023-02-01",
+  "endDate": "2024-02-01",
+  "warrantyPeriod": 12,
+  "warrantyType": "Manufacturer",
+  "notes": "Extended warranty",
+  "userProduct": {
+    "id": 2
+  },
+  "company": {
+    "id": 1
+  }
+}
+Response:
+{
+  "id": 2,
+  "startDate": "2023-02-01",
+  "endDate": "2024-02-01",
+  "warrantyPeriod": 12,
+  "warrantyType": "Manufacturer",
+  "notes": "Extended warranty",
+  "status": "ACTIVE",
+  "createdAt": "2023-02-01T10:00:00",
+  "updatedAt": "2023-02-01T10:00:00",
+  "user": {
+    "id": 1,
+    "firebaseUid": "firebase-uid-123",
+    "email": "user@example.com",
+    "displayName": "John Doe",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  },
+  "userProduct": {
+    "id": 2,
+    "serialNumber": "SN789012",
+    "purchaseDate": "2023-02-01",
+    "purchasePrice": 899.99,
+    "purchaseLocation": "Online Store",
+    "receiptNumber": "R789012",
+    "notes": "Personal purchase",
+    "createdAt": "2023-02-01T10:00:00",
+    "updatedAt": "2023-02-01T10:00:00"
+  },
+  "company": {
+    "id": 1,
+    "name": "Apple Inc.",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+}
+
+### PUT /api/warranty/{id} - Update warranty
+Updates a warranty
+Request:
+{
+  "startDate": "2023-02-01",
+  "endDate": "2024-02-01",
+  "warrantyPeriod": 12,
+  "warrantyType": "Extended",
+  "notes": "Updated warranty notes"
+}
+Response:
+{
+  "id": 2,
+  "startDate": "2023-02-01",
+  "endDate": "2024-02-01",
+  "warrantyPeriod": 12,
+  "warrantyType": "Extended",
+  "notes": "Updated warranty notes",
+  "status": "ACTIVE",
+  "createdAt": "2023-02-01T10:00:00",
+  "updatedAt": "2023-02-02T10:00:00",
+  "user": {
+    "id": 1,
+    "firebaseUid": "firebase-uid-123",
+    "email": "user@example.com",
+    "displayName": "John Doe",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  },
+  "userProduct": {
+    "id": 2,
+    "serialNumber": "SN789012",
+    "purchaseDate": "2023-02-01",
+    "purchasePrice": 899.99,
+    "purchaseLocation": "Online Store",
+    "receiptNumber": "R789012",
+    "notes": "Personal purchase",
+    "createdAt": "2023-02-01T10:00:00",
+    "updatedAt": "2023-02-01T10:00:00"
+  },
+  "company": {
+    "id": 1,
+    "name": "Apple Inc.",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00"
+  }
+}
+
+### DELETE /api/warranty/{id} - Delete warranty
+Deletes a warranty
+Request: No body
+Response: 204 No Content
+
+## Warranty Admin Endpoints
+
+### GET /api/warranty/admin - Get all warranties (admin only)
+Retrieves all warranties (admin only)
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2024-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Standard warranty",
+    "status": "ACTIVE",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/warranty/admin/user/{userId} - Get warranties by user ID (admin only)
+Retrieves warranties for a specific user (admin only)
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2024-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Standard warranty",
+    "status": "ACTIVE",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/warranty/admin/company/{companyId} - Get warranties by company ID (admin only)
+Retrieves warranties for a specific company (admin only)
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2024-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Standard warranty",
+    "status": "ACTIVE",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/warranty/admin/expired - Get expired warranties (admin only)
+Retrieves all expired warranties (admin only)
+Request: No body
+Response:
+[
+  {
+    "id": 3,
+    "startDate": "2022-01-01",
+    "endDate": "2023-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Expired warranty",
+    "status": "EXPIRED",
+    "createdAt": "2022-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/warranty/admin/expiring?startDate={startDate}&endDate={endDate} - Get expiring warranties (admin only)
+Retrieves warranties expiring within a date range (admin only)
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2024-01-01",
+    "warrantyPeriod": 12,
+    "warrantyType": "Manufacturer",
+    "notes": "Standard warranty",
+    "status": "ACTIVE",
+    "createdAt": "2023-01-01T10:00:00",
+    "updatedAt": "2023-01-01T10:00:00",
+    "user": {
+      "id": 1,
+      "firebaseUid": "firebase-uid-123",
+      "email": "user@example.com",
+      "displayName": "John Doe",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "userProduct": {
+      "id": 1,
+      "serialNumber": "SN123456",
+      "purchaseDate": "2023-01-01",
+      "purchasePrice": 999.99,
+      "purchaseLocation": "Apple Store",
+      "receiptNumber": "R123456",
+      "notes": "Gift from family",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    },
+    "company": {
+      "id": 1,
+      "name": "Apple Inc.",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+## Claim Endpoints
+
+### GET /api/claim - Get user's claims
+Retrieves all claims for the current user
+Request: No body
+Response:
+[
+  {
+    "id": 1,
+    "referenceNumber": "CLM001",
+    "issueDescription": "Screen cracked",
+    "resolutionDetails": "Replaced screen",
+    "status": "RESOLVED",
+    "createdAt": "2023-06-01T10:00:00",
+    "updatedAt": "2023-06-15T10:00:00",
+    "warranty": {
+      "id": 1,
+      "startDate": "2023-01-01",
+      "endDate": "2024-01-01",
+      "warrantyPeriod": 12,
+      "warrantyType": "Manufacturer",
+      "notes": "Standard warranty",
+      "status": "ACTIVE",
+      "createdAt": "2023-01-01T10:00:00",
+      "updatedAt": "2023-01-01T10:00:00"
+    }
+  }
+]
+
+### GET /api/claim/{id} - Get claim by ID
+Retrieves a specific claim by ID
+Request: No body
+Response:
+{
+  "id": 1,
+  "referenceNumber": "CLM001",
+  "issueDescription": "Screen cracked",
+  "resolutionDetails": "Replaced screen",
+  "status": "RESOLVED",
+  "createdAt": "2023-06-01T10:00:00",
+  "updatedAt": "2023-06-15T10:00:00",
+  "warranty": {
+    "id": 1,
+    "startDate": "2023-01-01",
+    "endDate": "2
