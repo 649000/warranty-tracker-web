@@ -14,29 +14,51 @@ import {
   Paper,
   Alert,
   CircularProgress,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  FormHelperText,
+  Stack,
+  Link,
 } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  email: z.string().min(1, { message: 'Email is required' }).email({ message: 'Please enter a valid email address' }),
+  password: z.string().min(1, { message: 'Password is required' }),
+});
+
+type Values = z.infer<typeof schema>;
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const { signIn } = useAuth();
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+  const {
+    control,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<Values>({
+    resolver: zodResolver(schema),
+    defaultValues: { email: '', password: '' },
+  });
 
+  const onSubmit = async (values: Values) => {
+    setIsPending(true);
     try {
-      await signIn(email, password);
+      await signIn(values.email, values.password);
       router.push('/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+      setError('root', { type: 'server', message: err.message || 'Failed to sign in' });
     } finally {
-      setLoading(false);
+      setIsPending(false);
     }
   };
 
@@ -54,71 +76,114 @@ export default function LoginPage() {
       {/* Login Form */}
       <Container maxWidth="sm" sx={{ py: 8 }}>
         <Paper elevation={3} sx={{ p: 4 }}>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
-            }}
-          >
-            <Typography variant="h4" component="h1" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
-              Sign In
-            </Typography>
-
-            {error && (
-              <Alert severity="error">
-                {error}
-              </Alert>
-            )}
-
-            <TextField
-              label="Email Address"
-              type="email"
-              autoComplete="email"
-              required
-              fullWidth
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              variant="outlined"
-            />
-
-            <TextField
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              required
-              fullWidth
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              variant="outlined"
-            />
-
-            <Button
-              type="submit"
-              variant="contained"
-              size="large"
-              disabled={loading}
-              startIcon={loading ? <CircularProgress size={20} /> : null}
-              sx={{ mt: 2 }}
-            >
-              {loading ? 'Signing In...' : 'Sign In'}
-            </Button>
-
-            <Box sx={{ textAlign: 'center', mt: 2 }}>
-              <Typography variant="body2" color="text.secondary">
+          <Stack spacing={4}>
+            <Stack spacing={1}>
+              <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>
+                Sign in
+              </Typography>
+              <Typography color="text.secondary" variant="body2">
                 Don't have an account?{' '}
-                <Button
-                  variant="text"
+                <Link
+                  component="button"
                   onClick={() => router.push('/register')}
+                  underline="hover"
+                  variant="subtitle2"
                   sx={{ p: 0, minWidth: 'auto', minHeight: 'auto', verticalAlign: 'baseline' }}
                 >
-                  Register here
-                </Button>
+                  Sign up
+                </Link>
               </Typography>
-            </Box>
-          </Box>
+            </Stack>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack spacing={2}>
+                <Controller
+                  control={control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormControl error={Boolean(errors.email)}>
+                      <TextField
+                        {...field}
+                        label="Email address"
+                        type="email"
+                        autoComplete="email"
+                        error={Boolean(errors.email)}
+                        helperText={errors.email?.message}
+                        variant="outlined"
+                        fullWidth
+                      />
+                    </FormControl>
+                  )}
+                />
+
+                <Controller
+                  control={control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormControl error={Boolean(errors.password)}>
+                      <TextField
+                        {...field}
+                        label="Password"
+                        type={showPassword ? 'text' : 'password'}
+                        autoComplete="current-password"
+                        error={Boolean(errors.password)}
+                        helperText={errors.password?.message}
+                        variant="outlined"
+                        fullWidth
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={() => setShowPassword(!showPassword)}
+                                edge="end"
+                                aria-label="toggle password visibility"
+                              >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </FormControl>
+                  )}
+                />
+
+                <Box sx={{ textAlign: 'left' }}>
+                  <Link
+                    component="button"
+                    onClick={() => router.push('/auth/reset-password')}
+                    variant="subtitle2"
+                    sx={{ p: 0 }}
+                  >
+                    Forgot password?
+                  </Link>
+                </Box>
+
+                {errors.root && (
+                  <Alert severity="error">
+                    {errors.root.message}
+                  </Alert>
+                )}
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  disabled={isPending}
+                  startIcon={isPending ? <CircularProgress size={20} /> : null}
+                  sx={{ mt: 2 }}
+                >
+                  {isPending ? 'Signing In...' : 'Sign In'}
+                </Button>
+              </Stack>
+            </form>
+
+            <Alert severity="info" sx={{ mt: 2 }}>
+              <Typography variant="body2">
+                Track your product warranties seamlessly. Sign in to manage your warranty claims and product information.
+              </Typography>
+            </Alert>
+          </Stack>
         </Paper>
       </Container>
     </Box>
