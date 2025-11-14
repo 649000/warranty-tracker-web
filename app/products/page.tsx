@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { productApi } from '../../services/product.service';
-import { userProductApi } from '../../services/user-product.service';
-import { Product } from '../../types/product.types';
-import { UserProduct } from '../../types/user-product.types';
+import { productApi } from '@/features/products/services/product.service';
+import { userProductApi } from '@/features/products/services/user-product.service';
+import { Product } from '@/types/product.types';
+import { UserProduct } from '@/types/user-product.types';
 
 export default function ProductsPage() {
   const queryClient = useQueryClient();

@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { warrantyApi } from '../../services/warranty.service';
-import { claimApi } from '../../services/claim.service';
-import { userProductApi } from '../../services/user-product.service';
-import { Warranty } from '../../types/warranty.types';
-import { Claim } from '../../types/claim.types';
-import { UserProduct } from '../../types/user-product.types';
+import { warrantyApi } from '@/features/warranties/services/warranty.service';
+import { claimApi } from '@/features/claims/services/claim.service';
+import { userProductApi } from '@/features/products/services/user-product.service';
+import { Warranty } from '@/types/warranty.types';
+import { Claim } from '@/types/claim.types';
+import { UserProduct } from '@/types/user-product.types';
 
 export default function Dashboard() {
   const [timeframe, setTimeframe] = useState<'all' | '30' | '60' | '90'>('30');

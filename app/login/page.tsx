@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../../context/auth.context';
+import { useAuth } from '@/features/auth/context/auth.context';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');

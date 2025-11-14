@@ -1,36 +1,160 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Warranty Tracker Web
 
-## Getting Started
+A modern Next.js application for tracking product warranties and managing claims.
 
-First, run the development server:
+## Project Structure
+
+This project follows a feature-based architecture for better maintainability and scalability:
+
+```
+warranty-tracker-web/
+├── app/                    # Next.js App Router pages
+│   ├── layout.tsx         # Root layout with providers
+│   ├── page.tsx           # Home page
+│   ├── dashboard/          # Dashboard page
+│   ├── login/              # Login page
+│   ├── register/           # Registration page
+│   ├── products/           # Products management
+│   ├── warranties/          # Warranty management
+│   └── claims/             # Claims management
+├── src/                    # Source code
+│   ├── components/
+│   │   ├── ui/           # Base UI components (Button, Input, Loader)
+│   │   └── layout/       # Layout components (ProtectedRoute)
+│   ├── features/            # Feature-based organization
+│   │   ├── auth/          # Authentication feature
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   ├── types/
+│   │   │   ├── hooks/
+│   │   │   ├── context/
+│   │   │   └── providers/
+│   │   ├── products/       # Products feature
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   ├── types/
+│   │   │   └── hooks/
+│   │   ├── warranties/      # Warranties feature
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   ├── types/
+│   │   │   └── hooks/
+│   │   ├── claims/         # Claims feature
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   ├── types/
+│   │   │   └── hooks/
+│   │   └── dashboard/      # Dashboard feature
+│   │       ├── components/
+│   │       ├── services/
+│   │       ├── types/
+│   │       └── hooks/
+│   ├── lib/                 # Shared utilities and configurations
+│   │   ├── firebase.ts     # Firebase configuration
+│   │   ├── api.base.ts     # Base API configuration
+│   │   └── api.service.ts  # API services and hooks
+│   ├── hooks/               # Global custom hooks
+│   ├── utils/               # Utility functions
+│   ├── types/               # Global type definitions
+│   └── styles/              # Global styles and theme
+│       └── theme.ts         # Material-UI theme configuration
+├── public/                 # Static assets
+├── .prettierrc            # Prettier configuration
+├── .prettierignore         # Files to ignore for Prettier
+└── package.json
+```
+
+## Technology Stack
+
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type safety
+- **Material-UI** - UI component library
+- **React Query** - Data fetching and state management
+- **Firebase** - Authentication and backend services
+- **Tailwind CSS** - Utility-first CSS framework
+
+## Development
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### Environment Variables
+
+Create a `.env.local` file with your Firebase configuration:
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+```
+
+### Running the Development Server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+# or
+yarn build
+```
 
-## Learn More
+### Code Formatting
 
-To learn more about Next.js, take a look at the following resources:
+This project uses Prettier for code formatting. The configuration is in `.prettierrc`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Format all files
+npm run format
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Check formatting
+npm run format:check
+```
 
-## Deploy on Vercel
+### Linting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run lint
+# or
+yarn lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Features
+
+- **User Authentication** - Sign up and sign in functionality
+- **Product Management** - Register and manage products
+- **Warranty Tracking** - Track warranty periods and expiration dates
+- **Claims Management** - Submit and track warranty claims
+- **Dashboard** - Overview of all warranties and claims
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
