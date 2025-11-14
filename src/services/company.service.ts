@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { Company } from '@/types/company.types';
-import { apiFetch, queryKeys } from './api.base';
+import { apiFetch, queryKeys } from '@/lib/api.base';
 
 // Company API Service
 export const companyApi = {

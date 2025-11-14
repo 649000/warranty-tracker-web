@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { Claim } from '@/types/claim.types';
-import { apiFetch, queryKeys } from './api.base';
+import { apiFetch, queryKeys } from '@/lib/api.base';
 
 // Claim API Service
 export const claimApi = {

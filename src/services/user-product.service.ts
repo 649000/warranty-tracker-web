@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { UserProduct } from '@/types/user-product.types';
-import { apiFetch, queryKeys } from './api.base';
+import { apiFetch, queryKeys } from '@/lib/api.base';
 
 // User Product API Service
 export const userProductApi = {

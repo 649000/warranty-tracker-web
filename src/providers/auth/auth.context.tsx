@@ -3,7 +3,7 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User } from 'firebase/auth';
-import { authService } from '@/features/auth/services/auth.service';
+import { authService } from '@/services/auth.service';
 
 interface AuthContextType {
   user: User | null;

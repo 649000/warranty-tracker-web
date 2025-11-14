@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { Warranty } from '@/types/warranty.types';
-import { apiFetch, queryKeys } from './api.base';
+import { apiFetch, queryKeys } from '@/lib/api.base';
 
 // Warranty API Service
 export const warrantyApi = {
