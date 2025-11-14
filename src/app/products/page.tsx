@@ -54,9 +54,17 @@ export default function ProductsPage() {
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const selectedProduct = products.find(p => p.id === formData.productId);
+    if (!selectedProduct) return;
+
     createUserProduct({
-      ...formData,
-      purchasePrice: parseFloat(formData.purchasePrice as any)
+      serialNumber: formData.serialNumber,
+      purchaseDate: formData.purchaseDate,
+      purchasePrice: formData.purchasePrice,
+      purchaseLocation: formData.purchaseLocation,
+      receiptNumber: formData.receiptNumber,
+      notes: formData.notes,
+      product: selectedProduct
     });
   };
 

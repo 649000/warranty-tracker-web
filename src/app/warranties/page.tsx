@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { warrantyApi } from '@/services/warranty.service';
 import { userProductApi } from '@/services/user-product.service';
+import { companyApi } from '@/services/company.service';
 import { Warranty } from '@/types/warranty.types';
 import { UserProduct } from '@/types/user-product.types';
 
@@ -31,6 +32,12 @@ export default function WarrantiesPage() {
     queryFn: userProductApi.getUserProducts,
   });
 
+  // Fetch companies
+  const { data: companies = [], isLoading: companiesLoading } = useQuery({
+    queryKey: ['companies'],
+    queryFn: companyApi.getAllCompanies,
+  });
+
   // Create warranty mutation
   const { mutate: createWarranty, isPending: isCreating } = useMutation({
     mutationFn: warrantyApi.createWarranty,
@@ -51,9 +58,23 @@ export default function WarrantiesPage() {
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const selectedUserProduct = userProducts.find(up => up.id === formData.userProductId);
+    const selectedCompany = companies.find(c => c.id === formData.companyId);
+    if (!selectedUserProduct || !selectedCompany) return;
+
+    // Calculate end date
+    const startDateObj = new Date(formData.startDate);
+    const endDateObj = new Date(startDateObj);
+    endDateObj.setDate(endDateObj.getDate() + formData.warrantyPeriod);
+
     createWarranty({
-      ...formData,
-      startDate: formData.startDate
+      startDate: formData.startDate,
+      endDate: endDateObj.toISOString().split('T')[0],
+      warrantyPeriod: formData.warrantyPeriod,
+      warrantyType: formData.warrantyType,
+      notes: formData.notes,
+      userProduct: selectedUserProduct,
+      company: selectedCompany
     });
   };
 
@@ -110,6 +131,24 @@ export default function WarrantiesPage() {
                         {userProducts.map(userProduct => (
                           <option key={userProduct.id} value={userProduct.id}>
                             {userProduct.product.name} - {userProduct.serialNumber}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="companyId" className="block text-sm font-medium text-gray-700">Company</label>
+                      <select
+                        id="companyId"
+                        value={formData.companyId}
+                        onChange={(e) => setFormData({...formData, companyId: parseInt(e.target.value)})}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                        required
+                      >
+                        <option value="">Select a company</option>
+                        {companies.map(company => (
+                          <option key={company.id} value={company.id}>
+                            {company.name}
                           </option>
                         ))}
                       </select>
