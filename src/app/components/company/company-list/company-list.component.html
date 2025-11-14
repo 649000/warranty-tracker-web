@@ -1,0 +1,55 @@
+<div class="company-list">
+  <div class="header">
+    <h1>Companies</h1>
+    <a routerLink="/companies/new" class="btn btn-primary">Add New Company</a>
+  </div>
+
+  <div class="search-section">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      placeholder="Search companies..."
+      class="search-input">
+    <button *ngIf="searchTerm" (click)="clearSearch()" class="btn btn-secondary">Clear</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading companies...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="loadCompanies()" class="btn btn-primary">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && !error && filteredCompanies.length === 0 && searchTerm" class="no-results">
+    <p>No companies found matching "{{ searchTerm }}"</p>
+  </div>
+
+  <div *ngIf="!loading && !error && filteredCompanies.length > 0" class="companies-grid">
+    <div *ngFor="let company of filteredCompanies" class="company-card" (click)="viewCompany(company)">
+      <h3>{{ company.name }}</h3>
+      <div class="company-info">
+        <p *ngIf="company.contactEmail">
+          <i class="icon-mail"></i> {{ company.contactEmail }}
+        </p>
+        <p *ngIf="company.contactPhone">
+          <i class="icon-phone"></i> {{ company.contactPhone }}
+        </p>
+        <p *ngIf="company.website">
+          <i class="icon-web"></i> <a [href]="company.website" target="_blank" rel="noopener">Website</a>
+        </p>
+      </div>
+      <div class="company-actions">
+        <a [routerLink]="['/companies', company.id]" class="btn btn-link">View Details</a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && companies.length === 0 && !searchTerm" class="empty-state">
+    <h3>No companies found</h3>
+    <p>Be the first to add a company to the system.</p>
+    <a routerLink="/companies/new" class="btn btn-primary">Add First Company</a>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="dashboard">
+  <h1>Dashboard</h1>
+
+  <div class="stats-cards">
+    <div class="stat-card">
+      <h3>My Products</h3>
+      <div class="stat-number">{{ userProductCount }}</div>
+      <a routerLink="/products" class="stat-link">View All</a>
+    </div>
+
+    <div class="stat-card">
+      <h3>My Warranties</h3>
+      <div class="stat-number">{{ warrantyCount }}</div>
+      <a routerLink="/warranties" class="stat-link">View All</a>
+    </div>
+
+    <div class="stat-card">
+      <h3>My Claims</h3>
+      <div class="stat-number">{{ claimCount }}</div>
+      <a routerLink="/claims" class="stat-link">View All</a>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="actions-grid">
+      <button class="action-btn" routerLink="/products/register">Register New Product</button>
+      <button class="action-btn" routerLink="/claims/new">File a Claim</button>
+      <button class="action-btn" routerLink="/warranties">View Warranties</button>
+    </div>
+  </div>
+</div>
