@@ -1,137 +1,232 @@
 import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { Warranty } from '@/types/warranty.types';
 import { apiFetch, queryKeys } from '@/lib/api.base';
+import { HTTP_METHODS } from '@/lib/http-methods';
+import { API_ENDPOINTS as ENDPOINTS } from '@/lib/api-endpoints';
 
-// Warranty API Service
+/**
+ * Type alias for warranty data used in create operations
+ * Includes all fields except auto-generated ones
+ */
+type CreateWarrantyData = Omit<Warranty, 'id' | 'createdAt' | 'updatedAt'>;
+
+/**
+ * Type alias for warranty data used in update operations
+ * All fields are optional since updates can be partial
+ */
+type UpdateWarrantyData = Partial<Warranty>;
+
+/**
+ * Parameters for update warranty mutation
+ */
+type UpdateWarrantyParams = {
+  id: number;
+  data: UpdateWarrantyData;
+};
+
+/**
+ * Warranty API Service - Handles all HTTP operations for warranties
+ */
 export const warrantyApi = {
-  getUserWarranties: () => apiFetch<Warranty[]>('/warranty'),
-  getWarrantyById: (id: number) => apiFetch<Warranty>(`/warranty/${id}`),
-  getUserWarrantiesByStatus: (status: string) => apiFetch<Warranty[]>(`/warranty/status/${status}`),
-  getUserExpiringWarranties: (days: number) => apiFetch<Warranty[]>(`/warranty/expiring?days=${days}`),
-  createWarranty: (data: Omit<Warranty, 'id' | 'status' | 'createdAt' | 'updatedAt' | 'user'>) => 
-    apiFetch<Warranty>('/warranty', {
-      method: 'POST',
+  /**
+   * Fetch all warranties
+   * @returns Promise that resolves to array of warranties
+   */
+  getAllWarranties: function(): Promise<Warranty[]> {
+    return apiFetch<Warranty[]>(ENDPOINTS.WARRANTY);
+  },
+
+  /**
+   * Fetch a specific warranty by ID
+   * @param id - The unique identifier of the warranty
+   * @returns Promise that resolves to the warranty data
+   */
+  getWarrantyById: function(id: number): Promise<Warranty> {
+    if (id === undefined || id === null) {
+      throw new Error('Warranty ID is required');
+    }
+    return apiFetch<Warranty>(`${ENDPOINTS.WARRANTY}/${id}`);
+  },
+
+  /**
+   * Create a new warranty
+   * @param data - Warranty data without auto-generated fields
+   * @returns Promise that resolves to the created warranty
+   */
+  createWarranty: function(data: CreateWarrantyData): Promise<Warranty> {
+    if (!data) {
+      throw new Error('Warranty data is required');
+    }
+    return apiFetch<Warranty>(ENDPOINTS.WARRANTY, {
+      method: HTTP_METHODS.POST,
       body: JSON.stringify(data),
-    }),
-  updateWarranty: (id: number, data: Partial<Warranty>) => 
-    apiFetch<Warranty>(`/warranty/${id}`, {
-      method: 'PUT',
+    });
+  },
+
+  /**
+   * Update an existing warranty
+   * @param id - The unique identifier of the warranty to update
+   * @param data - Partial warranty data to update
+   * @returns Promise that resolves to the updated warranty
+   */
+  updateWarranty: function(id: number, data: UpdateWarrantyData): Promise<Warranty> {
+    if (id === undefined || id === null) {
+      throw new Error('Warranty ID is required');
+    }
+    if (!data) {
+      throw new Error('Update data is required');
+    }
+    return apiFetch<Warranty>(`${ENDPOINTS.WARRANTY}/${id}`, {
+      method: HTTP_METHODS.PUT,
       body: JSON.stringify(data),
-    }),
-  deleteWarranty: (id: number) => apiFetch<void>(`/warranty/${id}`, {
-    method: 'DELETE',
-  }),
-  // Admin endpoints
-  getAllWarranties: () => apiFetch<Warranty[]>('/warranty/admin'),
-  getWarrantiesByUserId: (userId: number) => apiFetch<Warranty[]>(`/warranty/admin/user/${userId}`),
-  getWarrantiesByCompanyId: (companyId: number) => apiFetch<Warranty[]>(`/warranty/admin/company/${companyId}`),
-  getExpiredWarranties: () => apiFetch<Warranty[]>('/warranty/admin/expired'),
-  getExpiringWarranties: (startDate: string, endDate: string) => 
-    apiFetch<Warranty[]>(`/warranty/admin/expiring?startDate=${startDate}&endDate=${endDate}`),
+    });
+  },
+
+  /**
+   * Delete a warranty
+   * @param id - The unique identifier of the warranty to delete
+   * @returns Promise that resolves when deletion is complete
+   */
+  deleteWarranty: function(id: number): Promise<void> {
+    if (id === undefined || id === null) {
+      throw new Error('Warranty ID is required');
+    }
+    return apiFetch<void>(`${ENDPOINTS.WARRANTY}/${id}`, {
+      method: HTTP_METHODS.DELETE,
+    });
+  },
 };
 
-// React Query Hooks
-export const useUserWarranties = (options?: UseQueryOptions<Warranty[]>) => 
-  useQuery<Warranty[]>({
+/**
+ * React Query Hook: Fetch all warranties
+ * @param queryOptions - Optional React Query options for this query
+ * @returns Query object with warranty data and loading states
+ */
+export const useAllWarranties = function(queryOptions?: UseQueryOptions<Warranty[]> | undefined) {
+  return useQuery<Warranty[]>({
     queryKey: queryKeys.warranties.list(),
-    queryFn: warrantyApi.getUserWarranties,
-    ...options,
+    queryFn: warrantyApi.getAllWarranties,
+    ...(queryOptions || {}),
   });
+};
 
-export const useWarrantyById = (id: number, options?: UseQueryOptions<Warranty>) => 
-  useQuery<Warranty>({
+/**
+ * React Query Hook: Fetch a specific warranty by ID
+ * @param id - The unique identifier of the warranty
+ * @param queryOptions - Optional React Query options for this query
+ * @returns Query object with warranty data and loading states
+ */
+export const useWarrantyById = function(id: number, queryOptions?: UseQueryOptions<Warranty> | undefined) {
+  if (id === undefined || id === null) {
+    throw new Error('Warranty ID is required');
+  }
+  
+  return useQuery<Warranty>({
     queryKey: queryKeys.warranties.detail(id),
-    queryFn: () => warrantyApi.getWarrantyById(id),
-    ...options,
+    queryFn: function(): Promise<Warranty> {
+      return warrantyApi.getWarrantyById(id);
+    },
+    ...(queryOptions || {}),
   });
+};
 
-export const useUserWarrantiesByStatus = (status: string, options?: UseQueryOptions<Warranty[]>) => 
-  useQuery<Warranty[]>({
-    queryKey: queryKeys.warranties.byStatus(status),
-    queryFn: () => warrantyApi.getUserWarrantiesByStatus(status),
-    ...options,
-  });
-
-export const useUserExpiringWarranties = (days: number, options?: UseQueryOptions<Warranty[]>) => 
-  useQuery<Warranty[]>({
-    queryKey: queryKeys.warranties.expiring(days),
-    queryFn: () => warrantyApi.getUserExpiringWarranties(days),
-    ...options,
-  });
-
-export const useCreateWarranty = (options?: UseMutationOptions<Warranty, Error, Omit<Warranty, 'id' | 'status' | 'createdAt' | 'updatedAt' | 'user'>>) => {
+/**
+ * React Query Hook: Create a new warranty
+ * @param mutationOptions - Optional mutation options including success callback
+ * @returns Mutation object with mutate function and states
+ */
+export const useCreateWarranty = function(mutationOptions?: UseMutationOptions<Warranty, Error, CreateWarrantyData> | undefined) {
   const queryClient = useQueryClient();
-  return useMutation<Warranty, Error, Omit<Warranty, 'id' | 'status' | 'createdAt' | 'updatedAt' | 'user'>>({
+  
+  // Extract user-provided success callback
+  const { onSuccess: userProvidedSuccessCallback } = mutationOptions || {};
+  const remainingOptions = mutationOptions ? { ...mutationOptions } : {};
+  if (remainingOptions.onSuccess) {
+    delete remainingOptions.onSuccess;
+  }
+  
+  return useMutation<Warranty, Error, CreateWarrantyData>({
     mutationFn: warrantyApi.createWarranty,
-    onSuccess: () => {
+    onSuccess: function(data, variables, context, mutation): void {
+      // Invalidate warranties list to refresh the UI
       queryClient.invalidateQueries({ queryKey: queryKeys.warranties.list() });
-      options?.onSuccess?.(undefined as any, undefined as any, undefined);
+      
+      // Call user-provided success callback if they gave one
+      if (userProvidedSuccessCallback) {
+        userProvidedSuccessCallback(data, variables, context, mutation);
+      }
     },
-    ...options,
+    ...remainingOptions,
   });
 };
 
-export const useUpdateWarranty = (options?: UseMutationOptions<Warranty, Error, { id: number; data: Partial<Warranty> }>) => {
+/**
+ * React Query Hook: Update an existing warranty
+ * @param mutationOptions - Optional mutation options including success callback
+ * @returns Mutation object with mutate function and states
+ */
+export const useUpdateWarranty = function(mutationOptions?: UseMutationOptions<Warranty, Error, UpdateWarrantyParams> | undefined) {
   const queryClient = useQueryClient();
-  return useMutation<Warranty, Error, { id: number; data: Partial<Warranty> }>({
-    mutationFn: ({ id, data }) => warrantyApi.updateWarranty(id, data),
-    onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.warranties.list() });
-      queryClient.setQueryData(queryKeys.warranties.detail(variables.id), data);
-      options?.onSuccess?.(data, variables, options.context);
+  
+  // Extract user-provided success callback
+  const { onSuccess: userProvidedSuccessCallback } = mutationOptions || {};
+  const remainingOptions = mutationOptions ? { ...mutationOptions } : {};
+  if (remainingOptions.onSuccess) {
+    delete remainingOptions.onSuccess;
+  }
+  
+  return useMutation<Warranty, Error, UpdateWarrantyParams>({
+    mutationFn: function(params: UpdateWarrantyParams): Promise<Warranty> {
+      return warrantyApi.updateWarranty(params.id, params.data);
     },
-    ...options,
+    onSuccess: function(data, variables, context, mutation): void {
+      // Invalidate warranties list to refresh the UI
+      queryClient.invalidateQueries({ queryKey: queryKeys.warranties.list() });
+      
+      // Update the specific warranty in cache for immediate UI update
+      queryClient.setQueryData(
+        queryKeys.warranties.detail(variables.id), 
+        data
+      );
+      
+      // Call user-provided success callback if they gave one
+      if (userProvidedSuccessCallback) {
+        userProvidedSuccessCallback(data, variables, context, mutation);
+      }
+    },
+    ...remainingOptions,
   });
 };
 
-export const useDeleteWarranty = (options?: UseMutationOptions<void, Error, number>) => {
+/**
+ * React Query Hook: Delete a warranty
+ * @param mutationOptions - Optional mutation options including success callback
+ * @returns Mutation object with mutate function and states
+ */
+export const useDeleteWarranty = function(mutationOptions?: UseMutationOptions<void, Error, number> | undefined) {
   const queryClient = useQueryClient();
+  
+  // Extract user-provided success callback
+  const { onSuccess: userProvidedSuccessCallback } = mutationOptions || {};
+  const remainingOptions = mutationOptions ? { ...mutationOptions } : {};
+  if (remainingOptions.onSuccess) {
+    delete remainingOptions.onSuccess;
+  }
+  
   return useMutation<void, Error, number>({
     mutationFn: warrantyApi.deleteWarranty,
-    onSuccess: (_, id) => {
+    onSuccess: function(data, variables, context, mutation): void {
+      // Invalidate warranties list to refresh the UI
       queryClient.invalidateQueries({ queryKey: queryKeys.warranties.list() });
-      queryClient.removeQueries({ queryKey: queryKeys.warranties.detail(id) });
-      options?.onSuccess?.(_, id, options.context);
+      
+      // Remove the specific warranty from cache
+      queryClient.removeQueries({ queryKey: queryKeys.warranties.detail(variables) });
+      
+      // Call user-provided success callback if they gave one
+      if (userProvidedSuccessCallback) {
+        userProvidedSuccessCallback(data, variables, context, mutation);
+      }
     },
-    ...options,
+    ...remainingOptions,
   });
 };
-
-export const useAllWarranties = (options?: UseQueryOptions<Warranty[]>) => 
-  useQuery<Warranty[]>({
-    queryKey: queryKeys.warranties.admin.list(),
-    queryFn: warrantyApi.getAllWarranties,
-    ...options,
-  });
-
-export const useWarrantiesByUserId = (userId: number, options?: UseQueryOptions<Warranty[]>) => 
-  useQuery<Warranty[]>({
-    queryKey: queryKeys.warranties.admin.byUser(userId),
-    queryFn: () => warrantyApi.getWarrantiesByUserId(userId),
-    ...options,
-  });
-
-export const useWarrantiesByCompanyId = (companyId: number, options?: UseQueryOptions<Warranty[]>) => 
-  useQuery<Warranty[]>({
-    queryKey: queryKeys.warranties.admin.byCompany(companyId),
-    queryFn: () => warrantyApi.getWarrantiesByCompanyId(companyId),
-    ...options,
-  });
-
-export const useExpiredWarranties = (options?: UseQueryOptions<Warranty[]>) => 
-  useQuery<Warranty[]>({
-    queryKey: queryKeys.warranties.admin.expired(),
-    queryFn: warrantyApi.getExpiredWarranties,
-    ...options,
-  });
-
-export const useExpiringWarranties = (
-  startDate: string, 
-  endDate: string, 
-  options?: UseQueryOptions<Warranty[]>
-) => 
-  useQuery<Warranty[]>({
-    queryKey: queryKeys.warranties.admin.expiring(startDate, endDate),
-    queryFn: () => warrantyApi.getExpiringWarranties(startDate, endDate),
-    ...options,
-  });
