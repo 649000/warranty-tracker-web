@@ -71,7 +71,7 @@ export const useDeleteClaim = (options?: UseMutationOptions<void, Error, number>
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.claims.list() });
       queryClient.removeQueries({ queryKey: queryKeys.claims.detail(variables) });
-      userOnSuccess?.(data, variables, undefined);
+      userOnSuccess?.(data, variables, options.context);
     },
     ...restOptions,
   });

@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { warrantyApi } from '@/features/warranties/services/warranty.service';
-import { userProductApi } from '@/features/products/services/user-product.service';
+import { warrantyApi } from '@/services/warranty.service';
+import { userProductApi } from '@/services/user-product.service';
 import { Warranty } from '@/types/warranty.types';
 import { UserProduct } from '@/types/user-product.types';
 
