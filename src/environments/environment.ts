@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiBaseUrl: 'http://localhost:8080',
   firebase: {
     // TODO: Add your Firebase development project configuration here
     apiKey: "YOUR_DEV_API_KEY",
@@ -24,4 +25,3 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
-

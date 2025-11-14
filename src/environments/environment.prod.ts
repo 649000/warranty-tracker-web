@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  apiBaseUrl: 'https://your-production-api.com',
   firebase: {
     // TODO: Add your Firebase production project configuration here
     // These values should be set via your CI/CD pipeline or build process
@@ -13,4 +14,3 @@ export const environment = {
     // measurementId is optional for web apps
   }
 };
-
