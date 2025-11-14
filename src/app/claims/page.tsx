@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { claimApi } from '@/features/claims/services/claim.service';
-import { warrantyApi } from '@/features/warranties/services/warranty.service';
+import { claimApi } from '@/services/claim.service';
+import { warrantyApi } from '@/services/warranty.service';
 import { Claim } from '@/types/claim.types';
 import { Warranty } from '@/types/warranty.types';
 

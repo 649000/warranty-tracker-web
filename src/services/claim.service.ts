@@ -38,38 +38,41 @@ export const useClaimById = (id: number, options?: UseQueryOptions<Claim>) =>
 
 export const useCreateClaim = (options?: UseMutationOptions<Claim, Error, Omit<Claim, 'id' | 'createdAt' | 'updatedAt'>>) => {
   const queryClient = useQueryClient();
+  const { onSuccess: userOnSuccess, ...restOptions } = options || {};
   return useMutation<Claim, Error, Omit<Claim, 'id' | 'createdAt' | 'updatedAt'>>({
     mutationFn: claimApi.createClaim,
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.claims.list() });
-      options?.onSuccess?.(undefined as any, undefined as any, undefined);
+      userOnSuccess?.(data, variables, undefined);
     },
-    ...options,
+    ...restOptions,
   });
 };
 
 export const useUpdateClaim = (options?: UseMutationOptions<Claim, Error, { id: number; data: Partial<Claim> }>) => {
   const queryClient = useQueryClient();
+  const { onSuccess: userOnSuccess, ...restOptions } = options || {};
   return useMutation<Claim, Error, { id: number; data: Partial<Claim> }>({
     mutationFn: ({ id, data }) => claimApi.updateClaim(id, data),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.claims.list() });
       queryClient.setQueryData(queryKeys.claims.detail(variables.id), data);
-      options?.onSuccess?.(data, variables, options.context);
+      userOnSuccess?.(data, variables, undefined);
     },
-    ...options,
+    ...restOptions,
   });
 };
 
 export const useDeleteClaim = (options?: UseMutationOptions<void, Error, number>) => {
   const queryClient = useQueryClient();
+  const { onSuccess: userOnSuccess, ...restOptions } = options || {};
   return useMutation<void, Error, number>({
     mutationFn: claimApi.deleteClaim,
-    onSuccess: (_, id) => {
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.claims.list() });
-      queryClient.removeQueries({ queryKey: queryKeys.claims.detail(id) });
-      options?.onSuccess?.(_, id, options.context);
+      queryClient.removeQueries({ queryKey: queryKeys.claims.detail(variables) });
+      userOnSuccess?.(data, variables, undefined);
     },
-    ...options,
+    ...restOptions,
   });
 };

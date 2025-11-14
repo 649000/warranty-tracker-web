@@ -1,5 +1,10 @@
 import { useQuery, useMutation, useQueryClient, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
-import { User, Company, Product, UserProduct, Warranty, Claim } from '@/types/api.types';
+import { User } from '@/types/user.types';
+import { Company } from '@/types/company.types';
+import { Product } from '@/types/product.types';
+import { UserProduct } from '@/types/user-product.types';
+import { Warranty } from '@/types/warranty.types';
+import { Claim } from '@/types/claim.types';
 
 // Base API configuration
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api';
