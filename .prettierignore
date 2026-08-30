@@ -1,0 +1,7 @@
+node_modules
+dist
+.angular
+.agents
+.idea
+.vscode
+package-lock.json
