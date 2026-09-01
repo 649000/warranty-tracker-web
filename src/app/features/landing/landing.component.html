@@ -1,0 +1,60 @@
+<header class="topbar">
+  <span class="brand">
+    <mat-icon aria-hidden="true">verified_user</mat-icon>
+    Warranty Tracker
+  </span>
+  <nav aria-label="Primary">
+    <button
+      mat-icon-button
+      [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+      (click)="toggleTheme()"
+    >
+      <mat-icon>{{ theme.theme() === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+    <a mat-button routerLink="/login">Sign in</a>
+    <a mat-flat-button color="primary" routerLink="/signup">Get started</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Know what’s covered. Before it breaks.</h1>
+    <p class="lede">
+      Warranty Tracker keeps every purchase, coverage, and proof of purchase in one place — and
+      reminds you before a warranty runs out.
+    </p>
+    <div class="cta">
+      <a mat-flat-button color="primary" size="large" routerLink="/signup"
+        >Get started — it’s free</a
+      >
+      <a mat-button size="large" routerLink="/login">Sign in</a>
+    </div>
+  </section>
+
+  <section class="features" aria-label="What Warranty Tracker does">
+    <div class="feature">
+      <mat-icon aria-hidden="true">fact_check</mat-icon>
+      <h2>See what’s covered at a glance</h2>
+      <p>
+        Every product and every coverage — manufacturer, retailer, or international — in one list.
+      </p>
+    </div>
+    <div class="feature">
+      <mat-icon aria-hidden="true">alarm</mat-icon>
+      <h2>Get warned before it lapses</h2>
+      <p>Expiring coverages surface up front, 60 days out, so you never miss a claim window.</p>
+    </div>
+    <div class="feature">
+      <mat-icon aria-hidden="true">receipt_long</mat-icon>
+      <h2>Claim with confidence</h2>
+      <p>
+        Serial number, retailer, contact details, and proof of purchase ready when you need them.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a routerLink="/terms">Terms</a>
+  <a routerLink="/privacy">Privacy</a>
+</footer>

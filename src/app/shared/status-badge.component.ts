@@ -1,0 +1,54 @@
+import { Component, computed, input } from '@angular/core';
+import type { CoverageStatus } from '../core/utils/coverage-status';
+
+const LABELS: Record<CoverageStatus, string> = {
+  active: 'Covered',
+  'expiring-soon': 'Expiring soon',
+  expired: 'Expired',
+};
+
+@Component({
+  selector: 'app-status-badge',
+  template: `
+    <span class="badge" [class]="status()" role="status">
+      <span class="dot" aria-hidden="true"></span>{{ label() }}
+    </span>
+  `,
+  styles: [
+    `
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.15rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+      .dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: currentColor;
+        flex: none;
+      }
+      .active {
+        color: light-dark(#1b5e20, #a5d6a7);
+        background: color-mix(in srgb, currentColor 14%, transparent);
+      }
+      .expiring-soon {
+        color: light-dark(#9a6200, #ffe082);
+        background: color-mix(in srgb, currentColor 16%, transparent);
+      }
+      .expired {
+        color: light-dark(#5f6368, #bdbdbd);
+        background: color-mix(in srgb, currentColor 14%, transparent);
+      }
+    `,
+  ],
+})
+export class StatusBadgeComponent {
+  readonly status = input<CoverageStatus>('active');
+  readonly label = computed(() => LABELS[this.status()]);
+}

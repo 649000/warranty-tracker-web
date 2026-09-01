@@ -1,0 +1,32 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.menu-email {
+  font-size: 0.875rem;
+  opacity: 0.75;
+}
+
+.danger {
+  color: var(--mat-sys-error);
+}
+
+.shell-content {
+  display: block;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}

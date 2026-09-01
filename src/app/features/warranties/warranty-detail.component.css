@@ -1,0 +1,160 @@
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.back {
+  margin-left: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  opacity: 0.7;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.section-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.section-row h2 {
+  margin: 0;
+}
+
+.coverage-item {
+  margin-bottom: 0.75rem;
+}
+
+.coverage-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.coverage-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.coverage-title {
+  font-weight: 500;
+}
+
+.coverage-expiry {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.coverage-side {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.coverage-detail {
+  padding: 0 1rem 0.75rem;
+}
+
+.contact-block h3 {
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0.25rem;
+  opacity: 0.7;
+}
+
+.contact-block p {
+  margin: 0.15rem 0;
+}
+
+.notes {
+  margin: 0.75rem 0 0;
+}
+
+.coverage-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.empty-coverage {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.claim-card {
+  padding: 0.25rem 1rem;
+}
+
+.claim-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.claim-row:last-child {
+  border-bottom: none;
+}
+
+.claim-row dt {
+  opacity: 0.7;
+  flex: none;
+}
+
+.claim-row dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.proof-present {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.proof-text {
+  max-width: 320px;
+}
+
+.danger {
+  color: var(--mat-sys-error);
+}
+
+.detail-skeleton {
+  height: 200px;
+}

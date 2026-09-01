@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>{{ data.coverage ? 'Edit coverage' : 'Add coverage' }}</h2>
+<mat-dialog-content>
+  <p class="field-label">Source</p>
+  <mat-button-toggle-group
+    class="toggle-group"
+    [value]="source"
+    aria-label="Coverage source"
+    (valueChange)="onSource($event)"
+  >
+    @for (s of sources; track s) {
+      <mat-button-toggle [value]="s">{{ s }}</mat-button-toggle>
+    }
+  </mat-button-toggle-group>
+
+  <p class="field-label">Scope</p>
+  <mat-button-toggle-group
+    class="toggle-group"
+    [value]="scope"
+    aria-label="Coverage scope"
+    (valueChange)="scope = $event"
+  >
+    <mat-button-toggle value="local">Local</mat-button-toggle>
+    <mat-button-toggle value="international">International</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <p class="field-label">Duration</p>
+  <mat-chip-listbox class="duration-chips" aria-label="Coverage duration" [value]="durationLabel">
+    @for (preset of presets; track preset.label) {
+      <mat-chip-option [value]="preset.label" (click)="durationLabel = preset.label">{{
+        preset.label
+      }}</mat-chip-option>
+    }
+    <mat-chip-option value="Custom" (click)="durationLabel = 'Custom'">Custom</mat-chip-option>
+  </mat-chip-listbox>
+
+  @if (durationLabel === 'Custom') {
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Number of months</mat-label>
+      <input matInput type="number" min="1" [(ngModel)]="customMonths" />
+      @if (!valid()) {
+        <mat-error>Enter the number of months</mat-error>
+      }
+    </mat-form-field>
+  }
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Exact expiry date (optional)</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="manualExpiry" />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <p class="field-label">Contact (optional)</p>
+  <div class="contact-row">
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Hotline</mat-label>
+      <input matInput [(ngModel)]="hotline" />
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [(ngModel)]="contactEmail" />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Website</mat-label>
+    <input matInput type="url" [(ngModel)]="contactUrl" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Notes</mat-label>
+    <textarea matInput rows="2" [(ngModel)]="notes"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="!valid()" (click)="save()">
+    {{ data.coverage ? 'Save' : 'Add coverage' }}
+  </button>
+</mat-dialog-actions>

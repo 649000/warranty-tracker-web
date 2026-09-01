@@ -46,3 +46,17 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase emulator debug logs
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/.playwright/
+
+# TypeScript incremental build info
+*.tsbuildinfo

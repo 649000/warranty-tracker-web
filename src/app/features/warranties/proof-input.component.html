@@ -1,0 +1,71 @@
+<div class="proof-section">
+  @if (mode() === 'none' && summary()) {
+    <div class="summary">
+      <mat-icon aria-hidden="true">{{
+        current()!.type === 'text'
+          ? 'notes'
+          : current()!.type === 'image'
+            ? 'image'
+            : 'picture_as_pdf'
+      }}</mat-icon>
+      <span class="summary-text">{{ summary() }}</span>
+      <button mat-stroked-button (click)="choose('text')">Replace</button>
+      <button mat-button color="warn" (click)="remove()">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </div>
+  } @else if (mode() === 'none') {
+    <div class="empty-actions">
+      <span class="hint">Proof of purchase (optional)</span>
+      <button mat-stroked-button (click)="choose('text')">Type details</button>
+      <button mat-stroked-button (click)="choose('image')">Add photo</button>
+      <button mat-stroked-button (click)="choose('pdf')">Upload PDF</button>
+    </div>
+  } @else {
+    <div class="editing">
+      <span class="hint">
+        {{
+          mode() === 'text'
+            ? 'Receipt details'
+            : mode() === 'image'
+              ? 'Photo of receipt'
+              : 'Receipt PDF'
+        }}
+      </span>
+      @if (mode() === 'text') {
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>e.g. Receipt #1234, Challenger, 15 Mar 2024</mat-label>
+          <textarea
+            matInput
+            rows="2"
+            [value]="text()"
+            (input)="setText($any($event.target).value)"
+          ></textarea>
+        </mat-form-field>
+      } @else {
+        <div class="file-row">
+          <input
+            #fileInput
+            type="file"
+            class="hidden-input"
+            [accept]="mode() === 'image' ? 'image/png,image/jpeg,image/webp' : 'application/pdf'"
+            (change)="onFileSelected($event)"
+          />
+          <button mat-stroked-button (click)="fileInput.click()">
+            <mat-icon>upload_file</mat-icon>
+            {{ pendingFile() ? 'Replace file' : 'Choose file' }}
+          </button>
+          @if (pendingFile()) {
+            <span class="file-name">{{ pendingFile()!.name }}</span>
+          }
+        </div>
+      }
+      <div class="row-actions">
+        <button mat-button color="warn" (click)="remove()">
+          <mat-icon>delete_outline</mat-icon>
+          Remove proof
+        </button>
+      </div>
+    </div>
+  }
+</div>

@@ -1,5 +1,19 @@
 schema: spec-driven
 
+context: |
+  Tech stack: Angular v22, TypeScript, Angular Material (Material 3, light + dark)
+  Backend: Firebase native JS SDK v12 (Auth, Firestore, Storage, Hosting, Analytics).
+    AngularFire is NOT used (no stable Angular 22-compatible release)
+  Notifications: deferred to a later MVP (email); none in v1
+  Domain: public warranty tracker for products bought in Singapore (SGD default currency,
+    local vs international warranty scope distinction)
+  CI/CD: GitHub Actions, lint/format/test/build gate on PR, auto-deploy to Firebase
+    Hosting on push to main, preview channels
+  Testing: Vitest unit + component tests, Firebase Emulator security-rules tests,
+    Playwright smoke suite
+  Constraints: professional showcase quality (WCAG AA), keep on Firebase free tier,
+    avoid unnecessary paid services
+
 # Project context (optional)
 # This is shown to AI when creating artifacts.
 # Add your tech stack, conventions, style guides, domain knowledge, etc.

@@ -4,4 +4,7 @@ dist
 .agents
 .idea
 .vscode
+.opencode
+openspec
+.firebaserc
 package-lock.json

@@ -1,0 +1,160 @@
+@if (loading()) {
+  <mat-card class="skeleton detail-skeleton"></mat-card>
+} @else if (product(); as product) {
+  <header class="detail-header">
+    <div>
+      <a mat-button class="back" routerLink="/warranties">
+        <mat-icon>arrow_back</mat-icon>
+        Warranty list
+      </a>
+      <h1>{{ product.name }}</h1>
+      <p class="subtitle">
+        {{ product.category ?? 'Uncategorised' }}
+        @if (product.brand) {
+          <span> · {{ product.brand }}</span>
+        }
+      </p>
+    </div>
+    <div class="header-actions">
+      <a mat-button [routerLink]="['/warranties', product.id, 'edit']">Edit</a>
+      <button mat-icon-button aria-label="More options" [matMenuTriggerFor]="moreMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #moreMenu="matMenu">
+        <button mat-menu-item class="danger" (click)="deleteProduct()">
+          <mat-icon>delete_forever</mat-icon>
+          <span>Delete product</span>
+        </button>
+      </mat-menu>
+    </div>
+  </header>
+
+  <section aria-labelledby="coverage-heading">
+    <div class="section-row">
+      <h2 id="coverage-heading">Coverage</h2>
+      <button mat-stroked-button (click)="addCoverage()">
+        <mat-icon>add</mat-icon>
+        Add coverage
+      </button>
+    </div>
+
+    @for (coverage of coverages(); track coverage.id) {
+      <mat-card appearance="outlined" class="coverage-item">
+        <button
+          class="coverage-summary"
+          (click)="toggleExpand(coverage.id)"
+          [attr.aria-expanded]="expanded().has(coverage.id)"
+        >
+          <div class="coverage-info">
+            <span class="coverage-title">
+              {{ coverage.source | titlecase }} · {{ coverage.scope | titlecase }}
+            </span>
+            <span class="coverage-expiry">{{ coverageStatusLine(coverage) }}</span>
+          </div>
+          <div class="coverage-side">
+            <app-status-badge [status]="statusOf(coverage)" />
+            <mat-icon>{{ expanded().has(coverage.id) ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </div>
+        </button>
+
+        @if (expanded().has(coverage.id)) {
+          <div class="coverage-detail">
+            @if (coverage.contact?.hotline || coverage.contact?.email || coverage.contact?.url) {
+              <div class="contact-block">
+                <h3>Contact</h3>
+                @if (coverage.contact?.hotline) {
+                  <p>
+                    <a [href]="'tel:' + coverage.contact!.hotline">{{
+                      coverage.contact!.hotline
+                    }}</a>
+                  </p>
+                }
+                @if (coverage.contact?.email) {
+                  <p>
+                    <a [href]="'mailto:' + coverage.contact!.email">{{
+                      coverage.contact!.email
+                    }}</a>
+                  </p>
+                }
+                @if (coverage.contact?.url) {
+                  <p>
+                    <a [href]="coverage.contact!.url" target="_blank" rel="noopener">{{
+                      coverage.contact!.url
+                    }}</a>
+                  </p>
+                }
+              </div>
+            }
+            @if (coverage.notes) {
+              <p class="notes">{{ coverage.notes }}</p>
+            }
+            <div class="coverage-actions">
+              <button mat-button (click)="editCoverage(coverage)">Edit</button>
+              <button mat-button color="warn" (click)="deleteCoverage(coverage)">Remove</button>
+            </div>
+          </div>
+        }
+      </mat-card>
+    } @empty {
+      <mat-card appearance="outlined" class="empty-coverage">
+        <p>No coverage yet. Add one to start tracking this warranty.</p>
+      </mat-card>
+    }
+  </section>
+
+  <section aria-labelledby="claim-heading">
+    <h2 id="claim-heading">Claim info</h2>
+    <mat-card appearance="outlined" class="claim-card">
+      <dl>
+        @if (product.serialNumber) {
+          <div class="claim-row">
+            <dt>Serial number</dt>
+            <dd>{{ product.serialNumber }}</dd>
+          </div>
+        }
+        @if (product.retailer) {
+          <div class="claim-row">
+            <dt>Retailer</dt>
+            <dd>{{ product.retailer }}</dd>
+          </div>
+        }
+        @if (product.price) {
+          <div class="claim-row">
+            <dt>Price</dt>
+            <dd>{{ product.price.amount | number: '1.0-2' }} {{ product.price.currency }}</dd>
+          </div>
+        }
+        <div class="claim-row">
+          <dt>Proof of purchase</dt>
+          <dd>
+            @if (product.proofOfPurchase; as proof) {
+              <div class="proof-present">
+                @if (proof.type === 'text') {
+                  <span class="proof-text">{{ proof.text }}</span>
+                } @else {
+                  <button mat-button (click)="viewProof()">
+                    <mat-icon>{{ proof.type === 'image' ? 'image' : 'picture_as_pdf' }}</mat-icon>
+                    {{ proof.fileName ?? 'View proof' }}
+                  </button>
+                }
+                <button
+                  mat-icon-button
+                  color="warn"
+                  aria-label="Remove proof of purchase"
+                  (click)="deleteProof()"
+                >
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </div>
+            } @else {
+              <a mat-button [routerLink]="['/warranties', product.id, 'edit']">
+                <mat-icon>add</mat-icon>
+                Add proof of purchase
+              </a>
+            }
+          </dd>
+        </div>
+      </dl>
+    </mat-card>
+  </section>
+}
