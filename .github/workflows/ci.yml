@@ -50,5 +50,5 @@ jobs:
       - name: Deploy
         run: |
           npx firebase-tools deploy \
-            --only hosting,firestore:rules,storage:rules \
+            --only hosting,firestore:rules,storage \
             --non-interactive
