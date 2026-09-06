@@ -47,6 +47,7 @@ export class LoginComponent {
     this.loading.set(true);
     try {
       await this.auth.signInWithGoogle();
+      await this.auth.redirectAfterAuth();
     } catch (error) {
       this.loading.set(false);
       if (!isExpectedAuthError(error)) {

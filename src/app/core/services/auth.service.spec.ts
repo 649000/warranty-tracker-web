@@ -6,8 +6,7 @@ import type { User } from 'firebase/auth';
 const authMocks = vi.hoisted(() => ({
   setPersistence: vi.fn(),
   onAuthStateChanged: vi.fn(),
-  getRedirectResult: vi.fn(),
-  signInWithRedirect: vi.fn(),
+  signInWithPopup: vi.fn(),
   signInWithEmailAndPassword: vi.fn(),
   createUserWithEmailAndPassword: vi.fn(),
   sendEmailVerification: vi.fn(),
@@ -23,8 +22,7 @@ vi.mock('firebase/auth', () => ({
   GoogleAuthProvider: class {},
   setPersistence: authMocks.setPersistence,
   onAuthStateChanged: authMocks.onAuthStateChanged,
-  getRedirectResult: authMocks.getRedirectResult,
-  signInWithRedirect: authMocks.signInWithRedirect,
+  signInWithPopup: authMocks.signInWithPopup,
   signInWithEmailAndPassword: authMocks.signInWithEmailAndPassword,
   createUserWithEmailAndPassword: authMocks.createUserWithEmailAndPassword,
   sendEmailVerification: authMocks.sendEmailVerification,
@@ -69,26 +67,19 @@ function fakeUser(overrides: Partial<User> = {}): User {
   return { uid: 'u1', email: 'a@b.c', emailVerified: true, ...overrides } as User;
 }
 
-function deferred<T>() {
-  let resolve!: (value: T) => void;
-  const promise = new Promise<T>((r) => (resolve = r));
-  return { promise, resolve };
-}
-
 async function flushMicrotasks(): Promise<void> {
   for (let i = 0; i < 5; i++) {
     await Promise.resolve();
   }
 }
 
-describe('AuthService initialization', () => {
+describe('AuthService', () => {
   const analytics = { log: vi.fn() };
 
   beforeEach(() => {
     vi.clearAllMocks();
     authMocks.setPersistence.mockResolvedValue(undefined);
     authMocks.onAuthStateChanged.mockReturnValue(() => undefined);
-    authMocks.getRedirectResult.mockResolvedValue(null);
     TestBed.configureTestingModule({
       providers: [
         { provide: AUTH, useValue: {} },
@@ -99,36 +90,18 @@ describe('AuthService initialization', () => {
     });
   });
 
-  it('awaits persistence before reading the redirect result', async () => {
-    const calls: string[] = [];
-    authMocks.setPersistence.mockImplementation(async () => {
-      calls.push('persistence');
-    });
-    authMocks.getRedirectResult.mockImplementation(async () => {
-      calls.push('redirect');
-      return null;
-    });
-
+  it('applies persistence on initialization', async () => {
     TestBed.inject(AuthService);
     await flushMicrotasks();
-
-    expect(calls.indexOf('persistence')).toBeGreaterThanOrEqual(0);
-    expect(calls.indexOf('redirect')).toBeGreaterThan(calls.indexOf('persistence'));
+    expect(authMocks.setPersistence).toHaveBeenCalled();
   });
 
-  it('resolves readyPromise only after the redirect result settles', async () => {
-    const redirect = deferred<{ user: User } | null>();
-    authMocks.getRedirectResult.mockReturnValue(redirect.promise);
-
+  it('resolves readyPromise once the initial auth state has settled', async () => {
     const service = TestBed.inject(AuthService);
+    await flushMicrotasks();
+
     let settled = false;
-    void service.readyPromise.then(() => (settled = true));
-
-    await flushMicrotasks();
-    expect(settled).toBe(false);
-
-    redirect.resolve(null);
-    await flushMicrotasks();
+    await service.readyPromise.then(() => (settled = true));
     expect(settled).toBe(true);
   });
 
@@ -148,12 +121,12 @@ describe('AuthService initialization', () => {
     expect(service.authReady()).toBe(true);
   });
 
-  it('logs sign_in and sets the user when a Google redirect returns a user', async () => {
+  it('sets the user and logs sign_in on Google sign-in', async () => {
     const user = fakeUser();
-    authMocks.getRedirectResult.mockResolvedValue({ user });
+    authMocks.signInWithPopup.mockResolvedValue({ user });
 
     const service = TestBed.inject(AuthService);
-    await flushMicrotasks();
+    await service.signInWithGoogle();
 
     expect(service.user()).toBe(user);
     expect(analytics.log).toHaveBeenCalledWith('sign_in');

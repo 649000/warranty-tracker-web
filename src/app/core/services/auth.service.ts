@@ -5,13 +5,12 @@ import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
   deleteUser,
-  getRedirectResult,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
-  signInWithRedirect,
+  signInWithPopup,
   signOut,
   GoogleAuthProvider,
   confirmPasswordReset,
@@ -50,10 +49,10 @@ export class AuthService {
   }
 
   /**
-   * Settles the initial auth state in order: persistence first, then the auth
-   * state listener, then any pending redirect result. `readyPromise` resolves
-   * only after all three, so route guards read a final `user()` value instead
-   * of the first (null) `onAuthStateChanged` emission.
+   * Settles the initial auth state: persistence first, then the auth state
+   * listener. `readyPromise` resolves once both are in place, so route guards
+   * read a final `user()` value instead of the first (null) `onAuthStateChanged`
+   * emission.
    */
   private async initialize(): Promise<void> {
     try {
@@ -65,15 +64,6 @@ export class AuthService {
       this.user.set(user);
       this.authReady.set(true);
     });
-    try {
-      const result = await getRedirectResult(this.auth);
-      if (result?.user) {
-        this.user.set(result.user);
-        this.analytics.log('sign_in');
-      }
-    } catch {
-      // Redirect failures surface through onAuthStateChanged/guard flows.
-    }
     this.resolveReady();
   }
 
@@ -102,7 +92,11 @@ export class AuthService {
 
   async signInWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
-    await this.run('signInWithGoogle', () => signInWithRedirect(this.auth, provider));
+    const credential = await this.run('signInWithGoogle', () =>
+      signInWithPopup(this.auth, provider),
+    );
+    this.user.set(credential.user);
+    this.analytics.log('sign_in');
   }
 
   async signUpWithEmail(email: string, password: string): Promise<void> {

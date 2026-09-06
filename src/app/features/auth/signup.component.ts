@@ -50,6 +50,7 @@ export class SignupComponent {
     this.loading.set(true);
     try {
       await this.auth.signInWithGoogle();
+      await this.router.navigateByUrl('/warranties');
     } catch (error) {
       this.loading.set(false);
       if (!isExpectedAuthError(error)) {
