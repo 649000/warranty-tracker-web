@@ -11,9 +11,9 @@
 ## 3. Tests
 
 - [x] 3.1 Update the guard Vitest spec to assert `guestGuard` returns `true` for both states and never a redirect; verify `npm test` passes.
-- [ ] 3.2 Ensure the Playwright smoke suite covers sign-up → `/warranties` and email sign-in → `/warranties`; verify `npm run e2e` passes under the emulator configuration (sign-up test goes green).
+- [x] 3.2 Ensure the Playwright smoke suite covers sign-up → `/warranties` and email sign-in → `/warranties`; verify `npm run e2e` passes under the emulator configuration (sign-up test goes green).
 
 ## 4. Verification & docs
 
 - [x] 4.1 Run the full gate (`npm run format:check`, `npm run lint`, `npm test -- --watch=false`, `npm run build`); verify all pass.
-- [ ] 4.2 Smoke-test email and Google login on the deployed production site; verify no white screen and a clean landing on `/warranties`.
+- [x] 4.2 Smoke-test email and Google login on the deployed production site; verify no white screen and a clean landing on `/warranties`.

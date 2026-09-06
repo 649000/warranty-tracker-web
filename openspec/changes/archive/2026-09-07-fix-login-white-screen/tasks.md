@@ -4,7 +4,7 @@
 - [x] 1.2 Add `src/environments/environment.development.ts` with `useEmulators: true` and the real `firebaseConfig`; verify `npx tsc --noEmit -p tsconfig.app.json` resolves the `@env` alias without errors.
 - [x] 1.3 Replace the `isDevMode()` emulator gating in `src/app/core/firebase/firebase.providers.ts` with the `useEmulators` flag (connect emulators only when `useEmulators` is true); verify `npm run lint` and `npm run build` pass.
 - [x] 1.4 Point the emulator-based suites (Playwright `webServer` and the rules-test command) at the development configuration; verify `npm run test:rules` passes against the emulators.
-- [ ] 1.5 Start `ng serve` and confirm the login page loads without emulator connection errors in the Network tab; verify sign-in against real Firebase is reachable.
+- [x] 1.5 Start `ng serve` and confirm the login page loads without emulator connection errors in the Network tab; verify sign-in against real Firebase is reachable.
 
 ## 2. Reproduce the loop
 
@@ -33,4 +33,4 @@
 
 - [x] 7.1 Run the full gate (`npm run format:check`, `npm run lint`, `npm test -- --watch=false`, `npm run build`); verify all pass.
 - [x] 7.2 Update the README's local-run and emulator instructions to match the `useEmulators` flag behavior; verify the documented commands reproduce the intended environments.
-- [ ] 7.3 Smoke-test email and Google login on the deployed production site after release; verify no white screen and a clean landing on `/warranties`.
+- [x] 7.3 Smoke-test email and Google login on the deployed production site after release; verify no white screen and a clean landing on `/warranties`.

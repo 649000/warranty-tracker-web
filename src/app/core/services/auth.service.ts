@@ -5,7 +5,9 @@ import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
   deleteUser,
+  EmailAuthProvider,
   onAuthStateChanged,
+  reauthenticateWithCredential,
   sendEmailVerification,
   sendPasswordResetEmail,
   setPersistence,
@@ -14,6 +16,8 @@ import {
   signOut,
   GoogleAuthProvider,
   confirmPasswordReset,
+  updatePassword as firebaseUpdatePassword,
+  verifyBeforeUpdateEmail,
   type User,
 } from 'firebase/auth';
 import { AUTH } from '../firebase/firebase.providers';
@@ -175,5 +179,34 @@ export class AuthService {
     await this.run('removeAccount', () => deleteUser(current));
     this.user.set(null);
     this.returnUrl = '';
+  }
+
+  async reauthenticate(password: string): Promise<void> {
+    const current = this.auth.currentUser;
+    if (!current || !current.email) {
+      return;
+    }
+    const credential = EmailAuthProvider.credential(current.email, password);
+    await this.run('reauthenticate', () => reauthenticateWithCredential(current, credential));
+  }
+
+  async updatePassword(currentPassword: string, newPassword: string): Promise<void> {
+    const current = this.auth.currentUser;
+    if (!current || !current.email) {
+      return;
+    }
+    await this.reauthenticate(currentPassword);
+    await this.run('updatePassword', () => firebaseUpdatePassword(current, newPassword));
+    this.analytics.log('update_password');
+  }
+
+  async changeEmail(newEmail: string, currentPassword: string): Promise<void> {
+    const current = this.auth.currentUser;
+    if (!current || !current.email) {
+      return;
+    }
+    await this.reauthenticate(currentPassword);
+    await this.run('changeEmail', () => verifyBeforeUpdateEmail(current, newEmail));
+    this.analytics.log('change_email');
   }
 }

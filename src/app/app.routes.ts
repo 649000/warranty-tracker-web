@@ -75,6 +75,20 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'account',
+    canMatch: [authGuard],
+    loadComponent: () => import('./shell/shell.component').then((m) => m.ShellComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/account/account-settings.component').then(
+            (m) => m.AccountSettingsComponent,
+          ),
+      },
+    ],
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./features/not-found/not-found.component').then((m) => m.NotFoundComponent),

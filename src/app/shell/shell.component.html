@@ -14,6 +14,10 @@
     <button mat-menu-item disabled>
       <span class="menu-email">{{ userEmail() }}</span>
     </button>
+    <button mat-menu-item routerLink="/account">
+      <mat-icon>settings</mat-icon>
+      <span>Account settings</span>
+    </button>
     <button mat-menu-item (click)="signOut()">
       <mat-icon>logout</mat-icon>
       <span>Sign out</span>

@@ -7,7 +7,7 @@ Handles user identity for Warranty Tracker: sign-up and sign-in (Google and emai
 
 ### Requirement: Sign in with Google
 
-The system SHALL allow a user to sign in with a Google account in a single action, creating an account on first use.
+The system SHALL allow a user to sign in with a Google account in a single action, creating an account on first use, and SHALL land the signed-in user on the warranty list without a blank or looping screen.
 
 #### Scenario: Successful Google sign-in
 
@@ -40,12 +40,17 @@ The system SHALL let a user create an account with a valid email address and a p
 
 ### Requirement: Sign in with email and password
 
-The system SHALL let a registered user sign in with their email and password.
+The system SHALL let a registered user sign in with their email and password and SHALL land them on the warranty list.
 
 #### Scenario: Successful email sign-in
 
 - **WHEN** a registered user submits the correct email and password
 - **THEN** the user is authenticated and redirected to the warranty list
+
+#### Scenario: Sign-in renders the warranty list without a blank screen
+
+- **WHEN** a user completes email sign-in
+- **THEN** the warranty list renders a loading or content state, never a blank white screen
 
 #### Scenario: Wrong credentials
 
@@ -65,6 +70,20 @@ The system SHALL let a user request a password reset for their email address.
 
 - **WHEN** a user follows the password reset link and sets a new password
 - **THEN** the new password takes effect and the user can sign in with it
+
+### Requirement: Local development sign-in
+
+The system SHALL allow a developer to sign in during local development against either the live Firebase project or the Firebase emulators, selected by environment configuration.
+
+#### Scenario: Emulators enabled
+
+- **WHEN** the application is served in development with the emulator option enabled
+- **THEN** authentication, Firestore, and Storage requests target the local Firebase emulators
+
+#### Scenario: Emulators disabled
+
+- **WHEN** the application is served in development with the emulator option disabled
+- **THEN** sign-in targets the live Firebase project so it can be tested locally
 
 ### Requirement: Email verification
 
@@ -109,7 +128,7 @@ The system SHALL let a user delete their account and SHALL remove the user's sto
 
 ### Requirement: Guarded routes
 
-The system SHALL prevent unauthenticated users from accessing private pages and SHALL prevent authenticated users from accessing the sign-in/sign-up pages.
+The system SHALL prevent unauthenticated users from accessing private pages and SHALL prevent authenticated users from accessing the sign-in/sign-up pages, redirecting an authenticated user to the warranty list exactly once without an endless redirect loop.
 
 #### Scenario: Unauthenticated user redirected to sign-in
 
@@ -120,6 +139,11 @@ The system SHALL prevent unauthenticated users from accessing private pages and 
 
 - **WHEN** an authenticated user navigates to the sign-in or sign-up page
 - **THEN** they are redirected to the warranty list
+
+#### Scenario: Newly authenticated user lands without a loop
+
+- **WHEN** a user becomes authenticated while on a guest page (for example, by submitting sign-up or sign-in)
+- **THEN** the system redirects them to the warranty list exactly once and renders it, without an endless redirect loop or a blank screen
 
 ### Requirement: Auth errors are user-friendly
 

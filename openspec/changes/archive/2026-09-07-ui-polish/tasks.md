@@ -54,4 +54,4 @@
 - [x] 9.1 Add/extend Playwright viewport checks (375, 768, 1280) covering landing, auth, list, detail, and form; verify the suite passes
 - [x] 9.2 Run an AXE accessibility scan at each viewport and verify zero violations
 - [x] 9.3 Run `ng lint`, `ng test`, and `ng build` and verify all green
-- [ ] 9.4 Manual visual smoke across all routes in light and dark mode at desktop/tablet/mobile; verify no console errors and a polished, consistent result
+- [x] 9.4 Manual visual smoke across all routes in light and dark mode at desktop/tablet/mobile; verify no console errors and a polished, consistent result
