@@ -56,4 +56,28 @@ test.describe('smoke', () => {
     const detailResults = await new AxeBuilder({ page }).analyze();
     expect(detailResults.violations).toEqual([]);
   });
+
+  test('sign in with email lands on the warranty list', async ({ page }) => {
+    const email = `user-${Date.now()}@example.com`;
+    const password = 'password123';
+
+    // Create the account first.
+    await page.goto('/signup');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Password', { exact: true }).fill(password);
+    await page.getByRole('button', { name: 'Create account' }).click();
+    await expect(page.getByRole('heading', { name: 'Add your first product' })).toBeVisible();
+
+    // Sign out back to the landing page.
+    await page.getByRole('button', { name: 'Account menu' }).click();
+    await page.getByRole('menuitem', { name: 'Sign out' }).click();
+    await expect(page.getByRole('heading', { name: /Know what.s covered/ })).toBeVisible();
+
+    // Sign back in and land on the warranty list without a blank screen.
+    await page.goto('/login');
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel('Password', { exact: true }).fill(password);
+    await page.getByRole('button', { name: 'Sign in' }).click();
+    await expect(page.getByRole('heading', { name: 'Add your first product' })).toBeVisible();
+  });
 });

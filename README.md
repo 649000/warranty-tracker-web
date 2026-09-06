@@ -27,18 +27,25 @@ A public web app that centralizes warranty coverage per product — what's cover
 5. Paste those values into `src/environments/environment.ts` (the single source of truth).
 6. Set your project id in `.firebaserc`.
 
-> The Firebase web config is public identifiers, not secrets — security comes from the rules (`firestore.rules`, `storage.rules`), not from hiding the config. Emulator wiring is automatic: `ng serve` talks to the local emulators, `ng build` targets real Firebase.
+> The Firebase web config is public identifiers, not secrets — security comes from the rules (`firestore.rules`, `storage.rules`), not from hiding the config. Emulator wiring is driven by the `useEmulators` flag in `src/environments/environment.ts`: the default `ng serve` targets the live Firebase project, and `ng serve --configuration emulators` wires the SDK to the local emulators.
 
 ## Running locally
 
 ```bash
 npm install
 
+# Serve against the live Firebase project (default; supports real Google sign-in)
+npm start
+```
+
+To run against the local emulators instead (offline work or deterministic data), start the emulators and serve the emulator configuration:
+
+```bash
 # Terminal 1 — start the emulators (auth, firestore, storage)
 npm run emulators
 
-# Terminal 2 — serve the app (wires itself to the emulators in dev)
-npm start
+# Terminal 2 — serve the app wired to the emulators
+npm start -- --configuration emulators
 ```
 
 ## Data model

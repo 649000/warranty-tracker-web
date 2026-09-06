@@ -62,6 +62,8 @@ export class ProductService {
   readonly coverages = signal<ReadonlyMap<string, Coverage[]>>(new Map());
   /** True once the initial product snapshot has arrived. */
   readonly loaded = signal(false);
+  /** True when the product snapshot listener fails (permission/network). */
+  readonly error = signal(false);
 
   private productsUnsub: Unsubscribe | null = null;
   private readonly coverageUnsubs = new Map<string, Unsubscribe>();
@@ -81,6 +83,7 @@ export class ProductService {
   watch(uid: string): void {
     this.stopWatching();
     this.uid = uid;
+    this.error.set(false);
     const q = query(collection(this.db, 'users', uid, 'products'));
     this.productsUnsub = onSnapshot(
       q,
@@ -91,8 +94,12 @@ export class ProductService {
           this.ensureCoverageListener(product.id);
         }
         this.loaded.set(true);
+        this.error.set(false);
       },
-      (error) => this.errorReporting.captureException(error, { operation: 'watchProducts' }),
+      (error) => {
+        this.error.set(true);
+        this.errorReporting.captureException(error, { operation: 'watchProducts' });
+      },
     );
   }
 

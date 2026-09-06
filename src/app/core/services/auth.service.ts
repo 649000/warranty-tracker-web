@@ -46,13 +46,34 @@ export class AuthService {
 
   constructor() {
     this.readyPromise = new Promise((resolve) => (this.resolveReady = resolve));
-    void setPersistence(this.auth, browserLocalPersistence);
+    void this.initialize();
+  }
+
+  /**
+   * Settles the initial auth state in order: persistence first, then the auth
+   * state listener, then any pending redirect result. `readyPromise` resolves
+   * only after all three, so route guards read a final `user()` value instead
+   * of the first (null) `onAuthStateChanged` emission.
+   */
+  private async initialize(): Promise<void> {
+    try {
+      await setPersistence(this.auth, browserLocalPersistence);
+    } catch {
+      // Persistence is best-effort; continue so the auth state still resolves.
+    }
     onAuthStateChanged(this.auth, (user) => {
       this.user.set(user);
       this.authReady.set(true);
-      this.resolveReady();
     });
-    this.handleRedirectResult();
+    try {
+      const result = await getRedirectResult(this.auth);
+      if (result?.user) {
+        this.analytics.log('sign_in');
+      }
+    } catch {
+      // Redirect failures surface through onAuthStateChanged/guard flows.
+    }
+    this.resolveReady();
   }
 
   setReturnUrl(url: string): void {
@@ -75,18 +96,6 @@ export class AuthService {
         this.errorReporting.captureException(error, { operation });
       }
       throw error;
-    }
-  }
-
-  private async handleRedirectResult(): Promise<void> {
-    try {
-      const result = await getRedirectResult(this.auth);
-      if (result?.user) {
-        this.user.set(result.user);
-        this.analytics.log('sign_in');
-      }
-    } catch {
-      // Errors here surface through onAuthStateChanged/guard flows; ignore.
     }
   }
 

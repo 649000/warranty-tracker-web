@@ -61,6 +61,14 @@ export class WarrantyListComponent {
     }
   }
 
+  /** Re-subscribes to the user's products after a load failure. */
+  retry(): void {
+    const user = this.auth.user();
+    if (user) {
+      this.products.watch(user.uid);
+    }
+  }
+
   private readonly items = computed<ListItem[]>(() => {
     const today = new Date();
     const result: ListItem[] = [];

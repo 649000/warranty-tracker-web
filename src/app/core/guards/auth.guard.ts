@@ -21,11 +21,23 @@ export const authGuard: CanMatchFn = async () => {
 };
 
 /**
- * Keeps signed-in users off the auth pages (login/signup/etc.).
+ * Keeps the auth pages (login/signup/etc.) reachable for everyone. Signed-in
+ * users are redirected off these pages by `redirectIfAuthenticated` (run by
+ * each auth-page component), not here, to avoid an endless guard redirect loop.
  */
 export const guestGuard: CanMatchFn = async () => {
   const auth = inject(AuthService);
-  const router = inject(Router);
   await auth.readyPromise;
-  return auth.user() ? router.createUrlTree(['/warranties']) : true;
+  return true;
 };
+
+/**
+ * Redirects a signed-in user to the warranty list; a no-op for guests. Called
+ * by the auth-page components after first render, so the "already signed in"
+ * redirect never re-enters the router's matching phase.
+ */
+export function redirectIfAuthenticated(auth: AuthService, router: Router): void {
+  if (auth.user()) {
+    void router.navigateByUrl('/warranties');
+  }
+}

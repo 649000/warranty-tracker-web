@@ -34,15 +34,15 @@ const LABELS: Record<CoverageStatus, string> = {
         flex: none;
       }
       .active {
-        color: light-dark(#2e7d5b, #82c9a8);
+        color: light-dark(#1b6647, #82c9a8);
         background: color-mix(in srgb, currentColor 14%, transparent);
       }
       .expiring-soon {
-        color: light-dark(#9a6b00, #e8c36a);
+        color: light-dark(#7a5400, #e8c36a);
         background: color-mix(in srgb, currentColor 16%, transparent);
       }
       .expired {
-        color: light-dark(#6b7574, #aeb8b6);
+        color: light-dark(#545f5e, #aeb8b6);
         background: color-mix(in srgb, currentColor 14%, transparent);
       }
     `,

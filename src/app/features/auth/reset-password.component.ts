@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { afterNextRender, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
+import { redirectIfAuthenticated } from '../../core/guards/auth.guard';
 import { ErrorReportingService } from '../../core/services/error-reporting.service';
 import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
@@ -36,6 +37,10 @@ export class ResetPasswordComponent {
   readonly form = new FormGroup({
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
+
+  constructor() {
+    afterNextRender(() => redirectIfAuthenticated(this.auth, this.router));
+  }
 
   async submit(): Promise<void> {
     this.form.markAllAsTouched();

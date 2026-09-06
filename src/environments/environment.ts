@@ -27,3 +27,11 @@ export const firebaseConfig = {
  */
 export const sentryDsn =
   'https://c9f52db1d9e77c498c52a13222d27a32@o131112.ingest.us.sentry.io/4512039586037760';
+
+/**
+ * Whether to connect the Firebase Auth/Firestore/Storage SDKs to the local
+ * emulator suite (127.0.0.1:9099/8080/9199). The default `ng serve` targets
+ * the live Firebase project (false). The emulator build configuration flips
+ * this on via `environment.development.ts` (see angular.json "emulators").
+ */
+export const useEmulators = false;

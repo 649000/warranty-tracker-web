@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { afterNextRender, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
+import { redirectIfAuthenticated } from '../../core/guards/auth.guard';
 import { ErrorReportingService } from '../../core/services/error-reporting.service';
 import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
@@ -40,6 +41,10 @@ export class SignupComponent {
     },
     { validators: [] },
   );
+
+  constructor() {
+    afterNextRender(() => redirectIfAuthenticated(this.auth, this.router));
+  }
 
   async signUpWithGoogle(): Promise<void> {
     this.loading.set(true);

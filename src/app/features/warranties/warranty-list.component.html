@@ -10,7 +10,14 @@
   }
 </mat-chip-listbox>
 
-@if (!loaded()) {
+@if (products.error()) {
+  <div class="empty" role="alert">
+    <mat-icon aria-hidden="true">cloud_off</mat-icon>
+    <h2>Couldn't load your warranties</h2>
+    <p>Something went wrong while loading your data. Check your connection and try again.</p>
+    <button mat-flat-button color="primary" (click)="retry()">Try again</button>
+  </div>
+} @else if (!loaded()) {
   <div class="cards" aria-label="Loading warranties">
     @for (skeleton of [1, 2, 3]; track skeleton) {
       <mat-card class="skeleton-card"></mat-card>

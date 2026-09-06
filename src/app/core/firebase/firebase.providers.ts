@@ -1,10 +1,10 @@
-import { isDevMode, InjectionToken, type Provider } from '@angular/core';
+import { InjectionToken, type Provider } from '@angular/core';
 import { initializeApp, type FirebaseApp } from 'firebase/app';
 import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth';
 import { connectFirestoreEmulator, getFirestore, type Firestore } from 'firebase/firestore';
 import { connectStorageEmulator, getStorage, type FirebaseStorage } from 'firebase/storage';
 import { getAnalytics, type Analytics } from 'firebase/analytics';
-import { firebaseConfig } from '@env/environment';
+import { firebaseConfig, useEmulators } from '@env/environment';
 
 export const APP = new InjectionToken<FirebaseApp>('FirebaseApp');
 export const AUTH = new InjectionToken<Auth>('FirebaseAuth');
@@ -18,7 +18,7 @@ function firebaseAppFactory(): FirebaseApp {
 
 function authFactory(app: FirebaseApp): Auth {
   const auth = getAuth(app);
-  if (isDevMode()) {
+  if (useEmulators) {
     connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
   }
   return auth;
@@ -26,7 +26,7 @@ function authFactory(app: FirebaseApp): Auth {
 
 function dbFactory(app: FirebaseApp): Firestore {
   const db = getFirestore(app);
-  if (isDevMode()) {
+  if (useEmulators) {
     connectFirestoreEmulator(db, '127.0.0.1', 8080);
   }
   return db;
@@ -34,7 +34,7 @@ function dbFactory(app: FirebaseApp): Firestore {
 
 function storageFactory(app: FirebaseApp): FirebaseStorage {
   const storage = getStorage(app);
-  if (isDevMode()) {
+  if (useEmulators) {
     connectStorageEmulator(storage, '127.0.0.1', 9199);
   }
   return storage;
