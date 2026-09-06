@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     name: Deploy to Firebase Hosting
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/angular'
     needs: quality
     runs-on: ubuntu-latest
     steps:
