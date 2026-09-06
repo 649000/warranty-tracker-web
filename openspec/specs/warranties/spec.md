@@ -107,7 +107,7 @@ The system SHALL compute a status for each coverage (active, expiring soon, expi
 
 ### Requirement: Product list surfacing
 
-The system SHALL present the warranty list sorted by urgency (expiring soon first, then active, then expired) with filter chips for all/active/expiring-soon/expired and status shown as both color and text.
+The system SHALL present the warranty list sorted by urgency (expiring soon first, then active, then expired) with filter chips for all/active/expiring-soon/expired and status shown as both color and text, with the status badge meeting WCAG AA color contrast.
 
 #### Scenario: List sorted by urgency
 
@@ -123,6 +123,11 @@ The system SHALL present the warranty list sorted by urgency (expiring soon firs
 
 - **WHEN** a product's status is displayed
 - **THEN** both a color indicator and a text label are present
+
+#### Scenario: Status badge meets WCAG AA contrast
+
+- **WHEN** a product or coverage status badge is displayed in light or dark theme
+- **THEN** its text and background meet the WCAG AA contrast ratio of at least 4.5:1
 
 ### Requirement: Claim information
 

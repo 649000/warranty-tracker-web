@@ -68,6 +68,7 @@ export class AuthService {
     try {
       const result = await getRedirectResult(this.auth);
       if (result?.user) {
+        this.user.set(result.user);
         this.analytics.log('sign_in');
       }
     } catch {

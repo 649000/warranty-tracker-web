@@ -148,13 +148,14 @@ describe('AuthService initialization', () => {
     expect(service.authReady()).toBe(true);
   });
 
-  it('logs sign_in when a Google redirect returns a user', async () => {
+  it('logs sign_in and sets the user when a Google redirect returns a user', async () => {
     const user = fakeUser();
     authMocks.getRedirectResult.mockResolvedValue({ user });
 
-    TestBed.inject(AuthService);
+    const service = TestBed.inject(AuthService);
     await flushMicrotasks();
 
+    expect(service.user()).toBe(user);
     expect(analytics.log).toHaveBeenCalledWith('sign_in');
   });
 });
