@@ -15,3 +15,15 @@ export const firebaseConfig = {
   appId: '1:1068912111204:web:91940c54e1041577023971',
   measurementId: 'G-0NDS6PJN1N',
 };
+
+/**
+ * Sentry DSN — PASTE YOUR PROJECT'S DSN HERE.
+ *
+ * The DSN is a public ingest key (not a secret): it ships in the client bundle
+ * and only lets the client send events to your Sentry project. Find it under
+ * Sentry → Settings → Projects → <project> → Client Keys (DSN).
+ *
+ * Leave empty to keep Sentry reporting disabled in all builds.
+ */
+export const sentryDsn =
+  'https://c9f52db1d9e77c498c52a13222d27a32@o131112.ingest.us.sentry.io/4512039586037760';

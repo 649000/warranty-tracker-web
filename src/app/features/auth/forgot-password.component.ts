@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
+import { ErrorReportingService } from '../../core/services/error-reporting.service';
+import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
 @Component({
   selector: 'app-forgot-password',
@@ -25,6 +27,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class ForgotPasswordComponent {
   private readonly auth = inject(AuthService);
   private readonly snackbar = inject(MatSnackBar);
+  private readonly errorReporting = inject(ErrorReportingService);
 
   readonly loading = signal(false);
   readonly sent = signal(false);
@@ -43,6 +46,9 @@ export class ForgotPasswordComponent {
       await this.auth.sendPasswordReset(email);
       this.sent.set(true);
     } catch (error) {
+      if (!isExpectedAuthError(error)) {
+        this.errorReporting.captureException(error, { operation: 'forgotPassword.submit' });
+      }
       this.snackbar.open(this.auth.errorMessage(error), 'Close', { duration: 5000 });
     } finally {
       this.loading.set(false);

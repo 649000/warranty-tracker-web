@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
+import { ErrorReportingService } from '../../core/services/error-reporting.service';
+import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
 @Component({
   selector: 'app-reset-password',
@@ -26,6 +28,7 @@ export class ResetPasswordComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly snackbar = inject(MatSnackBar);
+  private readonly errorReporting = inject(ErrorReportingService);
 
   readonly loading = signal(false);
   private readonly oobCode = this.route.snapshot.queryParamMap.get('oobCode') ?? '';
@@ -47,6 +50,9 @@ export class ResetPasswordComponent {
       await this.router.navigateByUrl('/login');
     } catch (error) {
       this.loading.set(false);
+      if (!isExpectedAuthError(error)) {
+        this.errorReporting.captureException(error, { operation: 'resetPassword.submit' });
+      }
       this.snackbar.open(this.auth.errorMessage(error), 'Close', { duration: 5000 });
     }
   }

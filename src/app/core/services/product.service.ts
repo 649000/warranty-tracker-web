@@ -27,6 +27,7 @@ import type {
 } from '../models/warranty.model';
 import { firestoreDate } from '../utils/firestore';
 import { AnalyticsService } from './analytics.service';
+import { ErrorReportingService } from './error-reporting.service';
 
 export interface CoverageDraft {
   source: CoverageSource;
@@ -54,6 +55,7 @@ export interface ProductDraft {
 export class ProductService {
   private readonly db = inject(DB);
   private readonly analytics = inject(AnalyticsService);
+  private readonly errorReporting = inject(ErrorReportingService);
   /** The current user's products (realtime). */
   readonly products = signal<Product[]>([]);
   /** Coverages keyed by product id (realtime). */
@@ -65,19 +67,33 @@ export class ProductService {
   private readonly coverageUnsubs = new Map<string, Unsubscribe>();
   private uid = '';
 
+  /** Runs a Firestore operation, reporting unexpected failures. */
+  private async run<T>(operation: string, fn: () => Promise<T>): Promise<T> {
+    try {
+      return await fn();
+    } catch (error) {
+      this.errorReporting.captureException(error, { operation });
+      throw error;
+    }
+  }
+
   /** Starts realtime listeners for a user's products and their coverages. */
   watch(uid: string): void {
     this.stopWatching();
     this.uid = uid;
     const q = query(collection(this.db, 'users', uid, 'products'));
-    this.productsUnsub = onSnapshot(q, (snapshot) => {
-      const products = snapshot.docs.map((d) => productFromDoc(d.id, d.data()));
-      this.products.set(products);
-      for (const product of products) {
-        this.ensureCoverageListener(product.id);
-      }
-      this.loaded.set(true);
-    });
+    this.productsUnsub = onSnapshot(
+      q,
+      (snapshot) => {
+        const products = snapshot.docs.map((d) => productFromDoc(d.id, d.data()));
+        this.products.set(products);
+        for (const product of products) {
+          this.ensureCoverageListener(product.id);
+        }
+        this.loaded.set(true);
+      },
+      (error) => this.errorReporting.captureException(error, { operation: 'watchProducts' }),
+    );
   }
 
   stopWatching(): void {
@@ -94,14 +110,18 @@ export class ProductService {
       return;
     }
     const q = query(collection(this.db, 'users', this.uid, 'products', productId, 'coverages'));
-    const unsub = onSnapshot(q, (snapshot) => {
-      const list = snapshot.docs.map((d) => coverageFromDoc(d.id, d.data()));
-      this.coverages.update((map) => {
-        const next = new Map(map);
-        next.set(productId, list);
-        return next;
-      });
-    });
+    const unsub = onSnapshot(
+      q,
+      (snapshot) => {
+        const list = snapshot.docs.map((d) => coverageFromDoc(d.id, d.data()));
+        this.coverages.update((map) => {
+          const next = new Map(map);
+          next.set(productId, list);
+          return next;
+        });
+      },
+      (error) => this.errorReporting.captureException(error, { operation: 'watchCoverages' }),
+    );
     this.coverageUnsubs.set(productId, unsub);
   }
 
@@ -110,8 +130,10 @@ export class ProductService {
   }
 
   async getProduct(uid: string, productId: string): Promise<Product | null> {
-    const snapshot = await getDoc(doc(this.db, 'users', uid, 'products', productId));
-    return snapshot.exists() ? productFromDoc(snapshot.id, snapshot.data()) : null;
+    return this.run('getProduct', async () => {
+      const snapshot = await getDoc(doc(this.db, 'users', uid, 'products', productId));
+      return snapshot.exists() ? productFromDoc(snapshot.id, snapshot.data()) : null;
+    });
   }
 
   async setProofOfPurchase(
@@ -119,75 +141,91 @@ export class ProductService {
     productId: string,
     proof: ProofOfPurchase | null,
   ): Promise<void> {
-    const ref = doc(this.db, 'users', uid, 'products', productId);
-    if (proof) {
-      await updateDoc(ref, { proofOfPurchase: proof });
-    } else {
-      await updateDoc(ref, { proofOfPurchase: deleteField() });
-    }
+    await this.run('setProofOfPurchase', async () => {
+      const ref = doc(this.db, 'users', uid, 'products', productId);
+      if (proof) {
+        await updateDoc(ref, { proofOfPurchase: proof });
+      } else {
+        await updateDoc(ref, { proofOfPurchase: deleteField() });
+      }
+    });
   }
 
   async addProduct(uid: string, draft: ProductDraft, coverages: CoverageDraft[]): Promise<string> {
-    const ref = doc(collection(this.db, 'users', uid, 'products'));
-    await setDoc(ref, {
-      ...productToDoc(draft),
-      ownerId: uid,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
+    return this.run('addProduct', async () => {
+      const ref = doc(collection(this.db, 'users', uid, 'products'));
+      await setDoc(ref, {
+        ...productToDoc(draft),
+        ownerId: uid,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+      const batch = writeBatch(this.db);
+      for (const coverage of coverages) {
+        const cRef = doc(collection(this.db, 'users', uid, 'products', ref.id, 'coverages'));
+        batch.set(cRef, coverageToDoc(coverage));
+      }
+      await batch.commit();
+      this.analytics.log('product_added', { product_id: ref.id });
+      return ref.id;
     });
-    const batch = writeBatch(this.db);
-    for (const coverage of coverages) {
-      const cRef = doc(collection(this.db, 'users', uid, 'products', ref.id, 'coverages'));
-      batch.set(cRef, coverageToDoc(coverage));
-    }
-    await batch.commit();
-    this.analytics.log('product_added', { product_id: ref.id });
-    return ref.id;
   }
 
   async updateProduct(uid: string, productId: string, draft: ProductDraft): Promise<void> {
-    const ref = doc(this.db, 'users', uid, 'products', productId);
-    await updateDoc(ref, { ...productToDoc(draft), updatedAt: serverTimestamp() });
+    await this.run('updateProduct', async () => {
+      const ref = doc(this.db, 'users', uid, 'products', productId);
+      await updateDoc(ref, { ...productToDoc(draft), updatedAt: serverTimestamp() });
+    });
   }
 
   async deleteProduct(uid: string, productId: string): Promise<void> {
-    const coverageDocs = await getDocs(
-      collection(this.db, 'users', uid, 'products', productId, 'coverages'),
-    );
-    const batch = writeBatch(this.db);
-    for (const d of coverageDocs.docs) {
-      batch.delete(d.ref);
-    }
-    batch.delete(doc(this.db, 'users', uid, 'products', productId));
-    await batch.commit();
+    await this.run('deleteProduct', async () => {
+      const coverageDocs = await getDocs(
+        collection(this.db, 'users', uid, 'products', productId, 'coverages'),
+      );
+      const batch = writeBatch(this.db);
+      for (const d of coverageDocs.docs) {
+        batch.delete(d.ref);
+      }
+      batch.delete(doc(this.db, 'users', uid, 'products', productId));
+      await batch.commit();
+    });
   }
 
   async addCoverage(uid: string, productId: string, draft: CoverageDraft): Promise<void> {
-    await addDoc(
-      collection(this.db, 'users', uid, 'products', productId, 'coverages'),
-      coverageToDoc(draft),
-    );
-    await updateDoc(doc(this.db, 'users', uid, 'products', productId), {
-      updatedAt: serverTimestamp(),
+    await this.run('addCoverage', async () => {
+      await addDoc(
+        collection(this.db, 'users', uid, 'products', productId, 'coverages'),
+        coverageToDoc(draft),
+      );
+      await updateDoc(doc(this.db, 'users', uid, 'products', productId), {
+        updatedAt: serverTimestamp(),
+      });
+      this.analytics.log('coverage_added', { product_id: productId });
     });
-    this.analytics.log('coverage_added', { product_id: productId });
   }
 
   async updateCoverage(uid: string, productId: string, coverage: Coverage): Promise<void> {
-    const ref = doc(this.db, 'users', uid, 'products', productId, 'coverages', coverage.id);
-    await updateDoc(ref, { ...coverageToDoc(coverage), updatedAt: serverTimestamp() });
+    await this.run('updateCoverage', async () => {
+      const ref = doc(this.db, 'users', uid, 'products', productId, 'coverages', coverage.id);
+      await updateDoc(ref, { ...coverageToDoc(coverage), updatedAt: serverTimestamp() });
+    });
   }
 
   async deleteCoverage(uid: string, productId: string, coverageId: string): Promise<void> {
-    await deleteDoc(doc(this.db, 'users', uid, 'products', productId, 'coverages', coverageId));
-    await updateDoc(doc(this.db, 'users', uid, 'products', productId), {
-      updatedAt: serverTimestamp(),
+    await this.run('deleteCoverage', async () => {
+      await deleteDoc(doc(this.db, 'users', uid, 'products', productId, 'coverages', coverageId));
+      await updateDoc(doc(this.db, 'users', uid, 'products', productId), {
+        updatedAt: serverTimestamp(),
+      });
     });
   }
 
   /** Removes all of a user's products (coverages included). For account deletion. */
   async deleteAllProducts(uid: string): Promise<void> {
-    const productDocs = await getDocs(query(collection(this.db, 'users', uid, 'products')));
+    const productDocs = await this.run('listAllProducts', () =>
+      getDocs(query(collection(this.db, 'users', uid, 'products'))),
+    );
     for (const productDoc of productDocs.docs) {
       await this.deleteProduct(uid, productDoc.id);
     }

@@ -18,10 +18,33 @@ const FRIENDLY_MESSAGES: Record<string, string> = {
   'auth/user-disabled': 'This account has been disabled.',
 };
 
+/** Auth codes that represent expected, user-facing validation rather than bugs. */
+const VALIDATION_CODES = new Set<string>([
+  'auth/email-already-in-use',
+  'auth/invalid-email',
+  'auth/weak-password',
+  'auth/wrong-password',
+  'auth/invalid-credential',
+  'auth/user-not-found',
+  'auth/account-exists-with-different-credential',
+  'auth/popup-closed-by-user',
+  'auth/cancelled-popup-request',
+  'auth/redirect-cancelled-by-user',
+  'auth/requires-recent-login',
+]);
+
+function authErrorCode(error: unknown): string {
+  return typeof error === 'object' && error !== null && 'code' in error
+    ? String((error as { code: unknown }).code)
+    : '';
+}
+
 export function toFriendlyAuthError(error: unknown): string {
-  const code =
-    typeof error === 'object' && error !== null && 'code' in error
-      ? String((error as { code: unknown }).code)
-      : '';
-  return FRIENDLY_MESSAGES[code] ?? 'Something went wrong. Please try again.';
+  return FRIENDLY_MESSAGES[authErrorCode(error)] ?? 'Something went wrong. Please try again.';
+}
+
+/** True when the error is an expected validation failure, not an operational one. */
+export function isExpectedAuthError(error: unknown): boolean {
+  const code = authErrorCode(error);
+  return code !== '' && VALIDATION_CODES.has(code);
 }

@@ -18,14 +18,16 @@ import {
   type User,
 } from 'firebase/auth';
 import { AUTH } from '../firebase/firebase.providers';
-import { toFriendlyAuthError } from '../utils/auth-errors';
+import { isExpectedAuthError, toFriendlyAuthError } from '../utils/auth-errors';
 import { AnalyticsService } from './analytics.service';
+import { ErrorReportingService } from './error-reporting.service';
 
 @Service()
 export class AuthService {
   private readonly auth = inject(AUTH);
   private readonly router = inject(Router);
   private readonly analytics = inject(AnalyticsService);
+  private readonly errorReporting = inject(ErrorReportingService);
 
   /** The signed-in Firebase user, or null. */
   readonly user = signal<User | null>(null);
@@ -59,7 +61,21 @@ export class AuthService {
 
   /** After sign-in, go to the previously intended page or the default. */
   async redirectAfterAuth(): Promise<void> {
-    await this.router.navigateByUrl(this.returnUrl || '/warranties');
+    await this.run('redirectAfterAuth', () =>
+      this.router.navigateByUrl(this.returnUrl || '/warranties'),
+    );
+  }
+
+  /** Runs an auth operation, reporting unexpected (non-validation) failures. */
+  private async run<T>(operation: string, fn: () => Promise<T>): Promise<T> {
+    try {
+      return await fn();
+    } catch (error) {
+      if (!isExpectedAuthError(error)) {
+        this.errorReporting.captureException(error, { operation });
+      }
+      throw error;
+    }
   }
 
   private async handleRedirectResult(): Promise<void> {
@@ -76,11 +92,13 @@ export class AuthService {
 
   async signInWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
-    await signInWithRedirect(this.auth, provider);
+    await this.run('signInWithGoogle', () => signInWithRedirect(this.auth, provider));
   }
 
   async signUpWithEmail(email: string, password: string): Promise<void> {
-    const credential = await createUserWithEmailAndPassword(this.auth, email, password);
+    const credential = await this.run('signUpWithEmail', () =>
+      createUserWithEmailAndPassword(this.auth, email, password),
+    );
     this.user.set(credential.user);
     this.analytics.log('sign_in');
     if (!credential.user.emailVerified) {
@@ -89,24 +107,26 @@ export class AuthService {
   }
 
   async signInWithEmail(email: string, password: string): Promise<void> {
-    const credential = await signInWithEmailAndPassword(this.auth, email, password);
+    const credential = await this.run('signInWithEmail', () =>
+      signInWithEmailAndPassword(this.auth, email, password),
+    );
     this.user.set(credential.user);
     this.analytics.log('sign_in');
   }
 
   async sendPasswordReset(email: string): Promise<void> {
-    await sendPasswordResetEmail(this.auth, email);
+    await this.run('sendPasswordReset', () => sendPasswordResetEmail(this.auth, email));
   }
 
   async resendVerificationEmail(): Promise<void> {
     const current = this.auth.currentUser;
     if (current) {
-      await sendEmailVerification(current);
+      await this.run('resendVerificationEmail', () => sendEmailVerification(current));
     }
   }
 
   async signOut(): Promise<void> {
-    await signOut(this.auth);
+    await this.run('signOut', () => signOut(this.auth));
     this.returnUrl = '';
   }
 
@@ -125,7 +145,7 @@ export class AuthService {
     if (mode === 'resetPassword') {
       return 'resetPassword';
     }
-    await applyActionCode(this.auth, oobCode);
+    await this.run('applyActionCode', () => applyActionCode(this.auth, oobCode));
     if (mode === 'verifyEmail' && this.auth.currentUser) {
       await this.auth.currentUser.reload().catch(() => undefined);
     }
@@ -133,7 +153,7 @@ export class AuthService {
   }
 
   async confirmPasswordReset(code: string, newPassword: string): Promise<void> {
-    await confirmPasswordReset(this.auth, code, newPassword);
+    await this.run('confirmPasswordReset', () => confirmPasswordReset(this.auth, code, newPassword));
   }
 
   errorMessage(error: unknown): string {
@@ -146,7 +166,7 @@ export class AuthService {
     if (!current) {
       return;
     }
-    await deleteUser(current);
+    await this.run('removeAccount', () => deleteUser(current));
     this.user.set(null);
     this.returnUrl = '';
   }

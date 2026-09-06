@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
+import { ErrorReportingService } from '../../core/services/error-reporting.service';
+import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +30,7 @@ export class LoginComponent {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly snackbar = inject(MatSnackBar);
+  private readonly errorReporting = inject(ErrorReportingService);
 
   readonly loading = signal(false);
   readonly form = new FormGroup({
@@ -41,6 +44,9 @@ export class LoginComponent {
       await this.auth.signInWithGoogle();
     } catch (error) {
       this.loading.set(false);
+      if (!isExpectedAuthError(error)) {
+        this.errorReporting.captureException(error, { operation: 'login.signInWithGoogle' });
+      }
       this.snackbar.open(this.auth.errorMessage(error), 'Close', { duration: 5000 });
     }
   }
@@ -57,6 +63,9 @@ export class LoginComponent {
       await this.auth.redirectAfterAuth();
     } catch (error) {
       this.loading.set(false);
+      if (!isExpectedAuthError(error)) {
+        this.errorReporting.captureException(error, { operation: 'login.submit' });
+      }
       this.snackbar.open(this.auth.errorMessage(error), 'Close', { duration: 5000 });
     }
   }
