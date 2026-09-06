@@ -40,7 +40,9 @@ describe('ErrorReportingService', () => {
     mocks.isDevMode.mockReturnValue(false);
     const error = new Error('boom');
     service.captureException(error, { operation: 'addProduct' });
-    expect(mocks.captureException).toHaveBeenCalledWith(error, { extra: { operation: 'addProduct' } });
+    expect(mocks.captureException).toHaveBeenCalledWith(error, {
+      extra: { operation: 'addProduct' },
+    });
   });
 
   it('reports messages in production', () => {

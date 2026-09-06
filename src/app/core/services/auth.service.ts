@@ -153,7 +153,9 @@ export class AuthService {
   }
 
   async confirmPasswordReset(code: string, newPassword: string): Promise<void> {
-    await this.run('confirmPasswordReset', () => confirmPasswordReset(this.auth, code, newPassword));
+    await this.run('confirmPasswordReset', () =>
+      confirmPasswordReset(this.auth, code, newPassword),
+    );
   }
 
   errorMessage(error: unknown): string {
