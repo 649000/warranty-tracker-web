@@ -21,8 +21,8 @@ const LABELS: Record<CoverageStatus, string> = {
         align-items: center;
         gap: 0.35rem;
         padding: 0.15rem 0.6rem;
-        border-radius: 999px;
-        font-size: 0.8rem;
+        border-radius: var(--radius-full);
+        font-size: var(--type-caption);
         font-weight: 500;
         line-height: 1.4;
       }
@@ -34,15 +34,15 @@ const LABELS: Record<CoverageStatus, string> = {
         flex: none;
       }
       .active {
-        color: light-dark(#1b5e20, #a5d6a7);
+        color: light-dark(#2e7d5b, #82c9a8);
         background: color-mix(in srgb, currentColor 14%, transparent);
       }
       .expiring-soon {
-        color: light-dark(#9a6200, #ffe082);
+        color: light-dark(#9a6b00, #e8c36a);
         background: color-mix(in srgb, currentColor 16%, transparent);
       }
       .expired {
-        color: light-dark(#5f6368, #bdbdbd);
+        color: light-dark(#6b7574, #aeb8b6);
         background: color-mix(in srgb, currentColor 14%, transparent);
       }
     `,

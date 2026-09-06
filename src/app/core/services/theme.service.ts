@@ -1,25 +1,76 @@
-import { Service, signal } from '@angular/core';
+import { Service, computed, signal, type OnDestroy } from '@angular/core';
+
+export type ThemeMode = 'system' | 'light' | 'dark';
+export type ResolvedTheme = 'light' | 'dark';
 
 const STORAGE_KEY = 'warranty-tracker-theme';
+const DARK_QUERY = '(prefers-color-scheme: dark)';
+
+const NEXT_MODE: Record<ThemeMode, ThemeMode> = {
+  system: 'light',
+  light: 'dark',
+  dark: 'system',
+};
 
 @Service()
-export class ThemeService {
-  readonly theme = signal<'light' | 'dark'>('light');
+export class ThemeService implements OnDestroy {
+  readonly mode = signal<ThemeMode>('system');
+  readonly theme = signal<ResolvedTheme>('light');
+
+  readonly modeIcon = computed(() => {
+    switch (this.mode()) {
+      case 'light':
+        return 'light_mode';
+      case 'dark':
+        return 'dark_mode';
+      default:
+        return 'brightness_auto';
+    }
+  });
+
+  readonly modeLabel = computed(() => {
+    switch (this.mode()) {
+      case 'system':
+        return 'Theme: following system. Switch to light mode.';
+      case 'light':
+        return 'Theme: light. Switch to dark mode.';
+      default:
+        return 'Theme: dark. Switch to follow system.';
+    }
+  });
+
+  private readonly media = window.matchMedia?.(DARK_QUERY);
+
+  private readonly handleSystemChange = (): void => {
+    if (this.mode() === 'system') {
+      this.apply();
+    }
+  };
 
   constructor() {
     const stored = localStorage.getItem(STORAGE_KEY);
-    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
-    this.theme.set(stored === 'dark' || (stored === null && prefersDark) ? 'dark' : 'light');
+    if (stored === 'light' || stored === 'dark' || stored === 'system') {
+      this.mode.set(stored);
+    }
+    this.media?.addEventListener('change', this.handleSystemChange);
     this.apply();
   }
 
-  toggle(): void {
-    this.theme.update((t) => (t === 'light' ? 'dark' : 'light'));
+  cycle(): void {
+    this.mode.set(NEXT_MODE[this.mode()]);
+    localStorage.setItem(STORAGE_KEY, this.mode());
     this.apply();
+  }
+
+  ngOnDestroy(): void {
+    this.media?.removeEventListener('change', this.handleSystemChange);
   }
 
   private apply(): void {
-    document.documentElement.classList.toggle('dark', this.theme() === 'dark');
-    localStorage.setItem(STORAGE_KEY, this.theme());
+    const mode = this.mode();
+    const prefersDark = this.media?.matches ?? false;
+    const resolved: ResolvedTheme = mode === 'system' ? (prefersDark ? 'dark' : 'light') : mode;
+    this.theme.set(resolved);
+    document.documentElement.classList.toggle('dark', resolved === 'dark');
   }
 }

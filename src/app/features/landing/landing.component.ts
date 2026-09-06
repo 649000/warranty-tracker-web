@@ -12,9 +12,12 @@ import { inject } from '@angular/core';
   styleUrl: './landing.component.css',
 })
 export class LandingComponent {
-  readonly theme = inject(ThemeService);
+  private readonly themeService = inject(ThemeService);
 
-  toggleTheme(): void {
-    this.theme.toggle();
+  readonly themeIcon = this.themeService.modeIcon;
+  readonly themeLabel = this.themeService.modeLabel;
+
+  cycleTheme(): void {
+    this.themeService.cycle();
   }
 }

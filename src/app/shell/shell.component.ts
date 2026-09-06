@@ -25,17 +25,18 @@ import { ProofStorageService } from '../core/services/proof-storage.service';
 })
 export class ShellComponent {
   private readonly auth = inject(AuthService);
-  private readonly theme = inject(ThemeService);
+  private readonly themeService = inject(ThemeService);
   private readonly products = inject(ProductService);
   private readonly proofs = inject(ProofStorageService);
   private readonly router = inject(Router);
 
   readonly displayName = this.auth.displayName;
-  readonly themeMode = this.theme.theme;
+  readonly themeIcon = this.themeService.modeIcon;
+  readonly themeLabel = this.themeService.modeLabel;
   readonly userEmail = computed(() => this.auth.user()?.email ?? '');
 
-  toggleTheme(): void {
-    this.theme.toggle();
+  cycleTheme(): void {
+    this.themeService.cycle();
   }
 
   async signOut(): Promise<void> {

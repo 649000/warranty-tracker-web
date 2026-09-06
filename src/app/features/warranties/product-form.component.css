@@ -1,25 +1,25 @@
 .form-page {
   max-width: 640px;
   margin: 0 auto;
-  padding: 1rem 0 5rem;
+  padding: var(--space-4) 0 var(--space-16);
 }
 
 .form-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 
 .form-header h1 {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: var(--type-h1);
 }
 
 .form-body {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-1);
 }
 
 .full {
@@ -27,19 +27,19 @@
 }
 
 .coverage-card {
-  margin: 0.5rem 0;
-  padding: 0.75rem 1rem 1rem;
+  margin: var(--space-2) 0;
+  padding: var(--space-3) var(--space-4) var(--space-4);
 }
 
 .section-title {
-  margin: 0 0 0.75rem;
-  font-size: 1.05rem;
+  margin: 0 0 var(--space-3);
+  font-size: var(--type-h3);
 }
 
 .field-label {
-  margin: 0.75rem 0 0.25rem;
-  font-size: 0.85rem;
-  opacity: 0.75;
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: var(--type-body-sm);
+  color: var(--text-muted);
 }
 
 .toggle-group {
@@ -52,12 +52,12 @@
 
 .more-toggle {
   align-self: flex-start;
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
 }
 
 .price-row {
   display: flex;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 
 .price-amount {
@@ -69,7 +69,17 @@
 }
 
 .form-actions {
-  margin-top: 1rem;
+  margin-top: var(--space-4);
   display: flex;
   justify-content: flex-end;
+}
+
+@media (max-width: 480px) {
+  .price-row {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
 }

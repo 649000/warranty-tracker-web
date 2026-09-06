@@ -1,15 +1,11 @@
 <header class="topbar">
   <span class="brand">
     <mat-icon aria-hidden="true">verified_user</mat-icon>
-    Warranty Tracker
+    <span class="brand-text u-truncate">Warranty Tracker</span>
   </span>
   <nav aria-label="Primary">
-    <button
-      mat-icon-button
-      [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-      (click)="toggleTheme()"
-    >
-      <mat-icon>{{ theme.theme() === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    <button mat-icon-button [attr.aria-label]="themeLabel()" (click)="cycleTheme()">
+      <mat-icon>{{ themeIcon() }}</mat-icon>
     </button>
     <a mat-button routerLink="/login">Sign in</a>
     <a mat-flat-button color="primary" routerLink="/signup">Get started</a>

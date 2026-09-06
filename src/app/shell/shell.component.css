@@ -7,8 +7,13 @@ mat-toolbar {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
   font-weight: 500;
+  min-width: 0;
+}
+
+.brand-text {
+  min-width: 0;
 }
 
 .spacer {
@@ -16,7 +21,7 @@ mat-toolbar {
 }
 
 .menu-email {
-  font-size: 0.875rem;
+  font-size: var(--type-body-sm);
   opacity: 0.75;
 }
 
@@ -28,5 +33,11 @@ mat-toolbar {
   display: block;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: var(--space-4);
+}
+
+@media (max-width: 480px) {
+  .brand-text {
+    display: none;
+  }
 }

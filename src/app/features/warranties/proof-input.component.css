@@ -1,12 +1,12 @@
 .proof-section {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .hint {
-  font-size: 0.85rem;
-  opacity: 0.75;
+  font-size: var(--type-body-sm);
+  color: var(--text-muted);
 }
 
 .empty-actions,
@@ -15,24 +15,24 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .summary {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
   flex-wrap: wrap;
-  padding: 0.6rem 0.75rem;
-  border: 1px solid var(--mat-sys-outline-variant);
-  border-radius: 12px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-md);
 }
 
 .summary-text {
   flex: 1;
   min-width: 0;
   overflow-wrap: anywhere;
-  font-size: 0.9rem;
+  font-size: var(--type-body-sm);
 }
 
 .hidden-input {
@@ -44,8 +44,8 @@
 }
 
 .file-name {
-  font-size: 0.85rem;
-  opacity: 0.8;
+  font-size: var(--type-body-sm);
+  color: var(--text-muted);
   overflow-wrap: anywhere;
 }
 
