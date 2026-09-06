@@ -8,7 +8,7 @@
     (valueChange)="onSource($event)"
   >
     @for (s of sources; track s) {
-      <mat-button-toggle [value]="s">{{ s }}</mat-button-toggle>
+      <mat-button-toggle [value]="s">{{ s | titlecase }}</mat-button-toggle>
     }
   </mat-button-toggle-group>
 

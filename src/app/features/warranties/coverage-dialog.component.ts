@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,6 +32,7 @@ export interface CoverageDialogData {
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
+    TitleCasePipe,
   ],
   templateUrl: './coverage-dialog.component.html',
   styleUrl: './coverage-dialog.component.css',
