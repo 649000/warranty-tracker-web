@@ -12,7 +12,10 @@
           <mat-form-field appearance="outline" class="full">
             <mat-label>New email</mat-label>
             <input matInput type="email" formControlName="newEmail" autocomplete="email" />
-            @if (emailForm.controls.newEmail.hasError('required') && emailForm.controls.newEmail.touched) {
+            @if (
+              emailForm.controls.newEmail.hasError('required') &&
+              emailForm.controls.newEmail.touched
+            ) {
               <mat-error>Email is required</mat-error>
             } @else if (emailForm.controls.newEmail.hasError('email')) {
               <mat-error>Enter a valid email</mat-error>
@@ -27,7 +30,10 @@
               formControlName="currentPassword"
               autocomplete="current-password"
             />
-            @if (emailForm.controls.currentPassword.hasError('required') && emailForm.controls.currentPassword.touched) {
+            @if (
+              emailForm.controls.currentPassword.hasError('required') &&
+              emailForm.controls.currentPassword.touched
+            ) {
               <mat-error>Password is required</mat-error>
             }
           </mat-form-field>
@@ -56,7 +62,10 @@
                 formControlName="currentPassword"
                 autocomplete="current-password"
               />
-              @if (passwordForm.controls.currentPassword.hasError('required') && passwordForm.controls.currentPassword.touched) {
+              @if (
+                passwordForm.controls.currentPassword.hasError('required') &&
+                passwordForm.controls.currentPassword.touched
+              ) {
                 <mat-error>Password is required</mat-error>
               }
             </mat-form-field>
@@ -69,7 +78,10 @@
                 formControlName="newPassword"
                 autocomplete="new-password"
               />
-              @if (passwordForm.controls.newPassword.hasError('required') && passwordForm.controls.newPassword.touched) {
+              @if (
+                passwordForm.controls.newPassword.hasError('required') &&
+                passwordForm.controls.newPassword.touched
+              ) {
                 <mat-error>Password is required</mat-error>
               } @else if (passwordForm.controls.newPassword.hasError('minlength')) {
                 <mat-error>Use at least 6 characters</mat-error>
@@ -84,7 +96,10 @@
                 formControlName="confirmPassword"
                 autocomplete="new-password"
               />
-              @if (passwordForm.controls.confirmPassword.hasError('required') && passwordForm.controls.confirmPassword.touched) {
+              @if (
+                passwordForm.controls.confirmPassword.hasError('required') &&
+                passwordForm.controls.confirmPassword.touched
+              ) {
                 <mat-error>Please confirm your new password</mat-error>
               } @else if (passwordForm.controls.confirmPassword.hasError('passwordMismatch')) {
                 <mat-error>Passwords do not match</mat-error>
