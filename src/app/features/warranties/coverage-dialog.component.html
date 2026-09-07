@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>{{ data.coverage ? 'Edit Coverage' : 'Add Coverage' }}</h2>
+<h2 mat-dialog-title>{{ editing ? 'Edit Coverage' : 'Add Coverage' }}</h2>
 <mat-dialog-content>
   <p class="field-label">Source</p>
   <mat-button-toggle-group
     class="toggle-group"
-    [value]="source"
+    [value]="model().source"
     aria-label="Coverage Source"
     (valueChange)="onSource($event)"
   >
@@ -15,65 +15,78 @@
   <p class="field-label">Scope</p>
   <mat-button-toggle-group
     class="toggle-group"
-    [value]="scope"
+    [value]="model().scope"
     aria-label="Coverage Scope"
-    (valueChange)="scope = $event"
+    (valueChange)="onScope($event)"
   >
     <mat-button-toggle value="local">Local</mat-button-toggle>
     <mat-button-toggle value="international">International</mat-button-toggle>
   </mat-button-toggle-group>
 
   <p class="field-label">Duration</p>
-  <mat-chip-listbox class="duration-chips" aria-label="Coverage Duration" [value]="durationLabel">
+  <mat-chip-listbox
+    class="duration-chips"
+    aria-label="Coverage Duration"
+    [value]="model().duration"
+  >
     @for (preset of presets; track preset.label) {
-      <mat-chip-option [value]="preset.label" (click)="durationLabel = preset.label">{{
-        preset.label
-      }}</mat-chip-option>
+      <mat-chip-option [value]="preset.label" (click)="onDuration(preset.label)">
+        {{ preset.label }}
+      </mat-chip-option>
     }
-    <mat-chip-option value="Custom" (click)="durationLabel = 'Custom'">Custom</mat-chip-option>
+    <mat-chip-option value="Custom" (click)="onDuration('Custom')">Custom</mat-chip-option>
   </mat-chip-listbox>
 
-  @if (durationLabel === 'Custom') {
+  @if (model().duration === 'Custom') {
     <mat-form-field appearance="outline" class="full">
       <mat-label>Number of Months</mat-label>
-      <input matInput type="number" min="1" [(ngModel)]="customMonths" />
-      @if (!valid()) {
-        <mat-error>Enter the Number of Months</mat-error>
+      <input matInput type="number" [formField]="dialogForm.customMonths" />
+      @if (dialogForm.customMonths().touched() && dialogForm.customMonths().errors().length) {
+        <mat-error>{{ dialogForm.customMonths().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
   }
 
   <mat-form-field appearance="outline" class="full">
     <mat-label>Exact Expiry Date (Optional)</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="manualExpiry" />
+    <input matInput [matDatepicker]="picker" [formField]="dialogForm.manualExpiry" />
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+    @if (dialogForm.manualExpiry().touched() && dialogForm.manualExpiry().errors().length) {
+      <mat-error>{{ dialogForm.manualExpiry().errors()[0].message }}</mat-error>
+    }
   </mat-form-field>
 
   <p class="field-label">Contact (Optional)</p>
   <div class="contact-row">
     <mat-form-field appearance="outline" class="full">
       <mat-label>Hotline</mat-label>
-      <input matInput [(ngModel)]="hotline" />
+      <input matInput [formField]="dialogForm.hotline" autocomplete="off" />
     </mat-form-field>
   </div>
   <mat-form-field appearance="outline" class="full">
     <mat-label>Email</mat-label>
-    <input matInput type="email" [(ngModel)]="contactEmail" />
+    <input matInput type="email" [formField]="dialogForm.contactEmail" autocomplete="off" />
+    @if (dialogForm.contactEmail().touched() && dialogForm.contactEmail().errors().length) {
+      <mat-error>{{ dialogForm.contactEmail().errors()[0].message }}</mat-error>
+    }
   </mat-form-field>
   <mat-form-field appearance="outline" class="full">
     <mat-label>Website</mat-label>
-    <input matInput type="url" [(ngModel)]="contactUrl" />
+    <input matInput type="url" [formField]="dialogForm.contactUrl" autocomplete="off" />
+    @if (dialogForm.contactUrl().touched() && dialogForm.contactUrl().errors().length) {
+      <mat-error>{{ dialogForm.contactUrl().errors()[0].message }}</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full">
     <mat-label>Notes</mat-label>
-    <textarea matInput rows="2" [(ngModel)]="notes"></textarea>
+    <textarea matInput rows="2" [formField]="dialogForm.notes"></textarea>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-flat-button color="primary" [disabled]="!valid()" (click)="save()">
-    {{ data.coverage ? 'Save' : 'Add Coverage' }}
+  <button mat-flat-button color="primary" (click)="save()">
+    {{ editing ? 'Save' : 'Add Coverage' }}
   </button>
 </mat-dialog-actions>

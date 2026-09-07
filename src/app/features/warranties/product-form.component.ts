@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +12,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
 import {
@@ -20,7 +21,12 @@ import {
   type ProductDraft,
 } from '../../core/services/product.service';
 import { ProofStorageService } from '../../core/services/proof-storage.service';
-import { CURRENCIES, DURATION_PRESETS, PRODUCT_CATEGORIES } from '../../core/models/catalog';
+import {
+  CURRENCIES,
+  DURATION_PRESETS,
+  PRODUCT_CATEGORIES,
+  type ProductCategory,
+} from '../../core/models/catalog';
 import {
   DEFAULT_CURRENCY,
   type CoverageScope,
@@ -28,11 +34,33 @@ import {
   type ProofOfPurchase,
 } from '../../core/models/warranty.model';
 import { ProofInputComponent } from './proof-input.component';
+import {
+  customMonthsError,
+  filterBrands,
+  filterRetailers,
+  priceError,
+} from '../../core/utils/validation';
+
+export interface ProductFormModel {
+  name: string;
+  category: ProductCategory | '';
+  purchaseDate: Date;
+  brand: string;
+  serialNumber: string;
+  retailer: string;
+  priceAmount: number | null;
+  currency: string;
+  source: CoverageSource;
+  scope: CoverageScope;
+  duration: string;
+  customMonths: number | null;
+  manualExpiry: Date | null;
+}
 
 @Component({
   selector: 'app-product-form',
   imports: [
-    ReactiveFormsModule,
+    FormField,
     RouterLink,
     MatButtonModule,
     MatIconModule,
@@ -43,6 +71,7 @@ import { ProofInputComponent } from './proof-input.component';
     MatNativeDateModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatAutocompleteModule,
     MatCardModule,
     MatSnackBarModule,
     ProofInputComponent,
@@ -78,25 +107,65 @@ export class ProductFormComponent {
   readonly proofFile = signal<File | null>(null);
   private originalProof: ProofOfPurchase | null = null;
 
-  readonly form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    category: new FormControl<string>(''),
-    purchaseDate: new FormControl<Date>(new Date(), [Validators.required]),
-    brand: new FormControl(''),
-    serialNumber: new FormControl(''),
-    retailer: new FormControl(''),
-    priceAmount: new FormControl<number | null>(null),
-    currency: new FormControl<string>(DEFAULT_CURRENCY),
-    source: new FormControl<CoverageSource>('manufacturer', [Validators.required]),
-    scope: new FormControl<CoverageScope>('local', [Validators.required]),
-    duration: new FormControl<string>('12', [Validators.required]),
-    customMonths: new FormControl<number | null>(null),
-    manualExpiry: new FormControl<Date | null>(null),
-    hotline: new FormControl(''),
-    contactEmail: new FormControl(''),
-    contactUrl: new FormControl(''),
-    notes: new FormControl(''),
+  readonly model = signal<ProductFormModel>({
+    name: '',
+    category: '',
+    purchaseDate: new Date(),
+    brand: '',
+    serialNumber: '',
+    retailer: '',
+    priceAmount: null,
+    currency: DEFAULT_CURRENCY,
+    source: 'manufacturer',
+    scope: 'local',
+    duration: '12',
+    customMonths: null,
+    manualExpiry: null,
   });
+
+  readonly productForm = form(this.model, (s) => {
+    required(s.name, { message: 'Name Is Required' });
+    required(s.category, { message: 'Select a Category' });
+    required(s.purchaseDate, { message: 'Select a Purchase Date' });
+    required(s.source, { message: 'Select a Coverage Source' });
+    required(s.scope, { message: 'Select a Coverage Scope' });
+    required(s.duration, { message: 'Select a Duration' });
+
+    validate(s.priceAmount, ({ value }) => priceError(value()));
+
+    validate(s.customMonths, ({ value, valueOf }) => {
+      if (valueOf(s.duration) !== 'Custom') {
+        return undefined;
+      }
+      return customMonthsError(value());
+    });
+
+    validate(s.manualExpiry, ({ value, valueOf }) => {
+      const expiry = value();
+      if (!expiry) {
+        return undefined;
+      }
+      const purchase = valueOf(s.purchaseDate);
+      if (purchase && expiry.getTime() < purchase.getTime()) {
+        return {
+          kind: 'expiryBeforePurchase',
+          message: 'Expiry Date Cannot Be Before the Purchase Date',
+        };
+      }
+      return undefined;
+    });
+  });
+
+  readonly filteredBrands = computed(() =>
+    filterBrands(
+      this.productForm.brand().controlValue(),
+      this.productForm.category().controlValue(),
+    ),
+  );
+
+  readonly filteredRetailers = computed(() =>
+    filterRetailers(this.productForm.retailer().controlValue()),
+  );
 
   constructor() {
     if (this.isEdit()) {
@@ -116,116 +185,117 @@ export class ProductFormComponent {
       await this.router.navigateByUrl('/warranties');
       return;
     }
-    this.form.patchValue({
+    this.model.set({
       name: product.name,
-      category: product.category ?? '',
+      category: (product.category as ProductCategory | undefined) ?? '',
       purchaseDate: product.purchaseDate,
       brand: product.brand ?? '',
       serialNumber: product.serialNumber ?? '',
       retailer: product.retailer ?? '',
       priceAmount: product.price?.amount ?? null,
       currency: product.price?.currency ?? DEFAULT_CURRENCY,
+      source: 'manufacturer',
+      scope: 'local',
+      duration: '12',
+      customMonths: null,
+      manualExpiry: null,
     });
     this.originalProof = product.proofOfPurchase ?? null;
     this.proofModel.set(product.proofOfPurchase ?? null);
   }
 
   onSourceSelected(source: CoverageSource): void {
-    this.form.patchValue({ source });
-    if (source === 'retailer') {
-      this.form.patchValue({ scope: 'local' });
-    }
+    this.model.update((m) => ({
+      ...m,
+      source,
+      scope: source === 'retailer' ? 'local' : m.scope,
+    }));
+  }
+
+  onScopeSelected(scope: CoverageScope): void {
+    this.model.update((m) => ({ ...m, scope }));
   }
 
   onDurationSelected(duration: string): void {
-    this.form.patchValue({ duration });
+    this.model.update((m) => ({ ...m, duration }));
+  }
+
+  clearField(field: 'brand' | 'retailer'): void {
+    this.model.update((m) => ({ ...m, [field]: '' }));
+  }
+
+  onBrandSelected(brand: string): void {
+    this.model.update((m) => ({ ...m, brand }));
+  }
+
+  onRetailerSelected(retailer: string): void {
+    this.model.update((m) => ({ ...m, retailer }));
   }
 
   private buildProductDraft(): ProductDraft {
-    const v = this.form.getRawValue();
-    const priceAmount = v.priceAmount;
+    const m = this.model();
     return {
-      name: v.name!,
-      category: v.category || undefined,
-      purchaseDate: v.purchaseDate!,
-      brand: v.brand || undefined,
-      serialNumber: v.serialNumber || undefined,
-      retailer: v.retailer || undefined,
+      name: m.name,
+      category: (m.category as ProductCategory | '') || undefined,
+      purchaseDate: m.purchaseDate,
+      brand: m.brand || undefined,
+      serialNumber: m.serialNumber || undefined,
+      retailer: m.retailer || undefined,
       price:
-        priceAmount != null
-          ? { amount: Number(priceAmount), currency: v.currency ?? DEFAULT_CURRENCY }
+        m.priceAmount !== null
+          ? { amount: m.priceAmount, currency: m.currency || DEFAULT_CURRENCY }
           : undefined,
     };
   }
 
   private buildCoverageDraft(): CoverageDraft {
-    const v = this.form.getRawValue();
-    const preset = DURATION_PRESETS.find((p) => p.label === v.duration);
+    const m = this.model();
+    const preset = DURATION_PRESETS.find((p) => p.label === m.duration);
     const duration: CoverageDraft['duration'] = preset
       ? preset.lifetime
         ? { lifetime: true }
         : { months: preset.months }
-      : { months: v.customMonths ?? 12 };
-    const contact =
-      v.hotline || v.contactEmail || v.contactUrl
-        ? {
-            hotline: v.hotline || undefined,
-            email: v.contactEmail || undefined,
-            url: v.contactUrl || undefined,
-          }
-        : undefined;
-    const manualExpiry = v.manualExpiry ?? null;
+      : { months: m.customMonths ?? 12 };
     return {
-      source: v.source!,
-      scope: v.scope!,
+      source: m.source,
+      scope: m.scope,
       duration,
-      startDate: v.purchaseDate!,
-      expiryDate: manualExpiry,
-      manualExpiry: manualExpiry !== null,
-      contact,
-      notes: v.notes || undefined,
+      startDate: m.purchaseDate,
+      expiryDate: m.manualExpiry,
+      manualExpiry: m.manualExpiry !== null,
     };
   }
 
-  async save(): Promise<void> {
-    this.form.markAllAsTouched();
-    if (this.form.invalid || this.coverageInvalid()) {
-      return;
-    }
-    this.saving.set(true);
-    const user = this.auth.user();
-    if (!user) {
-      this.saving.set(false);
-      return;
-    }
-    try {
-      const productDraft = this.buildProductDraft();
-      let productId = this.productId();
-      if (productId) {
-        await this.products.updateProduct(user.uid, productId, productDraft);
-      } else {
-        productId = await this.products.addProduct(user.uid, productDraft, [
-          this.buildCoverageDraft(),
-        ]);
-      }
-      await this.persistProof(productId, user.uid);
-      await this.router.navigate(['/warranties', productId]);
-    } catch {
-      this.saving.set(false);
-      this.snackbar.open('Could Not Save. Please Try Again.', 'Close', { duration: 5000 });
-    }
+  onSubmit(event: SubmitEvent): void {
+    event.preventDefault();
+    this.save();
   }
 
-  coverageInvalid(): boolean {
-    if (this.isEdit()) {
-      return false;
-    }
-    const duration = this.form.getRawValue().duration;
-    if (duration === 'Custom') {
-      const months = this.form.getRawValue().customMonths;
-      return months == null || Number(months) <= 0;
-    }
-    return false;
+  save(): void {
+    submit(this.productForm, async () => {
+      this.saving.set(true);
+      const user = this.auth.user();
+      if (!user) {
+        this.saving.set(false);
+        return;
+      }
+      try {
+        const productDraft = this.buildProductDraft();
+        let productId = this.productId();
+        if (productId) {
+          await this.products.updateProduct(user.uid, productId, productDraft);
+        } else {
+          productId = await this.products.addProduct(user.uid, productDraft, [
+            this.buildCoverageDraft(),
+          ]);
+        }
+        await this.persistProof(productId, user.uid);
+        await this.router.navigate(['/warranties', productId]);
+      } catch {
+        this.saving.set(false);
+        this.snackbar.open('Could Not Save. Please Try Again.', 'Close', { duration: 5000 });
+      }
+    });
   }
 
   private async persistProof(productId: string, uid: string): Promise<void> {

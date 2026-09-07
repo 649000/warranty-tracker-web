@@ -45,7 +45,7 @@ The system SHALL let a user edit any product field and delete a product with con
 
 ### Requirement: Multiple coverages per product
 
-The system SHALL allow a product to have multiple coverages, each with a source (manufacturer, retailer, international, other), a scope (local, international), a duration, and an optional contact and notes.
+The system SHALL allow a product to have multiple coverages, each with a source (manufacturer, retailer, international, other), a scope (local, international), a duration, and an optional contact and notes. Source and scope labels SHALL be presented with consistent title-case capitalization in every control that selects or displays them.
 
 #### Scenario: Add a second coverage
 
@@ -61,6 +61,11 @@ The system SHALL allow a product to have multiple coverages, each with a source 
 
 - **WHEN** a user picks a coverage duration
 - **THEN** preset durations (6 months, 1, 2, 3, 5 years, Lifetime, Custom) are offered, with Custom accepting a number of months or an explicit end date
+
+#### Scenario: Source and scope labels are consistently capitalized
+
+- **WHEN** a user selects a coverage source or scope in any form or dialog
+- **THEN** the options are shown in title case (e.g., "Manufacturer", "Retailer", "Local", "International") regardless of entry point
 
 ### Requirement: Coverage expiry derivation
 

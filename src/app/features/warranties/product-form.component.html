@@ -4,29 +4,35 @@
     <a mat-button routerLink="/warranties">Cancel</a>
   </header>
 
-  <form [formGroup]="form" (ngSubmit)="save()" class="form-body">
+  <form class="form-body" novalidate (submit)="onSubmit($event)">
     <mat-form-field appearance="outline" class="full">
       <mat-label>Product Name</mat-label>
-      <input matInput formControlName="name" autocomplete="off" />
-      @if (form.controls.name.hasError('required') && form.controls.name.touched) {
-        <mat-error>Name Is Required</mat-error>
+      <input matInput [formField]="productForm.name" autocomplete="off" />
+      @if (productForm.name().touched() && productForm.name().errors().length) {
+        <mat-error>{{ productForm.name().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full">
       <mat-label>Category</mat-label>
-      <mat-select formControlName="category">
+      <mat-select [formField]="productForm.category">
         @for (category of categories; track category) {
           <mat-option [value]="category">{{ category }}</mat-option>
         }
       </mat-select>
+      @if (productForm.category().touched() && productForm.category().errors().length) {
+        <mat-error>{{ productForm.category().errors()[0].message }}</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full">
       <mat-label>Purchase Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="purchaseDate" />
+      <input matInput [matDatepicker]="picker" [formField]="productForm.purchaseDate" />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      @if (productForm.purchaseDate().touched() && productForm.purchaseDate().errors().length) {
+        <mat-error>{{ productForm.purchaseDate().errors()[0].message }}</mat-error>
+      }
     </mat-form-field>
 
     @if (!isEdit()) {
@@ -36,7 +42,7 @@
         <p class="field-label">Source</p>
         <mat-button-toggle-group
           class="toggle-group"
-          [value]="form.controls.source.value"
+          [value]="model().source"
           aria-label="Coverage Source"
           (valueChange)="onSourceSelected($event)"
         >
@@ -48,9 +54,9 @@
         <p class="field-label">Scope</p>
         <mat-button-toggle-group
           class="toggle-group"
-          [value]="form.controls.scope.value"
+          [value]="model().scope"
           aria-label="Coverage Scope"
-          (valueChange)="form.controls.scope.setValue($event)"
+          (valueChange)="onScopeSelected($event)"
         >
           <mat-button-toggle value="local">Local</mat-button-toggle>
           <mat-button-toggle value="international">International</mat-button-toggle>
@@ -60,7 +66,7 @@
         <mat-chip-listbox
           class="duration-chips"
           aria-label="Coverage Duration"
-          [value]="form.controls.duration.value"
+          [value]="model().duration"
         >
           @for (preset of durationPresets; track preset.label) {
             <mat-chip-option [value]="preset.label" (click)="onDurationSelected(preset.label)">
@@ -72,21 +78,26 @@
           >
         </mat-chip-listbox>
 
-        @if (form.controls.duration.value === 'Custom') {
+        @if (model().duration === 'Custom') {
           <mat-form-field appearance="outline" class="full">
             <mat-label>Number of Months</mat-label>
-            <input matInput type="number" min="1" formControlName="customMonths" />
-            @if (coverageInvalid() && form.controls.customMonths.touched) {
-              <mat-error>Enter the Number of Months</mat-error>
+            <input matInput type="number" [formField]="productForm.customMonths" />
+            @if (
+              productForm.customMonths().touched() && productForm.customMonths().errors().length
+            ) {
+              <mat-error>{{ productForm.customMonths().errors()[0].message }}</mat-error>
             }
           </mat-form-field>
         }
 
         <mat-form-field appearance="outline" class="full">
           <mat-label>Exact Expiry Date (Optional)</mat-label>
-          <input matInput [matDatepicker]="expiryPicker" formControlName="manualExpiry" />
+          <input matInput [matDatepicker]="expiryPicker" [formField]="productForm.manualExpiry" />
           <mat-datepicker-toggle matIconSuffix [for]="expiryPicker"></mat-datepicker-toggle>
           <mat-datepicker #expiryPicker></mat-datepicker>
+          @if (productForm.manualExpiry().touched() && productForm.manualExpiry().errors().length) {
+            <mat-error>{{ productForm.manualExpiry().errors()[0].message }}</mat-error>
+          }
         </mat-form-field>
       </mat-card>
     }
@@ -99,27 +110,86 @@
     @if (showMore()) {
       <mat-form-field appearance="outline" class="full">
         <mat-label>Brand</mat-label>
-        <input matInput formControlName="brand" autocomplete="off" />
+        <input
+          matInput
+          [formField]="productForm.brand"
+          [matAutocomplete]="brandAuto"
+          autocomplete="off"
+        />
+        @if (productForm.brand().value() !== '') {
+          <button
+            matSuffix
+            mat-icon-button
+            type="button"
+            aria-label="Clear Brand"
+            (click)="clearField('brand')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+        <mat-autocomplete
+          #brandAuto="matAutocomplete"
+          (optionSelected)="onBrandSelected($event.option.value)"
+        >
+          @for (brand of filteredBrands(); track brand) {
+            <mat-option [value]="brand">{{ brand }}</mat-option>
+          } @empty {
+            @if (productForm.brand().controlValue() !== '') {
+              <mat-option disabled>No Matches Found</mat-option>
+            }
+          }
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full">
         <mat-label>Serial Number</mat-label>
-        <input matInput formControlName="serialNumber" autocomplete="off" />
+        <input matInput [formField]="productForm.serialNumber" autocomplete="off" />
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full">
         <mat-label>Retailer</mat-label>
-        <input matInput formControlName="retailer" autocomplete="off" />
+        <input
+          matInput
+          [formField]="productForm.retailer"
+          [matAutocomplete]="retailerAuto"
+          autocomplete="off"
+        />
+        @if (productForm.retailer().value() !== '') {
+          <button
+            matSuffix
+            mat-icon-button
+            type="button"
+            aria-label="Clear Retailer"
+            (click)="clearField('retailer')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+        <mat-autocomplete
+          #retailerAuto="matAutocomplete"
+          (optionSelected)="onRetailerSelected($event.option.value)"
+        >
+          @for (retailer of filteredRetailers(); track retailer) {
+            <mat-option [value]="retailer">{{ retailer }}</mat-option>
+          } @empty {
+            @if (productForm.retailer().controlValue() !== '') {
+              <mat-option disabled>No Matches Found</mat-option>
+            }
+          }
+        </mat-autocomplete>
       </mat-form-field>
 
       <div class="price-row">
         <mat-form-field appearance="outline" class="price-amount">
           <mat-label>Price</mat-label>
-          <input matInput type="number" min="0" formControlName="priceAmount" />
+          <input matInput type="number" [formField]="productForm.priceAmount" />
+          @if (productForm.priceAmount().touched() && productForm.priceAmount().errors().length) {
+            <mat-error>{{ productForm.priceAmount().errors()[0].message }}</mat-error>
+          }
         </mat-form-field>
         <mat-form-field appearance="outline" class="price-currency">
           <mat-label>Currency</mat-label>
-          <mat-select formControlName="currency">
+          <mat-select [formField]="productForm.currency">
             @for (currency of currencies; track currency) {
               <mat-option [value]="currency">{{ currency }}</mat-option>
             }

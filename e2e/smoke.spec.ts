@@ -39,6 +39,22 @@ test.describe('smoke', () => {
     await expect(page.getByRole('heading', { name: 'Add product' })).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await page.getByLabel('Product name').fill('Sony WH-1000XM4');
+    await page.getByLabel('Category').click();
+    await page.getByRole('option', { name: 'Audio' }).click();
+
+    // More details: brand autocomplete suggests and fills, price validates.
+    await page.getByRole('button', { name: 'More Details (Optional)' }).click();
+    const brandInput = page.locator('mat-form-field', { hasText: 'Brand' }).locator('input');
+    await brandInput.fill('Son');
+    await expect(page.getByRole('option', { name: 'Sony' })).toBeVisible();
+    await page.getByRole('option', { name: 'Sony' }).click();
+    await expect(brandInput).toHaveValue('Sony');
+    const priceInput = page.locator('mat-form-field', { hasText: 'Price' }).locator('input');
+    await priceInput.fill('0.00099');
+    await priceInput.press('Tab');
+    await expect(page.getByText('Price Can Have at Most 2 Decimal Places')).toBeVisible();
+    await priceInput.fill('399.99');
+
     await page.getByRole('button', { name: 'Add product' }).click();
 
     // Back on the list, the product appears.
