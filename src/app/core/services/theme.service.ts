@@ -31,11 +31,11 @@ export class ThemeService implements OnDestroy {
   readonly modeLabel = computed(() => {
     switch (this.mode()) {
       case 'system':
-        return 'Theme: following system. Switch to light mode.';
+        return 'Theme: Following System. Switch to Light Mode.';
       case 'light':
-        return 'Theme: light. Switch to dark mode.';
+        return 'Theme: Light. Switch to Dark Mode.';
       default:
-        return 'Theme: dark. Switch to follow system.';
+        return 'Theme: Dark. Switch to Follow System.';
     }
   });
 

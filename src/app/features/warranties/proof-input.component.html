@@ -16,9 +16,9 @@
     </div>
   } @else if (mode() === 'none') {
     <div class="empty-actions">
-      <span class="hint">Proof of purchase (optional)</span>
-      <button mat-stroked-button (click)="choose('text')">Type details</button>
-      <button mat-stroked-button (click)="choose('image')">Add photo</button>
+      <span class="hint">Proof of Purchase (Optional)</span>
+      <button mat-stroked-button (click)="choose('text')">Type Details</button>
+      <button mat-stroked-button (click)="choose('image')">Add Photo</button>
       <button mat-stroked-button (click)="choose('pdf')">Upload PDF</button>
     </div>
   } @else {
@@ -26,9 +26,9 @@
       <span class="hint">
         {{
           mode() === 'text'
-            ? 'Receipt details'
+            ? 'Receipt Details'
             : mode() === 'image'
-              ? 'Photo of receipt'
+              ? 'Photo of Receipt'
               : 'Receipt PDF'
         }}
       </span>
@@ -53,7 +53,7 @@
           />
           <button mat-stroked-button (click)="fileInput.click()">
             <mat-icon>upload_file</mat-icon>
-            {{ pendingFile() ? 'Replace file' : 'Choose file' }}
+            {{ pendingFile() ? 'Replace File' : 'Choose File' }}
           </button>
           @if (pendingFile()) {
             <span class="file-name">{{ pendingFile()!.name }}</span>
@@ -63,7 +63,7 @@
       <div class="row-actions">
         <button mat-button color="warn" (click)="remove()">
           <mat-icon>delete_outline</mat-icon>
-          Remove proof
+          Remove Proof
         </button>
       </div>
     </div>

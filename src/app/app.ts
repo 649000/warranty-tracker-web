@@ -33,9 +33,9 @@ export class App {
       return;
     }
     if (mode === 'verifyEmail') {
-      this.snackbar.open('Email confirmed. Thanks!', 'Close', { duration: 5000 });
+      this.snackbar.open('Email Confirmed. Thanks!', 'Close', { duration: 5000 });
     } else if (mode === 'recoverEmail') {
-      this.snackbar.open('Email updated.', 'Close', { duration: 5000 });
+      this.snackbar.open('Email Updated.', 'Close', { duration: 5000 });
     }
     await this.router.navigateByUrl(this.auth.user() ? '/warranties' : '/login');
   }

@@ -112,7 +112,7 @@ export class ProductFormComponent {
     }
     const product = await this.products.getProduct(user!.uid, id);
     if (!product) {
-      this.snackbar.open('Product not found.', 'Close', { duration: 4000 });
+      this.snackbar.open('Product Not Found.', 'Close', { duration: 4000 });
       await this.router.navigateByUrl('/warranties');
       return;
     }
@@ -212,7 +212,7 @@ export class ProductFormComponent {
       await this.router.navigate(['/warranties', productId]);
     } catch {
       this.saving.set(false);
-      this.snackbar.open('Could not save. Please try again.', 'Close', { duration: 5000 });
+      this.snackbar.open('Could Not Save. Please Try Again.', 'Close', { duration: 5000 });
     }
   }
 

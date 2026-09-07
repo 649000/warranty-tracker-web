@@ -3,7 +3,7 @@ import type { CoverageStatus } from '../core/utils/coverage-status';
 
 const LABELS: Record<CoverageStatus, string> = {
   active: 'Covered',
-  'expiring-soon': 'Expiring soon',
+  'expiring-soon': 'Expiring Soon',
   expired: 'Expired',
 };
 

@@ -51,7 +51,7 @@ export class ResetPasswordComponent {
     const password = this.form.getRawValue().password ?? '';
     try {
       await this.auth.confirmPasswordReset(this.oobCode, password);
-      this.snackbar.open('Password updated. You can now sign in.', 'Close', { duration: 5000 });
+      this.snackbar.open('Password Updated. You Can Now Sign In.', 'Close', { duration: 5000 });
       await this.router.navigateByUrl('/login');
     } catch (error) {
       this.loading.set(false);

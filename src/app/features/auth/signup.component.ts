@@ -69,7 +69,7 @@ export class SignupComponent {
     const { email, password } = this.form.getRawValue();
     try {
       await this.auth.signUpWithEmail(email!, password!);
-      this.snackbar.open('Account created. Please confirm your email.', 'Close', {
+      this.snackbar.open('Account Created. Please Confirm Your Email.', 'Close', {
         duration: 6000,
       });
       await this.router.navigateByUrl('/warranties');

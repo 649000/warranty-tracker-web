@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>{{ data.coverage ? 'Edit coverage' : 'Add coverage' }}</h2>
+<h2 mat-dialog-title>{{ data.coverage ? 'Edit Coverage' : 'Add Coverage' }}</h2>
 <mat-dialog-content>
   <p class="field-label">Source</p>
   <mat-button-toggle-group
     class="toggle-group"
     [value]="source"
-    aria-label="Coverage source"
+    aria-label="Coverage Source"
     (valueChange)="onSource($event)"
   >
     @for (s of sources; track s) {
@@ -16,7 +16,7 @@
   <mat-button-toggle-group
     class="toggle-group"
     [value]="scope"
-    aria-label="Coverage scope"
+    aria-label="Coverage Scope"
     (valueChange)="scope = $event"
   >
     <mat-button-toggle value="local">Local</mat-button-toggle>
@@ -24,7 +24,7 @@
   </mat-button-toggle-group>
 
   <p class="field-label">Duration</p>
-  <mat-chip-listbox class="duration-chips" aria-label="Coverage duration" [value]="durationLabel">
+  <mat-chip-listbox class="duration-chips" aria-label="Coverage Duration" [value]="durationLabel">
     @for (preset of presets; track preset.label) {
       <mat-chip-option [value]="preset.label" (click)="durationLabel = preset.label">{{
         preset.label
@@ -35,22 +35,22 @@
 
   @if (durationLabel === 'Custom') {
     <mat-form-field appearance="outline" class="full">
-      <mat-label>Number of months</mat-label>
+      <mat-label>Number of Months</mat-label>
       <input matInput type="number" min="1" [(ngModel)]="customMonths" />
       @if (!valid()) {
-        <mat-error>Enter the number of months</mat-error>
+        <mat-error>Enter the Number of Months</mat-error>
       }
     </mat-form-field>
   }
 
   <mat-form-field appearance="outline" class="full">
-    <mat-label>Exact expiry date (optional)</mat-label>
+    <mat-label>Exact Expiry Date (Optional)</mat-label>
     <input matInput [matDatepicker]="picker" [(ngModel)]="manualExpiry" />
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <p class="field-label">Contact (optional)</p>
+  <p class="field-label">Contact (Optional)</p>
   <div class="contact-row">
     <mat-form-field appearance="outline" class="full">
       <mat-label>Hotline</mat-label>
@@ -74,6 +74,6 @@
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancel()">Cancel</button>
   <button mat-flat-button color="primary" [disabled]="!valid()" (click)="save()">
-    {{ data.coverage ? 'Save' : 'Add coverage' }}
+    {{ data.coverage ? 'Save' : 'Add Coverage' }}
   </button>
 </mat-dialog-actions>

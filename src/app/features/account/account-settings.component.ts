@@ -105,7 +105,7 @@ export class AccountSettingsComponent {
     const { currentPassword, newPassword } = this.passwordForm.getRawValue();
     try {
       await this.auth.updatePassword(currentPassword!, newPassword!);
-      this.snackbar.open('Password updated successfully.', 'Close', { duration: 5000 });
+      this.snackbar.open('Password Updated Successfully.', 'Close', { duration: 5000 });
       this.passwordForm.reset();
     } catch (error) {
       if (!isExpectedAuthError(error)) {

@@ -1,15 +1,15 @@
 <div class="form-page">
   <header class="form-header">
-    <h1>{{ isEdit() ? 'Edit product' : 'Add product' }}</h1>
+    <h1>{{ isEdit() ? 'Edit Product' : 'Add Product' }}</h1>
     <a mat-button routerLink="/warranties">Cancel</a>
   </header>
 
   <form [formGroup]="form" (ngSubmit)="save()" class="form-body">
     <mat-form-field appearance="outline" class="full">
-      <mat-label>Product name</mat-label>
+      <mat-label>Product Name</mat-label>
       <input matInput formControlName="name" autocomplete="off" />
       @if (form.controls.name.hasError('required') && form.controls.name.touched) {
-        <mat-error>Name is required</mat-error>
+        <mat-error>Name Is Required</mat-error>
       }
     </mat-form-field>
 
@@ -23,7 +23,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full">
-      <mat-label>Purchase date</mat-label>
+      <mat-label>Purchase Date</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="purchaseDate" />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -37,7 +37,7 @@
         <mat-button-toggle-group
           class="toggle-group"
           [value]="form.controls.source.value"
-          aria-label="Coverage source"
+          aria-label="Coverage Source"
           (valueChange)="onSourceSelected($event)"
         >
           @for (source of coverageSources; track source) {
@@ -49,7 +49,7 @@
         <mat-button-toggle-group
           class="toggle-group"
           [value]="form.controls.scope.value"
-          aria-label="Coverage scope"
+          aria-label="Coverage Scope"
           (valueChange)="form.controls.scope.setValue($event)"
         >
           <mat-button-toggle value="local">Local</mat-button-toggle>
@@ -59,7 +59,7 @@
         <p class="field-label">Duration</p>
         <mat-chip-listbox
           class="duration-chips"
-          aria-label="Coverage duration"
+          aria-label="Coverage Duration"
           [value]="form.controls.duration.value"
         >
           @for (preset of durationPresets; track preset.label) {
@@ -74,16 +74,16 @@
 
         @if (form.controls.duration.value === 'Custom') {
           <mat-form-field appearance="outline" class="full">
-            <mat-label>Number of months</mat-label>
+            <mat-label>Number of Months</mat-label>
             <input matInput type="number" min="1" formControlName="customMonths" />
             @if (coverageInvalid() && form.controls.customMonths.touched) {
-              <mat-error>Enter the number of months</mat-error>
+              <mat-error>Enter the Number of Months</mat-error>
             }
           </mat-form-field>
         }
 
         <mat-form-field appearance="outline" class="full">
-          <mat-label>Exact expiry date (optional)</mat-label>
+          <mat-label>Exact Expiry Date (Optional)</mat-label>
           <input matInput [matDatepicker]="expiryPicker" formControlName="manualExpiry" />
           <mat-datepicker-toggle matIconSuffix [for]="expiryPicker"></mat-datepicker-toggle>
           <mat-datepicker #expiryPicker></mat-datepicker>
@@ -93,7 +93,7 @@
 
     <button mat-button type="button" class="more-toggle" (click)="showMore.set(!showMore())">
       <mat-icon>{{ showMore() ? 'expand_less' : 'expand_more' }}</mat-icon>
-      More details (optional)
+      More Details (Optional)
     </button>
 
     @if (showMore()) {
@@ -103,7 +103,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full">
-        <mat-label>Serial number</mat-label>
+        <mat-label>Serial Number</mat-label>
         <input matInput formControlName="serialNumber" autocomplete="off" />
       </mat-form-field>
 
@@ -132,7 +132,7 @@
 
     <div class="form-actions">
       <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
-        {{ isEdit() ? 'Save changes' : 'Add product' }}
+        {{ isEdit() ? 'Save Changes' : 'Add Product' }}
       </button>
     </div>
   </form>

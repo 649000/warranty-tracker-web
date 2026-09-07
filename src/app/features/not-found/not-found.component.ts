@@ -8,9 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
   template: `
     <main class="nf">
       <p class="code" aria-hidden="true">404</p>
-      <h1>Page not found</h1>
+      <h1>Page Not Found</h1>
       <p>The page you’re looking for doesn’t exist.</p>
-      <a mat-flat-button color="primary" routerLink="/">Back to home</a>
+      <a mat-flat-button color="primary" routerLink="/">Back to Home</a>
     </main>
   `,
   styles: [

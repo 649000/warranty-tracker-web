@@ -65,7 +65,7 @@ export class WarrantyDetailComponent {
     }
     const product = await this.products.getProduct(this.uid(), this.productId());
     if (!product) {
-      this.snackbar.open('Product not found.', 'Close', { duration: 4000 });
+      this.snackbar.open('Product Not Found.', 'Close', { duration: 4000 });
       await this.router.navigateByUrl('/warranties');
       return;
     }
@@ -83,16 +83,16 @@ export class WarrantyDetailComponent {
     const expiry = coverageStatus(coverage);
     const date = coverage.expiryDate;
     if (coverage.duration.lifetime && !date) {
-      return 'Lifetime coverage';
+      return 'Lifetime Coverage';
     }
     if (expiry === 'expired' && date) {
       return `Expired ${format(date, 'd MMM yyyy')}`;
     }
     if (date) {
       const days = differenceInCalendarDays(date, new Date());
-      if (days === 0) return 'Expires today';
-      if (days <= 60) return `Expires in ${days} day${days === 1 ? '' : 's'}`;
-      return `Covered until ${format(date, 'd MMM yyyy')}`;
+      if (days === 0) return 'Expires Today';
+      if (days <= 60) return `Expires in ${days} Day${days === 1 ? '' : 's'}`;
+      return `Covered Until ${format(date, 'd MMM yyyy')}`;
     }
     return 'Covered';
   }
@@ -149,14 +149,14 @@ export class WarrantyDetailComponent {
   async deleteCoverage(coverage: Coverage): Promise<void> {
     const product = this.product();
     if (!product) return;
-    if (!window.confirm('Remove this coverage?')) return;
+    if (!window.confirm('Remove This Coverage?')) return;
     await this.products.deleteCoverage(this.uid(), product.id, coverage.id);
   }
 
   async deleteProduct(): Promise<void> {
     const product = this.product();
     if (!product) return;
-    if (!window.confirm('Delete this product and all its data? This cannot be undone.')) return;
+    if (!window.confirm('Delete This Product and All Its Data? This Cannot Be Undone.')) return;
     this.busy.set(true);
     try {
       if (product.proofOfPurchase?.storagePath) {
@@ -184,14 +184,14 @@ export class WarrantyDetailComponent {
         window.open(url, '_blank', 'noopener');
       }
     } catch {
-      this.snackbar.open('Could not load the proof file.', 'Close', { duration: 4000 });
+      this.snackbar.open('Could Not Load the Proof File.', 'Close', { duration: 4000 });
     }
   }
 
   async deleteProof(): Promise<void> {
     const product = this.product();
     if (!product) return;
-    if (!window.confirm('Remove this proof of purchase?')) return;
+    if (!window.confirm('Remove This Proof of Purchase?')) return;
     if (product.proofOfPurchase?.storagePath) {
       await this.proofs.deleteProof(product.proofOfPurchase.storagePath);
     }

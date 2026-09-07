@@ -46,7 +46,7 @@ export class ProofInputComponent {
     if (proof.type === 'text') {
       return proof.text;
     }
-    return proof.fileName ?? (proof.type === 'image' ? 'Photo proof' : 'PDF proof');
+    return proof.fileName ?? (proof.type === 'image' ? 'Photo Proof' : 'PDF Proof');
   });
 
   choose(mode: 'text' | 'image' | 'pdf'): void {
@@ -61,11 +61,11 @@ export class ProofInputComponent {
       return;
     }
     if (this.mode() === 'image' && !ACCEPTED_IMAGE_TYPES.includes(file.type)) {
-      this.snackbar.open('Please choose a PNG, JPEG or WebP photo.', 'Close', { duration: 5000 });
+      this.snackbar.open('Please Choose a PNG, JPEG or WebP Photo.', 'Close', { duration: 5000 });
       return;
     }
     if (this.mode() === 'pdf' && file.type !== 'application/pdf') {
-      this.snackbar.open('Please choose a PDF file.', 'Close', { duration: 5000 });
+      this.snackbar.open('Please Choose a PDF File.', 'Close', { duration: 5000 });
       return;
     }
     this.pendingFile.set(file);

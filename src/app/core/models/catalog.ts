@@ -21,11 +21,11 @@ export interface DurationPreset {
 }
 
 export const DURATION_PRESETS: DurationPreset[] = [
-  { label: '6 months', months: 6 },
-  { label: '1 year', months: 12 },
-  { label: '2 years', months: 24 },
-  { label: '3 years', months: 36 },
-  { label: '5 years', months: 60 },
+  { label: '6 Months', months: 6 },
+  { label: '1 Year', months: 12 },
+  { label: '2 Years', months: 24 },
+  { label: '3 Years', months: 36 },
+  { label: '5 Years', months: 60 },
   { label: 'Lifetime', lifetime: true },
 ];
 

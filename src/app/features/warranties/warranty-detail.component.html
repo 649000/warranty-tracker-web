@@ -5,7 +5,7 @@
     <div>
       <a mat-button class="back" routerLink="/warranties">
         <mat-icon>arrow_back</mat-icon>
-        Warranty list
+        Warranty List
       </a>
       <h1>{{ product.name }}</h1>
       <p class="subtitle">
@@ -17,13 +17,13 @@
     </div>
     <div class="header-actions">
       <a mat-button [routerLink]="['/warranties', product.id, 'edit']">Edit</a>
-      <button mat-icon-button aria-label="More options" [matMenuTriggerFor]="moreMenu">
+      <button mat-icon-button aria-label="More Options" [matMenuTriggerFor]="moreMenu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #moreMenu="matMenu">
         <button mat-menu-item class="danger" (click)="deleteProduct()">
           <mat-icon>delete_forever</mat-icon>
-          <span>Delete product</span>
+          <span>Delete Product</span>
         </button>
       </mat-menu>
     </div>
@@ -34,7 +34,7 @@
       <h2 id="coverage-heading">Coverage</h2>
       <button mat-stroked-button (click)="addCoverage()">
         <mat-icon>add</mat-icon>
-        Add coverage
+        Add Coverage
       </button>
     </div>
 
@@ -103,12 +103,12 @@
   </section>
 
   <section aria-labelledby="claim-heading">
-    <h2 id="claim-heading">Claim info</h2>
+    <h2 id="claim-heading">Claim Info</h2>
     <mat-card appearance="outlined" class="claim-card">
       <dl>
         @if (product.serialNumber) {
           <div class="claim-row">
-            <dt>Serial number</dt>
+            <dt>Serial Number</dt>
             <dd>{{ product.serialNumber }}</dd>
           </div>
         }
@@ -125,7 +125,7 @@
           </div>
         }
         <div class="claim-row">
-          <dt>Proof of purchase</dt>
+          <dt>Proof of Purchase</dt>
           <dd>
             @if (product.proofOfPurchase; as proof) {
               <div class="proof-present">
@@ -134,13 +134,13 @@
                 } @else {
                   <button mat-button (click)="viewProof()">
                     <mat-icon>{{ proof.type === 'image' ? 'image' : 'picture_as_pdf' }}</mat-icon>
-                    {{ proof.fileName ?? 'View proof' }}
+                    {{ proof.fileName ?? 'View Proof' }}
                   </button>
                 }
                 <button
                   mat-icon-button
                   color="warn"
-                  aria-label="Remove proof of purchase"
+                  aria-label="Remove Proof of Purchase"
                   (click)="deleteProof()"
                 >
                   <mat-icon>delete_outline</mat-icon>
@@ -149,7 +149,7 @@
             } @else {
               <a mat-button [routerLink]="['/warranties', product.id, 'edit']">
                 <mat-icon>add</mat-icon>
-                Add proof of purchase
+                Add Proof of Purchase
               </a>
             }
           </dd>

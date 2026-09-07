@@ -1,29 +1,29 @@
 <main>
-  <h1 class="visually-hidden">Account settings</h1>
+  <h1 class="visually-hidden">Account Settings</h1>
   <mat-card appearance="outlined">
     <mat-card-header>
-      <mat-card-title>Account settings</mat-card-title>
+      <mat-card-title>Account Settings</mat-card-title>
       <mat-card-subtitle>{{ user()?.email }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <section aria-labelledby="change-email-heading">
-        <h2 id="change-email-heading">Change email</h2>
+        <h2 id="change-email-heading">Change Email</h2>
         <form [formGroup]="emailForm" (ngSubmit)="changeEmail()">
           <mat-form-field appearance="outline" class="full">
-            <mat-label>New email</mat-label>
+            <mat-label>New Email</mat-label>
             <input matInput type="email" formControlName="newEmail" autocomplete="email" />
             @if (
               emailForm.controls.newEmail.hasError('required') &&
               emailForm.controls.newEmail.touched
             ) {
-              <mat-error>Email is required</mat-error>
+              <mat-error>Email Is Required</mat-error>
             } @else if (emailForm.controls.newEmail.hasError('email')) {
-              <mat-error>Enter a valid email</mat-error>
+              <mat-error>Enter a Valid Email</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="full">
-            <mat-label>Current password</mat-label>
+            <mat-label>Current Password</mat-label>
             <input
               matInput
               type="password"
@@ -34,7 +34,7 @@
               emailForm.controls.currentPassword.hasError('required') &&
               emailForm.controls.currentPassword.touched
             ) {
-              <mat-error>Password is required</mat-error>
+              <mat-error>Password Is Required</mat-error>
             }
           </mat-form-field>
 
@@ -45,17 +45,17 @@
             type="submit"
             [disabled]="emailLoading()"
           >
-            Update email
+            Update Email
           </button>
         </form>
       </section>
 
       @if (hasPasswordProvider()) {
         <section aria-labelledby="change-password-heading">
-          <h2 id="change-password-heading">Change password</h2>
+          <h2 id="change-password-heading">Change Password</h2>
           <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
             <mat-form-field appearance="outline" class="full">
-              <mat-label>Current password</mat-label>
+              <mat-label>Current Password</mat-label>
               <input
                 matInput
                 type="password"
@@ -66,12 +66,12 @@
                 passwordForm.controls.currentPassword.hasError('required') &&
                 passwordForm.controls.currentPassword.touched
               ) {
-                <mat-error>Password is required</mat-error>
+                <mat-error>Password Is Required</mat-error>
               }
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full">
-              <mat-label>New password</mat-label>
+              <mat-label>New Password</mat-label>
               <input
                 matInput
                 type="password"
@@ -82,14 +82,14 @@
                 passwordForm.controls.newPassword.hasError('required') &&
                 passwordForm.controls.newPassword.touched
               ) {
-                <mat-error>Password is required</mat-error>
+                <mat-error>Password Is Required</mat-error>
               } @else if (passwordForm.controls.newPassword.hasError('minlength')) {
-                <mat-error>Use at least 6 characters</mat-error>
+                <mat-error>Use at Least 6 Characters</mat-error>
               }
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full">
-              <mat-label>Confirm new password</mat-label>
+              <mat-label>Confirm New Password</mat-label>
               <input
                 matInput
                 type="password"
@@ -100,9 +100,9 @@
                 passwordForm.controls.confirmPassword.hasError('required') &&
                 passwordForm.controls.confirmPassword.touched
               ) {
-                <mat-error>Please confirm your new password</mat-error>
+                <mat-error>Please Confirm Your New Password</mat-error>
               } @else if (passwordForm.controls.confirmPassword.hasError('passwordMismatch')) {
-                <mat-error>Passwords do not match</mat-error>
+                <mat-error>Passwords Do Not Match</mat-error>
               }
             </mat-form-field>
 
@@ -113,7 +113,7 @@
               type="submit"
               [disabled]="passwordLoading()"
             >
-              Update password
+              Update Password
             </button>
           </form>
         </section>

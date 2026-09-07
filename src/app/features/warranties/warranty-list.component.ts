@@ -21,7 +21,7 @@ interface FilterOption {
 const FILTER_OPTIONS: FilterOption[] = [
   { value: 'all', label: 'All' },
   { value: 'active', label: 'Active' },
-  { value: 'expiring-soon', label: 'Expiring soon' },
+  { value: 'expiring-soon', label: 'Expiring Soon' },
   { value: 'expired', label: 'Expired' },
 ];
 
@@ -119,16 +119,16 @@ export class WarrantyListComponent {
   statusLine(item: ListItem): string {
     if (item.status === 'expiring-soon') {
       return item.daysLeft === 0
-        ? 'Expires today'
-        : `Expires in ${item.daysLeft} day${item.daysLeft === 1 ? '' : 's'}`;
+        ? 'Expires Today'
+        : `Expires in ${item.daysLeft} Day${item.daysLeft === 1 ? '' : 's'}`;
     }
     if (item.status === 'active') {
       return item.nextExpiry
-        ? `Covered until ${format(item.nextExpiry, 'd MMM yyyy')}`
-        : 'Lifetime coverage';
+        ? `Covered Until ${format(item.nextExpiry, 'd MMM yyyy')}`
+        : 'Lifetime Coverage';
     }
     return item.nextExpiry
       ? `Expired ${format(item.nextExpiry, 'd MMM yyyy')}`
-      : 'No active coverage';
+      : 'No Active Coverage';
   }
 }

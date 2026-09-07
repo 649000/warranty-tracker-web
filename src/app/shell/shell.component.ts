@@ -51,7 +51,7 @@ export class ShellComponent {
     if (!user) {
       return;
     }
-    if (!window.confirm('Delete your account and all warranty data? This cannot be undone.')) {
+    if (!window.confirm('Delete Your Account and All Warranty Data? This Cannot Be Undone.')) {
       return;
     }
     await this.products.deleteAllProducts(user.uid);
