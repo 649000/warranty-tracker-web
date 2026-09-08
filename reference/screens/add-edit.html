@@ -1,624 +1,1353 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","on-secondary-fixed":"#00174b","on-error-container":"#93000a","on-secondary":"#ffffff","surface-tint":"#565e74","inverse-primary":"#bec6e0","surface-bright":"#f8f9ff","tertiary":"#000000","outline":"#76777d","primary-fixed":"#dae2fd","on-tertiary-container":"#009668","surface-dim":"#cbdbf5","primary":"#000000","on-secondary-fixed-variant":"#003ea8","surface-container-high":"#dce9ff","tertiary-container":"#002113","secondary-fixed-dim":"#b4c5ff","on-secondary-container":"#fefcff","surface-container-highest":"#d3e4fe","tertiary-fixed":"#6ffbbe","surface-container":"#e5eeff","surface":"#f8f9ff","background":"#f8f9ff","on-background":"#0b1c30","on-primary-container":"#7c839b","primary-fixed-dim":"#bec6e0","on-primary-fixed":"#131b2e","on-tertiary-fixed-variant":"#005236","outline-variant":"#c6c6cd","on-tertiary-fixed":"#002113","primary-container":"#131b2e","surface-container-low":"#eff4ff","secondary-container":"#316bf3","secondary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","secondary":"#0051d5","surface-variant":"#d3e4fe","inverse-on-surface":"#eaf1ff","tertiary-fixed-dim":"#4edea3","error":"#ba1a1a","on-surface":"#0b1c30","on-primary-fixed-variant":"#3f465c","on-tertiary":"#ffffff","error-container":"#ffdad6","on-primary":"#ffffff","inverse-surface":"#213145","on-surface-variant":"#45464d"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-desktop":"1.5rem","margin-page":"1.5rem","space-3xl":"3rem","gutter-mobile":"1rem","space-base":"1rem","space-2xl":"2rem","space-xxs":"0.125rem","space-xl":"1.5rem","space-lg":"1.25rem","space-sm":"0.5rem","space-xs":"0.25rem","space-md":"0.75rem"},fontFamily:{"title-md":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"title-lg":["Inter"],"headline-lg":["Inter"],"display-lg":["Inter"],"label-md":["Inter"],"data-tabular":["Inter"],"headline-lg-mobile":["Inter"],"body-md":["Inter"]},fontSize:{"title-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"600"}],"title-lg":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"data-tabular":["14px",{lineHeight:"20px",letterSpacing:"-0.01em",fontWeight:"500"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="Warranty Tracker Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"/><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold">WarrantyTracker</span></div><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-on-surface font-semibold"><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="dashboard" href="#">Dashboard</a><a aria-current="page" class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold" data-path="add-product" href="#">Add Product</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="categories" href="#">Categories</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="export-claims" href="#">Export & Claims</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors" data-path="add-product" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span>+ Add Product</span></a><button aria-label="Notifications" class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="bg-surface-container-low/60"><div class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"><div class="flex items-center gap-space-md shrink-0"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Posture:</span><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Active (18)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expiring Soon (3)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-error"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expired (5)</span></div></div><div class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]">verified</span><span>Vault Synced</span></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
-<!-- Interactive Form Container -->
-<form class="w-full max-w-7xl mx-auto px-margin-page pb-space-3xl" id="warrantyForm" onsubmit="event.preventDefault(); handleFormSubmit();">
-<!-- Top Action Breadcrumb & Control Bar -->
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md py-space-lg mb-space-base">
-<div class="flex flex-col gap-space-xxs">
-<nav class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md">
-<a class="hover:text-on-surface transition-colors flex items-center gap-space-xxs" data-path="dashboard" href="#">
-<span class="material-symbols-outlined text-[16px]">dashboard</span>
-<span>Dashboard</span>
-</a>
-<span class="material-symbols-outlined text-[14px]">chevron_right</span>
-<span class="text-on-surface font-semibold">Add Product</span>
-</nav>
-<div class="flex items-center gap-space-md mt-space-xs">
-<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Add New Product Warranty</h1>
-<span class="hidden sm:inline-flex items-center gap-space-xxs px-space-md py-space-xxs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-            Asset Record #704
-          </span>
-</div>
-</div>
-<!-- Top Utility Controls -->
-<div class="flex items-center gap-space-sm self-start md:self-auto">
-<button class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-title-md text-title-md flex items-center gap-space-xs" type="button">
-<span class="material-symbols-outlined text-[18px]">close</span>
-<span>Cancel</span>
-</button>
-<button class="px-space-md py-space-xs rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-title-md text-title-md flex items-center gap-space-xs shadow-sm" id="saveDraftBtn" type="button">
-<span class="material-symbols-outlined text-[18px]">bookmark</span>
-<span>Save Draft</span>
-</button>
-</div>
-</div>
-<!-- Main Grid: 2 Column Layout (Left dense inputs, Right real-time overview & documents) -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
-<!-- Primary Form Column (8 Cols) -->
-<div class="lg:col-span-8 flex flex-col gap-space-xl">
-<!-- SECTION 1: Product Essentials -->
-<section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm relative overflow-hidden">
-<div class="flex items-center justify-between gap-space-base mb-space-lg">
-<div class="flex items-center gap-space-md">
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
-<span class="material-symbols-outlined text-[22px]">devices_other</span>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">01 / Categorization</span>
-<h2 class="font-title-lg text-title-lg text-on-surface font-bold">Product Essentials</h2>
-</div>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-sm py-space-xxs rounded">Required Data</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
-<!-- Product Name -->
-<div class="md:col-span-2 flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between" for="prodName">
-<span>Product Full Name <span class="text-error font-bold">*</span></span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">e.g. Model, Edition, Color</span>
-</label>
-<div class="relative flex items-center">
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all" id="prodName" name="prodName" placeholder="Sony WH-1000XM5 Wireless Noise-Canceling Headphones" required="" type="text" value="Sony WH-1000XM5 Wireless Noise-Canceling Headphones"/>
-</div>
-</div>
-<!-- Category -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant" for="category">
-                Category <span class="text-error font-bold">*</span>
-</label>
-<div class="relative">
-<select class="w-full h-10 px-space-md pr-space-xl rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all appearance-none cursor-pointer" id="category" name="category" required="">
-<option selected="" value="Audio">Audio & Headphones</option>
-<option value="Electronics">Consumer Electronics</option>
-<option value="Computing">Computing & Workstations</option>
-<option value="Major Appliances">Major Home Appliances</option>
-<option value="Small Appliances">Small Kitchen Appliances</option>
-<option value="Automotive">Automotive & Tools</option>
-<option value="Fitness">Fitness & Wearables</option>
-</select>
-<span class="material-symbols-outlined absolute right-space-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
-</div>
-</div>
-<!-- Brand / Manufacturer -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant" for="brand">
-                Brand / Manufacturer <span class="text-error font-bold">*</span>
-</label>
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all" id="brand" name="brand" placeholder="Sony Electronics" required="" type="text" value="Sony Corporation"/>
-</div>
-<!-- Model Number -->
-<div class="md:col-span-2 flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between" for="modelNumber">
-<span>Model Number</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Located on packaging or regulatory sticker</span>
-</label>
-<div class="flex items-center gap-space-xs">
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all" id="modelNumber" name="modelNumber" placeholder="WH1000XM5/B" type="text" value="WH1000XM5/B"/>
-</div>
-</div>
-</div>
-</section>
-<!-- SECTION 2: Purchase & Retailer Details -->
-<section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
-<div class="flex items-center justify-between gap-space-base mb-space-lg">
-<div class="flex items-center gap-space-md">
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
-<span class="material-symbols-outlined text-[22px]">shopping_bag</span>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">02 / Transaction</span>
-<h2 class="font-title-lg text-title-lg text-on-surface font-bold">Purchase & Retailer Details</h2>
-</div>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant text-[20px]">receipt_long</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
-<!-- Purchase Date -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant" for="purchaseDate">
-                Date of Purchase <span class="text-error font-bold">*</span>
-</label>
-<div class="relative flex items-center">
-<input class="w-full h-10 px-space-md pr-space-xl rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all" id="purchaseDate" name="purchaseDate" onchange="updateWarrantyDates()" required="" type="date" value="2024-02-20"/>
-<span class="material-symbols-outlined absolute right-space-md pointer-events-none text-on-surface-variant text-[20px]">calendar_today</span>
-</div>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Standard origin point for coverage clock.</span>
-</div>
-<!-- Retailer / Merchant with Autocomplete Suggestions -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant" for="retailer">
-                Retailer / Merchant <span class="text-error font-bold">*</span>
-</label>
-<div class="relative">
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all" id="retailer" list="retailerOptions" name="retailer" placeholder="Select or type retailer..." required="" type="text" value="Best Buy"/>
-<datalist id="retailerOptions">
-<option value="Best Buy"></option>
-<option value="Amazon.com"></option>
-<option value="Apple Store"></option>
-<option value="Costco Wholesale"></option>
-<option value="Target"></option>
-<option value="B&H Photo Video"></option>
-<option value="Manufacturer Direct"></option>
-</datalist>
-</div>
-<div class="flex items-center gap-space-xs mt-space-xxs">
-<button class="px-space-xs py-space-xxs bg-surface-container text-on-surface text-label-sm font-label-sm rounded hover:bg-surface-container-high transition-colors" onclick="document.getElementById('retailer').value='Best Buy'" type="button">Best Buy</button>
-<button class="px-space-xs py-space-xxs bg-surface-container text-on-surface text-label-sm font-label-sm rounded hover:bg-surface-container-high transition-colors" onclick="document.getElementById('retailer').value='Amazon.com'" type="button">Amazon</button>
-<button class="px-space-xs py-space-xxs bg-surface-container text-on-surface text-label-sm font-label-sm rounded hover:bg-surface-container-high transition-colors" onclick="document.getElementById('retailer').value='Apple Store'" type="button">Apple</button>
-</div>
-</div>
-<!-- Purchase Price ($USD) -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant" for="price">
-                Purchase Price (Pre-Tax or Total)
-              </label>
-<div class="relative flex items-center">
-<span class="absolute left-space-md font-body-md text-body-md text-on-surface-variant font-bold">$</span>
-<input class="w-full h-10 pl-space-xl pr-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all" id="price" name="price" placeholder="399.99" step="0.01" type="number" value="399.99"/>
-<span class="absolute right-space-md text-label-sm font-label-sm text-on-surface-variant uppercase">USD</span>
-</div>
-</div>
-<!-- Order / Invoice Number -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant" for="invoiceNumber">
-                Order / Invoice / Receipt #
-              </label>
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all" id="invoiceNumber" name="invoiceNumber" placeholder="BBY-01-884930129" type="text" value="BBY-01-884930129"/>
-</div>
-</div>
-</section>
-<!-- SECTION 3: Warranty & Coverage Duration -->
-<section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
-<div class="flex items-center justify-between gap-space-base mb-space-lg">
-<div class="flex items-center gap-space-md">
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
-<span class="material-symbols-outlined text-[22px]">verified_user</span>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">03 / Protection Term</span>
-<h2 class="font-title-lg text-title-lg text-on-surface font-bold">Warranty & Coverage Duration</h2>
-</div>
-</div>
-<div class="flex items-center gap-space-xs text-on-tertiary-container font-label-md text-label-md bg-tertiary-fixed/30 px-space-sm py-space-xxs rounded-full">
-<span class="material-symbols-outlined text-[16px]">sync</span>
-<span>Auto Calculator Active</span>
-</div>
-</div>
-<!-- Duration Segmented Selector -->
-<div class="flex flex-col gap-space-xs mb-space-lg">
-<label class="font-label-md text-label-md text-on-surface-variant">Coverage Term Preset</label>
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-space-xs">
-<button class="duration-btn active-pill py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-primary text-on-primary shadow-sm transition-all" onclick="selectDuration(12, this)" type="button">
-                1 Year (MFR)
-              </button>
-<button class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all" onclick="selectDuration(24, this)" type="button">
-                2 Years
-              </button>
-<button class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all" onclick="selectDuration(36, this)" type="button">
-                3 Years
-              </button>
-<button class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all" onclick="selectDuration(60, this)" type="button">
-                5 Years
-              </button>
-<button class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all" onclick="selectDuration(-1, this)" type="button">
-                Lifetime
-              </button>
-</div>
-</div>
-<!-- Computed Expiration Timeline Callout Banner -->
-<div class="bg-surface-container-low rounded-xl p-space-lg mb-space-lg">
-<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-base pb-space-sm">
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Coverage Period</span>
-<span class="font-title-lg text-title-lg text-on-surface font-semibold" id="dateRangeSummary">Feb 20, 2024 — Feb 20, 2025</span>
-</div>
-<div class="flex items-center gap-space-xs bg-tertiary-fixed text-on-tertiary-fixed px-space-md py-space-xxs rounded-full font-label-md text-label-md">
-<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
-<span id="countdownPill">364 Days Remaining (Active)</span>
-</div>
-</div>
-<!-- Micro progress bar for timeline simulation -->
-<div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden mt-space-xs">
-<div class="h-full bg-on-tertiary-container rounded-full transition-all duration-500" id="warrantyProgressBar" style="width: 4%;"></div>
-</div>
-</div>
-<!-- Notes & Links -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
-<div class="flex flex-col gap-space-xxs md:col-span-2">
-<label class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between" for="coverageNotes">
-<span>Coverage Scope & Deductible Terms</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">What is covered under this policy</span>
-</label>
-<textarea class="w-full p-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all resize-none" id="coverageNotes" name="coverageNotes" placeholder="Includes full parts and labor for hardware defect. Accidental damage handling requires $29 service fee under extended clause." rows="3">Standard manufacturer limited warranty: Covers mechanical breakdown, speaker drivers, and wireless antenna. Excludes cosmetic damage, liquid spills, and loss.</textarea>
-</div>
-<div class="flex flex-col gap-space-xxs md:col-span-2">
-<label class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between" for="policyUrl">
-<span>Online Terms & Claim URL</span>
-<span class="material-symbols-outlined text-[16px] text-on-surface-variant">link</span>
-</label>
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all" id="policyUrl" name="policyUrl" placeholder="https://www.sony.com/electronics/support/warranty" type="url" value="https://www.sony.com/electronics/support/warranty-info"/>
-</div>
-</div>
-</section>
-<!-- SECTION 4: Hardware Identification -->
-<section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
-<div class="flex items-center justify-between gap-space-base mb-space-lg">
-<div class="flex items-center gap-space-md">
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
-<span class="material-symbols-outlined text-[22px]">fingerprint</span>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">04 / Authentication</span>
-<h2 class="font-title-lg text-title-lg text-on-surface font-bold">Hardware Identification</h2>
-</div>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant text-[20px]">qr_code_scanner</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
-<!-- Serial Number with Barcode scan action -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between" for="serialNumber">
-<span>Primary Serial Number (S/N) <span class="text-error font-bold">*</span></span>
-<span class="font-label-sm text-label-sm text-secondary font-semibold cursor-pointer hover:underline" onclick="triggerBarcodeScan()">Scan Barcode</span>
-</label>
-<div class="relative flex items-center">
-<input class="w-full h-10 pl-space-md pr-12 rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular tracking-wider uppercase outline-none focus:bg-surface-container-low shadow-sm transition-all" id="serialNumber" name="serialNumber" placeholder="SN-948201-XM5-SL" required="" type="text" value="SN-948201-XM5-SL"/>
-<button class="absolute right-1 w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors" onclick="triggerBarcodeScan()" title="Scan hardware barcode" type="button">
-<span class="material-symbols-outlined text-[18px]">photo_camera</span>
-</button>
-</div>
-<span class="hidden text-on-tertiary-container font-label-sm text-label-sm flex items-center gap-space-xxs" id="barcodeToast">
-<span class="material-symbols-outlined text-[14px]">check_circle</span> Barcode captured via camera stream
-              </span>
-</div>
-<!-- IMEI or Secondary Network / Hardware MAC -->
-<div class="flex flex-col gap-space-xxs">
-<label class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between" for="secondaryId">
-<span>IMEI / Bluetooth MAC / EUI-64</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Optional</span>
-</label>
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all" id="secondaryId" name="secondaryId" placeholder="38:F9:D3:5A:21:40" type="text" value="00:1A:7D:DA:71:04"/>
-</div>
-</div>
-</section>
-<!-- SECTION 5: Receipts & Document Vault -->
-<section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
-<div class="flex items-center justify-between gap-space-base mb-space-base">
-<div class="flex items-center gap-space-md">
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
-<span class="material-symbols-outlined text-[22px]">attach_file</span>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">05 / Claim Evidence</span>
-<h2 class="font-title-lg text-title-lg text-on-surface font-bold">Receipts & Document Vault</h2>
-</div>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">PDF, JPG, PNG • Max 25MB</span>
-</div>
-<!-- Drag and Drop Zone -->
-<div class="w-full p-space-2xl rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col items-center justify-center text-center cursor-pointer group" id="dropZone">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface mb-space-sm shadow-sm group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined text-[26px]">cloud_upload</span>
-</div>
-<div class="flex flex-col gap-space-xxs">
-<span class="font-title-md text-title-md text-on-surface">Drop sales receipt, invoice, or physical guarantee card here</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">or <span class="text-secondary font-semibold hover:underline">browse files</span> from your computer or cloud drive</span>
-</div>
-<input accept=".pdf,.png,.jpg,.jpeg" class="hidden" id="fileInput" multiple="" onchange="handleFileSelected(this)" type="file"/>
-</div>
-<!-- Uploaded Files Preview List -->
-<div class="mt-space-lg flex flex-col gap-space-sm">
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Attached Proof of Purchase (1 File)</span>
-<!-- Attachment Card 1 -->
-<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low shadow-sm">
-<div class="flex items-center gap-space-md min-w-0">
-<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-error shrink-0">
-<span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
-</div>
-<div class="flex flex-col min-w-0">
-<div class="flex items-center gap-space-xs">
-<span class="font-title-md text-title-md text-on-surface truncate">BestBuy_Receipt_Invoice_7821.pdf</span>
-<span class="inline-flex items-center gap-space-xxs px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm">
-<span class="material-symbols-outlined text-[12px]">verified</span>
-                      OCR Verified
-                    </span>
-</div>
-<span class="font-body-sm text-body-sm text-on-surface-variant">1.2 MB • Uploaded Today at 11:24 AM</span>
-</div>
-</div>
-<div class="flex items-center gap-space-xs shrink-0">
-<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors" title="View Full Document" type="button">
-<span class="material-symbols-outlined text-[18px]">visibility</span>
-</button>
-<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors" title="Download Document" type="button">
-<span class="material-symbols-outlined text-[18px]">download</span>
-</button>
-<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-error hover:bg-error-container flex items-center justify-center transition-colors" title="Remove Document" type="button">
-<span class="material-symbols-outlined text-[18px]">delete</span>
-</button>
-</div>
-</div>
-</div>
-</section>
-</div>
-<!-- Secondary Right Column: Live Summary Card & Smart Advice (4 Cols) -->
-<div class="lg:col-span-4 flex flex-col gap-space-xl sticky top-36">
-<!-- Asset Live Preview Card -->
-<div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col gap-space-md">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Live Card Preview</span>
-<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
-</div>
-<!-- Visual Asset Card Simulation -->
-<div class="rounded-xl bg-surface-container-low overflow-hidden shadow-sm flex flex-col">
-<!-- Simulated Left Rail via flex indicator -->
-<div class="flex items-stretch">
-<div class="w-1.5 bg-tertiary-fixed-dim shrink-0"></div>
-<div class="p-space-lg flex flex-col gap-space-md w-full">
-<div class="flex items-start gap-space-md">
-<!-- Product Image PlaceHolder with detailed context -->
-<div class="w-16 h-16 rounded-lg bg-surface-container-lowest shrink-0 overflow-hidden shadow-sm">
-<img class="w-full h-full object-cover" data-alt="Close up studio product photograph of sleek matte black Sony wireless noise-canceling headphones resting on a minimalist light slate surface with clean studio softbox lighting highlighting the premium industrial design finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNrq3Hxijuk08o336SnKRFhW8C3RDLNpAT-bdYueqJj1Vi-_wArKSAWqTwlxYO7OnLmn1MDJwgX07N-mjGyutgNFyYfupw78QzZHu2XPRcGQR0sJxvzh2FleBMLeSOwPtpbhrnlzC3KF8RzzKB5R2p1nFD2igv4UZy2IRjki7aabDJApZAtkDN_jCppoxsG3EcdrtZCT7kmvt2FHrGBoTnm_E-xYwDQx1uDg9GMvPlhZvXHBmUE6OV"/>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Audio • Sony</span>
-<h3 class="font-title-lg text-title-lg text-on-surface truncate font-bold" id="previewTitle">Sony WH-1000XM5</h3>
-<span class="font-data-tabular text-body-sm text-on-surface-variant truncate" id="previewSerial">SN-948201-XM5-SL</span>
-</div>
-</div>
-<!-- Card Metrics Quick Specs -->
-<div class="grid grid-cols-2 gap-space-sm pt-space-xs font-body-sm text-body-sm">
-<div class="flex flex-col">
-<span class="text-on-surface-variant font-label-sm text-label-sm">Retailer</span>
-<span class="text-on-surface font-semibold truncate" id="previewRetailer">Best Buy</span>
-</div>
-<div class="flex flex-col">
-<span class="text-on-surface-variant font-label-sm text-label-sm">Total Valuation</span>
-<span class="text-on-surface font-data-tabular font-semibold truncate" id="previewPrice">$399.99 USD</span>
-</div>
-<div class="flex flex-col">
-<span class="text-on-surface-variant font-label-sm text-label-sm">Purchased</span>
-<span class="text-on-surface font-data-tabular truncate" id="previewPurchaseDate">Feb 20, 2024</span>
-</div>
-<div class="flex flex-col">
-<span class="text-on-surface-variant font-label-sm text-label-sm">Expiration</span>
-<span class="text-on-surface font-data-tabular truncate font-bold" id="previewExpiryDate">Feb 20, 2025</span>
-</div>
-</div>
-<div class="pt-space-xs">
-<div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-tertiary-container font-label-sm text-label-sm shadow-sm">
-<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
-<span>100% Policy Protection Active</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Document Safe Status Summary -->
-<div class="flex items-center gap-space-md p-space-md rounded-lg bg-surface-container-high/40">
-<span class="material-symbols-outlined text-secondary text-[24px]">verified</span>
-<div class="flex flex-col">
-<span class="font-title-md text-title-md text-on-surface">Cloud Vault Ready</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Document hash encrypted and ready for fast 1-click claim exports.</span>
-</div>
-</div>
-</div>
-<!-- Claim Readiness Checklist -->
-<div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col gap-space-md">
-<h3 class="font-title-md text-title-md text-on-surface font-bold flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">task_alt</span>
-<span>Claim Readiness Index</span>
-</h3>
-<ul class="flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface-variant">
-<li class="flex items-center gap-space-sm text-on-surface">
-<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">check_circle</span>
-<span>Invoice verified with date & pricing</span>
-</li>
-<li class="flex items-center gap-space-sm text-on-surface">
-<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">check_circle</span>
-<span>Valid Manufacturer Serial registered</span>
-</li>
-<li class="flex items-center gap-space-sm text-on-surface">
-<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">check_circle</span>
-<span>Direct URL link to claims portal attached</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- Sticky Bottom Actions Bar -->
-<div class="sticky bottom-4 z-40 mt-space-2xl p-space-base rounded-2xl bg-surface-container-lowest/95 backdrop-blur-md shadow-xl flex flex-col sm:flex-row items-center justify-between gap-space-md">
-<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm self-start sm:self-auto">
-<span class="material-symbols-outlined text-[18px] text-secondary">cloud_done</span>
-<span>All fields auto-saved to local browser session</span>
-</div>
-<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
-<button class="px-space-lg py-space-sm rounded-lg bg-surface-container text-on-surface font-title-md text-title-md hover:bg-surface-container-high transition-colors" type="button">
-          Cancel
-        </button>
-<button class="px-space-lg py-space-sm rounded-lg bg-surface-container text-on-surface font-title-md text-title-md hover:bg-surface-container-high transition-colors hidden md:inline-flex items-center gap-space-xs" onclick="saveAndAddAnother()" type="button">
-<span class="material-symbols-outlined text-[18px]">add_circle</span>
-<span>Save & Add Another</span>
-</button>
-<button class="w-full sm:w-auto px-space-xl py-space-sm rounded-lg bg-primary text-on-primary font-title-md text-title-md hover:bg-primary-container transition-all flex items-center justify-center gap-space-xs shadow-md" type="submit">
-<span class="material-symbols-outlined text-[18px]">shield</span>
-<span>Save Product Warranty</span>
-</button>
-</div>
-</div>
-</form>
-<!-- Visual Toast Notification -->
-<div class="fixed bottom-24 right-8 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-space-md p-space-md rounded-xl bg-primary text-on-primary shadow-2xl" id="toastNotification">
-<span class="material-symbols-outlined text-[20px] text-tertiary-fixed">check_circle</span>
-<div class="flex flex-col">
-<span class="font-title-md text-title-md" id="toastMessage">Warranty successfully protected!</span>
-<span class="font-body-sm text-body-sm text-on-primary-container">Added to Active policy register.</span>
-</div>
-</div>
-</div>
-<!-- Micro-Interactions Script -->
-<script>
-  let selectedMonths = 12;
-
-  function selectDuration(months, btnElement) {
-    selectedMonths = months;
-    
-    // Update button visual states
-    document.querySelectorAll('.duration-btn').forEach(btn => {
-      btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
-      btn.classList.add('bg-surface-container-low', 'text-on-surface');
-    });
-
-    btnElement.classList.remove('bg-surface-container-low', 'text-on-surface');
-    btnElement.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
-
-    updateWarrantyDates();
-  }
-
-  function updateWarrantyDates() {
-    const purchaseInput = document.getElementById('purchaseDate').value;
-    if (!purchaseInput) return;
-
-    const pDate = new Date(purchaseInput);
-    if (isNaN(pDate.getTime())) return;
-
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    const formattedPurchase = pDate.toLocaleDateString('en-US', options);
-
-    let formattedExpiry = '';
-    let countdownText = '';
-    
-    if (selectedMonths === -1) {
-      formattedExpiry = 'Lifetime Coverage';
-      countdownText = 'Perpetual Warranty';
-      document.getElementById('warrantyProgressBar').style.width = '100%';
-    } else {
-      const expDate = new Date(pDate);
-      expDate.setMonth(expDate.getMonth() + selectedMonths);
-      formattedExpiry = expDate.toLocaleDateString('en-US', options);
-
-      // Remaining days calculation
-      const today = new Date();
-      const diffTime = expDate - today;
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      if (diffDays > 0) {
-        countdownText = diffDays + ' Days Remaining (Active)';
-        document.getElementById('warrantyProgressBar').style.width = '15%';
-      } else {
-        countdownText = Math.abs(diffDays) + ' Days Expired';
-        document.getElementById('warrantyProgressBar').style.width = '100%';
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
       }
-    }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-error': '#ffffff',
+              'on-secondary-fixed': '#00174b',
+              'on-error-container': '#93000a',
+              'on-secondary': '#ffffff',
+              'surface-tint': '#565e74',
+              'inverse-primary': '#bec6e0',
+              'surface-bright': '#f8f9ff',
+              tertiary: '#000000',
+              outline: '#76777d',
+              'primary-fixed': '#dae2fd',
+              'on-tertiary-container': '#009668',
+              'surface-dim': '#cbdbf5',
+              primary: '#000000',
+              'on-secondary-fixed-variant': '#003ea8',
+              'surface-container-high': '#dce9ff',
+              'tertiary-container': '#002113',
+              'secondary-fixed-dim': '#b4c5ff',
+              'on-secondary-container': '#fefcff',
+              'surface-container-highest': '#d3e4fe',
+              'tertiary-fixed': '#6ffbbe',
+              'surface-container': '#e5eeff',
+              surface: '#f8f9ff',
+              background: '#f8f9ff',
+              'on-background': '#0b1c30',
+              'on-primary-container': '#7c839b',
+              'primary-fixed-dim': '#bec6e0',
+              'on-primary-fixed': '#131b2e',
+              'on-tertiary-fixed-variant': '#005236',
+              'outline-variant': '#c6c6cd',
+              'on-tertiary-fixed': '#002113',
+              'primary-container': '#131b2e',
+              'surface-container-low': '#eff4ff',
+              'secondary-container': '#316bf3',
+              'secondary-fixed': '#dbe1ff',
+              'surface-container-lowest': '#ffffff',
+              secondary: '#0051d5',
+              'surface-variant': '#d3e4fe',
+              'inverse-on-surface': '#eaf1ff',
+              'tertiary-fixed-dim': '#4edea3',
+              error: '#ba1a1a',
+              'on-surface': '#0b1c30',
+              'on-primary-fixed-variant': '#3f465c',
+              'on-tertiary': '#ffffff',
+              'error-container': '#ffdad6',
+              'on-primary': '#ffffff',
+              'inverse-surface': '#213145',
+              'on-surface-variant': '#45464d',
+            },
+            borderRadius: { DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
+            spacing: {
+              'gutter-desktop': '1.5rem',
+              'margin-page': '1.5rem',
+              'space-3xl': '3rem',
+              'gutter-mobile': '1rem',
+              'space-base': '1rem',
+              'space-2xl': '2rem',
+              'space-xxs': '0.125rem',
+              'space-xl': '1.5rem',
+              'space-lg': '1.25rem',
+              'space-sm': '0.5rem',
+              'space-xs': '0.25rem',
+              'space-md': '0.75rem',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-md': ['Inter'],
+              'body-sm': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-lg': ['Inter'],
+              'headline-lg': ['Inter'],
+              'display-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'data-tabular': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '600' }],
+              'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }],
+              'headline-md': [
+                '20px',
+                { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-sm': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.01em', fontWeight: '400' },
+              ],
+              'label-sm': [
+                '11px',
+                { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '600' },
+              ],
+              'title-lg': [
+                '16px',
+                { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg': [
+                '28px',
+                { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '36px',
+                { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'label-md': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '500' },
+              ],
+              'data-tabular': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '500' },
+              ],
+              'headline-lg-mobile': [
+                '24px',
+                { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
+    <header
+      class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+    >
+      <div
+        class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"
+      >
+        <div class="flex items-center gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <img
+              alt="Warranty Tracker Logo"
+              class="h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"
+            /><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold"
+              >WarrantyTracker</span
+            >
+          </div>
+          <nav
+            class="hidden md:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-on-surface font-semibold"
+          >
+            <a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="dashboard"
+              href="#"
+              >Dashboard</a
+            ><a
+              aria-current="page"
+              class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold"
+              data-path="add-product"
+              href="#"
+              >Add Product</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="categories"
+              href="#"
+              >Categories</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="export-claims"
+              href="#"
+              >Export & Claims</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <a
+            class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors"
+            data-path="add-product"
+            href="#"
+            ><span class="material-symbols-outlined text-[18px]">add</span
+            ><span>+ Add Product</span></a
+          ><button
+            aria-label="Notifications"
+            class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
+          </button>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low/60">
+        <div
+          class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"
+        >
+          <div class="flex items-center gap-space-md shrink-0">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Posture:</span
+            >
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Active (18)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expiring Soon (3)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-error"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expired (5)</span
+              >
+            </div>
+          </div>
+          <div
+            class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"
+          >
+            <span class="material-symbols-outlined text-[16px]">verified</span
+            ><span>Vault Synced</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-28 bg-surface">
+      <div class="flex flex-col w-full">
+        <!-- Interactive Form Container -->
+        <form
+          class="w-full max-w-7xl mx-auto px-margin-page pb-space-3xl"
+          id="warrantyForm"
+          onsubmit="
+            event.preventDefault();
+            handleFormSubmit();
+          "
+        >
+          <!-- Top Action Breadcrumb & Control Bar -->
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-space-md py-space-lg mb-space-base"
+          >
+            <div class="flex flex-col gap-space-xxs">
+              <nav
+                class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"
+              >
+                <a
+                  class="hover:text-on-surface transition-colors flex items-center gap-space-xxs"
+                  data-path="dashboard"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-[16px]">dashboard</span>
+                  <span>Dashboard</span>
+                </a>
+                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                <span class="text-on-surface font-semibold">Add Product</span>
+              </nav>
+              <div class="flex items-center gap-space-md mt-space-xs">
+                <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+                  Add New Product Warranty
+                </h1>
+                <span
+                  class="hidden sm:inline-flex items-center gap-space-xxs px-space-md py-space-xxs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Asset Record #704
+                </span>
+              </div>
+            </div>
+            <!-- Top Utility Controls -->
+            <div class="flex items-center gap-space-sm self-start md:self-auto">
+              <button
+                class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-title-md text-title-md flex items-center gap-space-xs"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px]">close</span>
+                <span>Cancel</span>
+              </button>
+              <button
+                class="px-space-md py-space-xs rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-title-md text-title-md flex items-center gap-space-xs shadow-sm"
+                id="saveDraftBtn"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px]">bookmark</span>
+                <span>Save Draft</span>
+              </button>
+            </div>
+          </div>
+          <!-- Main Grid: 2 Column Layout (Left dense inputs, Right real-time overview & documents) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+            <!-- Primary Form Column (8 Cols) -->
+            <div class="lg:col-span-8 flex flex-col gap-space-xl">
+              <!-- SECTION 1: Product Essentials -->
+              <section
+                class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm relative overflow-hidden"
+              >
+                <div class="flex items-center justify-between gap-space-base mb-space-lg">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface"
+                    >
+                      <span class="material-symbols-outlined text-[22px]">devices_other</span>
+                    </div>
+                    <div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block"
+                        >01 / Categorization</span
+                      >
+                      <h2 class="font-title-lg text-title-lg text-on-surface font-bold">
+                        Product Essentials
+                      </h2>
+                    </div>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-sm py-space-xxs rounded"
+                    >Required Data</span
+                  >
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+                  <!-- Product Name -->
+                  <div class="md:col-span-2 flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between"
+                      for="prodName"
+                    >
+                      <span>Product Full Name <span class="text-error font-bold">*</span></span>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant"
+                        >e.g. Model, Edition, Color</span
+                      >
+                    </label>
+                    <div class="relative flex items-center">
+                      <input
+                        class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                        id="prodName"
+                        name="prodName"
+                        placeholder="Sony WH-1000XM5 Wireless Noise-Canceling Headphones"
+                        required=""
+                        type="text"
+                        value="Sony WH-1000XM5 Wireless Noise-Canceling Headphones"
+                      />
+                    </div>
+                  </div>
+                  <!-- Category -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant"
+                      for="category"
+                    >
+                      Category <span class="text-error font-bold">*</span>
+                    </label>
+                    <div class="relative">
+                      <select
+                        class="w-full h-10 px-space-md pr-space-xl rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all appearance-none cursor-pointer"
+                        id="category"
+                        name="category"
+                        required=""
+                      >
+                        <option selected="" value="Audio">Audio & Headphones</option>
+                        <option value="Electronics">Consumer Electronics</option>
+                        <option value="Computing">Computing & Workstations</option>
+                        <option value="Major Appliances">Major Home Appliances</option>
+                        <option value="Small Appliances">Small Kitchen Appliances</option>
+                        <option value="Automotive">Automotive & Tools</option>
+                        <option value="Fitness">Fitness & Wearables</option>
+                      </select>
+                      <span
+                        class="material-symbols-outlined absolute right-space-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]"
+                        >expand_more</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Brand / Manufacturer -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label class="font-label-md text-label-md text-on-surface-variant" for="brand">
+                      Brand / Manufacturer <span class="text-error font-bold">*</span>
+                    </label>
+                    <input
+                      class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                      id="brand"
+                      name="brand"
+                      placeholder="Sony Electronics"
+                      required=""
+                      type="text"
+                      value="Sony Corporation"
+                    />
+                  </div>
+                  <!-- Model Number -->
+                  <div class="md:col-span-2 flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between"
+                      for="modelNumber"
+                    >
+                      <span>Model Number</span>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Located on packaging or regulatory sticker</span
+                      >
+                    </label>
+                    <div class="flex items-center gap-space-xs">
+                      <input
+                        class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                        id="modelNumber"
+                        name="modelNumber"
+                        placeholder="WH1000XM5/B"
+                        type="text"
+                        value="WH1000XM5/B"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 2: Purchase & Retailer Details -->
+              <section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+                <div class="flex items-center justify-between gap-space-base mb-space-lg">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface"
+                    >
+                      <span class="material-symbols-outlined text-[22px]">shopping_bag</span>
+                    </div>
+                    <div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block"
+                        >02 / Transaction</span
+                      >
+                      <h2 class="font-title-lg text-title-lg text-on-surface font-bold">
+                        Purchase & Retailer Details
+                      </h2>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                    >receipt_long</span
+                  >
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+                  <!-- Purchase Date -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant"
+                      for="purchaseDate"
+                    >
+                      Date of Purchase <span class="text-error font-bold">*</span>
+                    </label>
+                    <div class="relative flex items-center">
+                      <input
+                        class="w-full h-10 px-space-md pr-space-xl rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                        id="purchaseDate"
+                        name="purchaseDate"
+                        onchange="updateWarrantyDates()"
+                        required=""
+                        type="date"
+                        value="2024-02-20"
+                      />
+                      <span
+                        class="material-symbols-outlined absolute right-space-md pointer-events-none text-on-surface-variant text-[20px]"
+                        >calendar_today</span
+                      >
+                    </div>
+                    <span class="font-body-sm text-body-sm text-on-surface-variant"
+                      >Standard origin point for coverage clock.</span
+                    >
+                  </div>
+                  <!-- Retailer / Merchant with Autocomplete Suggestions -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant"
+                      for="retailer"
+                    >
+                      Retailer / Merchant <span class="text-error font-bold">*</span>
+                    </label>
+                    <div class="relative">
+                      <input
+                        class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                        id="retailer"
+                        list="retailerOptions"
+                        name="retailer"
+                        placeholder="Select or type retailer..."
+                        required=""
+                        type="text"
+                        value="Best Buy"
+                      />
+                      <datalist id="retailerOptions">
+                        <option value="Best Buy"></option>
+                        <option value="Amazon.com"></option>
+                        <option value="Apple Store"></option>
+                        <option value="Costco Wholesale"></option>
+                        <option value="Target"></option>
+                        <option value="B&H Photo Video"></option>
+                        <option value="Manufacturer Direct"></option>
+                      </datalist>
+                    </div>
+                    <div class="flex items-center gap-space-xs mt-space-xxs">
+                      <button
+                        class="px-space-xs py-space-xxs bg-surface-container text-on-surface text-label-sm font-label-sm rounded hover:bg-surface-container-high transition-colors"
+                        onclick="document.getElementById('retailer').value = 'Best Buy'"
+                        type="button"
+                      >
+                        Best Buy
+                      </button>
+                      <button
+                        class="px-space-xs py-space-xxs bg-surface-container text-on-surface text-label-sm font-label-sm rounded hover:bg-surface-container-high transition-colors"
+                        onclick="document.getElementById('retailer').value = 'Amazon.com'"
+                        type="button"
+                      >
+                        Amazon
+                      </button>
+                      <button
+                        class="px-space-xs py-space-xxs bg-surface-container text-on-surface text-label-sm font-label-sm rounded hover:bg-surface-container-high transition-colors"
+                        onclick="document.getElementById('retailer').value = 'Apple Store'"
+                        type="button"
+                      >
+                        Apple
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Purchase Price ($USD) -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label class="font-label-md text-label-md text-on-surface-variant" for="price">
+                      Purchase Price (Pre-Tax or Total)
+                    </label>
+                    <div class="relative flex items-center">
+                      <span
+                        class="absolute left-space-md font-body-md text-body-md text-on-surface-variant font-bold"
+                        >$</span
+                      >
+                      <input
+                        class="w-full h-10 pl-space-xl pr-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                        id="price"
+                        name="price"
+                        placeholder="399.99"
+                        step="0.01"
+                        type="number"
+                        value="399.99"
+                      />
+                      <span
+                        class="absolute right-space-md text-label-sm font-label-sm text-on-surface-variant uppercase"
+                        >USD</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Order / Invoice Number -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant"
+                      for="invoiceNumber"
+                    >
+                      Order / Invoice / Receipt #
+                    </label>
+                    <input
+                      class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                      id="invoiceNumber"
+                      name="invoiceNumber"
+                      placeholder="BBY-01-884930129"
+                      type="text"
+                      value="BBY-01-884930129"
+                    />
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 3: Warranty & Coverage Duration -->
+              <section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+                <div class="flex items-center justify-between gap-space-base mb-space-lg">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface"
+                    >
+                      <span class="material-symbols-outlined text-[22px]">verified_user</span>
+                    </div>
+                    <div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block"
+                        >03 / Protection Term</span
+                      >
+                      <h2 class="font-title-lg text-title-lg text-on-surface font-bold">
+                        Warranty & Coverage Duration
+                      </h2>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-space-xs text-on-tertiary-container font-label-md text-label-md bg-tertiary-fixed/30 px-space-sm py-space-xxs rounded-full"
+                  >
+                    <span class="material-symbols-outlined text-[16px]">sync</span>
+                    <span>Auto Calculator Active</span>
+                  </div>
+                </div>
+                <!-- Duration Segmented Selector -->
+                <div class="flex flex-col gap-space-xs mb-space-lg">
+                  <label class="font-label-md text-label-md text-on-surface-variant"
+                    >Coverage Term Preset</label
+                  >
+                  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-space-xs">
+                    <button
+                      class="duration-btn active-pill py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-primary text-on-primary shadow-sm transition-all"
+                      onclick="selectDuration(12, this)"
+                      type="button"
+                    >
+                      1 Year (MFR)
+                    </button>
+                    <button
+                      class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all"
+                      onclick="selectDuration(24, this)"
+                      type="button"
+                    >
+                      2 Years
+                    </button>
+                    <button
+                      class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all"
+                      onclick="selectDuration(36, this)"
+                      type="button"
+                    >
+                      3 Years
+                    </button>
+                    <button
+                      class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all"
+                      onclick="selectDuration(60, this)"
+                      type="button"
+                    >
+                      5 Years
+                    </button>
+                    <button
+                      class="duration-btn py-space-sm px-space-xs rounded-lg text-center font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all"
+                      onclick="selectDuration(-1, this)"
+                      type="button"
+                    >
+                      Lifetime
+                    </button>
+                  </div>
+                </div>
+                <!-- Computed Expiration Timeline Callout Banner -->
+                <div class="bg-surface-container-low rounded-xl p-space-lg mb-space-lg">
+                  <div
+                    class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-base pb-space-sm"
+                  >
+                    <div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block"
+                        >Coverage Period</span
+                      >
+                      <span
+                        class="font-title-lg text-title-lg text-on-surface font-semibold"
+                        id="dateRangeSummary"
+                        >Feb 20, 2024 — Feb 20, 2025</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center gap-space-xs bg-tertiary-fixed text-on-tertiary-fixed px-space-md py-space-xxs rounded-full font-label-md text-label-md"
+                    >
+                      <span
+                        class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"
+                      ></span>
+                      <span id="countdownPill">364 Days Remaining (Active)</span>
+                    </div>
+                  </div>
+                  <!-- Micro progress bar for timeline simulation -->
+                  <div
+                    class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden mt-space-xs"
+                  >
+                    <div
+                      class="h-full bg-on-tertiary-container rounded-full transition-all duration-500"
+                      id="warrantyProgressBar"
+                      style="width: 4%"
+                    ></div>
+                  </div>
+                </div>
+                <!-- Notes & Links -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+                  <div class="flex flex-col gap-space-xxs md:col-span-2">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between"
+                      for="coverageNotes"
+                    >
+                      <span>Coverage Scope & Deductible Terms</span>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant"
+                        >What is covered under this policy</span
+                      >
+                    </label>
+                    <textarea
+                      class="w-full p-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-low shadow-sm transition-all resize-none"
+                      id="coverageNotes"
+                      name="coverageNotes"
+                      placeholder="Includes full parts and labor for hardware defect. Accidental damage handling requires $29 service fee under extended clause."
+                      rows="3"
+                    >
+Standard manufacturer limited warranty: Covers mechanical breakdown, speaker drivers, and wireless antenna. Excludes cosmetic damage, liquid spills, and loss.</textarea>
+                  </div>
+                  <div class="flex flex-col gap-space-xxs md:col-span-2">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between"
+                      for="policyUrl"
+                    >
+                      <span>Online Terms & Claim URL</span>
+                      <span class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                        >link</span
+                      >
+                    </label>
+                    <input
+                      class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                      id="policyUrl"
+                      name="policyUrl"
+                      placeholder="https://www.sony.com/electronics/support/warranty"
+                      type="url"
+                      value="https://www.sony.com/electronics/support/warranty-info"
+                    />
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 4: Hardware Identification -->
+              <section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+                <div class="flex items-center justify-between gap-space-base mb-space-lg">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface"
+                    >
+                      <span class="material-symbols-outlined text-[22px]">fingerprint</span>
+                    </div>
+                    <div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block"
+                        >04 / Authentication</span
+                      >
+                      <h2 class="font-title-lg text-title-lg text-on-surface font-bold">
+                        Hardware Identification
+                      </h2>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                    >qr_code_scanner</span
+                  >
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+                  <!-- Serial Number with Barcode scan action -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between"
+                      for="serialNumber"
+                    >
+                      <span
+                        >Primary Serial Number (S/N)
+                        <span class="text-error font-bold">*</span></span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-secondary font-semibold cursor-pointer hover:underline"
+                        onclick="triggerBarcodeScan()"
+                        >Scan Barcode</span
+                      >
+                    </label>
+                    <div class="relative flex items-center">
+                      <input
+                        class="w-full h-10 pl-space-md pr-12 rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular tracking-wider uppercase outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                        id="serialNumber"
+                        name="serialNumber"
+                        placeholder="SN-948201-XM5-SL"
+                        required=""
+                        type="text"
+                        value="SN-948201-XM5-SL"
+                      />
+                      <button
+                        class="absolute right-1 w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors"
+                        onclick="triggerBarcodeScan()"
+                        title="Scan hardware barcode"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[18px]">photo_camera</span>
+                      </button>
+                    </div>
+                    <span
+                      class="hidden text-on-tertiary-container font-label-sm text-label-sm flex items-center gap-space-xxs"
+                      id="barcodeToast"
+                    >
+                      <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                      Barcode captured via camera stream
+                    </span>
+                  </div>
+                  <!-- IMEI or Secondary Network / Hardware MAC -->
+                  <div class="flex flex-col gap-space-xxs">
+                    <label
+                      class="font-label-md text-label-md text-on-surface-variant flex items-center justify-between"
+                      for="secondaryId"
+                    >
+                      <span>IMEI / Bluetooth MAC / EUI-64</span>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Optional</span
+                      >
+                    </label>
+                    <input
+                      class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-data-tabular text-data-tabular outline-none focus:bg-surface-container-low shadow-sm transition-all"
+                      id="secondaryId"
+                      name="secondaryId"
+                      placeholder="38:F9:D3:5A:21:40"
+                      type="text"
+                      value="00:1A:7D:DA:71:04"
+                    />
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 5: Receipts & Document Vault -->
+              <section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+                <div class="flex items-center justify-between gap-space-base mb-space-base">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface"
+                    >
+                      <span class="material-symbols-outlined text-[22px]">attach_file</span>
+                    </div>
+                    <div>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block"
+                        >05 / Claim Evidence</span
+                      >
+                      <h2 class="font-title-lg text-title-lg text-on-surface font-bold">
+                        Receipts & Document Vault
+                      </h2>
+                    </div>
+                  </div>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant"
+                    >PDF, JPG, PNG • Max 25MB</span
+                  >
+                </div>
+                <!-- Drag and Drop Zone -->
+                <div
+                  class="w-full p-space-2xl rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex flex-col items-center justify-center text-center cursor-pointer group"
+                  id="dropZone"
+                >
+                  <div
+                    class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface mb-space-sm shadow-sm group-hover:scale-110 transition-transform"
+                  >
+                    <span class="material-symbols-outlined text-[26px]">cloud_upload</span>
+                  </div>
+                  <div class="flex flex-col gap-space-xxs">
+                    <span class="font-title-md text-title-md text-on-surface"
+                      >Drop sales receipt, invoice, or physical guarantee card here</span
+                    >
+                    <span class="font-body-sm text-body-sm text-on-surface-variant"
+                      >or
+                      <span class="text-secondary font-semibold hover:underline">browse files</span>
+                      from your computer or cloud drive</span
+                    >
+                  </div>
+                  <input
+                    accept=".pdf,.png,.jpg,.jpeg"
+                    class="hidden"
+                    id="fileInput"
+                    multiple=""
+                    onchange="handleFileSelected(this)"
+                    type="file"
+                  />
+                </div>
+                <!-- Uploaded Files Preview List -->
+                <div class="mt-space-lg flex flex-col gap-space-sm">
+                  <span
+                    class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider"
+                    >Attached Proof of Purchase (1 File)</span
+                  >
+                  <!-- Attachment Card 1 -->
+                  <div
+                    class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low shadow-sm"
+                  >
+                    <div class="flex items-center gap-space-md min-w-0">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-error shrink-0"
+                      >
+                        <span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
+                      </div>
+                      <div class="flex flex-col min-w-0">
+                        <div class="flex items-center gap-space-xs">
+                          <span class="font-title-md text-title-md text-on-surface truncate"
+                            >BestBuy_Receipt_Invoice_7821.pdf</span
+                          >
+                          <span
+                            class="inline-flex items-center gap-space-xxs px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm"
+                          >
+                            <span class="material-symbols-outlined text-[12px]">verified</span>
+                            OCR Verified
+                          </span>
+                        </div>
+                        <span class="font-body-sm text-body-sm text-on-surface-variant"
+                          >1.2 MB • Uploaded Today at 11:24 AM</span
+                        >
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-space-xs shrink-0">
+                      <button
+                        class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors"
+                        title="View Full Document"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[18px]">visibility</span>
+                      </button>
+                      <button
+                        class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high flex items-center justify-center transition-colors"
+                        title="Download Document"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                      </button>
+                      <button
+                        class="w-8 h-8 rounded-lg bg-surface-container-lowest text-error hover:bg-error-container flex items-center justify-center transition-colors"
+                        title="Remove Document"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[18px]">delete</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- Secondary Right Column: Live Summary Card & Smart Advice (4 Cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-space-xl sticky top-36">
+              <!-- Asset Live Preview Card -->
+              <div
+                class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col gap-space-md"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest"
+                    >Live Card Preview</span
+                  >
+                  <span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+                </div>
+                <!-- Visual Asset Card Simulation -->
+                <div
+                  class="rounded-xl bg-surface-container-low overflow-hidden shadow-sm flex flex-col"
+                >
+                  <!-- Simulated Left Rail via flex indicator -->
+                  <div class="flex items-stretch">
+                    <div class="w-1.5 bg-tertiary-fixed-dim shrink-0"></div>
+                    <div class="p-space-lg flex flex-col gap-space-md w-full">
+                      <div class="flex items-start gap-space-md">
+                        <!-- Product Image PlaceHolder with detailed context -->
+                        <div
+                          class="w-16 h-16 rounded-lg bg-surface-container-lowest shrink-0 overflow-hidden shadow-sm"
+                        >
+                          <img
+                            class="w-full h-full object-cover"
+                            data-alt="Close up studio product photograph of sleek matte black Sony wireless noise-canceling headphones resting on a minimalist light slate surface with clean studio softbox lighting highlighting the premium industrial design finish."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNrq3Hxijuk08o336SnKRFhW8C3RDLNpAT-bdYueqJj1Vi-_wArKSAWqTwlxYO7OnLmn1MDJwgX07N-mjGyutgNFyYfupw78QzZHu2XPRcGQR0sJxvzh2FleBMLeSOwPtpbhrnlzC3KF8RzzKB5R2p1nFD2igv4UZy2IRjki7aabDJApZAtkDN_jCppoxsG3EcdrtZCT7kmvt2FHrGBoTnm_E-xYwDQx1uDg9GMvPlhZvXHBmUE6OV"
+                          />
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                          <span
+                            class="font-label-sm text-label-sm text-secondary font-semibold uppercase"
+                            >Audio • Sony</span
+                          >
+                          <h3
+                            class="font-title-lg text-title-lg text-on-surface truncate font-bold"
+                            id="previewTitle"
+                          >
+                            Sony WH-1000XM5
+                          </h3>
+                          <span
+                            class="font-data-tabular text-body-sm text-on-surface-variant truncate"
+                            id="previewSerial"
+                            >SN-948201-XM5-SL</span
+                          >
+                        </div>
+                      </div>
+                      <!-- Card Metrics Quick Specs -->
+                      <div
+                        class="grid grid-cols-2 gap-space-sm pt-space-xs font-body-sm text-body-sm"
+                      >
+                        <div class="flex flex-col">
+                          <span class="text-on-surface-variant font-label-sm text-label-sm"
+                            >Retailer</span
+                          >
+                          <span class="text-on-surface font-semibold truncate" id="previewRetailer"
+                            >Best Buy</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <span class="text-on-surface-variant font-label-sm text-label-sm"
+                            >Total Valuation</span
+                          >
+                          <span
+                            class="text-on-surface font-data-tabular font-semibold truncate"
+                            id="previewPrice"
+                            >$399.99 USD</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <span class="text-on-surface-variant font-label-sm text-label-sm"
+                            >Purchased</span
+                          >
+                          <span
+                            class="text-on-surface font-data-tabular truncate"
+                            id="previewPurchaseDate"
+                            >Feb 20, 2024</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <span class="text-on-surface-variant font-label-sm text-label-sm"
+                            >Expiration</span
+                          >
+                          <span
+                            class="text-on-surface font-data-tabular truncate font-bold"
+                            id="previewExpiryDate"
+                            >Feb 20, 2025</span
+                          >
+                        </div>
+                      </div>
+                      <div class="pt-space-xs">
+                        <div
+                          class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-tertiary-container font-label-sm text-label-sm shadow-sm"
+                        >
+                          <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                          <span>100% Policy Protection Active</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Document Safe Status Summary -->
+                <div
+                  class="flex items-center gap-space-md p-space-md rounded-lg bg-surface-container-high/40"
+                >
+                  <span class="material-symbols-outlined text-secondary text-[24px]">verified</span>
+                  <div class="flex flex-col">
+                    <span class="font-title-md text-title-md text-on-surface"
+                      >Cloud Vault Ready</span
+                    >
+                    <span class="font-body-sm text-body-sm text-on-surface-variant"
+                      >Document hash encrypted and ready for fast 1-click claim exports.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- Claim Readiness Checklist -->
+              <div
+                class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col gap-space-md"
+              >
+                <h3
+                  class="font-title-md text-title-md text-on-surface font-bold flex items-center gap-space-xs"
+                >
+                  <span class="material-symbols-outlined text-[18px] text-on-tertiary-container"
+                    >task_alt</span
+                  >
+                  <span>Claim Readiness Index</span>
+                </h3>
+                <ul
+                  class="flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface-variant"
+                >
+                  <li class="flex items-center gap-space-sm text-on-surface">
+                    <span class="material-symbols-outlined text-[18px] text-on-tertiary-container"
+                      >check_circle</span
+                    >
+                    <span>Invoice verified with date & pricing</span>
+                  </li>
+                  <li class="flex items-center gap-space-sm text-on-surface">
+                    <span class="material-symbols-outlined text-[18px] text-on-tertiary-container"
+                      >check_circle</span
+                    >
+                    <span>Valid Manufacturer Serial registered</span>
+                  </li>
+                  <li class="flex items-center gap-space-sm text-on-surface">
+                    <span class="material-symbols-outlined text-[18px] text-on-tertiary-container"
+                      >check_circle</span
+                    >
+                    <span>Direct URL link to claims portal attached</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Sticky Bottom Actions Bar -->
+          <div
+            class="sticky bottom-4 z-40 mt-space-2xl p-space-base rounded-2xl bg-surface-container-lowest/95 backdrop-blur-md shadow-xl flex flex-col sm:flex-row items-center justify-between gap-space-md"
+          >
+            <div
+              class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm self-start sm:self-auto"
+            >
+              <span class="material-symbols-outlined text-[18px] text-secondary">cloud_done</span>
+              <span>All fields auto-saved to local browser session</span>
+            </div>
+            <div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+              <button
+                class="px-space-lg py-space-sm rounded-lg bg-surface-container text-on-surface font-title-md text-title-md hover:bg-surface-container-high transition-colors"
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                class="px-space-lg py-space-sm rounded-lg bg-surface-container text-on-surface font-title-md text-title-md hover:bg-surface-container-high transition-colors hidden md:inline-flex items-center gap-space-xs"
+                onclick="saveAndAddAnother()"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                <span>Save & Add Another</span>
+              </button>
+              <button
+                class="w-full sm:w-auto px-space-xl py-space-sm rounded-lg bg-primary text-on-primary font-title-md text-title-md hover:bg-primary-container transition-all flex items-center justify-center gap-space-xs shadow-md"
+                type="submit"
+              >
+                <span class="material-symbols-outlined text-[18px]">shield</span>
+                <span>Save Product Warranty</span>
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- Visual Toast Notification -->
+        <div
+          class="fixed bottom-24 right-8 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-space-md p-space-md rounded-xl bg-primary text-on-primary shadow-2xl"
+          id="toastNotification"
+        >
+          <span class="material-symbols-outlined text-[20px] text-tertiary-fixed"
+            >check_circle</span
+          >
+          <div class="flex flex-col">
+            <span class="font-title-md text-title-md" id="toastMessage"
+              >Warranty successfully protected!</span
+            >
+            <span class="font-body-sm text-body-sm text-on-primary-container"
+              >Added to Active policy register.</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Micro-Interactions Script -->
+      <script>
+        let selectedMonths = 12;
 
-    // Update text elements
-    document.getElementById('dateRangeSummary').textContent = formattedPurchase + ' — ' + formattedExpiry;
-    document.getElementById('countdownPill').textContent = countdownText;
-    document.getElementById('previewPurchaseDate').textContent = formattedPurchase;
-    document.getElementById('previewExpiryDate').textContent = formattedExpiry;
-  }
+        function selectDuration(months, btnElement) {
+          selectedMonths = months;
 
-  function triggerBarcodeScan() {
-    const toast = document.getElementById('barcodeToast');
-    toast.classList.remove('hidden');
-    document.getElementById('serialNumber').value = 'SN-948201-XM5-SL';
-    setTimeout(() => {
-      toast.classList.add('hidden');
-    }, 4000);
-  }
+          // Update button visual states
+          document.querySelectorAll('.duration-btn').forEach((btn) => {
+            btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+            btn.classList.add('bg-surface-container-low', 'text-on-surface');
+          });
 
-  // Real-time synchronization to preview card
-  const prodNameInput = document.getElementById('prodName');
-  if (prodNameInput) {
-    prodNameInput.addEventListener('input', (e) => {
-      document.getElementById('previewTitle').textContent = e.target.value || 'Untitled Product';
-    });
-  }
+          btnElement.classList.remove('bg-surface-container-low', 'text-on-surface');
+          btnElement.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
 
-  const serialInput = document.getElementById('serialNumber');
-  if (serialInput) {
-    serialInput.addEventListener('input', (e) => {
-      document.getElementById('previewSerial').textContent = e.target.value || 'No S/N Entered';
-    });
-  }
+          updateWarrantyDates();
+        }
 
-  const retailerInput = document.getElementById('retailer');
-  if (retailerInput) {
-    retailerInput.addEventListener('input', (e) => {
-      document.getElementById('previewRetailer').textContent = e.target.value || '—';
-    });
-  }
+        function updateWarrantyDates() {
+          const purchaseInput = document.getElementById('purchaseDate').value;
+          if (!purchaseInput) return;
 
-  const priceInput = document.getElementById('price');
-  if (priceInput) {
-    priceInput.addEventListener('input', (e) => {
-      document.getElementById('previewPrice').textContent = e.target.value ? '$' + Number(e.target.value).toFixed(2) + ' USD' : '$0.00 USD';
-    });
-  }
+          const pDate = new Date(purchaseInput);
+          if (isNaN(pDate.getTime())) return;
 
-  // File drag and drop visual response
-  const dropZone = document.getElementById('dropZone');
-  const fileInput = document.getElementById('fileInput');
+          const options = { year: 'numeric', month: 'short', day: 'numeric' };
+          const formattedPurchase = pDate.toLocaleDateString('en-US', options);
 
-  if (dropZone && fileInput) {
-    dropZone.addEventListener('click', () => fileInput.click());
-    
-    ['dragenter', 'dragover'].forEach(eventName => {
-      dropZone.addEventListener(eventName, (e) => {
-        e.preventDefault();
-        dropZone.classList.add('bg-surface-container-high');
-      });
-    });
+          let formattedExpiry = '';
+          let countdownText = '';
 
-    ['dragleave', 'drop'].forEach(eventName => {
-      dropZone.addEventListener(eventName, (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('bg-surface-container-high');
-      });
-    });
+          if (selectedMonths === -1) {
+            formattedExpiry = 'Lifetime Coverage';
+            countdownText = 'Perpetual Warranty';
+            document.getElementById('warrantyProgressBar').style.width = '100%';
+          } else {
+            const expDate = new Date(pDate);
+            expDate.setMonth(expDate.getMonth() + selectedMonths);
+            formattedExpiry = expDate.toLocaleDateString('en-US', options);
 
-    dropZone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      showToast('Document securely uploaded & queued for OCR scan');
-    });
-  }
+            // Remaining days calculation
+            const today = new Date();
+            const diffTime = expDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  function handleFileSelected(input) {
-    if (input.files && input.files[0]) {
-      showToast('Uploaded: ' + input.files[0].name);
-    }
-  }
+            if (diffDays > 0) {
+              countdownText = diffDays + ' Days Remaining (Active)';
+              document.getElementById('warrantyProgressBar').style.width = '15%';
+            } else {
+              countdownText = Math.abs(diffDays) + ' Days Expired';
+              document.getElementById('warrantyProgressBar').style.width = '100%';
+            }
+          }
 
-  function showToast(message) {
-    const toast = document.getElementById('toastNotification');
-    const msg = document.getElementById('toastMessage');
-    if (msg) msg.textContent = message;
-    if (toast) {
-      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-      setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-      }, 3500);
-    }
-  }
+          // Update text elements
+          document.getElementById('dateRangeSummary').textContent =
+            formattedPurchase + ' — ' + formattedExpiry;
+          document.getElementById('countdownPill').textContent = countdownText;
+          document.getElementById('previewPurchaseDate').textContent = formattedPurchase;
+          document.getElementById('previewExpiryDate').textContent = formattedExpiry;
+        }
 
-  function handleFormSubmit() {
-    showToast('Product Warranty Registered Successfully');
-  }
+        function triggerBarcodeScan() {
+          const toast = document.getElementById('barcodeToast');
+          toast.classList.remove('hidden');
+          document.getElementById('serialNumber').value = 'SN-948201-XM5-SL';
+          setTimeout(() => {
+            toast.classList.add('hidden');
+          }, 4000);
+        }
 
-  function saveAndAddAnother() {
-    showToast('Saved! Ready for next product input.');
-    document.getElementById('prodName').value = '';
-    document.getElementById('serialNumber').value = '';
-    document.getElementById('modelNumber').value = '';
-    document.getElementById('price').value = '';
-    document.getElementById('invoiceNumber').value = '';
-    document.getElementById('prodName').focus();
-  }
+        // Real-time synchronization to preview card
+        const prodNameInput = document.getElementById('prodName');
+        if (prodNameInput) {
+          prodNameInput.addEventListener('input', (e) => {
+            document.getElementById('previewTitle').textContent =
+              e.target.value || 'Untitled Product';
+          });
+        }
 
-  // Initial calculation on render
-  updateWarrantyDates();
-</script></main><footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl"><div class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs"><span class="font-semibold text-on-surface">WarrantyTracker System</span><span>© 2024 Asset Protection Protocol.</span></div><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#">Overview</a><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#">Claim Policies</a><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Asset Index</a></div></div></footer></body></html>
+        const serialInput = document.getElementById('serialNumber');
+        if (serialInput) {
+          serialInput.addEventListener('input', (e) => {
+            document.getElementById('previewSerial').textContent =
+              e.target.value || 'No S/N Entered';
+          });
+        }
+
+        const retailerInput = document.getElementById('retailer');
+        if (retailerInput) {
+          retailerInput.addEventListener('input', (e) => {
+            document.getElementById('previewRetailer').textContent = e.target.value || '—';
+          });
+        }
+
+        const priceInput = document.getElementById('price');
+        if (priceInput) {
+          priceInput.addEventListener('input', (e) => {
+            document.getElementById('previewPrice').textContent = e.target.value
+              ? '$' + Number(e.target.value).toFixed(2) + ' USD'
+              : '$0.00 USD';
+          });
+        }
+
+        // File drag and drop visual response
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        if (dropZone && fileInput) {
+          dropZone.addEventListener('click', () => fileInput.click());
+
+          ['dragenter', 'dragover'].forEach((eventName) => {
+            dropZone.addEventListener(eventName, (e) => {
+              e.preventDefault();
+              dropZone.classList.add('bg-surface-container-high');
+            });
+          });
+
+          ['dragleave', 'drop'].forEach((eventName) => {
+            dropZone.addEventListener(eventName, (e) => {
+              e.preventDefault();
+              dropZone.classList.remove('bg-surface-container-high');
+            });
+          });
+
+          dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            showToast('Document securely uploaded & queued for OCR scan');
+          });
+        }
+
+        function handleFileSelected(input) {
+          if (input.files && input.files[0]) {
+            showToast('Uploaded: ' + input.files[0].name);
+          }
+        }
+
+        function showToast(message) {
+          const toast = document.getElementById('toastNotification');
+          const msg = document.getElementById('toastMessage');
+          if (msg) msg.textContent = message;
+          if (toast) {
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+              toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+          }
+        }
+
+        function handleFormSubmit() {
+          showToast('Product Warranty Registered Successfully');
+        }
+
+        function saveAndAddAnother() {
+          showToast('Saved! Ready for next product input.');
+          document.getElementById('prodName').value = '';
+          document.getElementById('serialNumber').value = '';
+          document.getElementById('modelNumber').value = '';
+          document.getElementById('price').value = '';
+          document.getElementById('invoiceNumber').value = '';
+          document.getElementById('prodName').focus();
+        }
+
+        // Initial calculation on render
+        updateWarrantyDates();
+      </script>
+    </main>
+    <footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl">
+      <div
+        class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"
+      >
+        <div class="flex items-center gap-space-xs">
+          <span class="font-semibold text-on-surface">WarrantyTracker System</span
+          ><span>© 2024 Asset Protection Protocol.</span>
+        </div>
+        <div class="flex items-center gap-space-lg">
+          <a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#"
+            >Overview</a
+          ><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#"
+            >Claim Policies</a
+          ><a class="hover:text-on-surface transition-colors" data-path="categories" href="#"
+            >Asset Index</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

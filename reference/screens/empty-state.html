@@ -1,279 +1,830 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","on-secondary-fixed":"#00174b","on-error-container":"#93000a","on-secondary":"#ffffff","surface-tint":"#565e74","inverse-primary":"#bec6e0","surface-bright":"#f8f9ff","tertiary":"#000000","outline":"#76777d","primary-fixed":"#dae2fd","on-tertiary-container":"#009668","surface-dim":"#cbdbf5","primary":"#000000","on-secondary-fixed-variant":"#003ea8","surface-container-high":"#dce9ff","tertiary-container":"#002113","secondary-fixed-dim":"#b4c5ff","on-secondary-container":"#fefcff","surface-container-highest":"#d3e4fe","tertiary-fixed":"#6ffbbe","surface-container":"#e5eeff","surface":"#f8f9ff","background":"#f8f9ff","on-background":"#0b1c30","on-primary-container":"#7c839b","primary-fixed-dim":"#bec6e0","on-primary-fixed":"#131b2e","on-tertiary-fixed-variant":"#005236","outline-variant":"#c6c6cd","on-tertiary-fixed":"#002113","primary-container":"#131b2e","surface-container-low":"#eff4ff","secondary-container":"#316bf3","secondary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","secondary":"#0051d5","surface-variant":"#d3e4fe","inverse-on-surface":"#eaf1ff","tertiary-fixed-dim":"#4edea3","error":"#ba1a1a","on-surface":"#0b1c30","on-primary-fixed-variant":"#3f465c","on-tertiary":"#ffffff","error-container":"#ffdad6","on-primary":"#ffffff","inverse-surface":"#213145","on-surface-variant":"#45464d"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-desktop":"1.5rem","margin-page":"1.5rem","space-3xl":"3rem","gutter-mobile":"1rem","space-base":"1rem","space-2xl":"2rem","space-xxs":"0.125rem","space-xl":"1.5rem","space-lg":"1.25rem","space-sm":"0.5rem","space-xs":"0.25rem","space-md":"0.75rem"},fontFamily:{"title-md":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"title-lg":["Inter"],"headline-lg":["Inter"],"display-lg":["Inter"],"label-md":["Inter"],"data-tabular":["Inter"],"headline-lg-mobile":["Inter"],"body-md":["Inter"]},fontSize:{"title-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"600"}],"title-lg":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"data-tabular":["14px",{lineHeight:"20px",letterSpacing:"-0.01em",fontWeight:"500"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="Warranty Tracker Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"/><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold">WarrantyTracker</span></div><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-on-surface font-semibold"><a aria-current="page" class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold" data-path="dashboard" href="#">Dashboard</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="add-product" href="#">Add Product</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="categories" href="#">Categories</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="export-claims" href="#">Export & Claims</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors" data-path="add-product" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span>+ Add Product</span></a><button aria-label="Notifications" class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="bg-surface-container-low/60"><div class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"><div class="flex items-center gap-space-md shrink-0"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Posture:</span><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Active (18)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expiring Soon (3)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-error"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expired (5)</span></div></div><div class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]">verified</span><span>Vault Synced</span></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
-<div class="w-full max-w-7xl mx-auto px-margin-page pb-space-3xl">
-<!-- Secondary Meta Context Header Strip (Sync state with Empty Vault) -->
-<div class="w-full mb-space-2xl bg-surface-container-low rounded-xl px-space-lg py-space-md flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-sm text-secondary">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-</div>
-<div>
-<h2 class="font-title-lg text-title-lg text-on-surface">Your Protected Equipment Vault</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">0 registered hardware warranties • Storage capacity: 5.0 GB available</p>
-</div>
-</div>
-<div class="flex items-center gap-space-sm self-stretch md:self-auto justify-end">
-<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-md py-space-xxs rounded-full inline-flex items-center gap-space-xs">
-<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container animate-pulse"></span>
-          Ready for Ingestion
-        </span>
-</div>
-</div>
-<!-- Main Empty State Hero Block -->
-<section class="relative w-full bg-surface-container-lowest rounded-xl shadow-sm px-space-xl py-space-3xl md:py-space-3xl flex flex-col items-center text-center overflow-hidden">
-<!-- Subtle Decorative Atmospheric Glows -->
-<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-surface-container-high/40 blur-3xl pointer-events-none -z-0"></div>
-<div class="absolute -bottom-20 right-12 w-64 h-64 rounded-full bg-secondary-fixed/30 blur-2xl pointer-events-none -z-0"></div>
-<!-- Bespoke Inline Vector Illustration: Vault Shield & Placeholder Asset Wireframes -->
-<div class="relative z-10 w-full max-w-md h-56 mx-auto mb-space-xl flex items-center justify-center">
-<svg class="w-full h-full text-secondary" fill="none" viewbox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
-<!-- Background radial mesh grid hints -->
-<circle cx="230" cy="110" r="96" stroke="currentColor" stroke-dasharray="4 4" stroke-opacity="0.08" stroke-width="1.5"></circle>
-<circle cx="230" cy="110" r="64" stroke="currentColor" stroke-opacity="0.14" stroke-width="1.5"></circle>
-<!-- Left Ghost Card: Laptop -->
-<g opacity="0.65" transform="translate(48, 42) rotate(-6 60 40)">
-<rect fill="#eff4ff" height="74" rx="8" width="112" x="0" y="0"></rect>
-<rect fill="#d3e4fe" fill-opacity="0.5" height="42" rx="4" width="92" x="10" y="10"></rect>
-<rect fill="#316bf3" fill-opacity="0.3" height="5" rx="2" width="32" x="16" y="16"></rect>
-<rect fill="#7c839b" fill-opacity="0.25" height="4" rx="2" width="48" x="16" y="26"></rect>
-<rect fill="#bec6e0" height="6" rx="2" width="24" x="44" y="60"></rect>
-<circle cx="92" cy="18" fill="#4edea3" r="4"></circle>
-</g>
-<!-- Right Ghost Card: Appliance/Kitchen Gadget -->
-<g opacity="0.65" transform="translate(296, 46) rotate(6 60 40)">
-<rect fill="#eff4ff" height="74" rx="8" width="112" x="0" y="0"></rect>
-<rect fill="#dce9ff" height="20" rx="4" width="92" x="10" y="10"></rect>
-<rect fill="#316bf3" fill-opacity="0.4" height="6" rx="2" width="28" x="16" y="17"></rect>
-<rect fill="#d3e4fe" fill-opacity="0.4" height="26" rx="4" width="40" x="10" y="38"></rect>
-<circle cx="78" cy="51" fill="#bec6e0" fill-opacity="0.5" r="10"></circle>
-<rect fill="#131b2e" fill-opacity="0.3" height="2" rx="1" width="10" x="73" y="47"></rect>
-</g>
-<!-- Central Asset Vault Shield & Core Hardware Icon -->
-<g filter="drop-shadow(0 10px 18px rgba(0, 81, 213, 0.12))">
-<!-- Shield Base -->
-<path d="M230 20L286 44V108C286 148 259 178 230 192C201 178 174 148 174 108V44L230 20Z" fill="#ffffff"></path>
-<path d="M230 25L280 47V108C280 144 255 171 230 184C205 171 180 144 180 108V47L230 25Z" fill="#f8f9ff"></path>
-<!-- Security Ring -->
-<circle cx="230" cy="104" fill="#316bf3" fill-opacity="0.1" r="30"></circle>
-<circle cx="230" cy="104" fill="#0051d5" r="22"></circle>
-<!-- Vault Keyhole / Lock Check -->
-<path d="M224 100C224 96.6863 226.686 94 230 94C233.314 94 236 96.6863 236 100V103H238C239.105 103 240 103.895 240 105V113C240 114.105 239.105 115 238 115H222C220.895 115 220 114.105 220 113V105C220 103.895 220.895 103 222 103H224V100ZM234 103V100C234 97.7909 232.209 96 230 96C227.791 96 226 97.7909 226 100V103H234Z" fill="#ffffff"></path>
-</g>
-<!-- Floating Sync Node Elements -->
-<g transform="translate(196, 172)">
-<rect fill="#131b2e" height="22" rx="11" width="68" x="0" y="0"></rect>
-<circle cx="11" cy="11" fill="#4edea3" r="3.5"></circle>
-<text fill="#ffffff" font-family="Inter" font-size="8.5" font-weight="600" letter-spacing="0.5" x="21" y="14">ENCRYPTED</text>
-</g>
-<!-- Dotted Connection Rays -->
-<path d="M160 84C180 84 186 92 196 98" opacity="0.4" stroke="#316bf3" stroke-dasharray="3 3" stroke-width="1.5"></path>
-<path d="M300 84C280 84 274 92 264 98" opacity="0.4" stroke="#316bf3" stroke-dasharray="3 3" stroke-width="1.5"></path>
-</svg>
-</div>
-<!-- Typographic Hierarchy -->
-<div class="relative z-10 max-w-2xl mx-auto mb-space-xl">
-<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold bg-surface-container px-space-md py-space-xxs rounded-full inline-block mb-space-sm">Zero Active Policies</span>
-<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight mb-space-sm">
-          No warranties tracked yet
-        </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto leading-relaxed">
-          Never lose a paper receipt, misplace a serial number, or miss an expiration deadline again. Store and track your appliances, laptops, and power tools in one central, verified vault.
-        </p>
-</div>
-<!-- Action Cluster: Primary CTA, Secondary Import, Demo Loader -->
-<div class="relative z-10 flex flex-wrap items-center justify-center gap-space-md mb-space-2xl">
-<!-- Primary Action -->
-<a class="inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-xl py-space-md rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-all duration-150 transform active:scale-95" data-path="add-product" href="#">
-<span class="material-symbols-outlined text-[20px]">add_circle</span>
-<span>+ Add Your First Product</span>
-</a>
-<!-- Secondary Batch Ingest Action with Tooltip Support -->
-<div class="relative group">
-<button class="inline-flex items-center justify-center gap-space-xs bg-surface-container-low text-on-surface font-title-md text-title-md px-space-lg py-space-md rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" type="button">
-<span class="material-symbols-outlined text-[20px] text-secondary">upload_file</span>
-<span>Import via CSV or Email</span>
-</button>
-<!-- Dropdown Info Tooltip -->
-<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-inverse-surface text-inverse-on-surface rounded-lg p-space-sm shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 z-30 text-left">
-<p class="font-label-sm text-label-sm font-semibold mb-1 flex items-center gap-1 text-primary-fixed">
-<span class="material-symbols-outlined text-[14px]">auto_fix_high</span> Smart Invoice Scraper
-            </p>
-<p class="font-body-sm text-body-sm leading-tight text-surface-container-lowest">Forward any receipt or order PDF to <span class="font-semibold text-white">vault@warrantytracker.app</span> or upload your merchant CSV files.</p>
-</div>
-</div>
-<!-- Sample Data Loader Button for Testing -->
-<button class="inline-flex items-center justify-center gap-space-xs text-on-surface-variant hover:text-on-surface font-title-md text-title-md px-space-md py-space-md rounded-lg hover:bg-surface-container-low transition-colors" id="load-sample-btn" type="button">
-<span class="material-symbols-outlined text-[18px]">dataset</span>
-<span>Load Sample Assets (Demo Mode)</span>
-</button>
-</div>
-<!-- Micro Confidence Metric Indicators -->
-<div class="relative z-10 pt-space-md flex flex-wrap items-center justify-center gap-space-xl text-on-surface-variant font-body-sm text-body-sm">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-tertiary-fixed-dim text-[18px]">verified_user</span>
-<span>256-bit Document Crypt</span>
-</div>
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-secondary-container text-[18px]">notifications_active</span>
-<span>Automated 30-Day Expiry Pings</span>
-</div>
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-on-surface-variant text-[18px]">receipt_long</span>
-<span>PDF & Thermal Scan OCR</span>
-</div>
-</div>
-</section>
-<!-- Guided Feature Onboarding (3 Structural Bento Pillars) -->
-<div class="mt-space-2xl">
-<div class="flex items-center justify-between mb-space-lg">
-<div>
-<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">How It Works</span>
-<h3 class="font-headline-md text-headline-md text-on-surface">Built for effortless consumer protection</h3>
-</div>
-<a class="hidden sm:inline-flex items-center gap-space-xxs font-title-md text-title-md text-secondary hover:underline" data-path="categories" href="#">
-<span>Explore Categories</span>
-<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
-<!-- Card 1: Expiration Alerts -->
-<div class="group bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
-<div>
-<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-space-base group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-[26px]">alarm_on</span>
-</div>
-<div class="flex items-center gap-space-xs mb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Proactive Radar</span>
-</div>
-<h4 class="font-title-lg text-title-lg text-on-surface mb-space-xs">Smart Expiration Alerts</h4>
-<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-lg">
-              We notify you 30 and 7 days before warranties expire so you can book free manufacturer maintenance, request repairs, or extend coverage before the clock runs out.
-            </p>
-</div>
-<!-- Micro visual snippet inside Card 1: Alert Timeline Wireframe -->
-<div class="w-full bg-surface-container-low rounded-lg p-space-md">
-<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant mb-space-xs">
-<span>Coverage Elapsed</span>
-<span class="font-semibold text-secondary">335 / 365 Days</span>
-</div>
-<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
-<div class="w-[88%] h-full bg-secondary-container rounded-full"></div>
-</div>
-<div class="mt-space-xs flex items-center gap-space-xs text-on-surface font-body-sm text-body-sm font-medium">
-<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
-<span>Trigger scheduled: 30-day notice</span>
-</div>
-</div>
-</div>
-<!-- Card 2: 1-Click Dossier -->
-<div class="group bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
-<div>
-<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-space-base group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-[26px]">assignment_turned_in</span>
-</div>
-<div class="flex items-center gap-space-xs mb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Zero Hassle Claims</span>
-</div>
-<h4 class="font-title-lg text-title-lg text-on-surface mb-space-xs">1-Click Claim Dossier</h4>
-<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-lg">
-              When equipment breaks, stop digging through shoe boxes. Generate a single verified PDF with your serial number, proof-of-purchase, and warranty contacts to file claims in 60 seconds.
-            </p>
-</div>
-<!-- Micro visual snippet inside Card 2: Export Claim Pill -->
-<div class="w-full bg-surface-container-low rounded-lg p-space-md flex items-center justify-between">
-<div class="flex items-center gap-space-sm min-w-0">
-<span class="material-symbols-outlined text-on-surface-variant text-[22px]">picture_as_pdf</span>
-<div class="min-w-0">
-<p class="font-title-md text-title-md text-on-surface truncate">Claim_Dossier_Asset.pdf</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Ready to export with receipt attached</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-secondary text-[20px]">download</span>
-</div>
-</div>
-<!-- Card 3: Receipt Cloud Vault -->
-<div class="group bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
-<div>
-<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-space-base group-hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-[26px]">cloud_sync</span>
-</div>
-<div class="flex items-center gap-space-xs mb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Permanent Backup</span>
-</div>
-<h4 class="font-title-lg text-title-lg text-on-surface mb-space-xs">Receipt Cloud Vault</h4>
-<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-lg">
-              Thermal register paper fades to blank in under two years. Snap photos or forward email receipts directly to your personal vault for permanent, high-resolution document archival.
-            </p>
-</div>
-<!-- Micro visual snippet inside Card 3: Storage health tag -->
-<div class="w-full bg-surface-container-low rounded-lg p-space-md flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></span>
-<span class="font-data-tabular text-data-tabular text-on-surface">End-to-End Encrypted</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Unlimited PDFs</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Quick Ingest Dropzone & Category Suggestions Bar -->
-<div class="mt-space-2xl bg-surface-container-low/80 rounded-xl p-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
-<div class="flex items-center gap-space-lg">
-<div class="hidden sm:flex w-12 h-12 rounded-full bg-surface-container-lowest items-center justify-center text-on-surface-variant shadow-sm">
-<span class="material-symbols-outlined text-[24px]">devices_other</span>
-</div>
-<div>
-<h4 class="font-title-lg text-title-lg text-on-surface">Common starter categories</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Most users protect high-value items first:</p>
-<div class="flex flex-wrap items-center gap-space-xs mt-space-xs">
-<span class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">Consumer Electronics</span>
-<span class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">Kitchen & Major Appliances</span>
-<span class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">Power Tools</span>
-<span class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm">Home HVAC</span>
-</div>
-</div>
-</div>
-<div class="shrink-0 w-full md:w-auto">
-<a class="w-full md:w-auto inline-flex items-center justify-center gap-space-xs bg-surface-container-lowest text-on-surface hover:bg-surface-container hover:text-on-surface font-title-md text-title-md px-space-xl py-space-md rounded-lg shadow-sm transition-colors" data-path="add-product" href="#">
-<span>Manual Input Form</span>
-<span class="material-symbols-outlined text-[18px]">chevron_right</span>
-</a>
-</div>
-</div>
-<!-- Interactive Feedback Toast Container (Handled via JS for Demo Mode) -->
-<div class="fixed bottom-8 right-8 bg-inverse-surface text-inverse-on-surface px-space-lg py-space-md rounded-xl shadow-2xl flex items-center gap-space-md transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 z-50" id="demo-toast">
-<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
-<span class="material-symbols-outlined text-[18px]">check</span>
-</div>
-<div>
-<p class="font-title-md text-title-md text-white font-semibold">Demo Sandbox Initialized</p>
-<p class="font-body-sm text-body-sm text-surface-container-highest">Injecting 3 sample products into your vault...</p>
-</div>
-</div>
-</div>
-</div>
-<script>
-  // Demo Data Injection Interaction
-  document.getElementById('load-sample-btn')?.addEventListener('click', function() {
-    const toast = document.getElementById('demo-toast');
-    if (!toast) return;
-    
-    // Animate Toast In
-    toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-    toast.classList.add('translate-y-0', 'opacity-100');
-
-    // Simulate State Switch / Redirect to populated dashboard after short delay
-    setTimeout(() => {
-      const dashboardLink = document.querySelector('a[data-path="dashboard"]');
-      if (dashboardLink) {
-        dashboardLink.click();
-      } else {
-        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-        toast.classList.remove('translate-y-0', 'opacity-100');
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
       }
-    }, 1200);
-  });
-</script></main><footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl"><div class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs"><span class="font-semibold text-on-surface">WarrantyTracker System</span><span>© 2024 Asset Protection Protocol.</span></div><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#">Overview</a><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#">Claim Policies</a><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Asset Index</a></div></div></footer></body></html>
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-error': '#ffffff',
+              'on-secondary-fixed': '#00174b',
+              'on-error-container': '#93000a',
+              'on-secondary': '#ffffff',
+              'surface-tint': '#565e74',
+              'inverse-primary': '#bec6e0',
+              'surface-bright': '#f8f9ff',
+              tertiary: '#000000',
+              outline: '#76777d',
+              'primary-fixed': '#dae2fd',
+              'on-tertiary-container': '#009668',
+              'surface-dim': '#cbdbf5',
+              primary: '#000000',
+              'on-secondary-fixed-variant': '#003ea8',
+              'surface-container-high': '#dce9ff',
+              'tertiary-container': '#002113',
+              'secondary-fixed-dim': '#b4c5ff',
+              'on-secondary-container': '#fefcff',
+              'surface-container-highest': '#d3e4fe',
+              'tertiary-fixed': '#6ffbbe',
+              'surface-container': '#e5eeff',
+              surface: '#f8f9ff',
+              background: '#f8f9ff',
+              'on-background': '#0b1c30',
+              'on-primary-container': '#7c839b',
+              'primary-fixed-dim': '#bec6e0',
+              'on-primary-fixed': '#131b2e',
+              'on-tertiary-fixed-variant': '#005236',
+              'outline-variant': '#c6c6cd',
+              'on-tertiary-fixed': '#002113',
+              'primary-container': '#131b2e',
+              'surface-container-low': '#eff4ff',
+              'secondary-container': '#316bf3',
+              'secondary-fixed': '#dbe1ff',
+              'surface-container-lowest': '#ffffff',
+              secondary: '#0051d5',
+              'surface-variant': '#d3e4fe',
+              'inverse-on-surface': '#eaf1ff',
+              'tertiary-fixed-dim': '#4edea3',
+              error: '#ba1a1a',
+              'on-surface': '#0b1c30',
+              'on-primary-fixed-variant': '#3f465c',
+              'on-tertiary': '#ffffff',
+              'error-container': '#ffdad6',
+              'on-primary': '#ffffff',
+              'inverse-surface': '#213145',
+              'on-surface-variant': '#45464d',
+            },
+            borderRadius: { DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
+            spacing: {
+              'gutter-desktop': '1.5rem',
+              'margin-page': '1.5rem',
+              'space-3xl': '3rem',
+              'gutter-mobile': '1rem',
+              'space-base': '1rem',
+              'space-2xl': '2rem',
+              'space-xxs': '0.125rem',
+              'space-xl': '1.5rem',
+              'space-lg': '1.25rem',
+              'space-sm': '0.5rem',
+              'space-xs': '0.25rem',
+              'space-md': '0.75rem',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-md': ['Inter'],
+              'body-sm': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-lg': ['Inter'],
+              'headline-lg': ['Inter'],
+              'display-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'data-tabular': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '600' }],
+              'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }],
+              'headline-md': [
+                '20px',
+                { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-sm': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.01em', fontWeight: '400' },
+              ],
+              'label-sm': [
+                '11px',
+                { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '600' },
+              ],
+              'title-lg': [
+                '16px',
+                { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg': [
+                '28px',
+                { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '36px',
+                { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'label-md': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '500' },
+              ],
+              'data-tabular': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '500' },
+              ],
+              'headline-lg-mobile': [
+                '24px',
+                { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
+    <header
+      class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+    >
+      <div
+        class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"
+      >
+        <div class="flex items-center gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <img
+              alt="Warranty Tracker Logo"
+              class="h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"
+            /><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold"
+              >WarrantyTracker</span
+            >
+          </div>
+          <nav
+            class="hidden md:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-on-surface font-semibold"
+          >
+            <a
+              aria-current="page"
+              class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold"
+              data-path="dashboard"
+              href="#"
+              >Dashboard</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="add-product"
+              href="#"
+              >Add Product</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="categories"
+              href="#"
+              >Categories</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="export-claims"
+              href="#"
+              >Export & Claims</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <a
+            class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors"
+            data-path="add-product"
+            href="#"
+            ><span class="material-symbols-outlined text-[18px]">add</span
+            ><span>+ Add Product</span></a
+          ><button
+            aria-label="Notifications"
+            class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
+          </button>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low/60">
+        <div
+          class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"
+        >
+          <div class="flex items-center gap-space-md shrink-0">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Posture:</span
+            >
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Active (18)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expiring Soon (3)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-error"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expired (5)</span
+              >
+            </div>
+          </div>
+          <div
+            class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"
+          >
+            <span class="material-symbols-outlined text-[16px]">verified</span
+            ><span>Vault Synced</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-28 bg-surface">
+      <div class="flex flex-col w-full">
+        <div class="w-full max-w-7xl mx-auto px-margin-page pb-space-3xl">
+          <!-- Secondary Meta Context Header Strip (Sync state with Empty Vault) -->
+          <div
+            class="w-full mb-space-2xl bg-surface-container-low rounded-xl px-space-lg py-space-md flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md"
+          >
+            <div class="flex items-center gap-space-md">
+              <div
+                class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-sm text-secondary"
+              >
+                <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+              </div>
+              <div>
+                <h2 class="font-title-lg text-title-lg text-on-surface">
+                  Your Protected Equipment Vault
+                </h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  0 registered hardware warranties • Storage capacity: 5.0 GB available
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-sm self-stretch md:self-auto justify-end">
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-md py-space-xxs rounded-full inline-flex items-center gap-space-xs"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container animate-pulse"
+                ></span>
+                Ready for Ingestion
+              </span>
+            </div>
+          </div>
+          <!-- Main Empty State Hero Block -->
+          <section
+            class="relative w-full bg-surface-container-lowest rounded-xl shadow-sm px-space-xl py-space-3xl md:py-space-3xl flex flex-col items-center text-center overflow-hidden"
+          >
+            <!-- Subtle Decorative Atmospheric Glows -->
+            <div
+              class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-surface-container-high/40 blur-3xl pointer-events-none -z-0"
+            ></div>
+            <div
+              class="absolute -bottom-20 right-12 w-64 h-64 rounded-full bg-secondary-fixed/30 blur-2xl pointer-events-none -z-0"
+            ></div>
+            <!-- Bespoke Inline Vector Illustration: Vault Shield & Placeholder Asset Wireframes -->
+            <div
+              class="relative z-10 w-full max-w-md h-56 mx-auto mb-space-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-full h-full text-secondary"
+                fill="none"
+                viewbox="0 0 460 220"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <!-- Background radial mesh grid hints -->
+                <circle
+                  cx="230"
+                  cy="110"
+                  r="96"
+                  stroke="currentColor"
+                  stroke-dasharray="4 4"
+                  stroke-opacity="0.08"
+                  stroke-width="1.5"
+                ></circle>
+                <circle
+                  cx="230"
+                  cy="110"
+                  r="64"
+                  stroke="currentColor"
+                  stroke-opacity="0.14"
+                  stroke-width="1.5"
+                ></circle>
+                <!-- Left Ghost Card: Laptop -->
+                <g opacity="0.65" transform="translate(48, 42) rotate(-6 60 40)">
+                  <rect fill="#eff4ff" height="74" rx="8" width="112" x="0" y="0"></rect>
+                  <rect
+                    fill="#d3e4fe"
+                    fill-opacity="0.5"
+                    height="42"
+                    rx="4"
+                    width="92"
+                    x="10"
+                    y="10"
+                  ></rect>
+                  <rect
+                    fill="#316bf3"
+                    fill-opacity="0.3"
+                    height="5"
+                    rx="2"
+                    width="32"
+                    x="16"
+                    y="16"
+                  ></rect>
+                  <rect
+                    fill="#7c839b"
+                    fill-opacity="0.25"
+                    height="4"
+                    rx="2"
+                    width="48"
+                    x="16"
+                    y="26"
+                  ></rect>
+                  <rect fill="#bec6e0" height="6" rx="2" width="24" x="44" y="60"></rect>
+                  <circle cx="92" cy="18" fill="#4edea3" r="4"></circle>
+                </g>
+                <!-- Right Ghost Card: Appliance/Kitchen Gadget -->
+                <g opacity="0.65" transform="translate(296, 46) rotate(6 60 40)">
+                  <rect fill="#eff4ff" height="74" rx="8" width="112" x="0" y="0"></rect>
+                  <rect fill="#dce9ff" height="20" rx="4" width="92" x="10" y="10"></rect>
+                  <rect
+                    fill="#316bf3"
+                    fill-opacity="0.4"
+                    height="6"
+                    rx="2"
+                    width="28"
+                    x="16"
+                    y="17"
+                  ></rect>
+                  <rect
+                    fill="#d3e4fe"
+                    fill-opacity="0.4"
+                    height="26"
+                    rx="4"
+                    width="40"
+                    x="10"
+                    y="38"
+                  ></rect>
+                  <circle cx="78" cy="51" fill="#bec6e0" fill-opacity="0.5" r="10"></circle>
+                  <rect
+                    fill="#131b2e"
+                    fill-opacity="0.3"
+                    height="2"
+                    rx="1"
+                    width="10"
+                    x="73"
+                    y="47"
+                  ></rect>
+                </g>
+                <!-- Central Asset Vault Shield & Core Hardware Icon -->
+                <g filter="drop-shadow(0 10px 18px rgba(0, 81, 213, 0.12))">
+                  <!-- Shield Base -->
+                  <path
+                    d="M230 20L286 44V108C286 148 259 178 230 192C201 178 174 148 174 108V44L230 20Z"
+                    fill="#ffffff"
+                  ></path>
+                  <path
+                    d="M230 25L280 47V108C280 144 255 171 230 184C205 171 180 144 180 108V47L230 25Z"
+                    fill="#f8f9ff"
+                  ></path>
+                  <!-- Security Ring -->
+                  <circle cx="230" cy="104" fill="#316bf3" fill-opacity="0.1" r="30"></circle>
+                  <circle cx="230" cy="104" fill="#0051d5" r="22"></circle>
+                  <!-- Vault Keyhole / Lock Check -->
+                  <path
+                    d="M224 100C224 96.6863 226.686 94 230 94C233.314 94 236 96.6863 236 100V103H238C239.105 103 240 103.895 240 105V113C240 114.105 239.105 115 238 115H222C220.895 115 220 114.105 220 113V105C220 103.895 220.895 103 222 103H224V100ZM234 103V100C234 97.7909 232.209 96 230 96C227.791 96 226 97.7909 226 100V103H234Z"
+                    fill="#ffffff"
+                  ></path>
+                </g>
+                <!-- Floating Sync Node Elements -->
+                <g transform="translate(196, 172)">
+                  <rect fill="#131b2e" height="22" rx="11" width="68" x="0" y="0"></rect>
+                  <circle cx="11" cy="11" fill="#4edea3" r="3.5"></circle>
+                  <text
+                    fill="#ffffff"
+                    font-family="Inter"
+                    font-size="8.5"
+                    font-weight="600"
+                    letter-spacing="0.5"
+                    x="21"
+                    y="14"
+                  >
+                    ENCRYPTED
+                  </text>
+                </g>
+                <!-- Dotted Connection Rays -->
+                <path
+                  d="M160 84C180 84 186 92 196 98"
+                  opacity="0.4"
+                  stroke="#316bf3"
+                  stroke-dasharray="3 3"
+                  stroke-width="1.5"
+                ></path>
+                <path
+                  d="M300 84C280 84 274 92 264 98"
+                  opacity="0.4"
+                  stroke="#316bf3"
+                  stroke-dasharray="3 3"
+                  stroke-width="1.5"
+                ></path>
+              </svg>
+            </div>
+            <!-- Typographic Hierarchy -->
+            <div class="relative z-10 max-w-2xl mx-auto mb-space-xl">
+              <span
+                class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold bg-surface-container px-space-md py-space-xxs rounded-full inline-block mb-space-sm"
+                >Zero Active Policies</span
+              >
+              <h1
+                class="font-display-lg text-display-lg text-on-surface tracking-tight mb-space-sm"
+              >
+                No warranties tracked yet
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto leading-relaxed"
+              >
+                Never lose a paper receipt, misplace a serial number, or miss an expiration deadline
+                again. Store and track your appliances, laptops, and power tools in one central,
+                verified vault.
+              </p>
+            </div>
+            <!-- Action Cluster: Primary CTA, Secondary Import, Demo Loader -->
+            <div
+              class="relative z-10 flex flex-wrap items-center justify-center gap-space-md mb-space-2xl"
+            >
+              <!-- Primary Action -->
+              <a
+                class="inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-xl py-space-md rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-all duration-150 transform active:scale-95"
+                data-path="add-product"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[20px]">add_circle</span>
+                <span>+ Add Your First Product</span>
+              </a>
+              <!-- Secondary Batch Ingest Action with Tooltip Support -->
+              <div class="relative group">
+                <button
+                  class="inline-flex items-center justify-center gap-space-xs bg-surface-container-low text-on-surface font-title-md text-title-md px-space-lg py-space-md rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[20px] text-secondary"
+                    >upload_file</span
+                  >
+                  <span>Import via CSV or Email</span>
+                </button>
+                <!-- Dropdown Info Tooltip -->
+                <div
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-inverse-surface text-inverse-on-surface rounded-lg p-space-sm shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 z-30 text-left"
+                >
+                  <p
+                    class="font-label-sm text-label-sm font-semibold mb-1 flex items-center gap-1 text-primary-fixed"
+                  >
+                    <span class="material-symbols-outlined text-[14px]">auto_fix_high</span> Smart
+                    Invoice Scraper
+                  </p>
+                  <p class="font-body-sm text-body-sm leading-tight text-surface-container-lowest">
+                    Forward any receipt or order PDF to
+                    <span class="font-semibold text-white">vault@warrantytracker.app</span> or
+                    upload your merchant CSV files.
+                  </p>
+                </div>
+              </div>
+              <!-- Sample Data Loader Button for Testing -->
+              <button
+                class="inline-flex items-center justify-center gap-space-xs text-on-surface-variant hover:text-on-surface font-title-md text-title-md px-space-md py-space-md rounded-lg hover:bg-surface-container-low transition-colors"
+                id="load-sample-btn"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px]">dataset</span>
+                <span>Load Sample Assets (Demo Mode)</span>
+              </button>
+            </div>
+            <!-- Micro Confidence Metric Indicators -->
+            <div
+              class="relative z-10 pt-space-md flex flex-wrap items-center justify-center gap-space-xl text-on-surface-variant font-body-sm text-body-sm"
+            >
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-tertiary-fixed-dim text-[18px]"
+                  >verified_user</span
+                >
+                <span>256-bit Document Crypt</span>
+              </div>
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-secondary-container text-[18px]"
+                  >notifications_active</span
+                >
+                <span>Automated 30-Day Expiry Pings</span>
+              </div>
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                  >receipt_long</span
+                >
+                <span>PDF & Thermal Scan OCR</span>
+              </div>
+            </div>
+          </section>
+          <!-- Guided Feature Onboarding (3 Structural Bento Pillars) -->
+          <div class="mt-space-2xl">
+            <div class="flex items-center justify-between mb-space-lg">
+              <div>
+                <span
+                  class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold"
+                  >How It Works</span
+                >
+                <h3 class="font-headline-md text-headline-md text-on-surface">
+                  Built for effortless consumer protection
+                </h3>
+              </div>
+              <a
+                class="hidden sm:inline-flex items-center gap-space-xxs font-title-md text-title-md text-secondary hover:underline"
+                data-path="categories"
+                href="#"
+              >
+                <span>Explore Categories</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+              <!-- Card 1: Expiration Alerts -->
+              <div
+                class="group bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-space-base group-hover:scale-105 transition-transform"
+                  >
+                    <span class="material-symbols-outlined text-[26px]">alarm_on</span>
+                  </div>
+                  <div class="flex items-center gap-space-xs mb-space-xs">
+                    <span class="font-label-sm text-label-sm text-secondary font-semibold uppercase"
+                      >Proactive Radar</span
+                    >
+                  </div>
+                  <h4 class="font-title-lg text-title-lg text-on-surface mb-space-xs">
+                    Smart Expiration Alerts
+                  </h4>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-lg"
+                  >
+                    We notify you 30 and 7 days before warranties expire so you can book free
+                    manufacturer maintenance, request repairs, or extend coverage before the clock
+                    runs out.
+                  </p>
+                </div>
+                <!-- Micro visual snippet inside Card 1: Alert Timeline Wireframe -->
+                <div class="w-full bg-surface-container-low rounded-lg p-space-md">
+                  <div
+                    class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant mb-space-xs"
+                  >
+                    <span>Coverage Elapsed</span>
+                    <span class="font-semibold text-secondary">335 / 365 Days</span>
+                  </div>
+                  <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+                    <div class="w-[88%] h-full bg-secondary-container rounded-full"></div>
+                  </div>
+                  <div
+                    class="mt-space-xs flex items-center gap-space-xs text-on-surface font-body-sm text-body-sm font-medium"
+                  >
+                    <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+                    <span>Trigger scheduled: 30-day notice</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Card 2: 1-Click Dossier -->
+              <div
+                class="group bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-space-base group-hover:scale-105 transition-transform"
+                  >
+                    <span class="material-symbols-outlined text-[26px]">assignment_turned_in</span>
+                  </div>
+                  <div class="flex items-center gap-space-xs mb-space-xs">
+                    <span class="font-label-sm text-label-sm text-secondary font-semibold uppercase"
+                      >Zero Hassle Claims</span
+                    >
+                  </div>
+                  <h4 class="font-title-lg text-title-lg text-on-surface mb-space-xs">
+                    1-Click Claim Dossier
+                  </h4>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-lg"
+                  >
+                    When equipment breaks, stop digging through shoe boxes. Generate a single
+                    verified PDF with your serial number, proof-of-purchase, and warranty contacts
+                    to file claims in 60 seconds.
+                  </p>
+                </div>
+                <!-- Micro visual snippet inside Card 2: Export Claim Pill -->
+                <div
+                  class="w-full bg-surface-container-low rounded-lg p-space-md flex items-center justify-between"
+                >
+                  <div class="flex items-center gap-space-sm min-w-0">
+                    <span class="material-symbols-outlined text-on-surface-variant text-[22px]"
+                      >picture_as_pdf</span
+                    >
+                    <div class="min-w-0">
+                      <p class="font-title-md text-title-md text-on-surface truncate">
+                        Claim_Dossier_Asset.pdf
+                      </p>
+                      <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Ready to export with receipt attached
+                      </p>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-secondary text-[20px]">download</span>
+                </div>
+              </div>
+              <!-- Card 3: Receipt Cloud Vault -->
+              <div
+                class="group bg-surface-container-lowest rounded-xl p-space-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-space-base group-hover:scale-105 transition-transform"
+                  >
+                    <span class="material-symbols-outlined text-[26px]">cloud_sync</span>
+                  </div>
+                  <div class="flex items-center gap-space-xs mb-space-xs">
+                    <span class="font-label-sm text-label-sm text-secondary font-semibold uppercase"
+                      >Permanent Backup</span
+                    >
+                  </div>
+                  <h4 class="font-title-lg text-title-lg text-on-surface mb-space-xs">
+                    Receipt Cloud Vault
+                  </h4>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-space-lg"
+                  >
+                    Thermal register paper fades to blank in under two years. Snap photos or forward
+                    email receipts directly to your personal vault for permanent, high-resolution
+                    document archival.
+                  </p>
+                </div>
+                <!-- Micro visual snippet inside Card 3: Storage health tag -->
+                <div
+                  class="w-full bg-surface-container-low rounded-lg p-space-md flex items-center justify-between"
+                >
+                  <div class="flex items-center gap-space-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim"></span>
+                    <span class="font-data-tabular text-data-tabular text-on-surface"
+                      >End-to-End Encrypted</span
+                    >
+                  </div>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant"
+                    >Unlimited PDFs</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Quick Ingest Dropzone & Category Suggestions Bar -->
+          <div
+            class="mt-space-2xl bg-surface-container-low/80 rounded-xl p-space-xl flex flex-col md:flex-row items-center justify-between gap-space-lg"
+          >
+            <div class="flex items-center gap-space-lg">
+              <div
+                class="hidden sm:flex w-12 h-12 rounded-full bg-surface-container-lowest items-center justify-center text-on-surface-variant shadow-sm"
+              >
+                <span class="material-symbols-outlined text-[24px]">devices_other</span>
+              </div>
+              <div>
+                <h4 class="font-title-lg text-title-lg text-on-surface">
+                  Common starter categories
+                </h4>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Most users protect high-value items first:
+                </p>
+                <div class="flex flex-wrap items-center gap-space-xs mt-space-xs">
+                  <span
+                    class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm"
+                    >Consumer Electronics</span
+                  >
+                  <span
+                    class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm"
+                    >Kitchen & Major Appliances</span
+                  >
+                  <span
+                    class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm"
+                    >Power Tools</span
+                  >
+                  <span
+                    class="px-space-md py-space-xxs rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-sm"
+                    >Home HVAC</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="shrink-0 w-full md:w-auto">
+              <a
+                class="w-full md:w-auto inline-flex items-center justify-center gap-space-xs bg-surface-container-lowest text-on-surface hover:bg-surface-container hover:text-on-surface font-title-md text-title-md px-space-xl py-space-md rounded-lg shadow-sm transition-colors"
+                data-path="add-product"
+                href="#"
+              >
+                <span>Manual Input Form</span>
+                <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+              </a>
+            </div>
+          </div>
+          <!-- Interactive Feedback Toast Container (Handled via JS for Demo Mode) -->
+          <div
+            class="fixed bottom-8 right-8 bg-inverse-surface text-inverse-on-surface px-space-lg py-space-md rounded-xl shadow-2xl flex items-center gap-space-md transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 z-50"
+            id="demo-toast"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed"
+            >
+              <span class="material-symbols-outlined text-[18px]">check</span>
+            </div>
+            <div>
+              <p class="font-title-md text-title-md text-white font-semibold">
+                Demo Sandbox Initialized
+              </p>
+              <p class="font-body-sm text-body-sm text-surface-container-highest">
+                Injecting 3 sample products into your vault...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        // Demo Data Injection Interaction
+        document.getElementById('load-sample-btn')?.addEventListener('click', function () {
+          const toast = document.getElementById('demo-toast');
+          if (!toast) return;
+
+          // Animate Toast In
+          toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+          toast.classList.add('translate-y-0', 'opacity-100');
+
+          // Simulate State Switch / Redirect to populated dashboard after short delay
+          setTimeout(() => {
+            const dashboardLink = document.querySelector('a[data-path="dashboard"]');
+            if (dashboardLink) {
+              dashboardLink.click();
+            } else {
+              toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+              toast.classList.remove('translate-y-0', 'opacity-100');
+            }
+          }, 1200);
+        });
+      </script>
+    </main>
+    <footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl">
+      <div
+        class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"
+      >
+        <div class="flex items-center gap-space-xs">
+          <span class="font-semibold text-on-surface">WarrantyTracker System</span
+          ><span>© 2024 Asset Protection Protocol.</span>
+        </div>
+        <div class="flex items-center gap-space-lg">
+          <a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#"
+            >Overview</a
+          ><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#"
+            >Claim Policies</a
+          ><a class="hover:text-on-surface transition-colors" data-path="categories" href="#"
+            >Asset Index</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

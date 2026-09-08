@@ -1,659 +1,1484 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","on-secondary-fixed":"#00174b","on-error-container":"#93000a","on-secondary":"#ffffff","surface-tint":"#565e74","inverse-primary":"#bec6e0","surface-bright":"#f8f9ff","tertiary":"#000000","outline":"#76777d","primary-fixed":"#dae2fd","on-tertiary-container":"#009668","surface-dim":"#cbdbf5","primary":"#000000","on-secondary-fixed-variant":"#003ea8","surface-container-high":"#dce9ff","tertiary-container":"#002113","secondary-fixed-dim":"#b4c5ff","on-secondary-container":"#fefcff","surface-container-highest":"#d3e4fe","tertiary-fixed":"#6ffbbe","surface-container":"#e5eeff","surface":"#f8f9ff","background":"#f8f9ff","on-background":"#0b1c30","on-primary-container":"#7c839b","primary-fixed-dim":"#bec6e0","on-primary-fixed":"#131b2e","on-tertiary-fixed-variant":"#005236","outline-variant":"#c6c6cd","on-tertiary-fixed":"#002113","primary-container":"#131b2e","surface-container-low":"#eff4ff","secondary-container":"#316bf3","secondary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","secondary":"#0051d5","surface-variant":"#d3e4fe","inverse-on-surface":"#eaf1ff","tertiary-fixed-dim":"#4edea3","error":"#ba1a1a","on-surface":"#0b1c30","on-primary-fixed-variant":"#3f465c","on-tertiary":"#ffffff","error-container":"#ffdad6","on-primary":"#ffffff","inverse-surface":"#213145","on-surface-variant":"#45464d"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-desktop":"1.5rem","margin-page":"1.5rem","space-3xl":"3rem","gutter-mobile":"1rem","space-base":"1rem","space-2xl":"2rem","space-xxs":"0.125rem","space-xl":"1.5rem","space-lg":"1.25rem","space-sm":"0.5rem","space-xs":"0.25rem","space-md":"0.75rem"},fontFamily:{"title-md":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"title-lg":["Inter"],"headline-lg":["Inter"],"display-lg":["Inter"],"label-md":["Inter"],"data-tabular":["Inter"],"headline-lg-mobile":["Inter"],"body-md":["Inter"]},fontSize:{"title-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"600"}],"title-lg":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"data-tabular":["14px",{lineHeight:"20px",letterSpacing:"-0.01em",fontWeight:"500"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="Warranty Tracker Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"/><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold">WarrantyTracker</span></div><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-on-surface font-semibold"><a aria-current="page" class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold" data-path="dashboard" href="#">Dashboard</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="add-product" href="#">Add Product</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="categories" href="#">Categories</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="export-claims" href="#">Export & Claims</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors" data-path="add-product" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span>+ Add Product</span></a><button aria-label="Notifications" class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="bg-surface-container-low/60"><div class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"><div class="flex items-center gap-space-md shrink-0"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Posture:</span><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Active (18)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expiring Soon (3)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-error"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expired (5)</span></div></div><div class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]">verified</span><span>Vault Synced</span></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
-<!-- Toast Notification Container -->
-<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-inverse-surface text-inverse-on-surface px-space-base py-space-sm rounded-xl shadow-xl" id="toast">
-<span class="material-symbols-outlined text-[18px] text-tertiary-fixed-dim">check_circle</span>
-<span class="font-body-sm text-body-sm" id="toast-message">Copied to clipboard</span>
-</div>
-<div class="max-w-7xl mx-auto w-full px-margin-page pb-space-3xl flex flex-col gap-space-xl">
-<!-- Breadcrumbs / Back Rail -->
-<div class="flex items-center justify-between text-on-surface-variant font-label-md text-label-md">
-<div class="flex items-center gap-space-xs">
-<a class="hover:text-on-surface flex items-center gap-space-xxs transition-colors" href="#">
-<span class="material-symbols-outlined text-[16px]">arrow_back</span>
-<span>Assets</span>
-</a>
-<span>/</span>
-<span class="hover:text-on-surface transition-colors">Audio & Electronics</span>
-<span>/</span>
-<span class="text-on-surface font-semibold truncate max-w-xs sm:max-w-md">Sony WH-1000XM5</span>
-</div>
-<div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
-<span>Registered Protection Unit</span>
-</div>
-</div>
-<!-- Top Summary Banner & Hero Asset Overview -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg sm:p-space-xl relative overflow-hidden">
-<!-- Ambient Glow Decorator -->
-<div class="absolute -right-20 -top-20 w-80 h-80 bg-secondary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
-<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg relative z-10">
-<!-- Asset Identification -->
-<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-base">
-<div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-surface-container-low shrink-0 overflow-hidden shadow-inner">
-<img class="w-full h-full object-cover" data-alt="Close-up studio shot of sleek matte black Sony WH-1000XM5 noise cancelling over-ear headphones rested on modern slate stone pedestals with soft geometric diffused studio lighting highlighting clean curves and premium finish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRrj-WT1jqbZ5m1rZRC6DoKCoUk3VA0dySW0W1k_6E4na12HhbLk8ruQx2fWbeCnBDrkvLfC9vWhYxVmU6oS8IhRdTZ4gX5HJeivOXSFesJYn5Ns_VGMhXyjrFQKino89L6hjKbjTqDtyBy_fGkcc3eDBnISlchlPRUgHUKoaWSkhJljiXfQ6gxZAbsVH6x85Rq9HWkkCR-kGRO5yFoZxkHo6iXvFq_u0ej3ODfclnPXJG-lVQ1NqT"/>
-<span class="absolute top-1.5 left-1.5 px-space-xs py-space-xxs rounded bg-primary text-on-primary font-label-sm text-label-sm">ANC</span>
-</div>
-<div class="flex flex-col gap-space-xxs">
-<div class="flex flex-wrap items-center gap-space-xs">
-<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Audio & Electronics</span>
-<span class="text-on-surface-variant text-body-sm">•</span>
-<span class="text-on-surface-variant font-label-md text-label-md">Sony Corporation</span>
-</div>
-<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Sony WH-1000XM5 Noise Canceling Headphones</h1>
-<div class="flex flex-wrap items-center gap-space-sm mt-space-xxs">
-<!-- Serial Pill with Click-to-Copy -->
-<button class="group inline-flex items-center gap-space-xs px-space-sm py-space-xxs rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors font-data-tabular text-data-tabular text-on-surface" onclick="copyToClipboard('SN-9824-B8310', 'Serial number SN-9824-B8310 copied')" type="button">
-<span class="material-symbols-outlined text-[16px] text-on-surface-variant">qr_code_2</span>
-<span>#SN-9824-B8310</span>
-<span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-primary transition-colors">content_copy</span>
-</button>
-<span class="text-on-surface-variant text-body-sm hidden sm:inline">•</span>
-<div class="flex items-center gap-space-xxs font-label-md text-label-md text-on-surface-variant">
-<span class="material-symbols-outlined text-[16px] text-on-surface-variant">storefront</span>
-<span>Best Buy (Seattle, WA)</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Quick Action CTAs -->
-<div class="flex flex-wrap items-center gap-space-xs sm:gap-space-sm self-stretch lg:self-auto pt-space-sm lg:pt-0">
-<a class="flex-1 sm:flex-none inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-inverse-surface shadow-sm transition-colors" href="#claim-concierge">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-<span>File Warranty Claim</span>
-</a>
-<button class="inline-flex items-center justify-center gap-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface px-space-md py-space-xs rounded-lg font-title-md text-title-md transition-colors" onclick="triggerDownload('BestBuy_Receipt_4019.pdf')" type="button">
-<span class="material-symbols-outlined text-[18px]">download</span>
-<span class="hidden sm:inline">Receipt PDF</span>
-</button>
-<button aria-label="Edit details" class="p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" type="button">
-<span class="material-symbols-outlined text-[20px]">edit</span>
-</button>
-<button aria-label="Archive Product" class="p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-error transition-colors" type="button">
-<span class="material-symbols-outlined text-[20px]">archive</span>
-</button>
-</div>
-</div>
-<!-- Urgent Alert Strip -->
-<div class="mt-space-lg p-space-md rounded-xl bg-surface-container flex flex-col md:flex-row md:items-center justify-between gap-space-base">
-<div class="flex items-center gap-space-md">
-<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 shadow-sm">
-<span class="material-symbols-outlined text-[20px]">hourglass_top</span>
-</div>
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="font-title-md text-title-md text-on-surface">Expiring Soon — 18 Days Left</span>
-<span class="px-space-xs py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold">URGENT</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Manufacturer 1-Year Limited Warranty reaches conclusion on <strong class="text-on-surface">March 15, 2025</strong>. Claims submitted past deadline will be declined.</p>
-</div>
-</div>
-<div class="flex items-center gap-space-lg shrink-0">
-<div class="w-48 hidden sm:flex flex-col gap-1">
-<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
-<span>Policy Elapsed</span>
-<span class="font-semibold text-on-surface">95%</span>
-</div>
-<div class="h-2 w-full rounded-full bg-surface-container-highest overflow-hidden">
-<div class="h-full bg-secondary-container rounded-full" style="width: 95%;"></div>
-</div>
-</div>
-<a class="inline-flex items-center gap-space-xxs text-secondary font-title-md text-title-md hover:underline" href="#claim-concierge">
-<span>Proceed to Claim</span>
-<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Split 2-Column Material Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
-<!-- LEFT COLUMN: Warranty & Claim Info Center (7 cols) -->
-<div class="lg:col-span-7 flex flex-col gap-space-xl">
-<!-- Dedicated Claim Info & Support Concierge Card -->
-<section class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-lg relative" id="claim-concierge">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-[20px]">support_agent</span>
-</div>
-<div>
-<h2 class="font-headline-md text-headline-md text-on-surface">Claim Concierge & Direct Support</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Verified manufacturer channels ready for immediate submission</p>
-</div>
-</div>
-<span class="px-space-sm py-space-xxs rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">Priority Ready</span>
-</div>
-<!-- Fast-Copy Action Cells Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
-<!-- Manufacturer Support URL -->
-<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs">
-<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
-<span>MANUFACTURER SUPPORT</span>
-<span class="material-symbols-outlined text-[16px]">public</span>
-</div>
-<div class="font-title-md text-title-md text-on-surface truncate">sony.com/electronics/support</div>
-<div class="pt-space-xs flex items-center gap-space-xs">
-<a class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md" href="https://sony.com/electronics/support" rel="noopener noreferrer" target="_blank">
-<span>Open Portal</span>
-<span class="material-symbols-outlined text-[14px]">open_in_new</span>
-</a>
-<span class="text-outline-variant">•</span>
-<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md" onclick="copyToClipboard('https://sony.com/electronics/support', 'Support URL copied')" type="button">
-                  Copy URL
-                </button>
-</div>
-</div>
-<!-- Customer Service Hotline -->
-<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs">
-<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
-<span>DEDICATED HOTLINE</span>
-<span class="material-symbols-outlined text-[16px]">phone_in_talk</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-data-tabular">1-800-222-7669</div>
-<div class="pt-space-xs flex items-center gap-space-xs">
-<a class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md" href="tel:18002227669">
-<span>Call Now</span>
-<span class="material-symbols-outlined text-[14px]">call</span>
-</a>
-<span class="text-outline-variant">•</span>
-<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md" onclick="copyToClipboard('1-800-222-7669', 'Phone number copied')" type="button">
-                  Copy Number
-                </button>
-</div>
-</div>
-<!-- Extended Serial Code -->
-<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs">
-<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
-<span>SERIAL REGISTRATION NO.</span>
-<span class="material-symbols-outlined text-[16px]">barcode</span>
-</div>
-<div class="font-data-tabular text-title-md text-on-surface font-bold tracking-wide">SN-9824-B8310-US</div>
-<div class="pt-space-xs">
-<button class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md" onclick="copyToClipboard('SN-9824-B8310-US', 'Serial number SN-9824-B8310-US copied')" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-<span>Copy Full SN</span>
-</button>
-</div>
-</div>
-<!-- Proof of Purchase Document Token -->
-<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs">
-<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
-<span>ATTACHED INVOICE</span>
-<span class="material-symbols-outlined text-[16px]">receipt_long</span>
-</div>
-<div class="font-title-md text-title-md text-on-surface truncate">BestBuy_Receipt_4019.pdf</div>
-<div class="pt-space-xs flex items-center gap-space-xs">
-<button class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md" onclick="openModal('receipt-preview-modal')" type="button">
-<span class="material-symbols-outlined text-[14px]">visibility</span>
-<span>Quick View</span>
-</button>
-<span class="text-outline-variant">•</span>
-<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md" onclick="triggerDownload('BestBuy_Receipt_4019.pdf')" type="button">Download</button>
-</div>
-</div>
-</div>
-<!-- Essential Metadata Ledger Table -->
-<div class="bg-surface-container-low/60 rounded-xl p-space-md">
-<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-sm">Purchasing Record Details</h3>
-<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-md">
-<div>
-<span class="text-body-sm text-on-surface-variant block">Authorized Retailer</span>
-<span class="font-title-md text-title-md text-on-surface">Best Buy #1402</span>
-<span class="text-label-sm text-on-surface-variant block">Seattle WA Metro</span>
-</div>
-<div>
-<span class="text-body-sm text-on-surface-variant block">Purchase Date</span>
-<span class="font-title-md text-title-md text-on-surface font-data-tabular">Feb 20, 2024</span>
-<span class="text-label-sm text-on-surface-variant block">Invoice #BB-4019-92</span>
-</div>
-<div>
-<span class="text-body-sm text-on-surface-variant block">Original Price</span>
-<span class="font-title-md text-title-md text-on-surface font-data-tabular">$399.99 USD</span>
-<span class="text-label-sm text-tertiary font-medium block">Pre-tax MSRP Paid</span>
-</div>
-</div>
-</div>
-<!-- Recommended Claim Flow (3-Step Checklist) -->
-<div class="flex flex-col gap-space-sm">
-<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-[18px] text-secondary">checklist</span>
-<span>Recommended Claim Flow for Instant Processing</span>
-</h3>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
-<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs">
-<div class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold">1</div>
-<span class="font-title-md text-title-md text-on-surface">Serial Prepared</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Have <code class="font-data-tabular bg-surface-container px-1 rounded">SN-9824-B8310-US</code> copied ready on clipboard.</p>
-</div>
-<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs">
-<div class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold">2</div>
-<span class="font-title-md text-title-md text-on-surface">Invoice PDF Exported</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Download PDF proof from the vault panel to upload in Sony web intake.</p>
-</div>
-<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs">
-<div class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold">3</div>
-<span class="font-title-md text-title-md text-on-surface">Submit & RMA</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Dial hotline or initiate web portal ticket. Request RMA prepaid shipping label.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Coverage Details Card -->
-<section class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-base">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center">
-<span class="material-symbols-outlined text-[20px]">security</span>
-</div>
-<div>
-<h2 class="font-headline-md text-headline-md text-on-surface">Policy Coverage Terms</h2>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Manufacturer Limited Hardware Warranty • 12 Months Parts & Labor</span>
-</div>
-</div>
-<span class="font-data-tabular text-label-md text-label-md px-space-sm py-space-xxs rounded bg-surface-container-low text-on-surface-variant">Tier 1 Consumer Policy</span>
-</div>
-<!-- Included vs Not Included Split -->
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-base pt-space-xs">
-<!-- Covered Items -->
-<div class="bg-surface-container-low/50 p-space-md rounded-xl flex flex-col gap-space-sm">
-<div class="flex items-center gap-space-xs text-on-surface font-title-md text-title-md">
-<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
-<span>Protected Under Terms</span>
-</div>
-<ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0">done</span>
-<span><strong>Driver failure:</strong> Distortion, loss of channel volume balance, or total audio cutoff.</span>
-</li>
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0">done</span>
-<span><strong>Active Noise Cancellation:</strong> Microphone hiss, ANC processing failure or feedback whistling.</span>
-</li>
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0">done</span>
-<span><strong>Battery degradation:</strong> Capacity retention drops below 80% within the 1-year operational cycle.</span>
-</li>
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0">done</span>
-<span><strong>Structural hinge defects:</strong> Mechanical swivel dislocation during normal usage.</span>
-</li>
-</ul>
-</div>
-<!-- Excluded Items -->
-<div class="bg-surface-container-low/50 p-space-md rounded-xl flex flex-col gap-space-sm">
-<div class="flex items-center gap-space-xs text-on-surface font-title-md text-title-md">
-<span class="material-symbols-outlined text-[18px] text-error">cancel</span>
-<span>Express Exclusions</span>
-</div>
-<ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0">close</span>
-<span><strong>Liquid intrusion:</strong> Accidental immersion, heavy rain, or liquid ingress triggering sensors.</span>
-</li>
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0">close</span>
-<span><strong>Physical drop impact:</strong> Cracked earcups, snapped headband frames caused by trauma.</span>
-</li>
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0">close</span>
-<span><strong>Cosmetic wear:</strong> Pad peeling, surface scuffs, and natural headband pleather aging.</span>
-</li>
-<li class="flex items-start gap-space-xs">
-<span class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0">close</span>
-<span><strong>Unauthorized repairs:</strong> Third-party disassembly or battery swap voids remaining balance.</span>
-</li>
-</ul>
-</div>
-</div>
-</section>
-</div>
-<!-- RIGHT COLUMN: Documents Vault & History Timeline (5 cols) -->
-<div class="lg:col-span-5 flex flex-col gap-space-xl">
-<!-- Attached Documents & Receipts Vault Card -->
-<section class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-base">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center">
-<span class="material-symbols-outlined text-[20px]">folder_special</span>
-</div>
-<div>
-<h2 class="font-headline-md text-headline-md text-on-surface">Document Vault</h2>
-<span class="font-body-sm text-body-sm text-on-surface-variant">2 Synced Proof Artifacts</span>
-</div>
-</div>
-<button class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md" onclick="triggerDownload('All_WH1000XM5_Documents.zip')" type="button">
-<span class="material-symbols-outlined text-[16px]">archive</span>
-<span>Export All</span>
-</button>
-</div>
-<!-- Document 1: PDF Purchase Receipt Invoice -->
-<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-sm group">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm min-w-0">
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-error">
-<span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
-</div>
-<div class="min-w-0">
-<h4 class="font-title-md text-title-md text-on-surface truncate">BestBuy_Receipt_4019.pdf</h4>
-<span class="font-body-sm text-body-sm text-on-surface-variant font-data-tabular">1.24 MB • Uploaded Feb 20, 2024</span>
-</div>
-</div>
-<span class="px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">VALID</span>
-</div>
-<!-- Visual Document Preview Container -->
-<div class="relative w-full h-36 bg-surface-container-lowest rounded-lg overflow-hidden shadow-inner flex items-center justify-center group-hover:shadow-md transition-shadow cursor-pointer" onclick="openModal('receipt-preview-modal')">
-<img class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" data-alt="High quality scanned receipt document with Best Buy corporate heading itemizing Sony WH1000XM5 headphones purchase with store stamp serial numbers and official retail barcode cleanly aligned" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRNA4ff10Fu321ZxtQZzC3e7CKTxum4sGpsDOt-YZ9IZgHNQdBSVLs5ucLXOJHUc3U1TzfB3OANzPpyrkGQBrU4wjmdyQ2As0q19owA8MoMX3wVz22gQKs4oKZt09YA1uRzdUSM21qOFTX3FVts6_4z-wN2AcZRDcaOorWzQPmEaJqozN9prIWNb1Kdbsn7e5GOSgJVy9RAYH6nw2iL_fvsibGhjgmJplUvM-_F0hTJ1yJtOlES_t1"/>
-<div class="absolute inset-0 bg-primary/20 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-space-sm text-on-primary">
-<span class="px-space-md py-space-xs rounded-full bg-primary/80 font-title-md text-title-md flex items-center gap-space-xxs shadow-md">
-<span class="material-symbols-outlined text-[16px]">zoom_in</span>
-<span>Inspect Receipt</span>
-</span>
-</div>
-</div>
-<div class="flex items-center justify-between pt-space-xs text-on-surface-variant font-label-md text-label-md">
-<button class="hover:text-on-surface flex items-center gap-space-xxs" onclick="openModal('receipt-preview-modal')" type="button">
-<span class="material-symbols-outlined text-[16px]">fullscreen</span>
-<span>Zoom Preview</span>
-</button>
-<button class="text-secondary hover:underline flex items-center gap-space-xxs" onclick="triggerDownload('BestBuy_Receipt_4019.pdf')" type="button">
-<span class="material-symbols-outlined text-[16px]">download</span>
-<span>Download PDF</span>
-</button>
-</div>
-</div>
-<!-- Document 2: Serial Barcode Image Asset -->
-<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-sm group">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm min-w-0">
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-secondary">
-<span class="material-symbols-outlined text-[24px]">image</span>
-</div>
-<div class="min-w-0">
-<h4 class="font-title-md text-title-md text-on-surface truncate">Physical_SN_Barcode_Sticker.jpg</h4>
-<span class="font-body-sm text-body-sm text-on-surface-variant font-data-tabular">842 KB • Packaging Scan</span>
-</div>
-</div>
-<span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">BOX PHOTO</span>
-</div>
-<div class="relative w-full h-28 bg-surface-container-lowest rounded-lg overflow-hidden shadow-inner flex items-center justify-center group-hover:shadow-md transition-shadow cursor-pointer" onclick="openModal('barcode-preview-modal')">
-<img class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" data-alt="Macro photography of Sony WH-1000XM5 retail box barcode label clearly exhibiting printed alphanumeric model code and crisp serial number SN-9824-B8310-US under neutral balanced daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPigooYeEZZiNTyJNoael2MCUy_pzozK6u2M5DeJO_5IKa8KP8ptZWpRYZYz_ttQ1u0I96DdZM5mazlet7YbD_yLcv9rcgr516oV6GN2COt6v6Dy2dh3iBz5QCl_c4QFgvzFauZY7WoTkVYr9713hY4brBecqakFyqbww4GxxhudXY2UuScqcKBiVYEzn8pb_JhnWRlMN6rhSeJXxcfq2BuuH-tscRWJiZR1pkIGeyzH9SgzOrPJ0S"/>
-<div class="absolute inset-0 bg-primary/20 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-on-primary">
-<span class="px-space-md py-space-xs rounded-full bg-primary/80 font-title-md text-title-md flex items-center gap-space-xxs shadow-md">
-<span class="material-symbols-outlined text-[16px]">zoom_in</span>
-<span>View Full Photo</span>
-</span>
-</div>
-</div>
-<div class="flex items-center justify-between pt-space-xs text-on-surface-variant font-label-md text-label-md">
-<button class="hover:text-on-surface flex items-center gap-space-xxs" onclick="copyToClipboard('SN-9824-B8310-US', 'Serial copied from barcode sticker')" type="button">
-<span class="material-symbols-outlined text-[16px]">content_copy</span>
-<span>Copy Code</span>
-</button>
-<button class="text-secondary hover:underline flex items-center gap-space-xxs" onclick="triggerDownload('Physical_SN_Barcode_Sticker.jpg')" type="button">
-<span class="material-symbols-outlined text-[16px]">download</span>
-<span>Download Image</span>
-</button>
-</div>
-</div>
-</section>
-<!-- Activity & Claim History Timeline Card -->
-<section class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-lg">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center">
-<span class="material-symbols-outlined text-[20px]">history</span>
-</div>
-<div>
-<h2 class="font-headline-md text-headline-md text-on-surface">Lifecycle & Log</h2>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Asset Timeline • 3 Events</span>
-</div>
-</div>
-</div>
-<!-- Timeline Track -->
-<div class="relative pl-6 space-y-6 before:content-[''] before:absolute before:top-2 before:bottom-2 before:left-[11px] before:w-[2px] before:bg-surface-container-high">
-<!-- Event 1: Recent Reminder -->
-<div class="relative">
-<div class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-secondary-container ring-4 ring-surface-container-lowest shadow-sm"></div>
-<div class="flex flex-col gap-0.5">
-<div class="flex items-center gap-space-xs">
-<span class="font-title-md text-title-md text-on-surface">Automated Expiration Alert</span>
-<span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">14-Day Notice</span>
-</div>
-<span class="font-data-tabular text-label-md text-label-md text-on-surface-variant">March 1, 2025 • 09:00 AM</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">System dispatched push notification and email alert regarding upcoming March 15 manufacturer warranty expiry.</p>
-</div>
-</div>
-<!-- Event 2: Sony Registration -->
-<div class="relative">
-<div class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-tertiary ring-4 ring-surface-container-lowest shadow-sm"></div>
-<div class="flex flex-col gap-0.5">
-<div class="flex items-center gap-space-xs">
-<span class="font-title-md text-title-md text-on-surface">Warranty Registration Confirmed</span>
-</div>
-<span class="font-data-tabular text-label-md text-label-md text-on-surface-variant">Feb 22, 2024 • 04:15 PM</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Official registration completed via My Sony account portal. Confirmation code: <strong class="font-data-tabular text-on-surface">#SY-889104</strong>.</p>
-</div>
-</div>
-<!-- Event 3: Purchase Point -->
-<div class="relative">
-<div class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-primary ring-4 ring-surface-container-lowest shadow-sm"></div>
-<div class="flex flex-col gap-0.5">
-<div class="flex items-center gap-space-xs">
-<span class="font-title-md text-title-md text-on-surface">Original Retail Acquisition</span>
-</div>
-<span class="font-data-tabular text-label-md text-label-md text-on-surface-variant">Feb 20, 2024 • 02:45 PM</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Purchased brand new at Best Buy Store #1402 (Seattle, WA). Paid $399.99 with primary Visa.</p>
-</div>
-</div>
-</div>
-<!-- Log Event Action Button -->
-<button class="w-full inline-flex items-center justify-center gap-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface py-space-sm px-space-md rounded-lg font-title-md text-title-md transition-colors shadow-sm" onclick="openModal('log-claim-modal')" type="button">
-<span class="material-symbols-outlined text-[18px]">add_circle</span>
-<span>+ Log Claim / Service Event</span>
-</button>
-</section>
-</div>
-</div>
-</div>
-<!-- Modal: Receipt Preview -->
-<div class="fixed inset-0 z-50 bg-primary-container/60 backdrop-blur-sm hidden items-center justify-center p-space-md" id="receipt-preview-modal">
-<div class="bg-surface-container-lowest rounded-xl max-w-2xl w-full max-h-[921px] flex flex-col shadow-2xl overflow-hidden">
-<div class="p-space-md bg-surface-container flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-error">picture_as_pdf</span>
-<span class="font-title-md text-title-md text-on-surface">BestBuy_Receipt_4019.pdf — Inspection View</span>
-</div>
-<button class="p-space-xxs rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="closeModal('receipt-preview-modal')" type="button">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<div class="p-space-lg overflow-y-auto flex flex-col items-center justify-center bg-surface-container-low">
-<div class="bg-surface-container-lowest p-space-xl rounded-lg shadow-md max-w-md w-full flex flex-col gap-space-base font-body-sm text-body-sm text-on-surface">
-<div class="text-center pb-space-sm border-b border-surface-container">
-<h3 class="font-headline-md text-headline-md font-bold">BEST BUY #1402</h3>
-<p class="text-on-surface-variant">4500 9th Ave NE, Seattle WA 98105</p>
-<p class="font-data-tabular text-on-surface-variant">Tel: (206) 547-2300</p>
-</div>
-<div class="flex justify-between font-data-tabular">
-<span>TRANS: 9812-4019</span>
-<span>DATE: 02/20/2024 14:45</span>
-</div>
-<div class="py-space-sm border-y border-surface-container flex flex-col gap-space-xs">
-<div class="flex justify-between font-title-md text-title-md">
-<span>SONY WH1000XM5/B</span>
-<span>$399.99</span>
-</div>
-<div class="text-on-surface-variant font-label-sm text-label-sm pl-2">
-<span>UPC: 027242923980</span><br/>
-<span>SERIAL: SN-9824-B8310-US</span>
-</div>
-</div>
-<div class="flex justify-between font-title-md text-title-md">
-<span>SUBTOTAL</span>
-<span>$399.99</span>
-</div>
-<div class="flex justify-between font-label-md text-label-md text-on-surface-variant">
-<span>WA STATE SALES TAX (10.25%)</span>
-<span>$41.00</span>
-</div>
-<div class="flex justify-between font-headline-md text-headline-md font-bold pt-space-xs border-t border-surface-container">
-<span>TOTAL AMOUNT PAID</span>
-<span>$440.99</span>
-</div>
-<div class="text-center pt-space-sm text-label-sm text-on-surface-variant">
-<span>AUTHORIZATION #99281A • VISA ENDING IN 4012</span><br/>
-<span>OFFICIAL PROOF OF PURCHASE FOR SONY WARRANTY</span>
-</div>
-</div>
-</div>
-<div class="p-space-md bg-surface-container-lowest flex items-center justify-end gap-space-sm">
-<button class="inline-flex items-center gap-space-xs bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-inverse-surface" onclick="triggerDownload('BestBuy_Receipt_4019.pdf')" type="button">
-<span class="material-symbols-outlined text-[16px]">download</span>
-<span>Download PDF Copy</span>
-</button>
-<button class="bg-surface-container px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-surface-container-high" onclick="closeModal('receipt-preview-modal')" type="button">
-          Close
-        </button>
-</div>
-</div>
-</div>
-<!-- Modal: Barcode Inspection -->
-<div class="fixed inset-0 z-50 bg-primary-container/60 backdrop-blur-sm hidden items-center justify-center p-space-md" id="barcode-preview-modal">
-<div class="bg-surface-container-lowest rounded-xl max-w-xl w-full flex flex-col shadow-2xl overflow-hidden">
-<div class="p-space-md bg-surface-container flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-secondary">qr_code</span>
-<span class="font-title-md text-title-md text-on-surface">Physical Serial Barcode Image</span>
-</div>
-<button class="p-space-xxs rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="closeModal('barcode-preview-modal')" type="button">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<div class="p-space-lg flex flex-col items-center justify-center bg-surface-container-low gap-space-md">
-<div class="w-full h-64 bg-surface-container-lowest rounded-lg overflow-hidden flex items-center justify-center shadow-md">
-<img class="w-full h-full object-cover" data-alt="Macro view photograph showing the printed barcode serial sticker on Sony WH-1000XM5 packaging with crisp black bars and numbers SN-9824-B8310-US legible" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdAbbLUqwPMip1uIp9EntmIwTJwr7jYkGwBFgSewI0pcIYKWynzANVbyQHSMynZGJOpHgOMQwscOBjFyUwwgI0GURznJS8JOT07N0fA1G7Pzk0lY2uq5eqkvcKk8zyOwdZlU0lTFUrpeb9w930VLZYnJrhSiQeUSqCDbn47y1fkZ5gzMzOZ9dFLVkZFCoSoO2PrAnzLVvm000iAue-jy2HWGgyvS2I0TCQgKiUf_ykhUJVO5Csvk_H"/>
-</div>
-<div class="text-center">
-<span class="font-data-tabular font-bold text-headline-md text-on-surface">SN-9824-B8310-US</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Verified match with retailer invoice registry</p>
-</div>
-</div>
-<div class="p-space-md bg-surface-container-lowest flex items-center justify-end gap-space-sm">
-<button class="inline-flex items-center gap-space-xs bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md" onclick="copyToClipboard('SN-9824-B8310-US', 'Serial number copied to clipboard')" type="button">
-<span class="material-symbols-outlined text-[16px]">content_copy</span>
-<span>Copy Number</span>
-</button>
-<button class="bg-surface-container px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-surface-container-high" onclick="closeModal('barcode-preview-modal')" type="button">
-          Close
-        </button>
-</div>
-</div>
-</div>
-<!-- Modal: Log Claim / Event -->
-<div class="fixed inset-0 z-50 bg-primary-container/60 backdrop-blur-sm hidden items-center justify-center p-space-md" id="log-claim-modal">
-<div class="bg-surface-container-lowest rounded-xl max-w-lg w-full flex flex-col shadow-2xl overflow-hidden">
-<div class="p-space-md bg-surface-container flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-secondary">add_task</span>
-<span class="font-title-md text-title-md text-on-surface">Log Warranty Claim or Service Event</span>
-</div>
-<button class="p-space-xxs rounded-lg hover:bg-surface-container-high text-on-surface-variant" onclick="closeModal('log-claim-modal')" type="button">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<form class="p-space-lg flex flex-col gap-space-md" onsubmit="handleLogSubmit(event)">
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Event Type</label>
-<select class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none">
-<option>Manufacturer RMA Ticket Filed</option>
-<option>Customer Support Call Conducted</option>
-<option>Headphones Sent for Diagnostics</option>
-<option>Replacement Unit Received</option>
-<option>Claim Denied / Resolved</option>
-</select>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Reference / RMA #</label>
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none" placeholder="e.g., SONY-RMA-891024" required="" type="text"/>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Date of Interaction</label>
-<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none" type="date" value="2025-03-01"/>
-</div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Interaction Notes</label>
-<textarea class="w-full p-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none" placeholder="Summary of technician instructions or return label tracking code..." rows="3"></textarea>
-</div>
-<div class="flex items-center justify-end gap-space-sm pt-space-xs">
-<button class="bg-surface-container px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-surface-container-high" onclick="closeModal('log-claim-modal')" type="button">
-            Cancel
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-error': '#ffffff',
+              'on-secondary-fixed': '#00174b',
+              'on-error-container': '#93000a',
+              'on-secondary': '#ffffff',
+              'surface-tint': '#565e74',
+              'inverse-primary': '#bec6e0',
+              'surface-bright': '#f8f9ff',
+              tertiary: '#000000',
+              outline: '#76777d',
+              'primary-fixed': '#dae2fd',
+              'on-tertiary-container': '#009668',
+              'surface-dim': '#cbdbf5',
+              primary: '#000000',
+              'on-secondary-fixed-variant': '#003ea8',
+              'surface-container-high': '#dce9ff',
+              'tertiary-container': '#002113',
+              'secondary-fixed-dim': '#b4c5ff',
+              'on-secondary-container': '#fefcff',
+              'surface-container-highest': '#d3e4fe',
+              'tertiary-fixed': '#6ffbbe',
+              'surface-container': '#e5eeff',
+              surface: '#f8f9ff',
+              background: '#f8f9ff',
+              'on-background': '#0b1c30',
+              'on-primary-container': '#7c839b',
+              'primary-fixed-dim': '#bec6e0',
+              'on-primary-fixed': '#131b2e',
+              'on-tertiary-fixed-variant': '#005236',
+              'outline-variant': '#c6c6cd',
+              'on-tertiary-fixed': '#002113',
+              'primary-container': '#131b2e',
+              'surface-container-low': '#eff4ff',
+              'secondary-container': '#316bf3',
+              'secondary-fixed': '#dbe1ff',
+              'surface-container-lowest': '#ffffff',
+              secondary: '#0051d5',
+              'surface-variant': '#d3e4fe',
+              'inverse-on-surface': '#eaf1ff',
+              'tertiary-fixed-dim': '#4edea3',
+              error: '#ba1a1a',
+              'on-surface': '#0b1c30',
+              'on-primary-fixed-variant': '#3f465c',
+              'on-tertiary': '#ffffff',
+              'error-container': '#ffdad6',
+              'on-primary': '#ffffff',
+              'inverse-surface': '#213145',
+              'on-surface-variant': '#45464d',
+            },
+            borderRadius: { DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
+            spacing: {
+              'gutter-desktop': '1.5rem',
+              'margin-page': '1.5rem',
+              'space-3xl': '3rem',
+              'gutter-mobile': '1rem',
+              'space-base': '1rem',
+              'space-2xl': '2rem',
+              'space-xxs': '0.125rem',
+              'space-xl': '1.5rem',
+              'space-lg': '1.25rem',
+              'space-sm': '0.5rem',
+              'space-xs': '0.25rem',
+              'space-md': '0.75rem',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-md': ['Inter'],
+              'body-sm': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-lg': ['Inter'],
+              'headline-lg': ['Inter'],
+              'display-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'data-tabular': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '600' }],
+              'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }],
+              'headline-md': [
+                '20px',
+                { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-sm': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.01em', fontWeight: '400' },
+              ],
+              'label-sm': [
+                '11px',
+                { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '600' },
+              ],
+              'title-lg': [
+                '16px',
+                { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg': [
+                '28px',
+                { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '36px',
+                { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'label-md': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '500' },
+              ],
+              'data-tabular': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '500' },
+              ],
+              'headline-lg-mobile': [
+                '24px',
+                { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
+    <header
+      class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+    >
+      <div
+        class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"
+      >
+        <div class="flex items-center gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <img
+              alt="Warranty Tracker Logo"
+              class="h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"
+            /><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold"
+              >WarrantyTracker</span
+            >
+          </div>
+          <nav
+            class="hidden md:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-on-surface font-semibold"
+          >
+            <a
+              aria-current="page"
+              class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold"
+              data-path="dashboard"
+              href="#"
+              >Dashboard</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="add-product"
+              href="#"
+              >Add Product</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="categories"
+              href="#"
+              >Categories</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="export-claims"
+              href="#"
+              >Export & Claims</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <a
+            class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors"
+            data-path="add-product"
+            href="#"
+            ><span class="material-symbols-outlined text-[18px]">add</span
+            ><span>+ Add Product</span></a
+          ><button
+            aria-label="Notifications"
+            class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
           </button>
-<button class="bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-inverse-surface shadow-sm" type="submit">
-            Save Log Entry
-          </button>
-</div>
-</form>
-</div>
-</div>
-<script>
-    function copyToClipboard(text, message) {
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(() => {
-          showToast(message || 'Copied to clipboard');
-        }).catch(() => {
-          showToast('Failed to copy');
-        });
-      } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        showToast(message || 'Copied to clipboard');
-      }
-    }
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low/60">
+        <div
+          class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"
+        >
+          <div class="flex items-center gap-space-md shrink-0">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Posture:</span
+            >
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Active (18)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expiring Soon (3)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-error"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expired (5)</span
+              >
+            </div>
+          </div>
+          <div
+            class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"
+          >
+            <span class="material-symbols-outlined text-[16px]">verified</span
+            ><span>Vault Synced</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-28 bg-surface">
+      <div class="flex flex-col w-full">
+        <!-- Toast Notification Container -->
+        <div
+          class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-inverse-surface text-inverse-on-surface px-space-base py-space-sm rounded-xl shadow-xl"
+          id="toast"
+        >
+          <span class="material-symbols-outlined text-[18px] text-tertiary-fixed-dim"
+            >check_circle</span
+          >
+          <span class="font-body-sm text-body-sm" id="toast-message">Copied to clipboard</span>
+        </div>
+        <div
+          class="max-w-7xl mx-auto w-full px-margin-page pb-space-3xl flex flex-col gap-space-xl"
+        >
+          <!-- Breadcrumbs / Back Rail -->
+          <div
+            class="flex items-center justify-between text-on-surface-variant font-label-md text-label-md"
+          >
+            <div class="flex items-center gap-space-xs">
+              <a
+                class="hover:text-on-surface flex items-center gap-space-xxs transition-colors"
+                href="#"
+              >
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                <span>Assets</span>
+              </a>
+              <span>/</span>
+              <span class="hover:text-on-surface transition-colors">Audio & Electronics</span>
+              <span>/</span>
+              <span class="text-on-surface font-semibold truncate max-w-xs sm:max-w-md"
+                >Sony WH-1000XM5</span
+              >
+            </div>
+            <div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant">
+              <span class="material-symbols-outlined text-[16px] text-secondary"
+                >verified_user</span
+              >
+              <span>Registered Protection Unit</span>
+            </div>
+          </div>
+          <!-- Top Summary Banner & Hero Asset Overview -->
+          <div
+            class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg sm:p-space-xl relative overflow-hidden"
+          >
+            <!-- Ambient Glow Decorator -->
+            <div
+              class="absolute -right-20 -top-20 w-80 h-80 bg-secondary-fixed/30 rounded-full blur-3xl pointer-events-none"
+            ></div>
+            <div
+              class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg relative z-10"
+            >
+              <!-- Asset Identification -->
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-base">
+                <div
+                  class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-surface-container-low shrink-0 overflow-hidden shadow-inner"
+                >
+                  <img
+                    class="w-full h-full object-cover"
+                    data-alt="Close-up studio shot of sleek matte black Sony WH-1000XM5 noise cancelling over-ear headphones rested on modern slate stone pedestals with soft geometric diffused studio lighting highlighting clean curves and premium finish"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRrj-WT1jqbZ5m1rZRC6DoKCoUk3VA0dySW0W1k_6E4na12HhbLk8ruQx2fWbeCnBDrkvLfC9vWhYxVmU6oS8IhRdTZ4gX5HJeivOXSFesJYn5Ns_VGMhXyjrFQKino89L6hjKbjTqDtyBy_fGkcc3eDBnISlchlPRUgHUKoaWSkhJljiXfQ6gxZAbsVH6x85Rq9HWkkCR-kGRO5yFoZxkHo6iXvFq_u0ej3ODfclnPXJG-lVQ1NqT"
+                  />
+                  <span
+                    class="absolute top-1.5 left-1.5 px-space-xs py-space-xxs rounded bg-primary text-on-primary font-label-sm text-label-sm"
+                    >ANC</span
+                  >
+                </div>
+                <div class="flex flex-col gap-space-xxs">
+                  <div class="flex flex-wrap items-center gap-space-xs">
+                    <span
+                      class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm"
+                      >Audio & Electronics</span
+                    >
+                    <span class="text-on-surface-variant text-body-sm">•</span>
+                    <span class="text-on-surface-variant font-label-md text-label-md"
+                      >Sony Corporation</span
+                    >
+                  </div>
+                  <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+                    Sony WH-1000XM5 Noise Canceling Headphones
+                  </h1>
+                  <div class="flex flex-wrap items-center gap-space-sm mt-space-xxs">
+                    <!-- Serial Pill with Click-to-Copy -->
+                    <button
+                      class="group inline-flex items-center gap-space-xs px-space-sm py-space-xxs rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors font-data-tabular text-data-tabular text-on-surface"
+                      onclick="
+                        copyToClipboard('SN-9824-B8310', 'Serial number SN-9824-B8310 copied')
+                      "
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                        >qr_code_2</span
+                      >
+                      <span>#SN-9824-B8310</span>
+                      <span
+                        class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-primary transition-colors"
+                        >content_copy</span
+                      >
+                    </button>
+                    <span class="text-on-surface-variant text-body-sm hidden sm:inline">•</span>
+                    <div
+                      class="flex items-center gap-space-xxs font-label-md text-label-md text-on-surface-variant"
+                    >
+                      <span class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                        >storefront</span
+                      >
+                      <span>Best Buy (Seattle, WA)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Quick Action CTAs -->
+              <div
+                class="flex flex-wrap items-center gap-space-xs sm:gap-space-sm self-stretch lg:self-auto pt-space-sm lg:pt-0"
+              >
+                <a
+                  class="flex-1 sm:flex-none inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-inverse-surface shadow-sm transition-colors"
+                  href="#claim-concierge"
+                >
+                  <span class="material-symbols-outlined text-[18px]">verified</span>
+                  <span>File Warranty Claim</span>
+                </a>
+                <button
+                  class="inline-flex items-center justify-center gap-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface px-space-md py-space-xs rounded-lg font-title-md text-title-md transition-colors"
+                  onclick="triggerDownload('BestBuy_Receipt_4019.pdf')"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]">download</span>
+                  <span class="hidden sm:inline">Receipt PDF</span>
+                </button>
+                <button
+                  aria-label="Edit details"
+                  class="p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[20px]">edit</span>
+                </button>
+                <button
+                  aria-label="Archive Product"
+                  class="p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-error transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[20px]">archive</span>
+                </button>
+              </div>
+            </div>
+            <!-- Urgent Alert Strip -->
+            <div
+              class="mt-space-lg p-space-md rounded-xl bg-surface-container flex flex-col md:flex-row md:items-center justify-between gap-space-base"
+            >
+              <div class="flex items-center gap-space-md">
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 shadow-sm"
+                >
+                  <span class="material-symbols-outlined text-[20px]">hourglass_top</span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-space-xs">
+                    <span class="font-title-md text-title-md text-on-surface"
+                      >Expiring Soon — 18 Days Left</span
+                    >
+                    <span
+                      class="px-space-xs py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold"
+                      >URGENT</span
+                    >
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Manufacturer 1-Year Limited Warranty reaches conclusion on
+                    <strong class="text-on-surface">March 15, 2025</strong>. Claims submitted past
+                    deadline will be declined.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-space-lg shrink-0">
+                <div class="w-48 hidden sm:flex flex-col gap-1">
+                  <div
+                    class="flex justify-between font-label-sm text-label-sm text-on-surface-variant"
+                  >
+                    <span>Policy Elapsed</span>
+                    <span class="font-semibold text-on-surface">95%</span>
+                  </div>
+                  <div class="h-2 w-full rounded-full bg-surface-container-highest overflow-hidden">
+                    <div
+                      class="h-full bg-secondary-container rounded-full"
+                      style="width: 95%"
+                    ></div>
+                  </div>
+                </div>
+                <a
+                  class="inline-flex items-center gap-space-xxs text-secondary font-title-md text-title-md hover:underline"
+                  href="#claim-concierge"
+                >
+                  <span>Proceed to Claim</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Split 2-Column Material Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+            <!-- LEFT COLUMN: Warranty & Claim Info Center (7 cols) -->
+            <div class="lg:col-span-7 flex flex-col gap-space-xl">
+              <!-- Dedicated Claim Info & Support Concierge Card -->
+              <section
+                class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-lg relative"
+                id="claim-concierge"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <div
+                      class="w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-[20px]">support_agent</span>
+                    </div>
+                    <div>
+                      <h2 class="font-headline-md text-headline-md text-on-surface">
+                        Claim Concierge & Direct Support
+                      </h2>
+                      <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Verified manufacturer channels ready for immediate submission
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="px-space-sm py-space-xxs rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold"
+                    >Priority Ready</span
+                  >
+                </div>
+                <!-- Fast-Copy Action Cells Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                  <!-- Manufacturer Support URL -->
+                  <div
+                    class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs"
+                  >
+                    <div
+                      class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span>MANUFACTURER SUPPORT</span>
+                      <span class="material-symbols-outlined text-[16px]">public</span>
+                    </div>
+                    <div class="font-title-md text-title-md text-on-surface truncate">
+                      sony.com/electronics/support
+                    </div>
+                    <div class="pt-space-xs flex items-center gap-space-xs">
+                      <a
+                        class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md"
+                        href="https://sony.com/electronics/support"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <span>Open Portal</span>
+                        <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                      </a>
+                      <span class="text-outline-variant">•</span>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md"
+                        onclick="
+                          copyToClipboard(
+                            'https://sony.com/electronics/support',
+                            'Support URL copied',
+                          )
+                        "
+                        type="button"
+                      >
+                        Copy URL
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Customer Service Hotline -->
+                  <div
+                    class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs"
+                  >
+                    <div
+                      class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span>DEDICATED HOTLINE</span>
+                      <span class="material-symbols-outlined text-[16px]">phone_in_talk</span>
+                    </div>
+                    <div
+                      class="font-headline-md text-headline-md text-on-surface font-data-tabular"
+                    >
+                      1-800-222-7669
+                    </div>
+                    <div class="pt-space-xs flex items-center gap-space-xs">
+                      <a
+                        class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md"
+                        href="tel:18002227669"
+                      >
+                        <span>Call Now</span>
+                        <span class="material-symbols-outlined text-[14px]">call</span>
+                      </a>
+                      <span class="text-outline-variant">•</span>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md"
+                        onclick="copyToClipboard('1-800-222-7669', 'Phone number copied')"
+                        type="button"
+                      >
+                        Copy Number
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Extended Serial Code -->
+                  <div
+                    class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs"
+                  >
+                    <div
+                      class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span>SERIAL REGISTRATION NO.</span>
+                      <span class="material-symbols-outlined text-[16px]">barcode</span>
+                    </div>
+                    <div
+                      class="font-data-tabular text-title-md text-on-surface font-bold tracking-wide"
+                    >
+                      SN-9824-B8310-US
+                    </div>
+                    <div class="pt-space-xs">
+                      <button
+                        class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md"
+                        onclick="
+                          copyToClipboard(
+                            'SN-9824-B8310-US',
+                            'Serial number SN-9824-B8310-US copied',
+                          )
+                        "
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                        <span>Copy Full SN</span>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Proof of Purchase Document Token -->
+                  <div
+                    class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-xs"
+                  >
+                    <div
+                      class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm"
+                    >
+                      <span>ATTACHED INVOICE</span>
+                      <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                    </div>
+                    <div class="font-title-md text-title-md text-on-surface truncate">
+                      BestBuy_Receipt_4019.pdf
+                    </div>
+                    <div class="pt-space-xs flex items-center gap-space-xs">
+                      <button
+                        class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md"
+                        onclick="openModal('receipt-preview-modal')"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">visibility</span>
+                        <span>Quick View</span>
+                      </button>
+                      <span class="text-outline-variant">•</span>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md"
+                        onclick="triggerDownload('BestBuy_Receipt_4019.pdf')"
+                        type="button"
+                      >
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Essential Metadata Ledger Table -->
+                <div class="bg-surface-container-low/60 rounded-xl p-space-md">
+                  <h3
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-sm"
+                  >
+                    Purchasing Record Details
+                  </h3>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-space-md">
+                    <div>
+                      <span class="text-body-sm text-on-surface-variant block"
+                        >Authorized Retailer</span
+                      >
+                      <span class="font-title-md text-title-md text-on-surface"
+                        >Best Buy #1402</span
+                      >
+                      <span class="text-label-sm text-on-surface-variant block"
+                        >Seattle WA Metro</span
+                      >
+                    </div>
+                    <div>
+                      <span class="text-body-sm text-on-surface-variant block">Purchase Date</span>
+                      <span class="font-title-md text-title-md text-on-surface font-data-tabular"
+                        >Feb 20, 2024</span
+                      >
+                      <span class="text-label-sm text-on-surface-variant block"
+                        >Invoice #BB-4019-92</span
+                      >
+                    </div>
+                    <div>
+                      <span class="text-body-sm text-on-surface-variant block">Original Price</span>
+                      <span class="font-title-md text-title-md text-on-surface font-data-tabular"
+                        >$399.99 USD</span
+                      >
+                      <span class="text-label-sm text-tertiary font-medium block"
+                        >Pre-tax MSRP Paid</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- Recommended Claim Flow (3-Step Checklist) -->
+                <div class="flex flex-col gap-space-sm">
+                  <h3
+                    class="font-title-md text-title-md text-on-surface flex items-center gap-space-xs"
+                  >
+                    <span class="material-symbols-outlined text-[18px] text-secondary"
+                      >checklist</span
+                    >
+                    <span>Recommended Claim Flow for Instant Processing</span>
+                  </h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+                    <div
+                      class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold"
+                      >
+                        1
+                      </div>
+                      <span class="font-title-md text-title-md text-on-surface"
+                        >Serial Prepared</span
+                      >
+                      <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Have
+                        <code class="font-data-tabular bg-surface-container px-1 rounded"
+                          >SN-9824-B8310-US</code
+                        >
+                        copied ready on clipboard.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold"
+                      >
+                        2
+                      </div>
+                      <span class="font-title-md text-title-md text-on-surface"
+                        >Invoice PDF Exported</span
+                      >
+                      <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Download PDF proof from the vault panel to upload in Sony web intake.
+                      </p>
+                    </div>
+                    <div
+                      class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs"
+                    >
+                      <div
+                        class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold"
+                      >
+                        3
+                      </div>
+                      <span class="font-title-md text-title-md text-on-surface">Submit & RMA</span>
+                      <p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Dial hotline or initiate web portal ticket. Request RMA prepaid shipping
+                        label.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- Coverage Details Card -->
+              <section
+                class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-base"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <div
+                      class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-[20px]">security</span>
+                    </div>
+                    <div>
+                      <h2 class="font-headline-md text-headline-md text-on-surface">
+                        Policy Coverage Terms
+                      </h2>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Manufacturer Limited Hardware Warranty • 12 Months Parts & Labor</span
+                      >
+                    </div>
+                  </div>
+                  <span
+                    class="font-data-tabular text-label-md text-label-md px-space-sm py-space-xxs rounded bg-surface-container-low text-on-surface-variant"
+                    >Tier 1 Consumer Policy</span
+                  >
+                </div>
+                <!-- Included vs Not Included Split -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-base pt-space-xs">
+                  <!-- Covered Items -->
+                  <div
+                    class="bg-surface-container-low/50 p-space-md rounded-xl flex flex-col gap-space-sm"
+                  >
+                    <div
+                      class="flex items-center gap-space-xs text-on-surface font-title-md text-title-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px] text-tertiary"
+                        >check_circle</span
+                      >
+                      <span>Protected Under Terms</span>
+                    </div>
+                    <ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0"
+                          >done</span
+                        >
+                        <span
+                          ><strong>Driver failure:</strong> Distortion, loss of channel volume
+                          balance, or total audio cutoff.</span
+                        >
+                      </li>
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0"
+                          >done</span
+                        >
+                        <span
+                          ><strong>Active Noise Cancellation:</strong> Microphone hiss, ANC
+                          processing failure or feedback whistling.</span
+                        >
+                      </li>
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0"
+                          >done</span
+                        >
+                        <span
+                          ><strong>Battery degradation:</strong> Capacity retention drops below 80%
+                          within the 1-year operational cycle.</span
+                        >
+                      </li>
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-tertiary mt-0.5 shrink-0"
+                          >done</span
+                        >
+                        <span
+                          ><strong>Structural hinge defects:</strong> Mechanical swivel dislocation
+                          during normal usage.</span
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Excluded Items -->
+                  <div
+                    class="bg-surface-container-low/50 p-space-md rounded-xl flex flex-col gap-space-sm"
+                  >
+                    <div
+                      class="flex items-center gap-space-xs text-on-surface font-title-md text-title-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px] text-error">cancel</span>
+                      <span>Express Exclusions</span>
+                    </div>
+                    <ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0"
+                          >close</span
+                        >
+                        <span
+                          ><strong>Liquid intrusion:</strong> Accidental immersion, heavy rain, or
+                          liquid ingress triggering sensors.</span
+                        >
+                      </li>
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0"
+                          >close</span
+                        >
+                        <span
+                          ><strong>Physical drop impact:</strong> Cracked earcups, snapped headband
+                          frames caused by trauma.</span
+                        >
+                      </li>
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0"
+                          >close</span
+                        >
+                        <span
+                          ><strong>Cosmetic wear:</strong> Pad peeling, surface scuffs, and natural
+                          headband pleather aging.</span
+                        >
+                      </li>
+                      <li class="flex items-start gap-space-xs">
+                        <span
+                          class="material-symbols-outlined text-[16px] text-error mt-0.5 shrink-0"
+                          >close</span
+                        >
+                        <span
+                          ><strong>Unauthorized repairs:</strong> Third-party disassembly or battery
+                          swap voids remaining balance.</span
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- RIGHT COLUMN: Documents Vault & History Timeline (5 cols) -->
+            <div class="lg:col-span-5 flex flex-col gap-space-xl">
+              <!-- Attached Documents & Receipts Vault Card -->
+              <section
+                class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-base"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <div
+                      class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-[20px]">folder_special</span>
+                    </div>
+                    <div>
+                      <h2 class="font-headline-md text-headline-md text-on-surface">
+                        Document Vault
+                      </h2>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant"
+                        >2 Synced Proof Artifacts</span
+                      >
+                    </div>
+                  </div>
+                  <button
+                    class="inline-flex items-center gap-space-xxs text-secondary hover:underline font-label-md text-label-md"
+                    onclick="triggerDownload('All_WH1000XM5_Documents.zip')"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[16px]">archive</span>
+                    <span>Export All</span>
+                  </button>
+                </div>
+                <!-- Document 1: PDF Purchase Receipt Invoice -->
+                <div
+                  class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-sm group"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-space-sm min-w-0">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-error"
+                      >
+                        <span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
+                      </div>
+                      <div class="min-w-0">
+                        <h4 class="font-title-md text-title-md text-on-surface truncate">
+                          BestBuy_Receipt_4019.pdf
+                        </h4>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant font-data-tabular"
+                          >1.24 MB • Uploaded Feb 20, 2024</span
+                        >
+                      </div>
+                    </div>
+                    <span
+                      class="px-space-xs py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold"
+                      >VALID</span
+                    >
+                  </div>
+                  <!-- Visual Document Preview Container -->
+                  <div
+                    class="relative w-full h-36 bg-surface-container-lowest rounded-lg overflow-hidden shadow-inner flex items-center justify-center group-hover:shadow-md transition-shadow cursor-pointer"
+                    onclick="openModal('receipt-preview-modal')"
+                  >
+                    <img
+                      class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                      data-alt="High quality scanned receipt document with Best Buy corporate heading itemizing Sony WH1000XM5 headphones purchase with store stamp serial numbers and official retail barcode cleanly aligned"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRNA4ff10Fu321ZxtQZzC3e7CKTxum4sGpsDOt-YZ9IZgHNQdBSVLs5ucLXOJHUc3U1TzfB3OANzPpyrkGQBrU4wjmdyQ2As0q19owA8MoMX3wVz22gQKs4oKZt09YA1uRzdUSM21qOFTX3FVts6_4z-wN2AcZRDcaOorWzQPmEaJqozN9prIWNb1Kdbsn7e5GOSgJVy9RAYH6nw2iL_fvsibGhjgmJplUvM-_F0hTJ1yJtOlES_t1"
+                    />
+                    <div
+                      class="absolute inset-0 bg-primary/20 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-space-sm text-on-primary"
+                    >
+                      <span
+                        class="px-space-md py-space-xs rounded-full bg-primary/80 font-title-md text-title-md flex items-center gap-space-xxs shadow-md"
+                      >
+                        <span class="material-symbols-outlined text-[16px]">zoom_in</span>
+                        <span>Inspect Receipt</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-between pt-space-xs text-on-surface-variant font-label-md text-label-md"
+                  >
+                    <button
+                      class="hover:text-on-surface flex items-center gap-space-xxs"
+                      onclick="openModal('receipt-preview-modal')"
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined text-[16px]">fullscreen</span>
+                      <span>Zoom Preview</span>
+                    </button>
+                    <button
+                      class="text-secondary hover:underline flex items-center gap-space-xxs"
+                      onclick="triggerDownload('BestBuy_Receipt_4019.pdf')"
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined text-[16px]">download</span>
+                      <span>Download PDF</span>
+                    </button>
+                  </div>
+                </div>
+                <!-- Document 2: Serial Barcode Image Asset -->
+                <div
+                  class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-space-sm group"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-space-sm min-w-0">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-secondary"
+                      >
+                        <span class="material-symbols-outlined text-[24px]">image</span>
+                      </div>
+                      <div class="min-w-0">
+                        <h4 class="font-title-md text-title-md text-on-surface truncate">
+                          Physical_SN_Barcode_Sticker.jpg
+                        </h4>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant font-data-tabular"
+                          >842 KB • Packaging Scan</span
+                        >
+                      </div>
+                    </div>
+                    <span
+                      class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm"
+                      >BOX PHOTO</span
+                    >
+                  </div>
+                  <div
+                    class="relative w-full h-28 bg-surface-container-lowest rounded-lg overflow-hidden shadow-inner flex items-center justify-center group-hover:shadow-md transition-shadow cursor-pointer"
+                    onclick="openModal('barcode-preview-modal')"
+                  >
+                    <img
+                      class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                      data-alt="Macro photography of Sony WH-1000XM5 retail box barcode label clearly exhibiting printed alphanumeric model code and crisp serial number SN-9824-B8310-US under neutral balanced daylight"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPigooYeEZZiNTyJNoael2MCUy_pzozK6u2M5DeJO_5IKa8KP8ptZWpRYZYz_ttQ1u0I96DdZM5mazlet7YbD_yLcv9rcgr516oV6GN2COt6v6Dy2dh3iBz5QCl_c4QFgvzFauZY7WoTkVYr9713hY4brBecqakFyqbww4GxxhudXY2UuScqcKBiVYEzn8pb_JhnWRlMN6rhSeJXxcfq2BuuH-tscRWJiZR1pkIGeyzH9SgzOrPJ0S"
+                    />
+                    <div
+                      class="absolute inset-0 bg-primary/20 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-on-primary"
+                    >
+                      <span
+                        class="px-space-md py-space-xs rounded-full bg-primary/80 font-title-md text-title-md flex items-center gap-space-xxs shadow-md"
+                      >
+                        <span class="material-symbols-outlined text-[16px]">zoom_in</span>
+                        <span>View Full Photo</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-between pt-space-xs text-on-surface-variant font-label-md text-label-md"
+                  >
+                    <button
+                      class="hover:text-on-surface flex items-center gap-space-xxs"
+                      onclick="
+                        copyToClipboard('SN-9824-B8310-US', 'Serial copied from barcode sticker')
+                      "
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                      <span>Copy Code</span>
+                    </button>
+                    <button
+                      class="text-secondary hover:underline flex items-center gap-space-xxs"
+                      onclick="triggerDownload('Physical_SN_Barcode_Sticker.jpg')"
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined text-[16px]">download</span>
+                      <span>Download Image</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <!-- Activity & Claim History Timeline Card -->
+              <section
+                class="bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col gap-space-lg"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-space-sm">
+                    <div
+                      class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-[20px]">history</span>
+                    </div>
+                    <div>
+                      <h2 class="font-headline-md text-headline-md text-on-surface">
+                        Lifecycle & Log
+                      </h2>
+                      <span class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Asset Timeline • 3 Events</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!-- Timeline Track -->
+                <div
+                  class="relative pl-6 space-y-6 before:content-[''] before:absolute before:top-2 before:bottom-2 before:left-[11px] before:w-[2px] before:bg-surface-container-high"
+                >
+                  <!-- Event 1: Recent Reminder -->
+                  <div class="relative">
+                    <div
+                      class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-secondary-container ring-4 ring-surface-container-lowest shadow-sm"
+                    ></div>
+                    <div class="flex flex-col gap-0.5">
+                      <div class="flex items-center gap-space-xs">
+                        <span class="font-title-md text-title-md text-on-surface"
+                          >Automated Expiration Alert</span
+                        >
+                        <span
+                          class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold"
+                          >14-Day Notice</span
+                        >
+                      </div>
+                      <span
+                        class="font-data-tabular text-label-md text-label-md text-on-surface-variant"
+                        >March 1, 2025 • 09:00 AM</span
+                      >
+                      <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                        System dispatched push notification and email alert regarding upcoming March
+                        15 manufacturer warranty expiry.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Event 2: Sony Registration -->
+                  <div class="relative">
+                    <div
+                      class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-tertiary ring-4 ring-surface-container-lowest shadow-sm"
+                    ></div>
+                    <div class="flex flex-col gap-0.5">
+                      <div class="flex items-center gap-space-xs">
+                        <span class="font-title-md text-title-md text-on-surface"
+                          >Warranty Registration Confirmed</span
+                        >
+                      </div>
+                      <span
+                        class="font-data-tabular text-label-md text-label-md text-on-surface-variant"
+                        >Feb 22, 2024 • 04:15 PM</span
+                      >
+                      <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                        Official registration completed via My Sony account portal. Confirmation
+                        code: <strong class="font-data-tabular text-on-surface">#SY-889104</strong>.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Event 3: Purchase Point -->
+                  <div class="relative">
+                    <div
+                      class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-primary ring-4 ring-surface-container-lowest shadow-sm"
+                    ></div>
+                    <div class="flex flex-col gap-0.5">
+                      <div class="flex items-center gap-space-xs">
+                        <span class="font-title-md text-title-md text-on-surface"
+                          >Original Retail Acquisition</span
+                        >
+                      </div>
+                      <span
+                        class="font-data-tabular text-label-md text-label-md text-on-surface-variant"
+                        >Feb 20, 2024 • 02:45 PM</span
+                      >
+                      <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                        Purchased brand new at Best Buy Store #1402 (Seattle, WA). Paid $399.99 with
+                        primary Visa.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Log Event Action Button -->
+                <button
+                  class="w-full inline-flex items-center justify-center gap-space-xs bg-surface-container-low hover:bg-surface-container text-on-surface py-space-sm px-space-md rounded-lg font-title-md text-title-md transition-colors shadow-sm"
+                  onclick="openModal('log-claim-modal')"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                  <span>+ Log Claim / Service Event</span>
+                </button>
+              </section>
+            </div>
+          </div>
+        </div>
+        <!-- Modal: Receipt Preview -->
+        <div
+          class="fixed inset-0 z-50 bg-primary-container/60 backdrop-blur-sm hidden items-center justify-center p-space-md"
+          id="receipt-preview-modal"
+        >
+          <div
+            class="bg-surface-container-lowest rounded-xl max-w-2xl w-full max-h-[921px] flex flex-col shadow-2xl overflow-hidden"
+          >
+            <div class="p-space-md bg-surface-container flex items-center justify-between">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-error">picture_as_pdf</span>
+                <span class="font-title-md text-title-md text-on-surface"
+                  >BestBuy_Receipt_4019.pdf — Inspection View</span
+                >
+              </div>
+              <button
+                class="p-space-xxs rounded-lg hover:bg-surface-container-high text-on-surface-variant"
+                onclick="closeModal('receipt-preview-modal')"
+                type="button"
+              >
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div
+              class="p-space-lg overflow-y-auto flex flex-col items-center justify-center bg-surface-container-low"
+            >
+              <div
+                class="bg-surface-container-lowest p-space-xl rounded-lg shadow-md max-w-md w-full flex flex-col gap-space-base font-body-sm text-body-sm text-on-surface"
+              >
+                <div class="text-center pb-space-sm border-b border-surface-container">
+                  <h3 class="font-headline-md text-headline-md font-bold">BEST BUY #1402</h3>
+                  <p class="text-on-surface-variant">4500 9th Ave NE, Seattle WA 98105</p>
+                  <p class="font-data-tabular text-on-surface-variant">Tel: (206) 547-2300</p>
+                </div>
+                <div class="flex justify-between font-data-tabular">
+                  <span>TRANS: 9812-4019</span>
+                  <span>DATE: 02/20/2024 14:45</span>
+                </div>
+                <div
+                  class="py-space-sm border-y border-surface-container flex flex-col gap-space-xs"
+                >
+                  <div class="flex justify-between font-title-md text-title-md">
+                    <span>SONY WH1000XM5/B</span>
+                    <span>$399.99</span>
+                  </div>
+                  <div class="text-on-surface-variant font-label-sm text-label-sm pl-2">
+                    <span>UPC: 027242923980</span><br />
+                    <span>SERIAL: SN-9824-B8310-US</span>
+                  </div>
+                </div>
+                <div class="flex justify-between font-title-md text-title-md">
+                  <span>SUBTOTAL</span>
+                  <span>$399.99</span>
+                </div>
+                <div
+                  class="flex justify-between font-label-md text-label-md text-on-surface-variant"
+                >
+                  <span>WA STATE SALES TAX (10.25%)</span>
+                  <span>$41.00</span>
+                </div>
+                <div
+                  class="flex justify-between font-headline-md text-headline-md font-bold pt-space-xs border-t border-surface-container"
+                >
+                  <span>TOTAL AMOUNT PAID</span>
+                  <span>$440.99</span>
+                </div>
+                <div class="text-center pt-space-sm text-label-sm text-on-surface-variant">
+                  <span>AUTHORIZATION #99281A • VISA ENDING IN 4012</span><br />
+                  <span>OFFICIAL PROOF OF PURCHASE FOR SONY WARRANTY</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="p-space-md bg-surface-container-lowest flex items-center justify-end gap-space-sm"
+            >
+              <button
+                class="inline-flex items-center gap-space-xs bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-inverse-surface"
+                onclick="triggerDownload('BestBuy_Receipt_4019.pdf')"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[16px]">download</span>
+                <span>Download PDF Copy</span>
+              </button>
+              <button
+                class="bg-surface-container px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-surface-container-high"
+                onclick="closeModal('receipt-preview-modal')"
+                type="button"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Modal: Barcode Inspection -->
+        <div
+          class="fixed inset-0 z-50 bg-primary-container/60 backdrop-blur-sm hidden items-center justify-center p-space-md"
+          id="barcode-preview-modal"
+        >
+          <div
+            class="bg-surface-container-lowest rounded-xl max-w-xl w-full flex flex-col shadow-2xl overflow-hidden"
+          >
+            <div class="p-space-md bg-surface-container flex items-center justify-between">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-secondary">qr_code</span>
+                <span class="font-title-md text-title-md text-on-surface"
+                  >Physical Serial Barcode Image</span
+                >
+              </div>
+              <button
+                class="p-space-xxs rounded-lg hover:bg-surface-container-high text-on-surface-variant"
+                onclick="closeModal('barcode-preview-modal')"
+                type="button"
+              >
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div
+              class="p-space-lg flex flex-col items-center justify-center bg-surface-container-low gap-space-md"
+            >
+              <div
+                class="w-full h-64 bg-surface-container-lowest rounded-lg overflow-hidden flex items-center justify-center shadow-md"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  data-alt="Macro view photograph showing the printed barcode serial sticker on Sony WH-1000XM5 packaging with crisp black bars and numbers SN-9824-B8310-US legible"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdAbbLUqwPMip1uIp9EntmIwTJwr7jYkGwBFgSewI0pcIYKWynzANVbyQHSMynZGJOpHgOMQwscOBjFyUwwgI0GURznJS8JOT07N0fA1G7Pzk0lY2uq5eqkvcKk8zyOwdZlU0lTFUrpeb9w930VLZYnJrhSiQeUSqCDbn47y1fkZ5gzMzOZ9dFLVkZFCoSoO2PrAnzLVvm000iAue-jy2HWGgyvS2I0TCQgKiUf_ykhUJVO5Csvk_H"
+                />
+              </div>
+              <div class="text-center">
+                <span class="font-data-tabular font-bold text-headline-md text-on-surface"
+                  >SN-9824-B8310-US</span
+                >
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Verified match with retailer invoice registry
+                </p>
+              </div>
+            </div>
+            <div
+              class="p-space-md bg-surface-container-lowest flex items-center justify-end gap-space-sm"
+            >
+              <button
+                class="inline-flex items-center gap-space-xs bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md"
+                onclick="copyToClipboard('SN-9824-B8310-US', 'Serial number copied to clipboard')"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                <span>Copy Number</span>
+              </button>
+              <button
+                class="bg-surface-container px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-surface-container-high"
+                onclick="closeModal('barcode-preview-modal')"
+                type="button"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Modal: Log Claim / Event -->
+        <div
+          class="fixed inset-0 z-50 bg-primary-container/60 backdrop-blur-sm hidden items-center justify-center p-space-md"
+          id="log-claim-modal"
+        >
+          <div
+            class="bg-surface-container-lowest rounded-xl max-w-lg w-full flex flex-col shadow-2xl overflow-hidden"
+          >
+            <div class="p-space-md bg-surface-container flex items-center justify-between">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-secondary">add_task</span>
+                <span class="font-title-md text-title-md text-on-surface"
+                  >Log Warranty Claim or Service Event</span
+                >
+              </div>
+              <button
+                class="p-space-xxs rounded-lg hover:bg-surface-container-high text-on-surface-variant"
+                onclick="closeModal('log-claim-modal')"
+                type="button"
+              >
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <form class="p-space-lg flex flex-col gap-space-md" onsubmit="handleLogSubmit(event)">
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface-variant mb-1"
+                  >Event Type</label
+                >
+                <select
+                  class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none"
+                >
+                  <option>Manufacturer RMA Ticket Filed</option>
+                  <option>Customer Support Call Conducted</option>
+                  <option>Headphones Sent for Diagnostics</option>
+                  <option>Replacement Unit Received</option>
+                  <option>Claim Denied / Resolved</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface-variant mb-1"
+                  >Reference / RMA #</label
+                >
+                <input
+                  class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none"
+                  placeholder="e.g., SONY-RMA-891024"
+                  required=""
+                  type="text"
+                />
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface-variant mb-1"
+                  >Date of Interaction</label
+                >
+                <input
+                  class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none"
+                  type="date"
+                  value="2025-03-01"
+                />
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface-variant mb-1"
+                  >Interaction Notes</label
+                >
+                <textarea
+                  class="w-full p-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:outline-none"
+                  placeholder="Summary of technician instructions or return label tracking code..."
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="flex items-center justify-end gap-space-sm pt-space-xs">
+                <button
+                  class="bg-surface-container px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-surface-container-high"
+                  onclick="closeModal('log-claim-modal')"
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-title-md text-title-md hover:bg-inverse-surface shadow-sm"
+                  type="submit"
+                >
+                  Save Log Entry
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <script>
+          function copyToClipboard(text, message) {
+            if (navigator.clipboard) {
+              navigator.clipboard
+                .writeText(text)
+                .then(() => {
+                  showToast(message || 'Copied to clipboard');
+                })
+                .catch(() => {
+                  showToast('Failed to copy');
+                });
+            } else {
+              const textarea = document.createElement('textarea');
+              textarea.value = text;
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textarea);
+              showToast(message || 'Copied to clipboard');
+            }
+          }
 
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toast-message');
-      toastMsg.innerText = message;
-      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-      }, 2500);
-    }
+          function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
 
-    function openModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
-    }
+            setTimeout(() => {
+              toast.classList.remove('translate-y-0', 'opacity-100');
+              toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 2500);
+          }
 
-    function closeModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
-    }
+          function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+              modal.classList.remove('hidden');
+              modal.classList.add('flex');
+            }
+          }
 
-    function triggerDownload(filename) {
-      showToast('Downloading ' + filename + '...');
-    }
+          function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+              modal.classList.add('hidden');
+              modal.classList.remove('flex');
+            }
+          }
 
-    function handleLogSubmit(e) {
-      e.preventDefault();
-      closeModal('log-claim-modal');
-      showToast('Event recorded in product warranty ledger');
-    }
-  </script>
-</div></main><footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl"><div class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs"><span class="font-semibold text-on-surface">WarrantyTracker System</span><span>© 2024 Asset Protection Protocol.</span></div><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#">Overview</a><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#">Claim Policies</a><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Asset Index</a></div></div></footer></body></html>
+          function triggerDownload(filename) {
+            showToast('Downloading ' + filename + '...');
+          }
+
+          function handleLogSubmit(e) {
+            e.preventDefault();
+            closeModal('log-claim-modal');
+            showToast('Event recorded in product warranty ledger');
+          }
+        </script>
+      </div>
+    </main>
+    <footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl">
+      <div
+        class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"
+      >
+        <div class="flex items-center gap-space-xs">
+          <span class="font-semibold text-on-surface">WarrantyTracker System</span
+          ><span>© 2024 Asset Protection Protocol.</span>
+        </div>
+        <div class="flex items-center gap-space-lg">
+          <a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#"
+            >Overview</a
+          ><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#"
+            >Claim Policies</a
+          ><a class="hover:text-on-surface transition-colors" data-path="categories" href="#"
+            >Asset Index</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

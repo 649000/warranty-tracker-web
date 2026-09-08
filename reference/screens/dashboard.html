@@ -1,672 +1,1473 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","on-secondary-fixed":"#00174b","on-error-container":"#93000a","on-secondary":"#ffffff","surface-tint":"#565e74","inverse-primary":"#bec6e0","surface-bright":"#f8f9ff","tertiary":"#000000","outline":"#76777d","primary-fixed":"#dae2fd","on-tertiary-container":"#009668","surface-dim":"#cbdbf5","primary":"#000000","on-secondary-fixed-variant":"#003ea8","surface-container-high":"#dce9ff","tertiary-container":"#002113","secondary-fixed-dim":"#b4c5ff","on-secondary-container":"#fefcff","surface-container-highest":"#d3e4fe","tertiary-fixed":"#6ffbbe","surface-container":"#e5eeff","surface":"#f8f9ff","background":"#f8f9ff","on-background":"#0b1c30","on-primary-container":"#7c839b","primary-fixed-dim":"#bec6e0","on-primary-fixed":"#131b2e","on-tertiary-fixed-variant":"#005236","outline-variant":"#c6c6cd","on-tertiary-fixed":"#002113","primary-container":"#131b2e","surface-container-low":"#eff4ff","secondary-container":"#316bf3","secondary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","secondary":"#0051d5","surface-variant":"#d3e4fe","inverse-on-surface":"#eaf1ff","tertiary-fixed-dim":"#4edea3","error":"#ba1a1a","on-surface":"#0b1c30","on-primary-fixed-variant":"#3f465c","on-tertiary":"#ffffff","error-container":"#ffdad6","on-primary":"#ffffff","inverse-surface":"#213145","on-surface-variant":"#45464d"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-desktop":"1.5rem","margin-page":"1.5rem","space-3xl":"3rem","gutter-mobile":"1rem","space-base":"1rem","space-2xl":"2rem","space-xxs":"0.125rem","space-xl":"1.5rem","space-lg":"1.25rem","space-sm":"0.5rem","space-xs":"0.25rem","space-md":"0.75rem"},fontFamily:{"title-md":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"title-lg":["Inter"],"headline-lg":["Inter"],"display-lg":["Inter"],"label-md":["Inter"],"data-tabular":["Inter"],"headline-lg-mobile":["Inter"],"body-md":["Inter"]},fontSize:{"title-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"600"}],"title-lg":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"data-tabular":["14px",{lineHeight:"20px",letterSpacing:"-0.01em",fontWeight:"500"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="Warranty Tracker Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"/><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold">WarrantyTracker</span></div><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container text-on-surface font-semibold"><a aria-current="page" class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold" data-path="dashboard" href="#">Dashboard</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="add-product" href="#">Add Product</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="categories" href="#">Categories</a><a class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md" data-path="export-claims" href="#">Export & Claims</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors" data-path="add-product" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span>+ Add Product</span></a><button aria-label="Notifications" class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="bg-surface-container-low/60"><div class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"><div class="flex items-center gap-space-md shrink-0"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Posture:</span><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Active (18)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expiring Soon (3)</span></div><div class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"><span class="w-2 h-2 rounded-full bg-error"></span><span class="font-label-md text-label-md text-on-surface font-semibold">Expired (5)</span></div></div><div class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]">verified</span><span>Vault Synced</span></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
-<div class="max-w-7xl mx-auto w-full px-margin-page pb-space-3xl flex flex-col gap-space-2xl">
-<!-- Overview Bar & Metric Hero Cards -->
-<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
-<!-- Active Coverage Card -->
-<div class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md transition-shadow">
-<div class="flex items-start justify-between">
-<div class="flex flex-col">
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Protection</span>
-<div class="flex items-baseline gap-space-sm mt-space-xs">
-<span class="font-display-lg text-display-lg text-on-surface tracking-tight">18</span>
-<span class="font-body-md text-body-md text-on-surface-variant font-medium">assets</span>
-</div>
-</div>
-<div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center text-on-tertiary-fixed">
-<span class="material-symbols-outlined text-[26px]">verified_user</span>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md bg-surface-container-low/50 rounded-lg p-space-sm flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
-<span class="font-data-tabular text-data-tabular font-semibold text-on-surface">$12,450</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">insured value</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-tertiary-container font-semibold">92% Healthy</span>
-</div>
-<!-- Subtle sparkline accent -->
-<div class="mt-space-md h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
-<div class="h-full bg-on-tertiary-container rounded-full" style="width: 78%;"></div>
-</div>
-</div>
-<!-- Expiring Soon Card -->
-<div class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md transition-shadow">
-<div class="flex items-start justify-between">
-<div class="flex flex-col">
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Expiring Soon</span>
-<div class="flex items-baseline gap-space-sm mt-space-xs">
-<span class="font-display-lg text-display-lg text-on-surface tracking-tight">3</span>
-<span class="font-body-md text-body-md text-on-surface-variant font-medium">needs review</span>
-</div>
-</div>
-<div class="w-12 h-12 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-on-secondary-fixed">
-<span class="material-symbols-outlined text-[26px]">hourglass_top</span>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md bg-secondary-fixed/20 rounded-lg p-space-sm flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span class="font-body-sm text-body-sm font-semibold text-on-secondary-fixed-variant">Expires in < 30 days</span>
-</div>
-<a class="font-label-sm text-label-sm text-secondary font-semibold hover:underline flex items-center" href="#action-expiring">
-            Review <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-</a>
-</div>
-<div class="mt-space-md h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
-<div class="h-full bg-secondary rounded-full" style="width: 45%;"></div>
-</div>
-</div>
-<!-- Expired Assets Card -->
-<div class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md transition-shadow">
-<div class="flex items-start justify-between">
-<div class="flex flex-col">
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Coverage Lapsed</span>
-<div class="flex items-baseline gap-space-sm mt-space-xs">
-<span class="font-display-lg text-display-lg text-on-surface tracking-tight">5</span>
-<span class="font-body-md text-body-md text-on-surface-variant font-medium">unprotected</span>
-</div>
-</div>
-<div class="w-12 h-12 rounded-xl bg-error-container/60 flex items-center justify-center text-error">
-<span class="material-symbols-outlined text-[26px]">cancel</span>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md bg-error-container/30 rounded-lg p-space-sm flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="w-2 h-2 rounded-full bg-error"></span>
-<span class="font-body-sm text-body-sm font-semibold text-error">Renew or Archive</span>
-</div>
-<button class="font-label-sm text-label-sm text-error font-semibold hover:underline" type="button">Batch Archive</button>
-</div>
-<div class="mt-space-md h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
-<div class="h-full bg-error rounded-full" style="width: 100%;"></div>
-</div>
-</div>
-</section>
-<!-- Toolbar: Search, Filtering & View Switcher -->
-<section class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col lg:flex-row items-center justify-between gap-space-md">
-<!-- Search Input -->
-<div class="relative w-full lg:w-96">
-<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-<input class="w-full pl-10 pr-space-md py-space-xs bg-surface-container-low text-on-surface rounded-lg font-body-md text-body-md placeholder:text-on-surface-variant/70 focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/40 transition-all" id="productSearchInput" placeholder="Search product, serial number, brand..." type="text"/>
-</div>
-<!-- Filter Pills Group -->
-<div class="flex items-center gap-space-xs overflow-x-auto w-full lg:w-auto pb-space-xxs lg:pb-0" id="filterPillContainer">
-<button class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-primary text-on-primary shadow-sm hover:opacity-95 transition-all shrink-0" data-filter="all" type="button">
-          All (26)
-        </button>
-<button class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container text-on-surface hover:bg-surface-container-high transition-all shrink-0 flex items-center gap-space-xs" data-filter="active" type="button">
-<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
-          Active (18)
-        </button>
-<button class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container text-on-surface hover:bg-surface-container-high transition-all shrink-0 flex items-center gap-space-xs" data-filter="expiring" type="button">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-          Expiring Soon (3)
-        </button>
-<button class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container text-on-surface hover:bg-surface-container-high transition-all shrink-0 flex items-center gap-space-xs" data-filter="expired" type="button">
-<span class="w-2 h-2 rounded-full bg-error"></span>
-          Expired (5)
-        </button>
-</div>
-<!-- Category Filter & View Mode Switcher -->
-<div class="flex items-center justify-between w-full lg:w-auto gap-space-md shrink-0">
-<div class="relative">
-<select class="appearance-none bg-surface-container-low text-on-surface font-label-md text-label-md py-space-xs pl-space-md pr-8 rounded-lg focus:outline-none focus:bg-surface-container-lowest cursor-pointer">
-<option value="">All Categories</option>
-<option value="Electronics">Electronics</option>
-<option value="Appliances">Appliances</option>
-<option value="Tools">Tools</option>
-<option value="Home">Home</option>
-</select>
-<span class="material-symbols-outlined absolute right-space-xs top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
-</div>
-<div class="flex items-center bg-surface-container-low p-space-xxs rounded-lg">
-<button class="p-space-xs rounded-md bg-surface-container-lowest text-on-surface shadow-sm transition-colors" id="btnGridView" title="Grid View" type="button">
-<span class="material-symbols-outlined text-[18px] block">grid_view</span>
-</button>
-<button class="p-space-xs rounded-md text-on-surface-variant hover:text-on-surface transition-colors" id="btnTableView" title="Table View" type="button">
-<span class="material-symbols-outlined text-[18px] block">view_list</span>
-</button>
-</div>
-</div>
-</section>
-<!-- Product Warranty Grid Cards -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop" id="productGrid">
-<!-- Card 1: MacBook Pro 16" M3 Max -->
-<article class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden" data-status="active">
-<!-- Visual Status Rail -->
-<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-on-tertiary-container"></div>
-<div>
-<!-- Header: Product Identity & Badges -->
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative">
-<img class="w-full h-full object-cover" data-alt="Minimalist top-down studio shot of space black Apple MacBook Pro laptop open on crisp light slate architectural table, high key commercial tech photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw8tznLnwqu-0-XYYgX4RbI7MoMdIfh2r4j3jDeZimwghux-yR7kgPEUcnqtpcDnx8gpDSpkBRTRJ3Hfe0Xe1nVaYX9QnloiSpn4s_w9Q0WMVEnOVZJxjNV5gFoEvT7SXQ0l9t4NyT0URi9lIKMlEGPb0k-VT1JfBgPU3DP7DJA0lA3aMTUJzZApLntUr46IAh34lG78w6USMw_NCKq3KZiL_uccpBxgtJwBuNq-R3yYIltSWDhMLA"/>
-<div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
-<span class="material-symbols-outlined text-[12px] text-on-primary">laptop_mac</span>
-</div>
-</div>
-<div class="min-w-0">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Apple</span>
-<h3 class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors" title='MacBook Pro 16" M3 Max'>
-                  MacBook Pro 16" M3 Max
-                </h3>
-</div>
-</div>
-<!-- Active Badge -->
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-on-tertiary-fixed shrink-0">
-<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
-              Active
-            </span>
-</div>
-<!-- Metadata Tabular Grid -->
-<div class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg">
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Retailer</span>
-<div class="flex items-center gap-1 mt-0.5">
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium truncate">Apple Store</span>
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container" title="Verified Proof of Purchase">verified</span>
-</div>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Purchase Date</span>
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5">Nov 14, 2023</span>
-</div>
-<div class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
-<div class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface">
-<code>C02G99XXMD6R</code>
-<button class="text-on-surface-variant hover:text-on-surface" onclick="navigator.clipboard.writeText('C02G99XXMD6R')" title="Copy Serial" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Warranty Timeline Indicator -->
-<div class="mt-space-lg">
-<div class="flex items-center justify-between text-body-sm mb-1">
-<span class="font-data-tabular text-data-tabular font-medium text-on-surface">284 days left</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Coverage ends Nov 2025</span>
-</div>
-<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-on-tertiary-container rounded-full" style="width: 72%;"></div>
-</div>
-</div>
-</div>
-<!-- Footer Card Actions -->
-<div class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between">
-<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-<span class="material-symbols-outlined text-[16px]">receipt_long</span>
-<span>Receipt.pdf</span>
-</button>
-<div class="flex items-center gap-space-xs">
-<button class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-              Claim Support
-            </button>
-<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" title="Options" type="button">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Card 2: Sony WH-1000XM5 -->
-<article class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden" data-status="expiring">
-<!-- Visual Status Rail -->
-<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative">
-<img class="w-full h-full object-cover" data-alt="Matte silver Sony WH-1000XM5 over-ear noise-cancelling headphones resting on a textured wooden design desk with soft ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChdA82jOl8pY13RoW80-0eOH0D-qNVP5pC38K7zQvIxVY9YCO69IRWdXeGu2tG_NTW55YLDrAH4qiMvxXTaVbA6deQQdh17rTIW1T9bGucs4OMmG3WxUNFPZfimTHHRKgztDVQs5gVVtm82GBGjlMQstgiq_oTiDHNtJaOvqYcRuGaxRNnnY-eD99HXzEOifrSCKhksoonVY0lyXgV6l4-d6zMWlc0lZCv4SLmF2MGKnRqSgRbaj5f"/>
-<div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
-<span class="material-symbols-outlined text-[12px] text-on-primary">headphones</span>
-</div>
-</div>
-<div class="min-w-0">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Sony</span>
-<h3 class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors" title="Sony WH-1000XM5">
-                  Sony WH-1000XM5
-                </h3>
-</div>
-</div>
-<!-- Expiring Soon Badge -->
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed shrink-0">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-              Expiring Soon
-            </span>
-</div>
-<div class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg">
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Retailer</span>
-<div class="flex items-center gap-1 mt-0.5">
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium truncate">Best Buy</span>
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">verified</span>
-</div>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Purchase Date</span>
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5">Feb 20, 2024</span>
-</div>
-<div class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
-<div class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface">
-<code>SN-8941042-J</code>
-<button class="text-on-surface-variant hover:text-on-surface" onclick="navigator.clipboard.writeText('SN-8941042-J')" title="Copy Serial" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Timeline Indicator - Amber Warning -->
-<div class="mt-space-lg">
-<div class="flex items-center justify-between text-body-sm mb-1">
-<span class="font-data-tabular text-data-tabular font-semibold text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[15px]">priority_high</span> 18 days left
-              </span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Policy ends in March</span>
-</div>
-<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary rounded-full" style="width: 92%;"></div>
-</div>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between">
-<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-<span class="material-symbols-outlined text-[16px]">receipt_long</span>
-<span>Invoice.pdf</span>
-</button>
-<div class="flex items-center gap-space-xs">
-<button class="px-space-sm py-1 rounded bg-secondary/10 text-secondary hover:bg-secondary/20 font-label-md text-label-md transition-colors font-medium" type="button">
-              Extend Policy
-            </button>
-<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" title="Options" type="button">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Card 3: LG OLED C3 65" TV -->
-<article class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden" data-status="active">
-<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-on-tertiary-container"></div>
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative">
-<img class="w-full h-full object-cover" data-alt="LG OLED television showing vibrant cinematic landscape on a contemporary floating media console with soft architectural room lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ7kMFmfSBdn5tl3G0jgP-_zQnmYwmJc2TGB_u0O8Utt1LktBq5TkAXtvosO5-cxQNbJP35Io24uRzaNo24xI1AC32PMcKkmv4dzRIpqwjfee-CZLK7xKnSuGjnSd_8EyRAA1RFopRq7Jb7MB5mlgdzd8x_U_yM5D808f0Yc1ARVMDKyX7UCKHCDLgb7wTYpnm13jJS8Veh2k1kl3okXVThnSDydD-H_Lkm5Z1my-aOQQt7Iwzd7ts"/>
-<div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
-<span class="material-symbols-outlined text-[12px] text-on-primary">tv</span>
-</div>
-</div>
-<div class="min-w-0">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">LG Electronics</span>
-<h3 class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors" title='LG OLED C3 65" TV'>
-                  LG OLED C3 65" TV
-                </h3>
-</div>
-</div>
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-on-tertiary-fixed shrink-0">
-<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
-              Active
-            </span>
-</div>
-<div class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg">
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Retailer</span>
-<div class="flex items-center gap-1 mt-0.5">
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium truncate">Costco Concierge</span>
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">verified</span>
-</div>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Coverage Type</span>
-<span class="inline-flex items-center font-label-sm text-label-sm text-secondary font-semibold bg-secondary-fixed/30 px-1.5 py-0.5 rounded mt-0.5">
-                +2 Yr Extended
-              </span>
-</div>
-<div class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
-<div class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface">
-<code>311RMQS59012</code>
-<button class="text-on-surface-variant hover:text-on-surface" onclick="navigator.clipboard.writeText('311RMQS59012')" title="Copy Serial" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Extended Progress indicator -->
-<div class="mt-space-lg">
-<div class="flex items-center justify-between text-body-sm mb-1">
-<span class="font-data-tabular text-data-tabular font-medium text-on-surface">420 days left</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Extended Protection</span>
-</div>
-<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-on-tertiary-container rounded-full" style="width: 38%;"></div>
-</div>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between">
-<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-<span class="material-symbols-outlined text-[16px]">receipt_long</span>
-<span>Warranty_Doc.pdf</span>
-</button>
-<div class="flex items-center gap-space-xs">
-<button class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-              Claim Support
-            </button>
-<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" title="Options" type="button">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Card 4: De'Longhi Espresso Specialista -->
-<article class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden" data-status="expiring">
-<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative">
-<img class="w-full h-full object-cover" data-alt="DeLonghi stainless steel espresso coffee machine on marble kitchen countertop with fresh crema in glass espresso cup, warm cinematic morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPyVS1vup2mscPK3ZoZL4Y_qlJMCDAlyIRaWsOp48YHfKthmQZxIoHKfjereHPJX_3xz_I6D2AIKaV-vCty4Z-DD1LmN4r0lOjb3RVK2YQiM1C2AXb8Xv__7rLYllymVSW-YsiqZqpJWhfbfgPNHWeFfyjCKKVKkdDt5ERj88Ym2swn7s52oWa1ZNZ34QsaQeFirO4DoZcxFFudwibaQ-Syfc-bm9gVm4Bza8Lv8ppeS3WlkCqRv0X"/>
-<div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
-<span class="material-symbols-outlined text-[12px] text-on-primary">coffee_maker</span>
-</div>
-</div>
-<div class="min-w-0">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">De'Longhi</span>
-<h3 class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors" title="De'Longhi Espresso Specialista">
-                  De'Longhi Espresso Specialista
-                </h3>
-</div>
-</div>
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed shrink-0">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-              6 Days Left
-            </span>
-</div>
-<div class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg">
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Retailer</span>
-<div class="flex items-center gap-1 mt-0.5">
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium truncate">Williams Sonoma</span>
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">verified</span>
-</div>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Purchase Date</span>
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5">Jan 12, 2023</span>
-</div>
-<div class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
-<div class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface">
-<code>DL9335M-0081</code>
-<button class="text-on-surface-variant hover:text-on-surface" onclick="navigator.clipboard.writeText('DL9335M-0081')" title="Copy Serial" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Alert Bar -->
-<div class="mt-space-lg">
-<div class="flex items-center justify-between text-body-sm mb-1">
-<span class="font-data-tabular text-data-tabular font-semibold text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[15px]">warning</span> Action Required
-              </span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Expires next week</span>
-</div>
-<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary rounded-full" style="width: 98%;"></div>
-</div>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between">
-<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-<span class="material-symbols-outlined text-[16px]">receipt_long</span>
-<span>Receipt.pdf</span>
-</button>
-<div class="flex items-center gap-space-xs">
-<button class="px-space-sm py-1 rounded bg-secondary text-on-secondary hover:bg-secondary/90 font-label-md text-label-md transition-colors font-medium" type="button">
-              File Claim
-            </button>
-<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" title="Options" type="button">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Card 5: Dyson V15 Detect Vacuum -->
-<article class="group relative bg-surface-container-lowest/80 rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden" data-status="expired">
-<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative">
-<img class="w-full h-full object-cover grayscale contrast-125 opacity-80" data-alt="Dyson cordless stick vacuum cleaner standing sleekly docked against a clean off-white architectural wall, product catalog photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARyMtTHVTKq-Ie6qJSxJ8W6oKM7VQDsVS_RHIsMopcwhZEWS0Ry0FP6sRB05xmrBzh0mJhawHO7V2sFvQVEexJJWY5rNqPIy2g22ikIFDnvgaeWnW-O9mtXrhT2Zkt04KyA80atlaWjaGygMFSPlIK9OyBqrdT4Mgz_BQ1s8zG-vIKoUrPXjc8gAYLNgXHx6qnFru9hDkgEFTkLaIY5Fjf_aspeeoiLYWj9EafgM0OMGx4Tw4Y52rU"/>
-<div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
-<span class="material-symbols-outlined text-[12px] text-on-primary">cleaning_services</span>
-</div>
-</div>
-<div class="min-w-0">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Dyson</span>
-<h3 class="font-title-md text-title-md text-on-surface truncate group-hover:text-error transition-colors" title="Dyson V15 Detect Vacuum">
-                  Dyson V15 Detect
-                </h3>
-</div>
-</div>
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-error-container/60 text-error shrink-0">
-<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
-              Expired
-            </span>
-</div>
-<div class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg">
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Retailer</span>
-<div class="flex items-center gap-1 mt-0.5">
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium truncate">Target</span>
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">verified</span>
-</div>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Purchased</span>
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5">Oct 02, 2022</span>
-</div>
-<div class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
-<div class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface">
-<code>V15-US-49901A</code>
-<button class="text-on-surface-variant hover:text-on-surface" onclick="navigator.clipboard.writeText('V15-US-49901A')" title="Copy Serial" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Lapsed indicator -->
-<div class="mt-space-lg">
-<div class="flex items-center justify-between text-body-sm mb-1">
-<span class="font-data-tabular text-data-tabular font-medium text-error flex items-center gap-1">
-<span class="material-symbols-outlined text-[15px]">history_toggle_off</span> Expired 42 days ago
-              </span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Dec 2023</span>
-</div>
-<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-error rounded-full" style="width: 100%;"></div>
-</div>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between">
-<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-<span class="material-symbols-outlined text-[16px]">receipt_long</span>
-<span>Invoice.pdf</span>
-</button>
-<div class="flex items-center gap-space-xs">
-<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors font-medium" type="button">
-              Archive
-            </button>
-<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" title="Options" type="button">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Card 6: iPad Air M2 -->
-<article class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden" data-status="active">
-<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-on-tertiary-container"></div>
-<div>
-<div class="flex items-start justify-between gap-space-md">
-<div class="flex items-center gap-space-md">
-<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative">
-<img class="w-full h-full object-cover" data-alt="Apple iPad Air with Apple Pencil placed on a minimal designer sketchbook in an architect studio workspace, soft warm daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ3R6bi2r3B7NsARY3vKADg6UaYb4KBAmHIw0hSqApxrIVK3AmhteqA6h6fkvvU2T44sUR1zbG-czUf6XhDw6hkkgpW9u9kQWu0YJgnsg6qSdfdq3ia6LSQC0vrnedaVyU1jCmZgAzUDEaD_zCem_ZmH_M2rXblkcgnxbpgzylKlyMME7VygLDbtWyGLBZM4UOIGL0WAoatbpIrRhFBRVaOVJHr0zD17PRf9m0lcChk2xGuHNf5LV9"/>
-<div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
-<span class="material-symbols-outlined text-[12px] text-on-primary">tablet_mac</span>
-</div>
-</div>
-<div class="min-w-0">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Apple</span>
-<h3 class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors" title="iPad Air M2">
-                  iPad Air M2 (11-inch)
-                </h3>
-</div>
-</div>
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-on-tertiary-fixed shrink-0">
-<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
-              Active
-            </span>
-</div>
-<div class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg">
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Retailer</span>
-<div class="flex items-center gap-1 mt-0.5">
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium truncate">Amazon</span>
-<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">verified</span>
-</div>
-</div>
-<div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Purchase Date</span>
-<span class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5">May 28, 2024</span>
-</div>
-<div class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
-<div class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface">
-<code>DMPX7812LMW</code>
-<button class="text-on-surface-variant hover:text-on-surface" onclick="navigator.clipboard.writeText('DMPX7812LMW')" title="Copy Serial" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Progress indicator -->
-<div class="mt-space-lg">
-<div class="flex items-center justify-between text-body-sm mb-1">
-<span class="font-data-tabular text-data-tabular font-medium text-on-surface">190 days left</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Standard AppleCare</span>
-</div>
-<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-on-tertiary-container rounded-full" style="width: 48%;"></div>
-</div>
-</div>
-</div>
-<div class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between">
-<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-<span class="material-symbols-outlined text-[16px]">receipt_long</span>
-<span>Order_Amazon.pdf</span>
-</button>
-<div class="flex items-center gap-space-xs">
-<button class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
-              Claim Support
-            </button>
-<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface" title="Options" type="button">
-<span class="material-symbols-outlined text-[18px]">more_vert</span>
-</button>
-</div>
-</div>
-</article>
-</section>
-<!-- Quick Action Banner / Cloud Sync Utility -->
-<section class="mt-space-xl p-space-xl rounded-xl bg-surface-container-lowest shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-lg">
-<div class="flex items-center gap-space-lg">
-<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[24px] text-secondary">cloud_sync</span>
-</div>
-<div>
-<h4 class="font-title-lg text-title-lg text-on-surface">Automated Receipt Inbox Scan</h4>
-<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">3 new warranty receipts were automatically extracted from connected email accounts.</p>
-</div>
-</div>
-<div class="flex items-center gap-space-md shrink-0 w-full md:w-auto">
-<button class="w-full md:w-auto px-space-lg py-space-xs rounded-lg font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" type="button">
-          Dismiss
-        </button>
-<button class="w-full md:w-auto px-space-lg py-space-xs rounded-lg font-title-md text-title-md bg-primary text-on-primary hover:bg-inverse-surface transition-colors flex items-center justify-center gap-space-xs" type="button">
-<span>Review 3 Assets</span>
-<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-</button>
-</div>
-</section>
-</div>
-</div>
-<script>
-  (function initDashboard() {
-    const searchInput = document.getElementById('productSearchInput');
-    const filterButtons = document.querySelectorAll('#filterPillContainer button');
-    const cards = document.querySelectorAll('#productGrid article');
-    const gridViewBtn = document.getElementById('btnGridView');
-    const tableViewBtn = document.getElementById('btnTableView');
-    const gridContainer = document.getElementById('productGrid');
-
-    let currentFilter = 'all';
-
-    function applyFilters() {
-      const query = (searchInput?.value || '').toLowerCase().trim();
-
-      cards.forEach(card => {
-        const textContent = card.innerText.toLowerCase();
-        const status = card.getAttribute('data-status');
-
-        const matchesQuery = !query || textContent.includes(query);
-        const matchesStatus = currentFilter === 'all' || status === currentFilter;
-
-        if (matchesQuery && matchesStatus) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
         }
-      });
-    }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'on-error': '#ffffff',
+              'on-secondary-fixed': '#00174b',
+              'on-error-container': '#93000a',
+              'on-secondary': '#ffffff',
+              'surface-tint': '#565e74',
+              'inverse-primary': '#bec6e0',
+              'surface-bright': '#f8f9ff',
+              tertiary: '#000000',
+              outline: '#76777d',
+              'primary-fixed': '#dae2fd',
+              'on-tertiary-container': '#009668',
+              'surface-dim': '#cbdbf5',
+              primary: '#000000',
+              'on-secondary-fixed-variant': '#003ea8',
+              'surface-container-high': '#dce9ff',
+              'tertiary-container': '#002113',
+              'secondary-fixed-dim': '#b4c5ff',
+              'on-secondary-container': '#fefcff',
+              'surface-container-highest': '#d3e4fe',
+              'tertiary-fixed': '#6ffbbe',
+              'surface-container': '#e5eeff',
+              surface: '#f8f9ff',
+              background: '#f8f9ff',
+              'on-background': '#0b1c30',
+              'on-primary-container': '#7c839b',
+              'primary-fixed-dim': '#bec6e0',
+              'on-primary-fixed': '#131b2e',
+              'on-tertiary-fixed-variant': '#005236',
+              'outline-variant': '#c6c6cd',
+              'on-tertiary-fixed': '#002113',
+              'primary-container': '#131b2e',
+              'surface-container-low': '#eff4ff',
+              'secondary-container': '#316bf3',
+              'secondary-fixed': '#dbe1ff',
+              'surface-container-lowest': '#ffffff',
+              secondary: '#0051d5',
+              'surface-variant': '#d3e4fe',
+              'inverse-on-surface': '#eaf1ff',
+              'tertiary-fixed-dim': '#4edea3',
+              error: '#ba1a1a',
+              'on-surface': '#0b1c30',
+              'on-primary-fixed-variant': '#3f465c',
+              'on-tertiary': '#ffffff',
+              'error-container': '#ffdad6',
+              'on-primary': '#ffffff',
+              'inverse-surface': '#213145',
+              'on-surface-variant': '#45464d',
+            },
+            borderRadius: { DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
+            spacing: {
+              'gutter-desktop': '1.5rem',
+              'margin-page': '1.5rem',
+              'space-3xl': '3rem',
+              'gutter-mobile': '1rem',
+              'space-base': '1rem',
+              'space-2xl': '2rem',
+              'space-xxs': '0.125rem',
+              'space-xl': '1.5rem',
+              'space-lg': '1.25rem',
+              'space-sm': '0.5rem',
+              'space-xs': '0.25rem',
+              'space-md': '0.75rem',
+            },
+            fontFamily: {
+              'title-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'headline-md': ['Inter'],
+              'body-sm': ['Inter'],
+              'label-sm': ['Inter'],
+              'title-lg': ['Inter'],
+              'headline-lg': ['Inter'],
+              'display-lg': ['Inter'],
+              'label-md': ['Inter'],
+              'data-tabular': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'body-md': ['Inter'],
+            },
+            fontSize: {
+              'title-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '600' }],
+              'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }],
+              'headline-md': [
+                '20px',
+                { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-sm': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.01em', fontWeight: '400' },
+              ],
+              'label-sm': [
+                '11px',
+                { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '600' },
+              ],
+              'title-lg': [
+                '16px',
+                { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'headline-lg': [
+                '28px',
+                { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '600' },
+              ],
+              'display-lg': [
+                '36px',
+                { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'label-md': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '500' },
+              ],
+              'data-tabular': [
+                '14px',
+                { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '500' },
+              ],
+              'headline-lg-mobile': [
+                '24px',
+                { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' },
+              ],
+              'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
+    <header
+      class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+    >
+      <div
+        class="h-16 max-w-7xl mx-auto px-margin-page flex items-center justify-between gap-space-base"
+      >
+        <div class="flex items-center gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <img
+              alt="Warranty Tracker Logo"
+              class="h-8 w-auto object-contain"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1WBXam8RlgiMU_LRqGymyfldOkuIH-rxLkKXhEEZk2MPlGw5kyvwgfcUykOJykKWo1wddqMrxXiS70zs7gUZv4n4wzE_hhNlGH8Ba7caBXvlliI-j0DXHim2mMJi2JxUfTLg7v9U8WanOMt5A2KUwsSQ8IqfyGmp6HE5U2KFLxdBI7ttIUVShOZagXZHxCR4MMnpaNYKdUQwlxmjBXAhkF9A91IZ4MXeNEAt1XR7jyFaepFz2WS1QAK7Ng"
+            /><span class="font-title-lg text-title-lg text-on-surface tracking-tight font-bold"
+              >WarrantyTracker</span
+            >
+          </div>
+          <nav
+            class="hidden md:flex items-center gap-space-xs"
+            data-active-classes="bg-surface-container text-on-surface font-semibold"
+          >
+            <a
+              aria-current="page"
+              class="px-space-md py-space-xs rounded-lg transition-colors bg-surface-container text-on-surface font-semibold"
+              data-path="dashboard"
+              href="#"
+              >Dashboard</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="add-product"
+              href="#"
+              >Add Product</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="categories"
+              href="#"
+              >Categories</a
+            ><a
+              class="px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-title-md text-title-md"
+              data-path="export-claims"
+              href="#"
+              >Export & Claims</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-space-md">
+          <a
+            class="hidden sm:inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-title-md text-title-md px-space-md py-space-xs rounded-lg shadow-sm hover:bg-inverse-surface hover:text-inverse-on-surface transition-colors"
+            data-path="add-product"
+            href="#"
+            ><span class="material-symbols-outlined text-[18px]">add</span
+            ><span>+ Add Product</span></a
+          ><button
+            aria-label="Notifications"
+            class="p-space-xs rounded-full text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
+          </button>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low/60">
+        <div
+          class="max-w-7xl mx-auto px-margin-page py-space-xs flex items-center justify-between overflow-x-auto"
+        >
+          <div class="flex items-center gap-space-md shrink-0">
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Posture:</span
+            >
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Active (18)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expiring Soon (3)</span
+              >
+            </div>
+            <div
+              class="inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.03)]"
+            >
+              <span class="w-2 h-2 rounded-full bg-error"></span
+              ><span class="font-label-md text-label-md text-on-surface font-semibold"
+                >Expired (5)</span
+              >
+            </div>
+          </div>
+          <div
+            class="hidden lg:flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"
+          >
+            <span class="material-symbols-outlined text-[16px]">verified</span
+            ><span>Vault Synced</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full pt-28 bg-surface">
+      <div class="flex flex-col w-full">
+        <div
+          class="max-w-7xl mx-auto w-full px-margin-page pb-space-3xl flex flex-col gap-space-2xl"
+        >
+          <!-- Overview Bar & Metric Hero Cards -->
+          <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
+            <!-- Active Coverage Card -->
+            <div
+              class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider"
+                    >Active Protection</span
+                  >
+                  <div class="flex items-baseline gap-space-sm mt-space-xs">
+                    <span class="font-display-lg text-display-lg text-on-surface tracking-tight"
+                      >18</span
+                    >
+                    <span class="font-body-md text-body-md text-on-surface-variant font-medium"
+                      >assets</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center text-on-tertiary-fixed"
+                >
+                  <span class="material-symbols-outlined text-[26px]">verified_user</span>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md bg-surface-container-low/50 rounded-lg p-space-sm flex items-center justify-between"
+              >
+                <div class="flex items-center gap-space-xs">
+                  <span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+                  <span class="font-data-tabular text-data-tabular font-semibold text-on-surface"
+                    >$12,450</span
+                  >
+                  <span class="font-body-sm text-body-sm text-on-surface-variant"
+                    >insured value</span
+                  >
+                </div>
+                <span class="font-label-sm text-label-sm text-on-tertiary-container font-semibold"
+                  >92% Healthy</span
+                >
+              </div>
+              <!-- Subtle sparkline accent -->
+              <div
+                class="mt-space-md h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden"
+              >
+                <div class="h-full bg-on-tertiary-container rounded-full" style="width: 78%"></div>
+              </div>
+            </div>
+            <!-- Expiring Soon Card -->
+            <div
+              class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider"
+                    >Expiring Soon</span
+                  >
+                  <div class="flex items-baseline gap-space-sm mt-space-xs">
+                    <span class="font-display-lg text-display-lg text-on-surface tracking-tight"
+                      >3</span
+                    >
+                    <span class="font-body-md text-body-md text-on-surface-variant font-medium"
+                      >needs review</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-on-secondary-fixed"
+                >
+                  <span class="material-symbols-outlined text-[26px]">hourglass_top</span>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md bg-secondary-fixed/20 rounded-lg p-space-sm flex items-center justify-between"
+              >
+                <div class="flex items-center gap-space-xs">
+                  <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                  <span
+                    class="font-body-sm text-body-sm font-semibold text-on-secondary-fixed-variant"
+                    >Expires in < 30 days</span
+                  >
+                </div>
+                <a
+                  class="font-label-sm text-label-sm text-secondary font-semibold hover:underline flex items-center"
+                  href="#action-expiring"
+                >
+                  Review <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </a>
+              </div>
+              <div
+                class="mt-space-md h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden"
+              >
+                <div class="h-full bg-secondary rounded-full" style="width: 45%"></div>
+              </div>
+            </div>
+            <!-- Expired Assets Card -->
+            <div
+              class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex items-start justify-between">
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider"
+                    >Coverage Lapsed</span
+                  >
+                  <div class="flex items-baseline gap-space-sm mt-space-xs">
+                    <span class="font-display-lg text-display-lg text-on-surface tracking-tight"
+                      >5</span
+                    >
+                    <span class="font-body-md text-body-md text-on-surface-variant font-medium"
+                      >unprotected</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-error-container/60 flex items-center justify-center text-error"
+                >
+                  <span class="material-symbols-outlined text-[26px]">cancel</span>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md bg-error-container/30 rounded-lg p-space-sm flex items-center justify-between"
+              >
+                <div class="flex items-center gap-space-xs">
+                  <span class="w-2 h-2 rounded-full bg-error"></span>
+                  <span class="font-body-sm text-body-sm font-semibold text-error"
+                    >Renew or Archive</span
+                  >
+                </div>
+                <button
+                  class="font-label-sm text-label-sm text-error font-semibold hover:underline"
+                  type="button"
+                >
+                  Batch Archive
+                </button>
+              </div>
+              <div
+                class="mt-space-md h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden"
+              >
+                <div class="h-full bg-error rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+          </section>
+          <!-- Toolbar: Search, Filtering & View Switcher -->
+          <section
+            class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col lg:flex-row items-center justify-between gap-space-md"
+          >
+            <!-- Search Input -->
+            <div class="relative w-full lg:w-96">
+              <span
+                class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]"
+                >search</span
+              >
+              <input
+                class="w-full pl-10 pr-space-md py-space-xs bg-surface-container-low text-on-surface rounded-lg font-body-md text-body-md placeholder:text-on-surface-variant/70 focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/40 transition-all"
+                id="productSearchInput"
+                placeholder="Search product, serial number, brand..."
+                type="text"
+              />
+            </div>
+            <!-- Filter Pills Group -->
+            <div
+              class="flex items-center gap-space-xs overflow-x-auto w-full lg:w-auto pb-space-xxs lg:pb-0"
+              id="filterPillContainer"
+            >
+              <button
+                class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-primary text-on-primary shadow-sm hover:opacity-95 transition-all shrink-0"
+                data-filter="all"
+                type="button"
+              >
+                All (26)
+              </button>
+              <button
+                class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container text-on-surface hover:bg-surface-container-high transition-all shrink-0 flex items-center gap-space-xs"
+                data-filter="active"
+                type="button"
+              >
+                <span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+                Active (18)
+              </button>
+              <button
+                class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container text-on-surface hover:bg-surface-container-high transition-all shrink-0 flex items-center gap-space-xs"
+                data-filter="expiring"
+                type="button"
+              >
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                Expiring Soon (3)
+              </button>
+              <button
+                class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-surface-container text-on-surface hover:bg-surface-container-high transition-all shrink-0 flex items-center gap-space-xs"
+                data-filter="expired"
+                type="button"
+              >
+                <span class="w-2 h-2 rounded-full bg-error"></span>
+                Expired (5)
+              </button>
+            </div>
+            <!-- Category Filter & View Mode Switcher -->
+            <div class="flex items-center justify-between w-full lg:w-auto gap-space-md shrink-0">
+              <div class="relative">
+                <select
+                  class="appearance-none bg-surface-container-low text-on-surface font-label-md text-label-md py-space-xs pl-space-md pr-8 rounded-lg focus:outline-none focus:bg-surface-container-lowest cursor-pointer"
+                >
+                  <option value="">All Categories</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Appliances">Appliances</option>
+                  <option value="Tools">Tools</option>
+                  <option value="Home">Home</option>
+                </select>
+                <span
+                  class="material-symbols-outlined absolute right-space-xs top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]"
+                  >expand_more</span
+                >
+              </div>
+              <div class="flex items-center bg-surface-container-low p-space-xxs rounded-lg">
+                <button
+                  class="p-space-xs rounded-md bg-surface-container-lowest text-on-surface shadow-sm transition-colors"
+                  id="btnGridView"
+                  title="Grid View"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px] block">grid_view</span>
+                </button>
+                <button
+                  class="p-space-xs rounded-md text-on-surface-variant hover:text-on-surface transition-colors"
+                  id="btnTableView"
+                  title="Table View"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px] block">view_list</span>
+                </button>
+              </div>
+            </div>
+          </section>
+          <!-- Product Warranty Grid Cards -->
+          <section
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop"
+            id="productGrid"
+          >
+            <!-- Card 1: MacBook Pro 16" M3 Max -->
+            <article
+              class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden"
+              data-status="active"
+            >
+              <!-- Visual Status Rail -->
+              <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-on-tertiary-container"></div>
+              <div>
+                <!-- Header: Product Identity & Badges -->
+                <div class="flex items-start justify-between gap-space-md">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative"
+                    >
+                      <img
+                        class="w-full h-full object-cover"
+                        data-alt="Minimalist top-down studio shot of space black Apple MacBook Pro laptop open on crisp light slate architectural table, high key commercial tech photography"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw8tznLnwqu-0-XYYgX4RbI7MoMdIfh2r4j3jDeZimwghux-yR7kgPEUcnqtpcDnx8gpDSpkBRTRJ3Hfe0Xe1nVaYX9QnloiSpn4s_w9Q0WMVEnOVZJxjNV5gFoEvT7SXQ0l9t4NyT0URi9lIKMlEGPb0k-VT1JfBgPU3DP7DJA0lA3aMTUJzZApLntUr46IAh34lG78w6USMw_NCKq3KZiL_uccpBxgtJwBuNq-R3yYIltSWDhMLA"
+                      />
+                      <div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
+                        <span class="material-symbols-outlined text-[12px] text-on-primary"
+                          >laptop_mac</span
+                        >
+                      </div>
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                        >Apple</span
+                      >
+                      <h3
+                        class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors"
+                        title='MacBook Pro 16" M3 Max'
+                      >
+                        MacBook Pro 16" M3 Max
+                      </h3>
+                    </div>
+                  </div>
+                  <!-- Active Badge -->
+                  <span
+                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-on-tertiary-fixed shrink-0"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                    Active
+                  </span>
+                </div>
+                <!-- Metadata Tabular Grid -->
+                <div
+                  class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg"
+                >
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Retailer</span
+                    >
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <span
+                        class="font-data-tabular text-data-tabular text-on-surface font-medium truncate"
+                        >Apple Store</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-[14px] text-on-tertiary-container"
+                        title="Verified Proof of Purchase"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Purchase Date</span
+                    >
+                    <span
+                      class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5"
+                      >Nov 14, 2023</span
+                    >
+                  </div>
+                  <div
+                    class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40"
+                  >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
+                    <div
+                      class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface"
+                    >
+                      <code>C02G99XXMD6R</code>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface"
+                        onclick="navigator.clipboard.writeText('C02G99XXMD6R')"
+                        title="Copy Serial"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Warranty Timeline Indicator -->
+                <div class="mt-space-lg">
+                  <div class="flex items-center justify-between text-body-sm mb-1">
+                    <span class="font-data-tabular text-data-tabular font-medium text-on-surface"
+                      >284 days left</span
+                    >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Coverage ends Nov 2025</span
+                    >
+                  </div>
+                  <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                    <div
+                      class="h-full bg-on-tertiary-container rounded-full"
+                      style="width: 72%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Footer Card Actions -->
+              <div
+                class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between"
+              >
+                <button
+                  class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                  <span>Receipt.pdf</span>
+                </button>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors"
+                    type="button"
+                  >
+                    Claim Support
+                  </button>
+                  <button
+                    class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface"
+                    title="Options"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <!-- Card 2: Sony WH-1000XM5 -->
+            <article
+              class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden"
+              data-status="expiring"
+            >
+              <!-- Visual Status Rail -->
+              <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+              <div>
+                <div class="flex items-start justify-between gap-space-md">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative"
+                    >
+                      <img
+                        class="w-full h-full object-cover"
+                        data-alt="Matte silver Sony WH-1000XM5 over-ear noise-cancelling headphones resting on a textured wooden design desk with soft ambient lighting"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuChdA82jOl8pY13RoW80-0eOH0D-qNVP5pC38K7zQvIxVY9YCO69IRWdXeGu2tG_NTW55YLDrAH4qiMvxXTaVbA6deQQdh17rTIW1T9bGucs4OMmG3WxUNFPZfimTHHRKgztDVQs5gVVtm82GBGjlMQstgiq_oTiDHNtJaOvqYcRuGaxRNnnY-eD99HXzEOifrSCKhksoonVY0lyXgV6l4-d6zMWlc0lZCv4SLmF2MGKnRqSgRbaj5f"
+                      />
+                      <div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
+                        <span class="material-symbols-outlined text-[12px] text-on-primary"
+                          >headphones</span
+                        >
+                      </div>
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                        >Sony</span
+                      >
+                      <h3
+                        class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors"
+                        title="Sony WH-1000XM5"
+                      >
+                        Sony WH-1000XM5
+                      </h3>
+                    </div>
+                  </div>
+                  <!-- Expiring Soon Badge -->
+                  <span
+                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed shrink-0"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                    Expiring Soon
+                  </span>
+                </div>
+                <div
+                  class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg"
+                >
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Retailer</span
+                    >
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <span
+                        class="font-data-tabular text-data-tabular text-on-surface font-medium truncate"
+                        >Best Buy</span
+                      >
+                      <span class="material-symbols-outlined text-[14px] text-on-tertiary-container"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Purchase Date</span
+                    >
+                    <span
+                      class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5"
+                      >Feb 20, 2024</span
+                    >
+                  </div>
+                  <div
+                    class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40"
+                  >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
+                    <div
+                      class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface"
+                    >
+                      <code>SN-8941042-J</code>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface"
+                        onclick="navigator.clipboard.writeText('SN-8941042-J')"
+                        title="Copy Serial"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Timeline Indicator - Amber Warning -->
+                <div class="mt-space-lg">
+                  <div class="flex items-center justify-between text-body-sm mb-1">
+                    <span
+                      class="font-data-tabular text-data-tabular font-semibold text-secondary flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-[15px]">priority_high</span> 18
+                      days left
+                    </span>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Policy ends in March</span
+                    >
+                  </div>
+                  <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                    <div class="h-full bg-secondary rounded-full" style="width: 92%"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between"
+              >
+                <button
+                  class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                  <span>Invoice.pdf</span>
+                </button>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-sm py-1 rounded bg-secondary/10 text-secondary hover:bg-secondary/20 font-label-md text-label-md transition-colors font-medium"
+                    type="button"
+                  >
+                    Extend Policy
+                  </button>
+                  <button
+                    class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface"
+                    title="Options"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <!-- Card 3: LG OLED C3 65" TV -->
+            <article
+              class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden"
+              data-status="active"
+            >
+              <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-on-tertiary-container"></div>
+              <div>
+                <div class="flex items-start justify-between gap-space-md">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative"
+                    >
+                      <img
+                        class="w-full h-full object-cover"
+                        data-alt="LG OLED television showing vibrant cinematic landscape on a contemporary floating media console with soft architectural room lights"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ7kMFmfSBdn5tl3G0jgP-_zQnmYwmJc2TGB_u0O8Utt1LktBq5TkAXtvosO5-cxQNbJP35Io24uRzaNo24xI1AC32PMcKkmv4dzRIpqwjfee-CZLK7xKnSuGjnSd_8EyRAA1RFopRq7Jb7MB5mlgdzd8x_U_yM5D808f0Yc1ARVMDKyX7UCKHCDLgb7wTYpnm13jJS8Veh2k1kl3okXVThnSDydD-H_Lkm5Z1my-aOQQt7Iwzd7ts"
+                      />
+                      <div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
+                        <span class="material-symbols-outlined text-[12px] text-on-primary"
+                          >tv</span
+                        >
+                      </div>
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                        >LG Electronics</span
+                      >
+                      <h3
+                        class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors"
+                        title='LG OLED C3 65" TV'
+                      >
+                        LG OLED C3 65" TV
+                      </h3>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-on-tertiary-fixed shrink-0"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                    Active
+                  </span>
+                </div>
+                <div
+                  class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg"
+                >
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Retailer</span
+                    >
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <span
+                        class="font-data-tabular text-data-tabular text-on-surface font-medium truncate"
+                        >Costco Concierge</span
+                      >
+                      <span class="material-symbols-outlined text-[14px] text-on-tertiary-container"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Coverage Type</span
+                    >
+                    <span
+                      class="inline-flex items-center font-label-sm text-label-sm text-secondary font-semibold bg-secondary-fixed/30 px-1.5 py-0.5 rounded mt-0.5"
+                    >
+                      +2 Yr Extended
+                    </span>
+                  </div>
+                  <div
+                    class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40"
+                  >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
+                    <div
+                      class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface"
+                    >
+                      <code>311RMQS59012</code>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface"
+                        onclick="navigator.clipboard.writeText('311RMQS59012')"
+                        title="Copy Serial"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Extended Progress indicator -->
+                <div class="mt-space-lg">
+                  <div class="flex items-center justify-between text-body-sm mb-1">
+                    <span class="font-data-tabular text-data-tabular font-medium text-on-surface"
+                      >420 days left</span
+                    >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Extended Protection</span
+                    >
+                  </div>
+                  <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                    <div
+                      class="h-full bg-on-tertiary-container rounded-full"
+                      style="width: 38%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between"
+              >
+                <button
+                  class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                  <span>Warranty_Doc.pdf</span>
+                </button>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors"
+                    type="button"
+                  >
+                    Claim Support
+                  </button>
+                  <button
+                    class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface"
+                    title="Options"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <!-- Card 4: De'Longhi Espresso Specialista -->
+            <article
+              class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden"
+              data-status="expiring"
+            >
+              <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+              <div>
+                <div class="flex items-start justify-between gap-space-md">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative"
+                    >
+                      <img
+                        class="w-full h-full object-cover"
+                        data-alt="DeLonghi stainless steel espresso coffee machine on marble kitchen countertop with fresh crema in glass espresso cup, warm cinematic morning light"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPyVS1vup2mscPK3ZoZL4Y_qlJMCDAlyIRaWsOp48YHfKthmQZxIoHKfjereHPJX_3xz_I6D2AIKaV-vCty4Z-DD1LmN4r0lOjb3RVK2YQiM1C2AXb8Xv__7rLYllymVSW-YsiqZqpJWhfbfgPNHWeFfyjCKKVKkdDt5ERj88Ym2swn7s52oWa1ZNZ34QsaQeFirO4DoZcxFFudwibaQ-Syfc-bm9gVm4Bza8Lv8ppeS3WlkCqRv0X"
+                      />
+                      <div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
+                        <span class="material-symbols-outlined text-[12px] text-on-primary"
+                          >coffee_maker</span
+                        >
+                      </div>
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                        >De'Longhi</span
+                      >
+                      <h3
+                        class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors"
+                        title="De'Longhi Espresso Specialista"
+                      >
+                        De'Longhi Espresso Specialista
+                      </h3>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed/50 text-on-secondary-fixed shrink-0"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                    6 Days Left
+                  </span>
+                </div>
+                <div
+                  class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg"
+                >
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Retailer</span
+                    >
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <span
+                        class="font-data-tabular text-data-tabular text-on-surface font-medium truncate"
+                        >Williams Sonoma</span
+                      >
+                      <span class="material-symbols-outlined text-[14px] text-on-tertiary-container"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Purchase Date</span
+                    >
+                    <span
+                      class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5"
+                      >Jan 12, 2023</span
+                    >
+                  </div>
+                  <div
+                    class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40"
+                  >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
+                    <div
+                      class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface"
+                    >
+                      <code>DL9335M-0081</code>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface"
+                        onclick="navigator.clipboard.writeText('DL9335M-0081')"
+                        title="Copy Serial"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Alert Bar -->
+                <div class="mt-space-lg">
+                  <div class="flex items-center justify-between text-body-sm mb-1">
+                    <span
+                      class="font-data-tabular text-data-tabular font-semibold text-secondary flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-[15px]">warning</span> Action
+                      Required
+                    </span>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Expires next week</span
+                    >
+                  </div>
+                  <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                    <div class="h-full bg-secondary rounded-full" style="width: 98%"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between"
+              >
+                <button
+                  class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                  <span>Receipt.pdf</span>
+                </button>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-sm py-1 rounded bg-secondary text-on-secondary hover:bg-secondary/90 font-label-md text-label-md transition-colors font-medium"
+                    type="button"
+                  >
+                    File Claim
+                  </button>
+                  <button
+                    class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface"
+                    title="Options"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <!-- Card 5: Dyson V15 Detect Vacuum -->
+            <article
+              class="group relative bg-surface-container-lowest/80 rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden"
+              data-status="expired"
+            >
+              <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+              <div>
+                <div class="flex items-start justify-between gap-space-md">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative"
+                    >
+                      <img
+                        class="w-full h-full object-cover grayscale contrast-125 opacity-80"
+                        data-alt="Dyson cordless stick vacuum cleaner standing sleekly docked against a clean off-white architectural wall, product catalog photography"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuARyMtTHVTKq-Ie6qJSxJ8W6oKM7VQDsVS_RHIsMopcwhZEWS0Ry0FP6sRB05xmrBzh0mJhawHO7V2sFvQVEexJJWY5rNqPIy2g22ikIFDnvgaeWnW-O9mtXrhT2Zkt04KyA80atlaWjaGygMFSPlIK9OyBqrdT4Mgz_BQ1s8zG-vIKoUrPXjc8gAYLNgXHx6qnFru9hDkgEFTkLaIY5Fjf_aspeeoiLYWj9EafgM0OMGx4Tw4Y52rU"
+                      />
+                      <div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
+                        <span class="material-symbols-outlined text-[12px] text-on-primary"
+                          >cleaning_services</span
+                        >
+                      </div>
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                        >Dyson</span
+                      >
+                      <h3
+                        class="font-title-md text-title-md text-on-surface truncate group-hover:text-error transition-colors"
+                        title="Dyson V15 Detect Vacuum"
+                      >
+                        Dyson V15 Detect
+                      </h3>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-error-container/60 text-error shrink-0"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    Expired
+                  </span>
+                </div>
+                <div
+                  class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg"
+                >
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Retailer</span
+                    >
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <span
+                        class="font-data-tabular text-data-tabular text-on-surface font-medium truncate"
+                        >Target</span
+                      >
+                      <span class="material-symbols-outlined text-[14px] text-on-tertiary-container"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Purchased</span
+                    >
+                    <span
+                      class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5"
+                      >Oct 02, 2022</span
+                    >
+                  </div>
+                  <div
+                    class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40"
+                  >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
+                    <div
+                      class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface"
+                    >
+                      <code>V15-US-49901A</code>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface"
+                        onclick="navigator.clipboard.writeText('V15-US-49901A')"
+                        title="Copy Serial"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Lapsed indicator -->
+                <div class="mt-space-lg">
+                  <div class="flex items-center justify-between text-body-sm mb-1">
+                    <span
+                      class="font-data-tabular text-data-tabular font-medium text-error flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-[15px]">history_toggle_off</span>
+                      Expired 42 days ago
+                    </span>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Dec 2023</span
+                    >
+                  </div>
+                  <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                    <div class="h-full bg-error rounded-full" style="width: 100%"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between"
+              >
+                <button
+                  class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                  <span>Invoice.pdf</span>
+                </button>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-sm py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors font-medium"
+                    type="button"
+                  >
+                    Archive
+                  </button>
+                  <button
+                    class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface"
+                    title="Options"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <!-- Card 6: iPad Air M2 -->
+            <article
+              class="group relative bg-surface-container-lowest rounded-xl p-space-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between overflow-hidden"
+              data-status="active"
+            >
+              <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-on-tertiary-container"></div>
+              <div>
+                <div class="flex items-start justify-between gap-space-md">
+                  <div class="flex items-center gap-space-md">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 overflow-hidden relative"
+                    >
+                      <img
+                        class="w-full h-full object-cover"
+                        data-alt="Apple iPad Air with Apple Pencil placed on a minimal designer sketchbook in an architect studio workspace, soft warm daylight"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ3R6bi2r3B7NsARY3vKADg6UaYb4KBAmHIw0hSqApxrIVK3AmhteqA6h6fkvvU2T44sUR1zbG-czUf6XhDw6hkkgpW9u9kQWu0YJgnsg6qSdfdq3ia6LSQC0vrnedaVyU1jCmZgAzUDEaD_zCem_ZmH_M2rXblkcgnxbpgzylKlyMME7VygLDbtWyGLBZM4UOIGL0WAoatbpIrRhFBRVaOVJHr0zD17PRf9m0lcChk2xGuHNf5LV9"
+                      />
+                      <div class="absolute bottom-0 right-0 bg-primary/80 p-0.5 rounded-tl">
+                        <span class="material-symbols-outlined text-[12px] text-on-primary"
+                          >tablet_mac</span
+                        >
+                      </div>
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                        >Apple</span
+                      >
+                      <h3
+                        class="font-title-md text-title-md text-on-surface truncate group-hover:text-secondary transition-colors"
+                        title="iPad Air M2"
+                      >
+                        iPad Air M2 (11-inch)
+                      </h3>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed/30 text-on-tertiary-fixed shrink-0"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                    Active
+                  </span>
+                </div>
+                <div
+                  class="grid grid-cols-2 gap-space-sm mt-space-lg p-space-sm bg-surface-container-low/40 rounded-lg"
+                >
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Retailer</span
+                    >
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <span
+                        class="font-data-tabular text-data-tabular text-on-surface font-medium truncate"
+                        >Amazon</span
+                      >
+                      <span class="material-symbols-outlined text-[14px] text-on-tertiary-container"
+                        >verified</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Purchase Date</span
+                    >
+                    <span
+                      class="font-data-tabular text-data-tabular text-on-surface font-medium block mt-0.5"
+                      >May 28, 2024</span
+                    >
+                  </div>
+                  <div
+                    class="col-span-2 flex items-center justify-between pt-1 border-t border-surface-container-high/40"
+                  >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Serial:</span>
+                    <div
+                      class="flex items-center gap-1 font-data-tabular text-body-sm text-on-surface"
+                    >
+                      <code>DMPX7812LMW</code>
+                      <button
+                        class="text-on-surface-variant hover:text-on-surface"
+                        onclick="navigator.clipboard.writeText('DMPX7812LMW')"
+                        title="Copy Serial"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Progress indicator -->
+                <div class="mt-space-lg">
+                  <div class="flex items-center justify-between text-body-sm mb-1">
+                    <span class="font-data-tabular text-data-tabular font-medium text-on-surface"
+                      >190 days left</span
+                    >
+                    <span class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Standard AppleCare</span
+                    >
+                  </div>
+                  <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                    <div
+                      class="h-full bg-on-tertiary-container rounded-full"
+                      style="width: 48%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mt-space-lg pt-space-md border-t border-surface-container-low flex items-center justify-between"
+              >
+                <button
+                  class="inline-flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                  <span>Order_Amazon.pdf</span>
+                </button>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-sm py-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors"
+                    type="button"
+                  >
+                    Claim Support
+                  </button>
+                  <button
+                    class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface"
+                    title="Options"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </section>
+          <!-- Quick Action Banner / Cloud Sync Utility -->
+          <section
+            class="mt-space-xl p-space-xl rounded-xl bg-surface-container-lowest shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-lg"
+          >
+            <div class="flex items-center gap-space-lg">
+              <div
+                class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-[24px] text-secondary">cloud_sync</span>
+              </div>
+              <div>
+                <h4 class="font-title-lg text-title-lg text-on-surface">
+                  Automated Receipt Inbox Scan
+                </h4>
+                <p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+                  3 new warranty receipts were automatically extracted from connected email
+                  accounts.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-md shrink-0 w-full md:w-auto">
+              <button
+                class="w-full md:w-auto px-space-lg py-space-xs rounded-lg font-title-md text-title-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors"
+                type="button"
+              >
+                Dismiss
+              </button>
+              <button
+                class="w-full md:w-auto px-space-lg py-space-xs rounded-lg font-title-md text-title-md bg-primary text-on-primary hover:bg-inverse-surface transition-colors flex items-center justify-center gap-space-xs"
+                type="button"
+              >
+                <span>Review 3 Assets</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+      <script>
+        (function initDashboard() {
+          const searchInput = document.getElementById('productSearchInput');
+          const filterButtons = document.querySelectorAll('#filterPillContainer button');
+          const cards = document.querySelectorAll('#productGrid article');
+          const gridViewBtn = document.getElementById('btnGridView');
+          const tableViewBtn = document.getElementById('btnTableView');
+          const gridContainer = document.getElementById('productGrid');
 
-    // Filter pill toggles
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach(b => {
-          b.classList.remove('bg-primary', 'text-on-primary');
-          b.classList.add('bg-surface-container', 'text-on-surface');
-        });
+          let currentFilter = 'all';
 
-        btn.classList.remove('bg-surface-container', 'text-on-surface');
-        btn.classList.add('bg-primary', 'text-on-primary');
+          function applyFilters() {
+            const query = (searchInput?.value || '').toLowerCase().trim();
 
-        currentFilter = btn.getAttribute('data-filter') || 'all';
-        applyFilters();
-      });
-    });
+            cards.forEach((card) => {
+              const textContent = card.innerText.toLowerCase();
+              const status = card.getAttribute('data-status');
 
-    // Real-time search filter
-    searchInput?.addEventListener('input', applyFilters);
+              const matchesQuery = !query || textContent.includes(query);
+              const matchesStatus = currentFilter === 'all' || status === currentFilter;
 
-    // View Switcher Interactions (Grid vs Table layout modifier)
-    gridViewBtn?.addEventListener('click', () => {
-      gridViewBtn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
-      tableViewBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
-      tableViewBtn.classList.add('text-on-surface-variant');
-      gridContainer.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop';
-    });
+              if (matchesQuery && matchesStatus) {
+                card.classList.remove('hidden');
+              } else {
+                card.classList.add('hidden');
+              }
+            });
+          }
 
-    tableViewBtn?.addEventListener('click', () => {
-      tableViewBtn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
-      gridViewBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
-      gridViewBtn.classList.add('text-on-surface-variant');
-      gridContainer.className = 'grid grid-cols-1 gap-space-md';
-    });
-  })();
-</script></main><footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl"><div class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"><div class="flex items-center gap-space-xs"><span class="font-semibold text-on-surface">WarrantyTracker System</span><span>© 2024 Asset Protection Protocol.</span></div><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#">Overview</a><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#">Claim Policies</a><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Asset Index</a></div></div></footer></body></html>
+          // Filter pill toggles
+          filterButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+              filterButtons.forEach((b) => {
+                b.classList.remove('bg-primary', 'text-on-primary');
+                b.classList.add('bg-surface-container', 'text-on-surface');
+              });
+
+              btn.classList.remove('bg-surface-container', 'text-on-surface');
+              btn.classList.add('bg-primary', 'text-on-primary');
+
+              currentFilter = btn.getAttribute('data-filter') || 'all';
+              applyFilters();
+            });
+          });
+
+          // Real-time search filter
+          searchInput?.addEventListener('input', applyFilters);
+
+          // View Switcher Interactions (Grid vs Table layout modifier)
+          gridViewBtn?.addEventListener('click', () => {
+            gridViewBtn.classList.add(
+              'bg-surface-container-lowest',
+              'text-on-surface',
+              'shadow-sm',
+            );
+            tableViewBtn.classList.remove(
+              'bg-surface-container-lowest',
+              'text-on-surface',
+              'shadow-sm',
+            );
+            tableViewBtn.classList.add('text-on-surface-variant');
+            gridContainer.className =
+              'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop';
+          });
+
+          tableViewBtn?.addEventListener('click', () => {
+            tableViewBtn.classList.add(
+              'bg-surface-container-lowest',
+              'text-on-surface',
+              'shadow-sm',
+            );
+            gridViewBtn.classList.remove(
+              'bg-surface-container-lowest',
+              'text-on-surface',
+              'shadow-sm',
+            );
+            gridViewBtn.classList.add('text-on-surface-variant');
+            gridContainer.className = 'grid grid-cols-1 gap-space-md';
+          });
+        })();
+      </script>
+    </main>
+    <footer class="w-full bg-surface-container-low py-space-xl mt-space-3xl">
+      <div
+        class="max-w-7xl mx-auto px-margin-page flex flex-col md:flex-row items-center justify-between gap-space-base text-on-surface-variant font-body-sm text-body-sm"
+      >
+        <div class="flex items-center gap-space-xs">
+          <span class="font-semibold text-on-surface">WarrantyTracker System</span
+          ><span>© 2024 Asset Protection Protocol.</span>
+        </div>
+        <div class="flex items-center gap-space-lg">
+          <a class="hover:text-on-surface transition-colors" data-path="dashboard" href="#"
+            >Overview</a
+          ><a class="hover:text-on-surface transition-colors" data-path="export-claims" href="#"
+            >Claim Policies</a
+          ><a class="hover:text-on-surface transition-colors" data-path="categories" href="#"
+            >Asset Index</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
