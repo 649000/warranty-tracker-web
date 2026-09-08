@@ -12,6 +12,9 @@ import { redirectIfAuthenticated } from '../../core/guards/auth.guard';
 import { ErrorReportingService } from '../../core/services/error-reporting.service';
 import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
+import { SiteHeaderComponent } from '../../shared/site-header.component';
+import { SiteFooterComponent } from '../../shared/site-footer.component';
+
 @Component({
   selector: 'app-signup',
   imports: [
@@ -23,6 +26,8 @@ import { isExpectedAuthError } from '../../core/utils/auth-errors';
     MatCardModule,
     MatSnackBarModule,
     RouterLink,
+    SiteHeaderComponent,
+    SiteFooterComponent,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './auth-page.css',

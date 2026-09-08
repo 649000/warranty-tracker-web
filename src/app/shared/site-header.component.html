@@ -1,0 +1,27 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__brand" routerLink="/" aria-label="Warranty Tracker Home">
+      <img
+        class="site-header__logo"
+        src="/logo.svg"
+        width="160"
+        height="40"
+        alt="Warranty Tracker"
+      />
+    </a>
+
+    <div class="site-header__actions">
+      <button
+        mat-icon-button
+        type="button"
+        class="site-header__icon"
+        [attr.aria-label]="themeLabel()"
+        (click)="cycleTheme()"
+      >
+        <mat-icon>{{ themeIcon() }}</mat-icon>
+      </button>
+      <a mat-button routerLink="/login">Sign In</a>
+      <a mat-flat-button color="primary" routerLink="/signup">Get Started</a>
+    </div>
+  </div>
+</header>

@@ -1,28 +1,52 @@
 :host {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: var(--space-12) var(--space-4);
+  flex-direction: column;
   min-height: 100dvh;
 }
 
-main {
+.auth-shell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-12) var(--space-4);
   width: 100%;
-  max-width: 420px;
+}
+
+.auth-shell main {
+  width: 100%;
+  max-width: 440px;
 }
 
 mat-card {
   width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hover);
+  background: var(--surface);
 }
 
 mat-card-header {
-  padding-top: var(--space-2);
+  padding: var(--space-6) var(--space-6) 0;
+  text-align: center;
+  display: block;
+}
+
+mat-card-header mat-card-title {
+  font-size: var(--type-h2);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+mat-card-header mat-card-subtitle {
+  color: var(--text-muted);
+  margin-top: var(--space-1);
 }
 
 mat-card-content {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  padding: var(--space-6);
 }
 
 .full {
@@ -43,7 +67,7 @@ mat-card-content {
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--mat-sys-outline-variant);
+  background: var(--outline);
 }
 
 .links {
@@ -55,11 +79,26 @@ mat-card-content {
 }
 
 .links a {
-  color: var(--mat-sys-primary);
+  color: var(--secondary);
   text-decoration: none;
   font-size: var(--type-body-sm);
+  font-weight: 500;
 }
 
 .links a:hover {
   text-decoration: underline;
+}
+
+.sent {
+  color: var(--status-active-fg);
+  background: var(--status-active-bg);
+  border: 1px solid var(--status-active-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+}
+
+@media (max-width: 480px) {
+  .auth-shell {
+    padding: var(--space-8) var(--space-4);
+  }
 }

@@ -11,6 +11,9 @@ import { redirectIfAuthenticated } from '../../core/guards/auth.guard';
 import { ErrorReportingService } from '../../core/services/error-reporting.service';
 import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
+import { SiteHeaderComponent } from '../../shared/site-header.component';
+import { SiteFooterComponent } from '../../shared/site-footer.component';
+
 @Component({
   selector: 'app-forgot-password',
   imports: [
@@ -21,6 +24,8 @@ import { isExpectedAuthError } from '../../core/utils/auth-errors';
     MatCardModule,
     MatSnackBarModule,
     RouterLink,
+    SiteHeaderComponent,
+    SiteFooterComponent,
   ],
   templateUrl: './forgot-password.component.html',
   styleUrl: './auth-page.css',

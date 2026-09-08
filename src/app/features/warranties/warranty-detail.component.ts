@@ -8,13 +8,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { format, differenceInCalendarDays } from 'date-fns';
+import { format, differenceInCalendarDays, differenceInMilliseconds } from 'date-fns';
 import { AuthService } from '../../core/services/auth.service';
 import { ProductService, type CoverageDraft } from '../../core/services/product.service';
 import { ProofStorageService } from '../../core/services/proof-storage.service';
 import type { Coverage, Product } from '../../core/models/warranty.model';
-import { coverageStatus, type CoverageStatus } from '../../core/utils/coverage-status';
+import {
+  coverageStatus,
+  nextExpiry,
+  productStatus,
+  type CoverageStatus,
+} from '../../core/utils/coverage-status';
 import { StatusBadgeComponent } from '../../shared/status-badge.component';
+import { ProductThumbComponent } from '../../shared/product-thumb.component';
 import { CoverageDialogComponent } from './coverage-dialog.component';
 import { ProofLightboxComponent } from './proof-lightbox.component';
 
@@ -29,6 +35,7 @@ import { ProofLightboxComponent } from './proof-lightbox.component';
     MatSnackBarModule,
     MatDialogModule,
     StatusBadgeComponent,
+    ProductThumbComponent,
     TitleCasePipe,
     DecimalPipe,
     DatePipe,
@@ -75,6 +82,62 @@ export class WarrantyDetailComponent {
   }
 
   readonly coverages = computed(() => this.products.coveragesFor(this.productId()));
+
+  readonly productStatus = computed<CoverageStatus>(() =>
+    this.product() ? productStatus(this.products.coveragesFor(this.product()!.id)) : 'expired',
+  );
+
+  readonly statusLabel = computed(() => {
+    switch (this.productStatus()) {
+      case 'active':
+        return 'Active Coverage';
+      case 'expiring-soon':
+        return 'Expiring Soon';
+      default:
+        return 'Coverage Lapsed';
+    }
+  });
+
+  readonly expirySummary = computed(() => {
+    const product = this.product();
+    if (!product) {
+      return null;
+    }
+    const coverages = this.products.coveragesFor(product.id);
+    const next = nextExpiry(coverages);
+    if (!next) {
+      return null;
+    }
+    const days = differenceInCalendarDays(next, new Date());
+    return { date: next, days };
+  });
+
+  async copyText(text: string, message: string): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(text);
+      this.snackbar.open(message, 'Close', { duration: 2500 });
+    } catch {
+      this.snackbar.open('Could Not Copy to Clipboard', 'Close', { duration: 2500 });
+    }
+  }
+
+  /** Fraction (0..100) of purchase→expiry elapsed for the product's primary coverage. */
+  readonly progress = computed(() => {
+    const product = this.product();
+    if (!product) {
+      return 0;
+    }
+    const next = nextExpiry(this.products.coveragesFor(product.id));
+    if (!next) {
+      return 100;
+    }
+    const total = differenceInMilliseconds(next, product.purchaseDate);
+    if (total <= 0) {
+      return 100;
+    }
+    const elapsed = differenceInMilliseconds(new Date(), product.purchaseDate);
+    return Math.min(100, Math.max(0, Math.round((elapsed / total) * 100)));
+  });
 
   statusOf(coverage: Coverage): CoverageStatus {
     return coverageStatus(coverage);

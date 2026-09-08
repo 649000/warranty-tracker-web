@@ -8,9 +8,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
 import { isExpectedAuthError } from '../../core/utils/auth-errors';
@@ -31,13 +31,13 @@ function passwordMatchValidator(control: AbstractControl): ValidationErrors | nu
   imports: [
     ReactiveFormsModule,
     MatButtonModule,
-    MatCardModule,
+    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
   ],
   templateUrl: './account-settings.component.html',
-  styleUrl: '../auth/auth-page.css',
+  styleUrl: './account-settings.component.css',
 })
 export class AccountSettingsComponent {
   private readonly auth = inject(AuthService);

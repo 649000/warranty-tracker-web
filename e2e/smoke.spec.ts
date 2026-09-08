@@ -12,7 +12,7 @@ async function expectNoHorizontalOverflow(page: Page): Promise<void> {
 test.describe('smoke', () => {
   test('landing page renders the headline', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('heading', { name: /Know what.s covered/ })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Know what.s covered/i })).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 
@@ -87,7 +87,7 @@ test.describe('smoke', () => {
     // Sign out back to the landing page.
     await page.getByRole('button', { name: 'Account menu' }).click();
     await page.getByRole('menuitem', { name: 'Sign out' }).click();
-    await expect(page.getByRole('heading', { name: /Know what.s covered/ })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Know what.s covered/i })).toBeVisible();
 
     // Sign back in and land on the warranty list without a blank screen.
     await page.goto('/login');

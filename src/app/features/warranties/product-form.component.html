@@ -1,200 +1,264 @@
 <div class="form-page">
   <header class="form-header">
-    <h1>{{ isEdit() ? 'Edit Product' : 'Add Product' }}</h1>
-    <a mat-button routerLink="/warranties">Cancel</a>
+    <div>
+      <nav class="form-header__crumb" aria-label="Breadcrumb">
+        <a routerLink="/warranties">My Warranties</a>
+        <mat-icon>chevron_right</mat-icon>
+        <span>{{ isEdit() ? 'Edit Product' : 'Add Product' }}</span>
+      </nav>
+      <h1>{{ isEdit() ? 'Edit Product' : 'Add Product' }}</h1>
+      <p class="form-header__subtitle">
+        {{
+          isEdit()
+            ? 'Update the details and coverage for this item.'
+            : 'Keep every coverage and receipt safe from day one.'
+        }}
+      </p>
+    </div>
+    <a mat-stroked-button routerLink="/warranties">Cancel</a>
   </header>
 
   <form class="form-body" novalidate (submit)="onSubmit($event)">
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Product Name</mat-label>
-      <input matInput [formField]="productForm.name" autocomplete="off" />
-      @if (productForm.name().touched() && productForm.name().errors().length) {
-        <mat-error>{{ productForm.name().errors()[0].message }}</mat-error>
-      }
-    </mat-form-field>
+    <section class="form-section" aria-labelledby="product-heading">
+      <div class="form-section__head">
+        <span class="form-section__icon"><mat-icon>devices_other</mat-icon></span>
+        <div>
+          <h2 id="product-heading">Product Essentials</h2>
+          <p>What you bought, and where to find it.</p>
+        </div>
+      </div>
 
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Category</mat-label>
-      <mat-select [formField]="productForm.category">
-        @for (category of categories; track category) {
-          <mat-option [value]="category">{{ category }}</mat-option>
-        }
-      </mat-select>
-      @if (productForm.category().touched() && productForm.category().errors().length) {
-        <mat-error>{{ productForm.category().errors()[0].message }}</mat-error>
-      }
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Brand</mat-label>
-      <input
-        matInput
-        [formField]="productForm.brand"
-        [matAutocomplete]="brandAuto"
-        autocomplete="off"
-      />
-      @if (productForm.brand().value() !== '') {
-        <button
-          matSuffix
-          mat-icon-button
-          type="button"
-          aria-label="Clear Brand"
-          (click)="clearField('brand')"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      }
-      <mat-autocomplete
-        #brandAuto="matAutocomplete"
-        (optionSelected)="onBrandSelected($event.option.value)"
-      >
-        @for (brand of filteredBrands(); track brand) {
-          <mat-option [value]="brand">{{ brand }}</mat-option>
-        } @empty {
-          @if (productForm.brand().controlValue() !== '') {
-            <mat-option disabled>No Matches Found</mat-option>
-          }
-        }
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Purchase Date</mat-label>
-      <input matInput [matDatepicker]="picker" [formField]="productForm.purchaseDate" />
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      @if (productForm.purchaseDate().touched() && productForm.purchaseDate().errors().length) {
-        <mat-error>{{ productForm.purchaseDate().errors()[0].message }}</mat-error>
-      }
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Serial Number</mat-label>
-      <input matInput [formField]="productForm.serialNumber" autocomplete="off" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Retailer</mat-label>
-      <input
-        matInput
-        [formField]="productForm.retailer"
-        [matAutocomplete]="retailerAuto"
-        autocomplete="off"
-      />
-      @if (productForm.retailer().value() !== '') {
-        <button
-          matSuffix
-          mat-icon-button
-          type="button"
-          aria-label="Clear Retailer"
-          (click)="clearField('retailer')"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      }
-      <mat-autocomplete
-        #retailerAuto="matAutocomplete"
-        (optionSelected)="onRetailerSelected($event.option.value)"
-      >
-        @for (retailer of filteredRetailers(); track retailer) {
-          <mat-option [value]="retailer">{{ retailer }}</mat-option>
-        } @empty {
-          @if (productForm.retailer().controlValue() !== '') {
-            <mat-option disabled>No Matches Found</mat-option>
-          }
-        }
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <div class="price-row">
-      <mat-form-field appearance="outline" class="price-amount">
-        <mat-label>Price</mat-label>
-        <input matInput type="number" [formField]="productForm.priceAmount" />
-        @if (productForm.priceAmount().touched() && productForm.priceAmount().errors().length) {
-          <mat-error>{{ productForm.priceAmount().errors()[0].message }}</mat-error>
-        }
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="price-currency">
-        <mat-label>Currency</mat-label>
-        <mat-select [formField]="productForm.currency">
-          @for (currency of currencies; track currency) {
-            <mat-option [value]="currency">{{ currency }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <app-proof-input [(current)]="proofModel" [(pendingFile)]="proofFile" />
-
-    @if (!isEdit()) {
-      <mat-card appearance="outlined" class="coverage-card">
-        <h2 class="section-title">Warranty</h2>
-
-        <p class="field-label">Source</p>
-        <mat-button-toggle-group
-          class="toggle-group"
-          [value]="model().source"
-          aria-label="Coverage Source"
-          (valueChange)="onSourceSelected($event)"
-        >
-          @for (source of coverageSources; track source) {
-            <mat-button-toggle [value]="source">{{ source | titlecase }}</mat-button-toggle>
-          }
-        </mat-button-toggle-group>
-
-        <p class="field-label">Scope</p>
-        <mat-button-toggle-group
-          class="toggle-group"
-          [value]="model().scope"
-          aria-label="Coverage Scope"
-          (valueChange)="onScopeSelected($event)"
-        >
-          <mat-button-toggle value="local">Local</mat-button-toggle>
-          <mat-button-toggle value="international">International</mat-button-toggle>
-        </mat-button-toggle-group>
-
-        <p class="field-label">Duration</p>
-        <mat-chip-listbox
-          class="duration-chips"
-          aria-label="Coverage Duration"
-          [value]="model().duration"
-        >
-          @for (preset of durationPresets; track preset.label) {
-            <mat-chip-option [value]="preset.label" (click)="onDurationSelected(preset.label)">
-              {{ preset.label }}
-            </mat-chip-option>
-          }
-          <mat-chip-option value="Custom" (click)="onDurationSelected('Custom')"
-            >Custom</mat-chip-option
-          >
-        </mat-chip-listbox>
-
-        @if (model().duration === 'Custom') {
-          <mat-form-field appearance="outline" class="full">
-            <mat-label>Number of Months</mat-label>
-            <input matInput type="number" [formField]="productForm.customMonths" />
-            @if (
-              productForm.customMonths().touched() && productForm.customMonths().errors().length
-            ) {
-              <mat-error>{{ productForm.customMonths().errors()[0].message }}</mat-error>
-            }
-          </mat-form-field>
-        }
-
-        <mat-form-field appearance="outline" class="full">
-          <mat-label>Exact Expiry Date (Optional)</mat-label>
-          <input matInput [matDatepicker]="expiryPicker" [formField]="productForm.manualExpiry" />
-          <mat-datepicker-toggle matIconSuffix [for]="expiryPicker"></mat-datepicker-toggle>
-          <mat-datepicker #expiryPicker></mat-datepicker>
-          @if (productForm.manualExpiry().touched() && productForm.manualExpiry().errors().length) {
-            <mat-error>{{ productForm.manualExpiry().errors()[0].message }}</mat-error>
+      <div class="form-section__grid">
+        <mat-form-field appearance="outline" class="full span-2">
+          <mat-label>Product Name</mat-label>
+          <input matInput [formField]="productForm.name" autocomplete="off" />
+          @if (productForm.name().touched() && productForm.name().errors().length) {
+            <mat-error>{{ productForm.name().errors()[0].message }}</mat-error>
           }
         </mat-form-field>
-      </mat-card>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Category</mat-label>
+          <mat-select [formField]="productForm.category">
+            @for (category of categories; track category) {
+              <mat-option [value]="category">{{ category }}</mat-option>
+            }
+          </mat-select>
+          @if (productForm.category().touched() && productForm.category().errors().length) {
+            <mat-error>{{ productForm.category().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Brand</mat-label>
+          <input
+            matInput
+            [formField]="productForm.brand"
+            [matAutocomplete]="brandAuto"
+            autocomplete="off"
+          />
+          @if (productForm.brand().value() !== '') {
+            <button
+              matSuffix
+              mat-icon-button
+              type="button"
+              aria-label="Clear Brand"
+              (click)="clearField('brand')"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+          <mat-autocomplete
+            #brandAuto="matAutocomplete"
+            (optionSelected)="onBrandSelected($event.option.value)"
+          >
+            @for (brand of filteredBrands(); track brand) {
+              <mat-option [value]="brand">{{ brand }}</mat-option>
+            } @empty {
+              @if (productForm.brand().controlValue() !== '') {
+                <mat-option disabled>No Matches Found</mat-option>
+              }
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </section>
+
+    <section class="form-section" aria-labelledby="purchase-heading">
+      <div class="form-section__head">
+        <span class="form-section__icon"><mat-icon>shopping_bag</mat-icon></span>
+        <div>
+          <h2 id="purchase-heading">Purchase Details</h2>
+          <p>When and where you bought it, and what you paid.</p>
+        </div>
+      </div>
+
+      <div class="form-section__grid">
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Purchase Date</mat-label>
+          <input matInput [matDatepicker]="picker" [formField]="productForm.purchaseDate" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          @if (productForm.purchaseDate().touched() && productForm.purchaseDate().errors().length) {
+            <mat-error>{{ productForm.purchaseDate().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Retailer</mat-label>
+          <input
+            matInput
+            [formField]="productForm.retailer"
+            [matAutocomplete]="retailerAuto"
+            autocomplete="off"
+          />
+          @if (productForm.retailer().value() !== '') {
+            <button
+              matSuffix
+              mat-icon-button
+              type="button"
+              aria-label="Clear Retailer"
+              (click)="clearField('retailer')"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+          <mat-autocomplete
+            #retailerAuto="matAutocomplete"
+            (optionSelected)="onRetailerSelected($event.option.value)"
+          >
+            @for (retailer of filteredRetailers(); track retailer) {
+              <mat-option [value]="retailer">{{ retailer }}</mat-option>
+            } @empty {
+              @if (productForm.retailer().controlValue() !== '') {
+                <mat-option disabled>No Matches Found</mat-option>
+              }
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full span-2">
+          <mat-label>Serial Number</mat-label>
+          <input matInput [formField]="productForm.serialNumber" autocomplete="off" />
+        </mat-form-field>
+
+        <div class="price-row span-2">
+          <mat-form-field appearance="outline" class="price-amount">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" [formField]="productForm.priceAmount" />
+            @if (productForm.priceAmount().touched() && productForm.priceAmount().errors().length) {
+              <mat-error>{{ productForm.priceAmount().errors()[0].message }}</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="price-currency">
+            <mat-label>Currency</mat-label>
+            <mat-select [formField]="productForm.currency">
+              @for (currency of currencies; track currency) {
+                <mat-option [value]="currency">{{ currency }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" aria-labelledby="proof-heading">
+      <div class="form-section__head">
+        <span class="form-section__icon"><mat-icon>receipt_long</mat-icon></span>
+        <div>
+          <h2 id="proof-heading">Proof of Purchase</h2>
+          <p>Add a photo, PDF, or written details.</p>
+        </div>
+      </div>
+      <app-proof-input [(current)]="proofModel" [(pendingFile)]="proofFile" />
+    </section>
+
+    @if (!isEdit()) {
+      <section class="form-section" aria-labelledby="coverage-heading">
+        <div class="form-section__head">
+          <span class="form-section__icon"><mat-icon>verified_user</mat-icon></span>
+          <div>
+            <h2 id="coverage-heading">Warranty Coverage</h2>
+            <p>How this product is protected, and for how long.</p>
+          </div>
+        </div>
+
+        <div class="form-stack">
+          <fieldset class="fieldset">
+            <legend>Source</legend>
+            <mat-button-toggle-group
+              class="toggle-group"
+              [value]="model().source"
+              aria-label="Coverage Source"
+              (valueChange)="onSourceSelected($event)"
+            >
+              @for (source of coverageSources; track source) {
+                <mat-button-toggle [value]="source">{{ source | titlecase }}</mat-button-toggle>
+              }
+            </mat-button-toggle-group>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Scope</legend>
+            <mat-button-toggle-group
+              class="toggle-group"
+              [value]="model().scope"
+              aria-label="Coverage Scope"
+              (valueChange)="onScopeSelected($event)"
+            >
+              <mat-button-toggle value="local">Local</mat-button-toggle>
+              <mat-button-toggle value="international">International</mat-button-toggle>
+            </mat-button-toggle-group>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Duration</legend>
+            <mat-chip-listbox
+              class="duration-chips"
+              aria-label="Coverage Duration"
+              [value]="model().duration"
+            >
+              @for (preset of durationPresets; track preset.label) {
+                <mat-chip-option [value]="preset.label" (click)="onDurationSelected(preset.label)">
+                  {{ preset.label }}
+                </mat-chip-option>
+              }
+              <mat-chip-option value="Custom" (click)="onDurationSelected('Custom')"
+                >Custom</mat-chip-option
+              >
+            </mat-chip-listbox>
+          </fieldset>
+
+          @if (model().duration === 'Custom') {
+            <mat-form-field appearance="outline" class="full">
+              <mat-label>Number of Months</mat-label>
+              <input matInput type="number" [formField]="productForm.customMonths" />
+              @if (
+                productForm.customMonths().touched() && productForm.customMonths().errors().length
+              ) {
+                <mat-error>{{ productForm.customMonths().errors()[0].message }}</mat-error>
+              }
+            </mat-form-field>
+          }
+
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Exact Expiry Date (Optional)</mat-label>
+            <input matInput [matDatepicker]="expiryPicker" [formField]="productForm.manualExpiry" />
+            <mat-datepicker-toggle matIconSuffix [for]="expiryPicker"></mat-datepicker-toggle>
+            <mat-datepicker #expiryPicker></mat-datepicker>
+            @if (
+              productForm.manualExpiry().touched() && productForm.manualExpiry().errors().length
+            ) {
+              <mat-error>{{ productForm.manualExpiry().errors()[0].message }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </section>
     }
 
     <div class="form-actions">
       <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
+        <mat-icon>{{ isEdit() ? 'save' : 'shield' }}</mat-icon>
         {{ isEdit() ? 'Save Changes' : 'Add Product' }}
       </button>
     </div>

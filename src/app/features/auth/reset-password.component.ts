@@ -11,6 +11,9 @@ import { redirectIfAuthenticated } from '../../core/guards/auth.guard';
 import { ErrorReportingService } from '../../core/services/error-reporting.service';
 import { isExpectedAuthError } from '../../core/utils/auth-errors';
 
+import { SiteHeaderComponent } from '../../shared/site-header.component';
+import { SiteFooterComponent } from '../../shared/site-footer.component';
+
 @Component({
   selector: 'app-reset-password',
   imports: [
@@ -20,6 +23,8 @@ import { isExpectedAuthError } from '../../core/utils/auth-errors';
     MatFormFieldModule,
     MatCardModule,
     MatSnackBarModule,
+    SiteHeaderComponent,
+    SiteFooterComponent,
   ],
   templateUrl: './reset-password.component.html',
   styleUrl: './auth-page.css',

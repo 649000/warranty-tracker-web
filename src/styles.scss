@@ -5,72 +5,66 @@
 
 // ---------------------------------------------------------------------------
 // Brand palettes (Material 3 tonal ramps)
-// Calm, trustworthy teal primary with slate secondary and sage tertiary.
-// Neutrals and error are inherited from Material's cool cyan palette.
+// Adapted from the Google Stitch reference design language:
+//   slate/ink primary (#0f172a), cobalt secondary (#2563eb),
+//   emerald tertiary (#10b981), cool slate canvas + surface containers.
 // ---------------------------------------------------------------------------
 
-$_teal-primary: (
+$_slate-primary: (
   0: #000000,
-  10: #00201c,
-  20: #003732,
-  25: #00433d,
-  30: #005048,
-  35: #005c53,
-  40: #0e6b63,
-  50: #2a847b,
-  60: #479f95,
-  70: #64b9af,
-  80: #83d5ca,
-  90: #a9ece3,
-  95: #cdf8f1,
-  98: #e4fdf8,
-  99: #f0fffb,
+  10: #04060a,
+  20: #080c15,
+  25: #090e1a,
+  30: #0b1120,
+  35: #0d1425,
+  40: #0f172a,
+  50: #373e4e,
+  60: #5f6471,
+  70: #878b94,
+  80: #afb2b8,
+  90: #d7d8dc,
+  95: #ebeced,
+  98: #f7f7f8,
+  99: #fbfbfb,
   100: #ffffff,
 );
 
-$_slate-secondary: (
+$_cobalt-secondary: (
   0: #000000,
-  10: #0a1d29,
-  20: #1f323f,
-  25: #2a3d4b,
-  30: #364957,
-  35: #425463,
-  40: #4a6677,
-  50: #627f90,
-  60: #7c99ab,
-  70: #96b3c6,
-  80: #b1cfe2,
-  90: #cdebfe,
-  95: #e5f5ff,
-  98: #f4faff,
-  99: #fafcff,
+  10: #09193b,
+  20: #123276,
+  25: #173e93,
+  30: #1c4ab0,
+  35: #2057ce,
+  40: #2563eb,
+  50: #497dee,
+  60: #6e97f2,
+  70: #92b1f5,
+  80: #b6cbf8,
+  90: #dbe5fc,
+  95: #edf2fd,
+  98: #f8fafe,
+  99: #fbfcff,
   100: #ffffff,
 );
 
-$_sage-tertiary: (
+$_emerald-tertiary: (
   0: #000000,
-  10: #18210f,
-  20: #2d3723,
-  25: #38422d,
-  30: #434e38,
-  35: #4f5a43,
-  40: #5b664f,
-  50: #747f67,
-  60: #8d9980,
-  70: #a8b49a,
-  80: #c3cfb4,
-  90: #dfebcf,
-  95: #edfadd,
-  98: #f6ffe8,
-  99: #fbfff2,
+  10: #042e20,
+  20: #085c40,
+  25: #0a7451,
+  30: #0c8b61,
+  35: #0ea271,
+  40: #10b981,
+  50: #38c596,
+  60: #60d0ab,
+  70: #88dcc0,
+  80: #afe8d5,
+  90: #d7f3ea,
+  95: #ebf9f4,
+  98: #f7fdfb,
+  99: #fbfefd,
   100: #ffffff,
-);
-
-$_primary-palette: map.merge(
-  map.merge(mat.$cyan-palette, $_teal-primary),
-  (
-    secondary: $_slate-secondary,
-  )
 );
 
 $_typography: (
@@ -80,22 +74,58 @@ $_typography: (
     sans-serif,
   ),
   brand-family: (
-    Newsreader,
-    Georgia,
-    serif,
+    Inter,
+    'Helvetica Neue',
+    sans-serif,
   ),
   regular-weight: 400,
   medium-weight: 500,
-  bold-weight: 700,
+  bold-weight: 600,
 );
 
-:root {
+// ---------------------------------------------------------------------------
+// M3 palette bundles.
+// Material's mat.theme expects primary/tertiary values to be full M3 palette
+// objects: tone keys (0-100) plus nested `secondary`, `neutral`, `neutral-variant`
+// sub-palettes. We merge our brand ramps over a built-in cool-neutral bundle so
+// the derived neutral (surfaces, inverse-surface) stays slate-ish and WCAG-safe.
+// ---------------------------------------------------------------------------
+
+$_primary-palette: map.merge(
+  map.merge(mat.$blue-palette, $_slate-primary),
+  (
+    secondary: $_cobalt-secondary,
+  )
+);
+
+// Semantic status color roles. Kept as SCSS maps so both the light and dark
+// blocks below can consume them; contrast pairs satisfy WCAG AA.
+$_status-active: (
+  dot: #10b981,
+  fg: #065f46,
+  bg: #ecfdf5,
+  border: #a7f3d0,
+);
+$_status-expiring: (
+  dot: #f59e0b,
+  fg: #92400e,
+  bg: #fffbeb,
+  border: #fde68a,
+);
+$_status-expired: (
+  dot: #ef4444,
+  fg: #991b1b,
+  bg: #fef2f2,
+  border: #fecaca,
+);
+
+@mixin _light-mode() {
   color-scheme: light;
   @include mat.theme(
     (
       color: (
         primary: $_primary-palette,
-        tertiary: $_sage-tertiary,
+        tertiary: $_emerald-tertiary,
         theme-type: light,
       ),
       typography: $_typography,
@@ -104,13 +134,13 @@ $_typography: (
   );
 }
 
-html.dark {
+@mixin _dark-mode() {
   color-scheme: dark;
   @include mat.theme(
     (
       color: (
         primary: $_primary-palette,
-        tertiary: $_sage-tertiary,
+        tertiary: $_emerald-tertiary,
         theme-type: dark,
       ),
       typography: $_typography,
@@ -123,18 +153,83 @@ html.dark {
 // Design tokens
 // ---------------------------------------------------------------------------
 
-:root {
-  // Semantic color aliases
-  --primary: #0e6b63;
-  --secondary: #4a6677;
-  --tertiary: #7c8b72;
-  --ink: #1b2b2a;
-  --text-muted: #5c6b6a;
+@mixin _semantic-tokens-light() {
+  --primary: #0f172a;
+  --on-primary: #ffffff;
+  --secondary: #2563eb;
+  --on-secondary: #ffffff;
+  --tertiary: #10b981;
+  --ink: #0f172a;
+  --text-muted: #475569;
   --surface: #ffffff;
-  --background: #f5f7f7;
-  --outline: #d8dedc;
+  --background: #f8fafc;
+  --outline: #e2e8f0;
+  --outline-strong: #cbd5e1;
 
-  // Spacing scale (4px base)
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f8fafc;
+  --surface-container: #f1f5f9;
+  --surface-container-high: #e9eef4;
+  --surface-container-highest: #e2e8f0;
+
+  --status-active-fg: #{map.get($_status-active, fg)};
+  --status-active-bg: #{map.get($_status-active, bg)};
+  --status-active-border: #{map.get($_status-active, border)};
+  --status-active-dot: #{map.get($_status-active, dot)};
+
+  --status-expiring-fg: #{map.get($_status-expiring, fg)};
+  --status-expiring-bg: #{map.get($_status-expiring, bg)};
+  --status-expiring-border: #{map.get($_status-expiring, border)};
+  --status-expiring-dot: #{map.get($_status-expiring, dot)};
+
+  --status-expired-fg: #{map.get($_status-expired, fg)};
+  --status-expired-bg: #{map.get($_status-expired, bg)};
+  --status-expired-border: #{map.get($_status-expired, border)};
+  --status-expired-dot: #{map.get($_status-expired, dot)};
+
+  --shadow-hover: 0 4px 6px -1px rgb(15 23 42 / 0.07), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-raised: 0 20px 25px -5px rgb(15 23 42 / 0.1), 0 8px 10px -6px rgb(15 23 42 / 0.06);
+}
+
+@mixin _semantic-tokens-dark() {
+  --primary: #d7d8dc;
+  --on-primary: #0f172a;
+  --secondary: #92b1f5;
+  --on-secondary: #0b1220;
+  --tertiary: #60d0ab;
+  --ink: #e7ecf3;
+  --text-muted: #a4b0c2;
+  --surface: #151b26;
+  --background: #0b0f17;
+  --outline: #2a3444;
+  --outline-strong: #3a465a;
+
+  --surface-container-lowest: #10151f;
+  --surface-container-low: #151b26;
+  --surface-container: #1b2330;
+  --surface-container-high: #212a3a;
+  --surface-container-highest: #283244;
+
+  --status-active-fg: #6ee7b7;
+  --status-active-bg: #06351f;
+  --status-active-border: #115e3a;
+  --status-active-dot: #34d399;
+
+  --status-expiring-fg: #fcd34d;
+  --status-expiring-bg: #3a2c06;
+  --status-expiring-border: #6b4e0e;
+  --status-expiring-dot: #fbbf24;
+
+  --status-expired-fg: #fca5a5;
+  --status-expired-bg: #400e10;
+  --status-expired-border: #7f2326;
+  --status-expired-dot: #f87171;
+
+  --shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.35);
+  --shadow-raised: 0 20px 25px -5px rgb(0 0 0 / 0.55), 0 8px 10px -6px rgb(0 0 0 / 0.45);
+}
+
+:root {
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -146,38 +241,26 @@ html.dark {
   --space-12: 3rem;
   --space-16: 4rem;
 
-  // Border-radius scale
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 999px;
 
-  // Type scale
-  --type-display: clamp(2rem, 1.1rem + 2.6vw, 3.25rem);
-  --type-h1: clamp(1.5rem, 1.2rem + 1vw, 1.75rem);
+  --type-display: clamp(2rem, 1.2rem + 2.4vw, 3.25rem);
+  --type-h1: clamp(1.5rem, 1.25rem + 0.9vw, 1.75rem);
   --type-h2: 1.25rem;
   --type-h3: 1.125rem;
   --type-body: 1rem;
   --type-body-sm: 0.875rem;
   --type-caption: 0.8125rem;
 
-  // Elevation
-  --shadow-hover: 0 2px 8px rgb(20 40 40 / 0.12);
-  --shadow-raised: 0 6px 24px rgb(20 40 40 / 0.18);
+  @include _light-mode();
+  @include _semantic-tokens-light();
 }
 
 html.dark {
-  --primary: #79d4c9;
-  --secondary: #9fb7c6;
-  --tertiary: #a9b8a0;
-  --ink: #e2e9e7;
-  --text-muted: #9fb0ac;
-  --surface: #1a211f;
-  --background: #121817;
-  --outline: #2f3a37;
-
-  --shadow-hover: 0 2px 8px rgb(0 0 0 / 0.4);
-  --shadow-raised: 0 6px 24px rgb(0 0 0 / 0.55);
+  @include _dark-mode();
+  @include _semantic-tokens-dark();
 }
 
 // ---------------------------------------------------------------------------
@@ -199,8 +282,7 @@ body {
   box-sizing: border-box;
 }
 
-// Cards sit on a cool surface with a crisp background; Material outlined
-// appearance supplies the border, we only normalize the fill.
+// Cards sit on a near-white elevated surface with the ambient card shadow.
 mat-card {
   background: var(--surface);
 }
@@ -210,16 +292,22 @@ mat-card {
 .coverage-expiry,
 .status-line,
 .claim-row dd,
-.subtitle {
+.subtitle,
+.metric-value,
+.dashboard-search input {
   font-variant-numeric: tabular-nums;
 }
 
-// Display headings use the serif brand face.
-h1 {
-  font-family: Newsreader, Georgia, serif;
-  font-weight: 500;
+// Headings use the Inter display face with tight tracking.
+h1,
+h2,
+h3,
+h4 {
+  font-family: Inter, 'Helvetica Neue', sans-serif;
+  font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 // Accessible focus is handled by Material; keep default outline reset clean.
@@ -259,8 +347,11 @@ h1 {
 .mat-mdc-button,
 .mat-mdc-unelevated-button,
 .mat-mdc-raised-button,
-.mat-mdc-stroked-button {
+.mat-mdc-stroked-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
   min-height: 44px;
+  min-width: 44px;
 }
 
 // ---------------------------------------------------------------------------

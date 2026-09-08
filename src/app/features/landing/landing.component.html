@@ -1,29 +1,68 @@
-<header class="topbar">
-  <span class="brand">
-    <mat-icon aria-hidden="true">verified_user</mat-icon>
-    <span class="brand-text u-truncate">Warranty Tracker</span>
-  </span>
-  <nav aria-label="Primary">
-    <button mat-icon-button [attr.aria-label]="themeLabel()" (click)="cycleTheme()">
-      <mat-icon>{{ themeIcon() }}</mat-icon>
-    </button>
-    <a mat-button routerLink="/login">Sign In</a>
-    <a mat-flat-button color="primary" routerLink="/signup">Get Started</a>
-  </nav>
-</header>
+<app-site-header />
 
-<main>
+<main class="landing">
   <section class="hero">
-    <h1>Know What’s Covered. Before It Breaks.</h1>
-    <p class="lede">
-      Warranty Tracker keeps every purchase, coverage, and proof of purchase in one place — and
-      reminds you before a warranty runs out.
-    </p>
-    <div class="cta">
-      <a mat-flat-button color="primary" size="large" routerLink="/signup"
-        >Get Started — It’s Free</a
-      >
-      <a mat-button size="large" routerLink="/login">Sign In</a>
+    <div class="hero__content">
+      <span class="hero__eyebrow">Warranty &amp; Coverage Vault</span>
+      <h1>Know What’s Covered. Before It Breaks.</h1>
+      <p class="hero__lede">
+        Warranty Tracker keeps every purchase, coverage, and proof of purchase in one place — and
+        reminds you before a warranty runs out.
+      </p>
+      <div class="hero__cta">
+        <a mat-flat-button color="primary" size="large" routerLink="/signup"
+          >Get Started — It’s Free</a
+        >
+        <a mat-stroked-button size="large" routerLink="/login">Sign In</a>
+      </div>
+      <div class="hero__proof">
+        <span class="hero__proof-item">
+          <mat-icon aria-hidden="true">verified_user</mat-icon>
+          Encrypted Storage
+        </span>
+        <span class="hero__proof-item">
+          <mat-icon aria-hidden="true">notifications_active</mat-icon>
+          60-Day Expiry Alerts
+        </span>
+        <span class="hero__proof-item">
+          <mat-icon aria-hidden="true">receipt_long</mat-icon>
+          Proof of Purchase
+        </span>
+      </div>
+    </div>
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero-card hero-card--top">
+        <span class="hero-card__rail"></span>
+        <div class="hero-card__row">
+          <span class="hero-card__tile">
+            <mat-icon>laptop_mac</mat-icon>
+          </span>
+          <span class="hero-card__meta">
+            <span class="hero-card__label">MacBook Pro 16"</span>
+            <span class="hero-card__sub">Covered Until Nov 2025</span>
+          </span>
+          <span class="hero-card__badge">Active</span>
+        </div>
+        <div class="hero-card__bar">
+          <span style="width: 68%"></span>
+        </div>
+      </div>
+      <div class="hero-card hero-card--bottom">
+        <span class="hero-card__rail hero-card__rail--amber"></span>
+        <div class="hero-card__row">
+          <span class="hero-card__tile">
+            <mat-icon>headphones</mat-icon>
+          </span>
+          <span class="hero-card__meta">
+            <span class="hero-card__label">Sony WH-1000XM5</span>
+            <span class="hero-card__sub hero-card__sub--amber">18 Days Left</span>
+          </span>
+          <span class="hero-card__badge hero-card__badge--amber">Expiring Soon</span>
+        </div>
+        <div class="hero-card__bar hero-card__bar--amber">
+          <span style="width: 92%"></span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -50,7 +89,4 @@
   </section>
 </main>
 
-<footer>
-  <a routerLink="/terms">Terms</a>
-  <a routerLink="/privacy">Privacy</a>
-</footer>
+<app-site-footer />

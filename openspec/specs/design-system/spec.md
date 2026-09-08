@@ -8,31 +8,31 @@ Defines the shared visual foundation of the application — color palette, typog
 
 ### Requirement: Brand color palette
 
-The system SHALL use a defined teal/slate/sage brand palette with a cool neutral background, applied consistently across light and dark modes. The primary action color SHALL be a desaturated teal, not the default Material blue.
+The system SHALL use the Stitch-derived brand palette — a slate/ink primary (#0f172a family), cobalt secondary (#2563eb family), and emerald tertiary — over a cool near-white canvas (#f8f9ff family) with white level-1 surfaces, applied consistently across light and dark modes. The primary action color SHALL be the slate/ink primary, not the default Material blue.
 
 #### Scenario: Light mode uses the brand palette
 
 - **WHEN** the app is viewed in light mode
-- **THEN** primary actions, links, and active accents use the teal primary color and the page background is a cool neutral, not a warm cream
+- **THEN** primary actions, links, and active accents use the slate primary color and the page background is a cool near-white
 
 #### Scenario: Dark mode uses the brand palette
 
 - **WHEN** the app is viewed in dark mode
-- **THEN** the same teal/slate/sage palette is presented with dark-appropriate variants and adequate contrast
+- **THEN** the same slate/cobalt/emerald palette is presented with dark-appropriate variants and adequate contrast
 
 #### Scenario: Semantic status colors remain distinct
 
 - **WHEN** a warranty status is displayed
-- **THEN** covered, expiring-soon, and expired states use distinct semantic colors (green, amber, muted) in addition to text, and are legible in both light and dark mode
+- **THEN** active, expiring-soon, and expired states use distinct semantic colors (emerald, amber, rose) in addition to text, and are legible in both light and dark mode
 
-### Requirement: Typography and type scale
+### Requirement: Typography
 
-The system SHALL use a two-family typography system — a UI sans (Inter) for body, labels, forms, and numerals, and a serif (Newsreader) for large display headings — with a defined, fluid type scale and no raw pixel font sizes baked into components.
+The system SHALL use a single sans-serif typeface (Inter) for all text — body, labels, forms, headings, and display — with a defined, fluid type scale and no raw pixel font sizes baked into components. Numerals in data contexts (prices, dates, serials, counts) SHALL use tabular figures.
 
-#### Scenario: Display headings use the serif
+#### Scenario: Display headings use the sans face
 
 - **WHEN** the landing hero or a page title is rendered
-- **THEN** it uses the serif display face with fluid (clamp-based) sizing that scales across viewports
+- **THEN** it uses Inter with tight tracking and fluid (clamp-based) sizing that scales across viewports
 
 #### Scenario: Numerals align in lists
 
@@ -66,16 +66,16 @@ The system SHALL define a shared border-radius scale and SHALL apply it consiste
 - **WHEN** any card, input, button, chip, or dialog is rendered
 - **THEN** its corner radius matches one of the defined scale values appropriate to its size
 
-### Requirement: Elevation and card treatment
+### Requirement: Surface elevation and card treatment
 
-The system SHALL use outlined cards (border, no drop shadow) as the default surface treatment, with drop shadows reserved for hover/elevated states and for floating surfaces (FAB, menus, dialogs). Cards SHALL NOT all carry an identical drop shadow.
+The system SHALL use a surface-container elevation language: resting content surfaces are near-white cards with a subtle ambient shadow and 1px hairline border, and deeper surfaces (hovered cards, menus, dialogs, floating actions) use progressively stronger shadows. Cards SHALL NOT rely on color fill alone to separate from the canvas.
 
-#### Scenario: Cards are outlined by default
+#### Scenario: Cards sit on an elevated surface
 
 - **WHEN** a product or coverage card is rendered
-- **THEN** it uses a border outline and no drop shadow
+- **THEN** it uses a near-white surface with a soft shadow and hairline border that reads distinctly from the page canvas
 
-#### Scenario: Shadows are reserved for elevation
+#### Scenario: Floating surfaces use raised elevation
 
 - **WHEN** a floating surface (FAB, menu, or dialog) is shown
 - **THEN** it uses a raised shadow token distinct from any resting card

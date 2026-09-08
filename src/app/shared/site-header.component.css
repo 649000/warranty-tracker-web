@@ -1,0 +1,48 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--outline);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  height: 64px;
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.site-header__logo {
+  height: 30px;
+  width: auto;
+  max-width: 160px;
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.site-header__icon {
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .site-header__inner {
+    padding: 0 var(--space-4);
+    height: 58px;
+  }
+}

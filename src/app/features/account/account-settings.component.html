@@ -1,27 +1,66 @@
-<main>
-  <h1 class="visually-hidden">Account Settings</h1>
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Account Settings</mat-card-title>
-      <mat-card-subtitle>{{ user()?.email }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <section aria-labelledby="change-email-heading">
-        <h2 id="change-email-heading">Change Email</h2>
-        <form [formGroup]="emailForm" (ngSubmit)="changeEmail()">
-          <mat-form-field appearance="outline" class="full">
-            <mat-label>New Email</mat-label>
-            <input matInput type="email" formControlName="newEmail" autocomplete="email" />
-            @if (
-              emailForm.controls.newEmail.hasError('required') &&
-              emailForm.controls.newEmail.touched
-            ) {
-              <mat-error>Email Is Required</mat-error>
-            } @else if (emailForm.controls.newEmail.hasError('email')) {
-              <mat-error>Enter a Valid Email</mat-error>
-            }
-          </mat-form-field>
+<div class="account">
+  <header class="account__header">
+    <h1 class="account__title">Account Settings</h1>
+    <p class="account__subtitle">{{ user()?.email }}</p>
+    <div class="account__badges">
+      <span class="account__badge" [class.account__badge--ok]="emailVerified()">
+        <mat-icon>{{ emailVerified() ? 'verified' : 'schedule' }}</mat-icon>
+        {{ emailVerified() ? 'Email Verified' : 'Email Not Verified' }}
+      </span>
+    </div>
+  </header>
 
+  <section class="panel" aria-labelledby="change-email-heading">
+    <div class="panel__head">
+      <span class="panel__icon"><mat-icon>alternate_email</mat-icon></span>
+      <h2 id="change-email-heading">Change Email</h2>
+    </div>
+    <form [formGroup]="emailForm" (ngSubmit)="changeEmail()" novalidate>
+      <div class="panel__fields">
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>New Email</mat-label>
+          <input matInput type="email" formControlName="newEmail" autocomplete="email" />
+          @if (
+            emailForm.controls.newEmail.hasError('required') && emailForm.controls.newEmail.touched
+          ) {
+            <mat-error>Email Is Required</mat-error>
+          } @else if (emailForm.controls.newEmail.hasError('email')) {
+            <mat-error>Enter a Valid Email</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>Current Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="currentPassword"
+            autocomplete="current-password"
+          />
+          @if (
+            emailForm.controls.currentPassword.hasError('required') &&
+            emailForm.controls.currentPassword.touched
+          ) {
+            <mat-error>Password Is Required</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="panel__actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="emailLoading()">
+          Update Email
+        </button>
+      </div>
+    </form>
+  </section>
+
+  @if (hasPasswordProvider()) {
+    <section class="panel" aria-labelledby="change-password-heading">
+      <div class="panel__head">
+        <span class="panel__icon"><mat-icon>lock</mat-icon></span>
+        <h2 id="change-password-heading">Change Password</h2>
+      </div>
+      <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()" novalidate>
+        <div class="panel__fields">
           <mat-form-field appearance="outline" class="full">
             <mat-label>Current Password</mat-label>
             <input
@@ -31,93 +70,55 @@
               autocomplete="current-password"
             />
             @if (
-              emailForm.controls.currentPassword.hasError('required') &&
-              emailForm.controls.currentPassword.touched
+              passwordForm.controls.currentPassword.hasError('required') &&
+              passwordForm.controls.currentPassword.touched
             ) {
               <mat-error>Password Is Required</mat-error>
             }
           </mat-form-field>
 
-          <button
-            mat-flat-button
-            color="primary"
-            class="full"
-            type="submit"
-            [disabled]="emailLoading()"
-          >
-            Update Email
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>New Password</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="newPassword"
+              autocomplete="new-password"
+            />
+            @if (
+              passwordForm.controls.newPassword.hasError('required') &&
+              passwordForm.controls.newPassword.touched
+            ) {
+              <mat-error>Password Is Required</mat-error>
+            } @else if (passwordForm.controls.newPassword.hasError('minlength')) {
+              <mat-error>Use at Least 6 Characters</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Confirm New Password</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="confirmPassword"
+              autocomplete="new-password"
+            />
+            @if (
+              passwordForm.controls.confirmPassword.hasError('required') &&
+              passwordForm.controls.confirmPassword.touched
+            ) {
+              <mat-error>Please Confirm Your New Password</mat-error>
+            } @else if (passwordForm.controls.confirmPassword.hasError('passwordMismatch')) {
+              <mat-error>Passwords Do Not Match</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="panel__actions">
+          <button mat-flat-button color="primary" type="submit" [disabled]="passwordLoading()">
+            Update Password
           </button>
-        </form>
-      </section>
-
-      @if (hasPasswordProvider()) {
-        <section aria-labelledby="change-password-heading">
-          <h2 id="change-password-heading">Change Password</h2>
-          <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
-            <mat-form-field appearance="outline" class="full">
-              <mat-label>Current Password</mat-label>
-              <input
-                matInput
-                type="password"
-                formControlName="currentPassword"
-                autocomplete="current-password"
-              />
-              @if (
-                passwordForm.controls.currentPassword.hasError('required') &&
-                passwordForm.controls.currentPassword.touched
-              ) {
-                <mat-error>Password Is Required</mat-error>
-              }
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="full">
-              <mat-label>New Password</mat-label>
-              <input
-                matInput
-                type="password"
-                formControlName="newPassword"
-                autocomplete="new-password"
-              />
-              @if (
-                passwordForm.controls.newPassword.hasError('required') &&
-                passwordForm.controls.newPassword.touched
-              ) {
-                <mat-error>Password Is Required</mat-error>
-              } @else if (passwordForm.controls.newPassword.hasError('minlength')) {
-                <mat-error>Use at Least 6 Characters</mat-error>
-              }
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="full">
-              <mat-label>Confirm New Password</mat-label>
-              <input
-                matInput
-                type="password"
-                formControlName="confirmPassword"
-                autocomplete="new-password"
-              />
-              @if (
-                passwordForm.controls.confirmPassword.hasError('required') &&
-                passwordForm.controls.confirmPassword.touched
-              ) {
-                <mat-error>Please Confirm Your New Password</mat-error>
-              } @else if (passwordForm.controls.confirmPassword.hasError('passwordMismatch')) {
-                <mat-error>Passwords Do Not Match</mat-error>
-              }
-            </mat-form-field>
-
-            <button
-              mat-flat-button
-              color="primary"
-              class="full"
-              type="submit"
-              [disabled]="passwordLoading()"
-            >
-              Update Password
-            </button>
-          </form>
-        </section>
-      }
-    </mat-card-content>
-  </mat-card>
-</main>
+        </div>
+      </form>
+    </section>
+  }
+</div>
