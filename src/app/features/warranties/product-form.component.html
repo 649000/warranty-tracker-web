@@ -26,6 +26,39 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full">
+      <mat-label>Brand</mat-label>
+      <input
+        matInput
+        [formField]="productForm.brand"
+        [matAutocomplete]="brandAuto"
+        autocomplete="off"
+      />
+      @if (productForm.brand().value() !== '') {
+        <button
+          matSuffix
+          mat-icon-button
+          type="button"
+          aria-label="Clear Brand"
+          (click)="clearField('brand')"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      <mat-autocomplete
+        #brandAuto="matAutocomplete"
+        (optionSelected)="onBrandSelected($event.option.value)"
+      >
+        @for (brand of filteredBrands(); track brand) {
+          <mat-option [value]="brand">{{ brand }}</mat-option>
+        } @empty {
+          @if (productForm.brand().controlValue() !== '') {
+            <mat-option disabled>No Matches Found</mat-option>
+          }
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
       <mat-label>Purchase Date</mat-label>
       <input matInput [matDatepicker]="picker" [formField]="productForm.purchaseDate" />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -34,6 +67,64 @@
         <mat-error>{{ productForm.purchaseDate().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Serial Number</mat-label>
+      <input matInput [formField]="productForm.serialNumber" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Retailer</mat-label>
+      <input
+        matInput
+        [formField]="productForm.retailer"
+        [matAutocomplete]="retailerAuto"
+        autocomplete="off"
+      />
+      @if (productForm.retailer().value() !== '') {
+        <button
+          matSuffix
+          mat-icon-button
+          type="button"
+          aria-label="Clear Retailer"
+          (click)="clearField('retailer')"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      <mat-autocomplete
+        #retailerAuto="matAutocomplete"
+        (optionSelected)="onRetailerSelected($event.option.value)"
+      >
+        @for (retailer of filteredRetailers(); track retailer) {
+          <mat-option [value]="retailer">{{ retailer }}</mat-option>
+        } @empty {
+          @if (productForm.retailer().controlValue() !== '') {
+            <mat-option disabled>No Matches Found</mat-option>
+          }
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="price-row">
+      <mat-form-field appearance="outline" class="price-amount">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" [formField]="productForm.priceAmount" />
+        @if (productForm.priceAmount().touched() && productForm.priceAmount().errors().length) {
+          <mat-error>{{ productForm.priceAmount().errors()[0].message }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="price-currency">
+        <mat-label>Currency</mat-label>
+        <mat-select [formField]="productForm.currency">
+          @for (currency of currencies; track currency) {
+            <mat-option [value]="currency">{{ currency }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <app-proof-input [(current)]="proofModel" [(pendingFile)]="proofFile" />
 
     @if (!isEdit()) {
       <mat-card appearance="outlined" class="coverage-card">
@@ -100,104 +191,6 @@
           }
         </mat-form-field>
       </mat-card>
-    }
-
-    <button mat-button type="button" class="more-toggle" (click)="showMore.set(!showMore())">
-      <mat-icon>{{ showMore() ? 'expand_less' : 'expand_more' }}</mat-icon>
-      More Details (Optional)
-    </button>
-
-    @if (showMore()) {
-      <mat-form-field appearance="outline" class="full">
-        <mat-label>Brand</mat-label>
-        <input
-          matInput
-          [formField]="productForm.brand"
-          [matAutocomplete]="brandAuto"
-          autocomplete="off"
-        />
-        @if (productForm.brand().value() !== '') {
-          <button
-            matSuffix
-            mat-icon-button
-            type="button"
-            aria-label="Clear Brand"
-            (click)="clearField('brand')"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-        }
-        <mat-autocomplete
-          #brandAuto="matAutocomplete"
-          (optionSelected)="onBrandSelected($event.option.value)"
-        >
-          @for (brand of filteredBrands(); track brand) {
-            <mat-option [value]="brand">{{ brand }}</mat-option>
-          } @empty {
-            @if (productForm.brand().controlValue() !== '') {
-              <mat-option disabled>No Matches Found</mat-option>
-            }
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full">
-        <mat-label>Serial Number</mat-label>
-        <input matInput [formField]="productForm.serialNumber" autocomplete="off" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full">
-        <mat-label>Retailer</mat-label>
-        <input
-          matInput
-          [formField]="productForm.retailer"
-          [matAutocomplete]="retailerAuto"
-          autocomplete="off"
-        />
-        @if (productForm.retailer().value() !== '') {
-          <button
-            matSuffix
-            mat-icon-button
-            type="button"
-            aria-label="Clear Retailer"
-            (click)="clearField('retailer')"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-        }
-        <mat-autocomplete
-          #retailerAuto="matAutocomplete"
-          (optionSelected)="onRetailerSelected($event.option.value)"
-        >
-          @for (retailer of filteredRetailers(); track retailer) {
-            <mat-option [value]="retailer">{{ retailer }}</mat-option>
-          } @empty {
-            @if (productForm.retailer().controlValue() !== '') {
-              <mat-option disabled>No Matches Found</mat-option>
-            }
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-
-      <div class="price-row">
-        <mat-form-field appearance="outline" class="price-amount">
-          <mat-label>Price</mat-label>
-          <input matInput type="number" [formField]="productForm.priceAmount" />
-          @if (productForm.priceAmount().touched() && productForm.priceAmount().errors().length) {
-            <mat-error>{{ productForm.priceAmount().errors()[0].message }}</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="price-currency">
-          <mat-label>Currency</mat-label>
-          <mat-select [formField]="productForm.currency">
-            @for (currency of currencies; track currency) {
-              <mat-option [value]="currency">{{ currency }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <app-proof-input [(current)]="proofModel" [(pendingFile)]="proofFile" />
     }
 
     <div class="form-actions">

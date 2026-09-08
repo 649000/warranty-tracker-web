@@ -117,11 +117,11 @@ h2 {
   text-align: center;
 }
 
-.claim-card {
+.product-card {
   padding: var(--space-1) var(--space-4);
 }
 
-.claim-row {
+.product-row {
   display: flex;
   justify-content: space-between;
   gap: var(--space-4);
@@ -129,16 +129,16 @@ h2 {
   border-bottom: 1px solid var(--mat-sys-outline-variant);
 }
 
-.claim-row:last-child {
+.product-row:last-child {
   border-bottom: none;
 }
 
-.claim-row dt {
+.product-row dt {
   color: var(--text-muted);
   flex: none;
 }
 
-.claim-row dd {
+.product-row dd {
   margin: 0;
   text-align: right;
   overflow-wrap: anywhere;
@@ -170,12 +170,12 @@ h2 {
     align-items: stretch;
   }
 
-  .claim-row {
+  .product-row {
     flex-direction: column;
     gap: var(--space-1);
   }
 
-  .claim-row dd {
+  .product-row dd {
     text-align: left;
   }
 }

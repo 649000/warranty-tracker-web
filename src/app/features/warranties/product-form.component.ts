@@ -101,7 +101,6 @@ export class ProductFormComponent {
   readonly productId = signal<string | null>(this.route.snapshot.paramMap.get('id'));
   readonly isEdit = computed(() => this.productId() !== null);
   readonly saving = signal(false);
-  readonly showMore = signal(false);
 
   readonly proofModel = signal<ProofOfPurchase | null>(null);
   readonly proofFile = signal<File | null>(null);

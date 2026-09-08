@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { DecimalPipe, TitleCasePipe } from '@angular/common';
+import { DatePipe, DecimalPipe, TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +31,7 @@ import { ProofLightboxComponent } from './proof-lightbox.component';
     StatusBadgeComponent,
     TitleCasePipe,
     DecimalPipe,
+    DatePipe,
   ],
   templateUrl: './warranty-detail.component.html',
   styleUrl: './warranty-detail.component.css',

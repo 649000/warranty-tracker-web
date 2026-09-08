@@ -50,11 +50,6 @@
   flex-wrap: wrap;
 }
 
-.more-toggle {
-  align-self: flex-start;
-  margin-top: var(--space-2);
-}
-
 .price-row {
   display: flex;
   gap: var(--space-3);

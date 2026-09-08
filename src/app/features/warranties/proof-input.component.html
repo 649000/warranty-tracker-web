@@ -9,17 +9,17 @@
             : 'picture_as_pdf'
       }}</mat-icon>
       <span class="summary-text">{{ summary() }}</span>
-      <button mat-stroked-button (click)="choose('text')">Replace</button>
-      <button mat-button color="warn" (click)="remove()">
+      <button mat-stroked-button type="button" (click)="choose('text')">Replace</button>
+      <button mat-button type="button" color="warn" (click)="remove()">
         <mat-icon>delete_outline</mat-icon>
       </button>
     </div>
   } @else if (mode() === 'none') {
     <div class="empty-actions">
       <span class="hint">Proof of Purchase (Optional)</span>
-      <button mat-stroked-button (click)="choose('text')">Type Details</button>
-      <button mat-stroked-button (click)="choose('image')">Add Photo</button>
-      <button mat-stroked-button (click)="choose('pdf')">Upload PDF</button>
+      <button mat-stroked-button type="button" (click)="choose('text')">Type Details</button>
+      <button mat-stroked-button type="button" (click)="choose('image')">Add Photo</button>
+      <button mat-stroked-button type="button" (click)="choose('pdf')">Upload PDF</button>
     </div>
   } @else {
     <div class="editing">
@@ -51,7 +51,7 @@
             [accept]="mode() === 'image' ? 'image/png,image/jpeg,image/webp' : 'application/pdf'"
             (change)="onFileSelected($event)"
           />
-          <button mat-stroked-button (click)="fileInput.click()">
+          <button mat-stroked-button type="button" (click)="fileInput.click()">
             <mat-icon>upload_file</mat-icon>
             {{ pendingFile() ? 'Replace File' : 'Choose File' }}
           </button>
@@ -61,7 +61,7 @@
         </div>
       }
       <div class="row-actions">
-        <button mat-button color="warn" (click)="remove()">
+        <button mat-button type="button" color="warn" (click)="remove()">
           <mat-icon>delete_outline</mat-icon>
           Remove Proof
         </button>

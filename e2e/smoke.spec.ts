@@ -42,8 +42,7 @@ test.describe('smoke', () => {
     await page.getByLabel('Category').click();
     await page.getByRole('option', { name: 'Audio' }).click();
 
-    // More details: brand autocomplete suggests and fills, price validates.
-    await page.getByRole('button', { name: 'More Details (Optional)' }).click();
+    // Brand autocomplete suggests and fills, price validates.
     const brandInput = page.locator('mat-form-field', { hasText: 'Brand' }).locator('input');
     await brandInput.fill('Son');
     await expect(page.getByRole('option', { name: 'Sony' })).toBeVisible();
@@ -67,6 +66,7 @@ test.describe('smoke', () => {
 
     // Open the detail page and check it too.
     await page.getByText('Sony WH-1000XM4').click();
+    await expect(page.getByRole('heading', { name: 'Product Details' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Coverage' })).toBeVisible();
     await expectNoHorizontalOverflow(page);
     const detailResults = await new AxeBuilder({ page }).analyze();

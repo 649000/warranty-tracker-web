@@ -29,6 +29,67 @@
     </div>
   </header>
 
+  <section aria-labelledby="product-heading">
+    <h2 id="product-heading">Product Details</h2>
+    <mat-card appearance="outlined" class="product-card">
+      <dl>
+        <div class="product-row">
+          <dt>Purchase Date</dt>
+          <dd>{{ product.purchaseDate | date: 'mediumDate' }}</dd>
+        </div>
+        @if (product.serialNumber) {
+          <div class="product-row">
+            <dt>Serial Number</dt>
+            <dd>{{ product.serialNumber }}</dd>
+          </div>
+        }
+        @if (product.retailer) {
+          <div class="product-row">
+            <dt>Retailer</dt>
+            <dd>{{ product.retailer }}</dd>
+          </div>
+        }
+        @if (product.price) {
+          <div class="product-row">
+            <dt>Price</dt>
+            <dd>{{ product.price.amount | number: '1.0-2' }} {{ product.price.currency }}</dd>
+          </div>
+        }
+        <div class="product-row">
+          <dt>Proof of Purchase</dt>
+          <dd>
+            @if (product.proofOfPurchase; as proof) {
+              <div class="proof-present">
+                @if (proof.type === 'text') {
+                  <span class="proof-text">{{ proof.text }}</span>
+                } @else {
+                  <button mat-button type="button" (click)="viewProof()">
+                    <mat-icon>{{ proof.type === 'image' ? 'image' : 'picture_as_pdf' }}</mat-icon>
+                    {{ proof.fileName ?? 'View Proof' }}
+                  </button>
+                }
+                <button
+                  mat-icon-button
+                  type="button"
+                  color="warn"
+                  aria-label="Remove Proof of Purchase"
+                  (click)="deleteProof()"
+                >
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </div>
+            } @else {
+              <a mat-button [routerLink]="['/warranties', product.id, 'edit']">
+                <mat-icon>add</mat-icon>
+                Add Proof of Purchase
+              </a>
+            }
+          </dd>
+        </div>
+      </dl>
+    </mat-card>
+  </section>
+
   <section aria-labelledby="coverage-heading">
     <div class="section-row">
       <h2 id="coverage-heading">Coverage</h2>
@@ -42,6 +103,7 @@
       <mat-card appearance="outlined" class="coverage-item">
         <button
           class="coverage-summary"
+          type="button"
           (click)="toggleExpand(coverage.id)"
           [attr.aria-expanded]="expanded().has(coverage.id)"
         >
@@ -89,8 +151,10 @@
               <p class="notes">{{ coverage.notes }}</p>
             }
             <div class="coverage-actions">
-              <button mat-button (click)="editCoverage(coverage)">Edit</button>
-              <button mat-button color="warn" (click)="deleteCoverage(coverage)">Remove</button>
+              <button mat-button type="button" (click)="editCoverage(coverage)">Edit</button>
+              <button mat-button type="button" color="warn" (click)="deleteCoverage(coverage)">
+                Remove
+              </button>
             </div>
           </div>
         }
@@ -100,61 +164,5 @@
         <p>No coverage yet. Add one to start tracking this warranty.</p>
       </mat-card>
     }
-  </section>
-
-  <section aria-labelledby="claim-heading">
-    <h2 id="claim-heading">Claim Info</h2>
-    <mat-card appearance="outlined" class="claim-card">
-      <dl>
-        @if (product.serialNumber) {
-          <div class="claim-row">
-            <dt>Serial Number</dt>
-            <dd>{{ product.serialNumber }}</dd>
-          </div>
-        }
-        @if (product.retailer) {
-          <div class="claim-row">
-            <dt>Retailer</dt>
-            <dd>{{ product.retailer }}</dd>
-          </div>
-        }
-        @if (product.price) {
-          <div class="claim-row">
-            <dt>Price</dt>
-            <dd>{{ product.price.amount | number: '1.0-2' }} {{ product.price.currency }}</dd>
-          </div>
-        }
-        <div class="claim-row">
-          <dt>Proof of Purchase</dt>
-          <dd>
-            @if (product.proofOfPurchase; as proof) {
-              <div class="proof-present">
-                @if (proof.type === 'text') {
-                  <span class="proof-text">{{ proof.text }}</span>
-                } @else {
-                  <button mat-button (click)="viewProof()">
-                    <mat-icon>{{ proof.type === 'image' ? 'image' : 'picture_as_pdf' }}</mat-icon>
-                    {{ proof.fileName ?? 'View Proof' }}
-                  </button>
-                }
-                <button
-                  mat-icon-button
-                  color="warn"
-                  aria-label="Remove Proof of Purchase"
-                  (click)="deleteProof()"
-                >
-                  <mat-icon>delete_outline</mat-icon>
-                </button>
-              </div>
-            } @else {
-              <a mat-button [routerLink]="['/warranties', product.id, 'edit']">
-                <mat-icon>add</mat-icon>
-                Add Proof of Purchase
-              </a>
-            }
-          </dd>
-        </div>
-      </dl>
-    </mat-card>
   </section>
 }

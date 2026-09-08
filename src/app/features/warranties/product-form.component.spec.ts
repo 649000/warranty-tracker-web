@@ -74,7 +74,6 @@ describe('ProductFormComponent', () => {
 
   it('renders a mat-error for a touched price with too many decimals', () => {
     const { fixture, component } = setup();
-    component.showMore.set(true);
     component.model.set({ ...BASE_MODEL, priceAmount: 0.00099 });
     fixture.detectChanges();
     component.productForm.priceAmount().markAsTouched();
