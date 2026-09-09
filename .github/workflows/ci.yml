@@ -83,4 +83,5 @@ jobs:
         run: |
           npx firebase-tools deploy \
             --only hosting,functions,firestore:rules,storage \
+            --force \
             --non-interactive
