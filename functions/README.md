@@ -57,22 +57,20 @@ account email before the domain is verified.
 
 ### 3. Configure runtime params
 
-Reminders are on by default once the function is deployed, so the only required
-input is the public app origin used in email links:
+Reminders are on by default once the function is deployed, and `APP_ORIGIN`
+defaults to the app's hosting site, so no env configuration is required for the
+normal case. To override either, put the values in a project-scoped env file
+that `firebase deploy` reads (keep it out of source control):
 
 ```bash
-# APP_ORIGIN is the public app origin used in email links (hosting site).
-firebase deploy --only functions \
-  --set-env-vars APP_ORIGIN=https://<your-project>.web.app
+# functions/.env
+REMINDERS_ENABLED=false
+APP_ORIGIN=https://your-custom-domain.com
 ```
 
 If you are not ready to email yet (for example during verification of a fresh
-environment), deploy with reminders off:
-
-```bash
-firebase deploy --only functions \
-  --set-env-vars REMINDERS_ENABLED=false,APP_ORIGIN=https://<your-project>.web.app
-```
+environment), deploy with reminders off by setting `REMINDERS_ENABLED=false`
+in the env file above.
 
 ### 4. Firestore indexes and rules
 
@@ -86,18 +84,14 @@ firebase deploy --only functions \
 
 ## Enabling the production schedule (rollout)
 
-The default is enabled: any deploy of the function with the secrets and
-`APP_ORIGIN` configured starts sending. To roll out gradually, deploy with
-`REMINDERS_ENABLED=false` first, then flip it on:
+Reminders default to enabled and `APP_ORIGIN` defaults to the hosting site, so
+a normal deploy starts sending. To roll out gradually, deploy with reminders
+off first (see the env-file override above), then remove that override:
 
 1. Run the full verification gate (CI + the suites below).
 2. Send a controlled sandbox digest to your own verified address and confirm
    delivery and content in the Resend dashboard.
-3. Deploy with reminders on (default, or explicit `REMINDERS_ENABLED=true`):
-   ```bash
-   firebase deploy --only functions \
-     --set-env-vars APP_ORIGIN=https://<your-project>.web.app
-   ```
+3. Deploy normally (reminders on by default).
 4. Monitor delivery records (`users/{uid}/reminderDeliveries/{date}`) for
    `state: success`/`terminal_error`, the function error rate, and budget
    alerts for the first week.
@@ -113,8 +107,8 @@ The default is enabled: any deploy of the function with the secrets and
 
 ## Rollback
 
-- **Stop sending immediately:** redeploy (or set the env var) with
-  `REMINDERS_ENABLED=false`, or pause the Cloud Scheduler job
+- **Stop sending immediately:** redeploy with `REMINDERS_ENABLED=false` (via the
+  env-file override above), or pause the Cloud Scheduler job
   (`gcloud scheduler jobs pause` for the `sendExpiryReminders` job) / delete the
   schedule in the Firebase console.
 - Delivery records are retained, so re-enabling never resends thresholds that

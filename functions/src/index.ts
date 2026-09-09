@@ -17,7 +17,9 @@ initializeApp();
 const db = getFirestore();
 
 const remindersEnabled = defineBoolean('REMINDERS_ENABLED', { default: true });
-const appOrigin = defineString('APP_ORIGIN');
+const appOrigin = defineString('APP_ORIGIN', {
+  default: 'https://warranty-tracker-33dc5.web.app',
+});
 const resendApiKey = defineSecret('RESEND_API_KEY');
 const emailFrom = defineSecret('EMAIL_FROM');
 
