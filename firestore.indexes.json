@@ -1,10 +1,10 @@
 {
-  "indexes": [
+  "indexes": [],
+  "fieldOverrides": [
     {
       "collectionGroup": "coverages",
-      "queryScope": "COLLECTION_GROUP",
-      "fields": [{ "fieldPath": "expiryDate", "order": "ASCENDING" }]
+      "fieldPath": "expiryDate",
+      "indexes": [{ "order": "ASCENDING", "queryScope": "COLLECTION_GROUP" }]
     }
-  ],
-  "fieldOverrides": []
+  ]
 }

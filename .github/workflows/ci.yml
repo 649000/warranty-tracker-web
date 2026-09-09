@@ -82,5 +82,5 @@ jobs:
       - name: Deploy
         run: |
           npx firebase-tools deploy \
-            --only hosting,functions,firestore,storage \
+            --only hosting,functions,firestore:rules,storage \
             --non-interactive
