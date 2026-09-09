@@ -46,6 +46,8 @@ __screenshots__/
 # Environment
 .env
 .env.*
+# functions/.env holds non-secret deploy defaults and is tracked on purpose
+!functions/.env
 
 # System files
 .DS_Store

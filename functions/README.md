@@ -58,19 +58,18 @@ account email before the domain is verified.
 ### 3. Configure runtime params
 
 Reminders are on by default once the function is deployed, and `APP_ORIGIN`
-defaults to the app's hosting site, so no env configuration is required for the
-normal case. To override either, put the values in a project-scoped env file
-that `firebase deploy` reads (keep it out of source control):
+defaults to the app's hosting site. A tracked `functions/.env` file pins these
+non-secret defaults so non-interactive (CI) deploys don't prompt for values:
 
-```bash
+```dotenv
 # functions/.env
-REMINDERS_ENABLED=false
-APP_ORIGIN=https://your-custom-domain.com
+REMINDERS_ENABLED=true
+APP_ORIGIN=https://warranty-tracker-33dc5.web.app
 ```
 
-If you are not ready to email yet (for example during verification of a fresh
-environment), deploy with reminders off by setting `REMINDERS_ENABLED=false`
-in the env file above.
+To keep reminders off during verification, override the value for your local
+deploy (e.g. set `REMINDERS_ENABLED=false` in that file, or add a
+project-scoped `.env.<projectId>` that wins over `.env`).
 
 ### 4. Firestore indexes and rules
 
