@@ -83,4 +83,5 @@ jobs:
         run: |
           npx firebase-tools deploy \
             --only hosting,functions,firestore,storage \
+            --set-env-vars APP_ORIGIN=https://warranty-tracker-33dc5.web.app \
             --non-interactive
