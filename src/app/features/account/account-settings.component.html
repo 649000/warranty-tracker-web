@@ -10,6 +10,35 @@
     </div>
   </header>
 
+  <section class="panel" aria-labelledby="reminders-heading">
+    <div class="panel__head">
+      <span class="panel__icon"><mat-icon>notifications_active</mat-icon></span>
+      <h2 id="reminders-heading">Expiry Email Reminders</h2>
+    </div>
+    <p id="reminders-description">
+      Get a daily digest when coverage reaches 30 days, 7 days, or its expiry day.
+    </p>
+    <p class="account__status">
+      Expiry email reminders are currently
+      <strong>{{ expiryEmailsEnabled() ? 'on' : 'off' }}</strong
+      >.
+    </p>
+    <div class="panel__actions">
+      <button
+        mat-stroked-button
+        type="button"
+        role="switch"
+        aria-label="Expiry email reminders"
+        [attr.aria-checked]="expiryEmailsEnabled()"
+        [disabled]="reminderLoading()"
+        (click)="toggleExpiryEmails()"
+      >
+        {{ expiryEmailsEnabled() ? 'Disable Reminders' : 'Enable Reminders' }}
+      </button>
+    </div>
+    <p role="status" class="account__live">{{ reminderStatus() }}</p>
+  </section>
+
   <section class="panel" aria-labelledby="change-email-heading">
     <div class="panel__head">
       <span class="panel__icon"><mat-icon>alternate_email</mat-icon></span>

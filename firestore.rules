@@ -12,5 +12,13 @@ service cloud.firestore {
         allow read, write: if signedIn() && request.auth.uid == uid;
       }
     }
+
+    match /users/{uid}/settings/{settingId} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    match /users/{uid}/reminderDeliveries/{deliveryId} {
+      allow read, write: if false;
+    }
   }
 }

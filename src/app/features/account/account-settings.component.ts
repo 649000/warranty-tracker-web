@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -15,6 +15,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
 import { isExpectedAuthError } from '../../core/utils/auth-errors';
 import { ErrorReportingService } from '../../core/services/error-reporting.service';
+import { NotificationPreferenceService } from '../../core/services/notification-preference.service';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('newPassword');
@@ -43,6 +44,7 @@ export class AccountSettingsComponent {
   private readonly auth = inject(AuthService);
   private readonly snackbar = inject(MatSnackBar);
   private readonly errorReporting = inject(ErrorReportingService);
+  private readonly notifications = inject(NotificationPreferenceService);
 
   readonly user = this.auth.user;
   readonly emailVerified = this.auth.emailVerified;
@@ -56,6 +58,17 @@ export class AccountSettingsComponent {
 
   readonly emailLoading = signal(false);
   readonly passwordLoading = signal(false);
+  readonly expiryEmailsEnabled = signal(true);
+  readonly reminderLoading = signal(false);
+  readonly reminderStatus = signal('');
+
+  private readonly loadReminderPreference = effect(() => {
+    const uid = this.user()?.uid;
+    if (!uid) return;
+    void this.notifications
+      .expiryEmailsEnabled(uid)
+      .then((enabled) => this.expiryEmailsEnabled.set(enabled));
+  });
 
   readonly emailForm = new FormGroup({
     newEmail: new FormControl('', [Validators.required, Validators.email]),
@@ -116,6 +129,35 @@ export class AccountSettingsComponent {
       this.snackbar.open(this.auth.errorMessage(error), 'Close', { duration: 5000 });
     } finally {
       this.passwordLoading.set(false);
+    }
+  }
+
+  async toggleExpiryEmails(): Promise<void> {
+    const uid = this.user()?.uid;
+    if (!uid || this.reminderLoading()) {
+      return;
+    }
+    const next = !this.expiryEmailsEnabled();
+    this.reminderLoading.set(true);
+    try {
+      await this.notifications.setExpiryEmailsEnabled(uid, next);
+      this.expiryEmailsEnabled.set(next);
+      this.reminderStatus.set(`Expiry email reminders ${next ? 'enabled' : 'disabled'}.`);
+      this.snackbar.open(
+        next ? 'Expiry email reminders enabled.' : 'Expiry email reminders disabled.',
+        'Close',
+        { duration: 5000 },
+      );
+    } catch (error) {
+      if (!isExpectedAuthError(error)) {
+        this.errorReporting.captureException(error, {
+          operation: 'accountSettings.setExpiryEmailsEnabled',
+        });
+      }
+      this.reminderStatus.set('Could not update expiry email reminders. Please try again.');
+      this.snackbar.open('Failed to update expiry email reminders.', 'Close', { duration: 5000 });
+    } finally {
+      this.reminderLoading.set(false);
     }
   }
 }

@@ -11,6 +11,10 @@
 npm-debug.log
 yarn-error.log
 
+# Firebase Functions workspace
+/functions/lib
+/functions/node_modules
+
 # IDEs and editors
 .idea/
 .project

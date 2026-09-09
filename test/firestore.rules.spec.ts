@@ -30,6 +30,15 @@ function userProducts(uid: string) {
     .collection('products');
 }
 
+function userSettings(uid: string) {
+  return testEnv
+    .authenticatedContext(uid)
+    .firestore()
+    .collection('users')
+    .doc(uid)
+    .collection('settings');
+}
+
 describe('Firestore security rules', () => {
   it('denies unauthenticated reads of products', async () => {
     const db = testEnv.unauthenticatedContext().firestore();
@@ -109,5 +118,58 @@ describe('Firestore security rules', () => {
 
     const snapshot = await userProducts('alice').doc('p1').collection('coverages').get();
     expect(snapshot.docs.map((d) => d.id)).toContain('c1');
+  });
+
+  it('allows a user to read and change their own notification preference', async () => {
+    const notifications = userSettings('alice').doc('notifications');
+    await notifications.set({ expiryEmailsEnabled: false });
+
+    const read = await notifications.get();
+    expect(read.data()?.['expiryEmailsEnabled']).toBe(false);
+
+    await notifications.set({ expiryEmailsEnabled: true });
+    const updated = await notifications.get();
+    expect(updated.data()?.['expiryEmailsEnabled']).toBe(true);
+  });
+
+  it('denies a user reading another user’s notification preference', async () => {
+    await userSettings('alice').doc('notifications').set({ expiryEmailsEnabled: true });
+
+    await expect(
+      testEnv
+        .authenticatedContext('bob')
+        .firestore()
+        .collection('users')
+        .doc('alice')
+        .collection('settings')
+        .doc('notifications')
+        .get(),
+    ).rejects.toThrow();
+  });
+
+  it('denies a user changing another user’s notification preference', async () => {
+    await expect(
+      testEnv
+        .authenticatedContext('alice')
+        .firestore()
+        .collection('users')
+        .doc('bob')
+        .collection('settings')
+        .doc('notifications')
+        .set({ expiryEmailsEnabled: false }),
+    ).rejects.toThrow();
+  });
+
+  it('denies users access to the reminder delivery ledger', async () => {
+    const delivery = testEnv
+      .authenticatedContext('alice')
+      .firestore()
+      .collection('users')
+      .doc('alice')
+      .collection('reminderDeliveries')
+      .doc('2026-09-10');
+
+    await expect(delivery.set({ state: 'processing' })).rejects.toThrow();
+    await expect(delivery.get()).rejects.toThrow();
   });
 });
