@@ -198,10 +198,7 @@ describe('Firestore security rules', () => {
   });
 
   it('denies client writes to the claim directory', async () => {
-    const directory = testEnv
-      .authenticatedContext('alice')
-      .firestore()
-      .collection('claimContacts');
+    const directory = testEnv.authenticatedContext('alice').firestore().collection('claimContacts');
 
     await expect(
       directory.doc('manufacturer_apple').set({ type: 'manufacturer', name: 'Apple' }),
@@ -215,7 +212,9 @@ describe('Firestore security rules', () => {
         .set({ type: 'manufacturer', name: 'Apple', matchKeys: ['apple'] });
     });
 
-    await expect(directory.doc('manufacturer_apple').update({ name: 'Apple Inc' })).rejects.toThrow();
+    await expect(
+      directory.doc('manufacturer_apple').update({ name: 'Apple Inc' }),
+    ).rejects.toThrow();
     await expect(directory.doc('manufacturer_apple').delete()).rejects.toThrow();
   });
 

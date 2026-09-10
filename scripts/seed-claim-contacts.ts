@@ -9,9 +9,7 @@ const EMULATOR_PROJECT = 'warranty-tracker-33dc5';
 const LIVE_PROJECT = process.env['GCLOUD_PROJECT'] ?? 'warranty-tracker-33dc5';
 
 /** Idempotently writes every curated claim contact, keyed `{type}_{name}`. */
-export async function seedClaimContacts(
-  db: Firestore,
-): Promise<{ seeded: number; total: number }> {
+export async function seedClaimContacts(db: Firestore): Promise<{ seeded: number; total: number }> {
   for (const contact of CLAIM_CONTACTS) {
     const id = claimContactDocId(contact.type, contact.name);
     await db

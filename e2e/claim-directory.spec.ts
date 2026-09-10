@@ -33,7 +33,9 @@ test.describe('claim directory', () => {
     await expect(claimBlock.getByText('How to Claim')).toBeVisible({ timeout: 15_000 });
     await expect(claimBlock.getByText('Suggested')).toBeVisible();
     await expect(claimBlock.getByText(/Locate your proof of purchase/)).toBeVisible();
-    await expect(claimBlock.getByRole('link', { name: /support\.apple\.com/ }).first()).toBeVisible();
+    await expect(
+      claimBlock.getByRole('link', { name: /support\.apple\.com/ }).first(),
+    ).toBeVisible();
 
     // Accessibility: the expanded claim panel passes AXE.
     const results = await new AxeBuilder({ page }).analyze();
@@ -54,7 +56,10 @@ test.describe('claim directory', () => {
     await page.getByRole('button', { name: 'Reset to Suggested' }).click();
     await expect(page.locator('.claim-block').getByText('Suggested')).toBeVisible();
     await expect(
-      page.locator('.claim-block').getByRole('link', { name: /support\.apple\.com/ }).first(),
+      page
+        .locator('.claim-block')
+        .getByRole('link', { name: /support\.apple\.com/ })
+        .first(),
     ).toBeVisible();
   });
 });
