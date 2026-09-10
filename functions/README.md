@@ -129,13 +129,15 @@ settings that must be configured once per project.
 
 ### Configure once in the Firebase / GCP console
 
-1. **App Check (strongest anti-scripting control).** Firebase console → App
-   Check → register the web app with reCAPTCHA v3 (or Enterprise), copy the site
-   key into `src/environments/environment.ts` (`appCheckSiteKey`), deploy the web
-   app, then enable **enforcement** for Cloud Firestore and Cloud Storage.
-   Start in _monitor_ mode and watch the App Check metrics for legitimate
-   traffic before enforcing. For local/dev builds without the emulator, set
-   `self.FIREBASE_APPCHECK_DEBUG_TOKEN = true` before bootstrapping.
+1. **App Check (strongest anti-scripting control).** Enable the reCAPTCHA
+   Enterprise API in Google Cloud, create a score-based **Website** key (never
+   add `localhost`), then register the web app with the **reCAPTCHA Enterprise**
+   provider in Firebase console → App Check → Apps and paste the site key. Put
+   the same site key in `src/environments/environment.ts` (`appCheckSiteKey`),
+   deploy the web app, then enable **enforcement** for Cloud Firestore and Cloud
+   Storage. Start in _monitor_ mode and watch the App Check metrics for
+   legitimate traffic before enforcing. For local/dev builds without the
+   emulator, set `self.FIREBASE_APPCHECK_DEBUG_TOKEN = true` before bootstrapping.
 2. **Budget alerts.** Google Cloud Billing → Budgets & alerts at ~50%/90%/100%
    of a small monthly amount. Firestore has no native hard cap, so alerts are
    the safety net; the reminder function's `REMINDERS_ENABLED=false` env flag and

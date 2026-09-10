@@ -29,13 +29,15 @@ export const sentryDsn =
   'https://c9f52db1d9e77c498c52a13222d27a32@o131112.ingest.us.sentry.io/4512039586037760';
 
 /**
- * Firebase App Check — reCAPTCHA v3 site key.
+ * Firebase App Check — reCAPTCHA Enterprise site key.
  *
  * App Check attests that requests come from your real web app, blocking
  * scripted abuse of Firestore/Storage that would otherwise run up the bill.
- * Find it under Firebase console → App Check → Apps → your web app. Leave empty
- * to keep App Check disabled (the SDK is not initialized). Enforcement is
- * enabled per-service in the Firebase console.
+ * Create a score-based Website key in Google Cloud → Security → reCAPTCHA
+ * Enterprise (never add localhost), then register it for the web app under
+ * Firebase console → App Check → Apps. Leave empty to keep App Check disabled
+ * (the SDK is not initialized). Enforcement is enabled per-service in the
+ * Firebase console.
  */
 export const appCheckSiteKey = '';
 

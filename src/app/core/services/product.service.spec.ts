@@ -28,7 +28,7 @@ vi.mock('firebase/auth', () => ({
 vi.mock('firebase/app', () => ({ initializeApp: vi.fn() }));
 vi.mock('firebase/app-check', () => ({
   initializeAppCheck: vi.fn(),
-  ReCaptchaV3Provider: class {},
+  ReCaptchaEnterpriseProvider: class {},
 }));
 vi.mock('firebase/storage', () => ({ connectStorageEmulator: vi.fn(), getStorage: vi.fn() }));
 vi.mock('firebase/analytics', () => ({ getAnalytics: vi.fn(), logEvent: vi.fn() }));

@@ -1,6 +1,6 @@
 import { InjectionToken, type Provider } from '@angular/core';
 import { initializeApp, type FirebaseApp } from 'firebase/app';
-import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth';
 import { connectFirestoreEmulator, getFirestore, type Firestore } from 'firebase/firestore';
 import { connectStorageEmulator, getStorage, type FirebaseStorage } from 'firebase/storage';
@@ -18,7 +18,7 @@ function firebaseAppFactory(): FirebaseApp {
   if (appCheckSiteKey && !useEmulators) {
     try {
       initializeAppCheck(app, {
-        provider: new ReCaptchaV3Provider(appCheckSiteKey),
+        provider: new ReCaptchaEnterpriseProvider(appCheckSiteKey),
         isTokenAutoRefreshEnabled: true,
       });
     } catch {
