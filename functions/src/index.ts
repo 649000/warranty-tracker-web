@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
 import { defineBoolean, defineSecret, defineString } from 'firebase-functions/params';
+import { logger } from 'firebase-functions/v2';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import {
   FUNCTION_MEMORY_MIB,
@@ -39,16 +40,32 @@ export const sendExpiryReminders = onSchedule(
   },
   async () => {
     if (!remindersEnabled.value()) {
+      logger.info('Expiry reminders are disabled; skipping run', {
+        remindersEnabled: false,
+      });
       return;
     }
-    await runDailyReminders({
-      db,
-      auth: getAuth(),
-      adapter: createResendAdapter({
-        apiKey: resendApiKey.value(),
-        from: emailFrom.value(),
-      }),
-      origin: appOrigin.value(),
-    });
+    try {
+      const result = await runDailyReminders({
+        db,
+        auth: getAuth(),
+        adapter: createResendAdapter({
+          apiKey: resendApiKey.value(),
+          from: emailFrom.value(),
+        }),
+        origin: appOrigin.value(),
+      });
+      logger.info('Expiry reminder function completed', {
+        dateKey: result.dateKey,
+        candidateCount: result.candidateCount,
+        recipients: result.recipients.length,
+      });
+    } catch (error) {
+      logger.error('Expiry reminder function failed', {
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
+      throw error;
+    }
   },
 );

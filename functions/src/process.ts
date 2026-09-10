@@ -1,6 +1,11 @@
 import { Firestore } from 'firebase-admin/firestore';
+import { logger } from 'firebase-functions/v2';
 import { keyForDayStart, singaporeDayStart } from './calendar.js';
-import { NOTIFICATION_PREFERENCES_DOC, PREFERENCE_ENABLED_FIELD } from './config.js';
+import {
+  MAX_SEND_ATTEMPTS,
+  NOTIFICATION_PREFERENCES_DOC,
+  PREFERENCE_ENABLED_FIELD,
+} from './config.js';
 import type { DeliveryAdapter } from './delivery/adapter.js';
 import { isEligibleForReminder } from './eligibility.js';
 import { claimDelivery, markSuccess, recordFailure, type LedgerLine } from './ledger.js';
@@ -32,7 +37,8 @@ export type RecipientOutcome =
   | 'skipped_disabled'
   | 'skipped_existing'
   | 'failed'
-  | 'failed_terminal';
+  | 'failed_terminal'
+  | 'error';
 
 export interface RecipientResult {
   uid: string;
@@ -71,6 +77,11 @@ export async function runDailyReminders(deps: ReminderDeps): Promise<ReminderRun
   const dayStart = singaporeDayStart(deps.runAt);
   const dateKey = keyForDayStart(dayStart);
 
+  logger.info('Expiry reminder sweep started', {
+    dateKey,
+    runAt: (deps.runAt ?? new Date()).toISOString(),
+  });
+
   const candidates = await findDueCoverages(db, dayStart);
   const grouped = new Map<string, LedgerLine[]>();
   for (const candidate of candidates) {
@@ -81,60 +92,121 @@ export async function runDailyReminders(deps: ReminderDeps): Promise<ReminderRun
     grouped.set(candidate.uid, [...(grouped.get(candidate.uid) ?? []), line]);
   }
 
+  logger.info('Expiry reminder candidates selected', {
+    dateKey,
+    candidateCount: candidates.length,
+    recipientCount: grouped.size,
+  });
+
   const recipients: RecipientResult[] = [];
   const dateLabel = formatSingaporeDate(dayStart);
 
   for (const [uid, lines] of grouped) {
-    const user = await auth.getUser(uid).catch(() => null);
-    if (!user?.email) {
-      recipients.push({ uid, outcome: 'no_user', attemptNumber: 0 });
-      continue;
-    }
+    try {
+      const user = await auth.getUser(uid).catch(() => null);
+      if (!user?.email) {
+        logger.info('Reminder skipped: no user record', { uid, dateKey, outcome: 'no_user' });
+        recipients.push({ uid, outcome: 'no_user', attemptNumber: 0 });
+        continue;
+      }
 
-    const preference = await db.doc(`users/${uid}/settings/${NOTIFICATION_PREFERENCES_DOC}`).get();
-    const preferenceEnabled = preference.get(PREFERENCE_ENABLED_FIELD) as boolean | undefined;
+      const preference = await db
+        .doc(`users/${uid}/settings/${NOTIFICATION_PREFERENCES_DOC}`)
+        .get();
+      const preferenceEnabled = preference.get(PREFERENCE_ENABLED_FIELD) as boolean | undefined;
 
-    if (user.emailVerified !== true) {
-      recipients.push({ uid, outcome: 'skipped_unverified', attemptNumber: 0 });
-      continue;
-    }
-    if (!isEligibleForReminder({ email: user.email, emailVerified: true, preferenceEnabled })) {
-      recipients.push({ uid, outcome: 'skipped_disabled', attemptNumber: 0 });
-      continue;
-    }
+      if (user.emailVerified !== true) {
+        logger.info('Reminder skipped: email not verified', {
+          uid,
+          dateKey,
+          outcome: 'skipped_unverified',
+        });
+        recipients.push({ uid, outcome: 'skipped_unverified', attemptNumber: 0 });
+        continue;
+      }
+      if (!isEligibleForReminder({ email: user.email, emailVerified: true, preferenceEnabled })) {
+        logger.info('Reminder skipped: reminders disabled', {
+          uid,
+          dateKey,
+          outcome: 'skipped_disabled',
+        });
+        recipients.push({ uid, outcome: 'skipped_disabled', attemptNumber: 0 });
+        continue;
+      }
 
-    const claim = await claimDelivery(db, uid, dateKey, lines);
-    if (!claim.claimed) {
-      recipients.push({
-        uid,
-        outcome: 'skipped_existing',
-        attemptNumber: claim.attemptNumber,
+      const claim = await claimDelivery(db, uid, dateKey, lines);
+      if (!claim.claimed) {
+        logger.info('Reminder skipped: already delivered or in progress', {
+          uid,
+          dateKey,
+          attemptNumber: claim.attemptNumber,
+          outcome: 'skipped_existing',
+        });
+        recipients.push({
+          uid,
+          outcome: 'skipped_existing',
+          attemptNumber: claim.attemptNumber,
+        });
+        continue;
+      }
+
+      const digest = renderDigest(origin, dateLabel, claim.lines);
+      const result = await adapter.send({
+        to: user.email,
+        subject: digest.subject,
+        html: digest.html,
+        text: digest.text,
       });
-      continue;
-    }
 
-    const digest = renderDigest(origin, dateLabel, claim.lines);
-    const result = await adapter.send({
-      to: user.email,
-      subject: digest.subject,
-      html: digest.html,
-      text: digest.text,
-    });
-
-    if (result.ok) {
-      await markSuccess(db, uid, dateKey, result.messageId);
-      recipients.push({
+      if (result.ok) {
+        await markSuccess(db, uid, dateKey, result.messageId);
+        logger.info('Reminder sent', {
+          uid,
+          dateKey,
+          attemptNumber: claim.attemptNumber,
+          messageId: result.messageId,
+          coverageCount: claim.lines.length,
+        });
+        recipients.push({
+          uid,
+          outcome: 'sent',
+          attemptNumber: claim.attemptNumber,
+          messageId: result.messageId,
+        });
+      } else {
+        await recordFailure(db, uid, dateKey, result.message, claim.attemptNumber);
+        const terminal = claim.attemptNumber >= MAX_SEND_ATTEMPTS;
+        logger.error('Reminder delivery failed', {
+          uid,
+          dateKey,
+          attemptNumber: claim.attemptNumber,
+          failureKind: result.kind,
+          message: result.message,
+          terminal,
+        });
+        const outcome: RecipientOutcome = terminal ? 'failed_terminal' : 'failed';
+        recipients.push({ uid, outcome, attemptNumber: claim.attemptNumber });
+      }
+    } catch (error) {
+      logger.error('Reminder processing failed for user', {
         uid,
-        outcome: 'sent',
-        attemptNumber: claim.attemptNumber,
-        messageId: result.messageId,
+        dateKey,
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
       });
-    } else {
-      await recordFailure(db, uid, dateKey, result.message, claim.attemptNumber);
-      const outcome: RecipientOutcome = claim.attemptNumber >= 3 ? 'failed_terminal' : 'failed';
-      recipients.push({ uid, outcome, attemptNumber: claim.attemptNumber });
+      recipients.push({ uid, outcome: 'error', attemptNumber: 0 });
     }
   }
+
+  logger.info('Expiry reminder sweep finished', {
+    dateKey,
+    candidateCount: candidates.length,
+    sent: recipients.filter((r) => r.outcome === 'sent').length,
+    failed: recipients.filter((r) => r.outcome === 'failed' || r.outcome === 'failed_terminal')
+      .length,
+    errors: recipients.filter((r) => r.outcome === 'error').length,
+    skipped: recipients.filter((r) => r.outcome.startsWith('skipped')).length,
+  });
 
   return { dateKey, candidateCount: candidates.length, recipients };
 }
