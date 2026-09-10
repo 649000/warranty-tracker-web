@@ -29,6 +29,17 @@ export const sentryDsn =
   'https://c9f52db1d9e77c498c52a13222d27a32@o131112.ingest.us.sentry.io/4512039586037760';
 
 /**
+ * Firebase App Check — reCAPTCHA v3 site key.
+ *
+ * App Check attests that requests come from your real web app, blocking
+ * scripted abuse of Firestore/Storage that would otherwise run up the bill.
+ * Find it under Firebase console → App Check → Apps → your web app. Leave empty
+ * to keep App Check disabled (the SDK is not initialized). Enforcement is
+ * enabled per-service in the Firebase console.
+ */
+export const appCheckSiteKey = '';
+
+/**
  * Whether to connect the Firebase Auth/Firestore/Storage SDKs to the local
  * emulator suite (127.0.0.1:9099/8080/9199). The default `ng serve` targets
  * the live Firebase project (false). The emulator build configuration flips

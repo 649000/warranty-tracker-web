@@ -17,4 +17,10 @@ export const firebaseConfig = {
 export const sentryDsn =
   'https://c9f52db1d9e77c498c52a13222d27a32@o131112.ingest.us.sentry.io/4512039586037760';
 
+/**
+ * App Check is intentionally disabled against the emulator suite; the emulators
+ * do not verify tokens. See `environment.ts` for the production value.
+ */
+export const appCheckSiteKey = '';
+
 export const useEmulators = true;

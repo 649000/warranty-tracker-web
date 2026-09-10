@@ -1,6 +1,5 @@
 import { Component, afterNextRender, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -11,7 +10,6 @@ import { AuthService } from './core/services/auth.service';
 export class App {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly snackbar = inject(MatSnackBar);
 
   constructor() {
     afterNextRender(() => {
@@ -32,11 +30,8 @@ export class App {
       }
       return;
     }
-    if (mode === 'verifyEmail') {
-      this.snackbar.open('Email Confirmed. Thanks!', 'Close', { duration: 5000 });
-    } else if (mode === 'recoverEmail') {
-      this.snackbar.open('Email Updated.', 'Close', { duration: 5000 });
-    }
-    await this.router.navigateByUrl(this.auth.user() ? '/warranties' : '/login');
+    // Hard reload after an email action so the refreshed email_verified claim
+    // is in place before Firestore opens its listeners.
+    window.location.assign(this.auth.user() ? '/warranties' : '/login');
   }
 }

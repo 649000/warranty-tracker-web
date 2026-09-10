@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { verifyEmailViaEmulator } from './helpers/verify-email';
 
 const publicRoutes = ['/', '/login', '/signup', '/forgot-password', '/terms', '/privacy'];
 
@@ -33,6 +34,7 @@ test('accessibility: account settings with expiry reminder control has no violat
   await page.getByLabel('Email').fill(email);
   await page.getByLabel('Password', { exact: true }).fill(password);
   await page.getByRole('button', { name: 'Create account' }).click();
+  await verifyEmailViaEmulator(page, email);
   await expect(page.getByRole('heading', { name: 'Add your first product' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Account menu' }).click();

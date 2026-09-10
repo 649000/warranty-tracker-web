@@ -100,9 +100,53 @@ off first (see the env-file override above), then remove that override:
 - Create a **budget alert** in Google Cloud Billing at ~50%/90%/100% of a small
   monthly amount so unexpected email volume or invocations page you.
 - The function uses the minimum practical resources (256 MiB memory, 300 s
-  timeout) and runs once/day. Watch Cloud Scheduler, function invocations, and
-  Resend volume in the provider dashboard.
+  timeout, `maxInstances: 1`) and runs once/day. Watch Cloud Scheduler, function
+  invocations, and Resend volume in the provider dashboard.
 - Consider a provider-side sending limit/alert in Resend for extra safety.
+
+## Abuse and cost guardrails
+
+Firestore, Storage, and Auth are client-writable, so these guardrails limit what
+a scripted or throwaway account can spend. Most are enforced in security rules
+(deployed with `firebase deploy --only firestore,storage`); a few are console
+settings that must be configured once per project.
+
+### Enforced in this repo
+
+- **Verified email required.** `firestore.rules` gates all user-data reads and
+  writes on `request.auth.token.email_verified == true`. Unverified password
+  users are routed to `/verify-email` by `emailVerifiedGuard`; Google sign-in
+  users are already verified. This removes the cheapest abuse path (throwaway
+  accounts writing data).
+- **Field-shape validation.** Products, coverages, and settings are checked
+  against an allowlist of keys, types, enums, and string-length caps, so junk or
+  oversized documents are rejected.
+- **Storage upload limits.** `storage.rules` caps proofs at 5 MB and restricts
+  content types to `image/*` or `application/pdf`, bounding Storage bytes/egress.
+- **Bounded cleanup.** Account deletion recursively removes every proof file so
+  Storage is not left billing for orphaned objects.
+- **Single-instance schedule.** The reminder function sets `maxInstances: 1`.
+
+### Configure once in the Firebase / GCP console
+
+1. **App Check (strongest anti-scripting control).** Firebase console → App
+   Check → register the web app with reCAPTCHA v3 (or Enterprise), copy the site
+   key into `src/environments/environment.ts` (`appCheckSiteKey`), deploy the web
+   app, then enable **enforcement** for Cloud Firestore and Cloud Storage.
+   Start in _monitor_ mode and watch the App Check metrics for legitimate
+   traffic before enforcing. For local/dev builds without the emulator, set
+   `self.FIREBASE_APPCHECK_DEBUG_TOKEN = true` before bootstrapping.
+2. **Budget alerts.** Google Cloud Billing → Budgets & alerts at ~50%/90%/100%
+   of a small monthly amount. Firestore has no native hard cap, so alerts are
+   the safety net; the reminder function's `REMINDERS_ENABLED=false` env flag and
+   `gcloud scheduler jobs pause` remain the manual kill switches.
+3. **Usage quotas/alerts.** Cloud console → Quotas (and Cloud Monitoring) for
+   Cloud Firestore, Cloud Storage, and Identity Toolkit; alert on unusual read,
+   write, storage-byte, and sign-in volume.
+4. **Auth abuse protection.** Firebase console → Authentication → Settings:
+   enable **email enumeration protection**. Review the default Identity Toolkit
+   quotas and lower them if appropriate.
+5. **Provider limit.** Set a Resend sending limit/alert for the verified sender.
 
 ## Rollback
 

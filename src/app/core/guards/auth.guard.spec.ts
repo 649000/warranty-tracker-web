@@ -24,6 +24,10 @@ vi.mock('firebase/auth', () => ({
 }));
 
 vi.mock('firebase/app', () => ({ initializeApp: vi.fn() }));
+vi.mock('firebase/app-check', () => ({
+  initializeAppCheck: vi.fn(),
+  ReCaptchaV3Provider: class {},
+}));
 vi.mock('firebase/storage', () => ({ connectStorageEmulator: vi.fn(), getStorage: vi.fn() }));
 vi.mock('firebase/analytics', () => ({ getAnalytics: vi.fn(), logEvent: vi.fn() }));
 vi.mock('firebase/firestore', () => ({
@@ -47,12 +51,13 @@ vi.mock('firebase/firestore', () => ({
 vi.mock('@sentry/angular', () => ({ captureException: vi.fn(), captureMessage: vi.fn() }));
 
 import { AuthService } from '../services/auth.service';
-import { authGuard, guestGuard, redirectIfAuthenticated } from './auth.guard';
+import { authGuard, emailVerifiedGuard, guestGuard, redirectIfAuthenticated } from './auth.guard';
 
-function fakeAuth(user: User | null) {
+function fakeAuth(user: User | null, emailVerified = true) {
   return {
     readyPromise: Promise.resolve(),
     user: signal<User | null>(user),
+    emailVerified: signal(emailVerified),
     setReturnUrl: vi.fn(),
   };
 }
@@ -88,6 +93,47 @@ describe('authGuard', () => {
     });
     const result = await TestBed.runInInjectionContext(() =>
       authGuard({} as Route, [] as UrlSegment[], {} as PartialMatchRouteSnapshot),
+    );
+    expect(result).toEqual(['/login']);
+  });
+});
+
+describe('emailVerifiedGuard', () => {
+  it('allows a verified user through', async () => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthService, useValue: fakeAuth({ uid: 'u1' } as User, true) },
+        { provide: Router, useValue: fakeRouter(null) },
+      ],
+    });
+    const result = await TestBed.runInInjectionContext(() =>
+      emailVerifiedGuard({} as Route, [] as UrlSegment[], {} as PartialMatchRouteSnapshot),
+    );
+    expect(result).toBe(true);
+  });
+
+  it('redirects an unverified user to the verification page', async () => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthService, useValue: fakeAuth({ uid: 'u1' } as User, false) },
+        { provide: Router, useValue: fakeRouter(null) },
+      ],
+    });
+    const result = await TestBed.runInInjectionContext(() =>
+      emailVerifiedGuard({} as Route, [] as UrlSegment[], {} as PartialMatchRouteSnapshot),
+    );
+    expect(result).toEqual(['/verify-email']);
+  });
+
+  it('redirects an unauthenticated user to login', async () => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthService, useValue: fakeAuth(null) },
+        { provide: Router, useValue: fakeRouter(null) },
+      ],
+    });
+    const result = await TestBed.runInInjectionContext(() =>
+      emailVerifiedGuard({} as Route, [] as UrlSegment[], {} as PartialMatchRouteSnapshot),
     );
     expect(result).toEqual(['/login']);
   });

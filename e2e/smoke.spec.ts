@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { verifyEmailViaEmulator } from './helpers/verify-email';
 
 async function expectNoHorizontalOverflow(page: Page): Promise<void> {
   const { scrollWidth, clientWidth } = await page.evaluate(() => ({
@@ -29,6 +30,8 @@ test.describe('smoke', () => {
     await page.getByLabel('Email').fill(email);
     await page.getByLabel('Password', { exact: true }).fill('password123');
     await page.getByRole('button', { name: 'Create account' }).click();
+
+    await verifyEmailViaEmulator(page, email);
 
     // Land on the warranty list (empty state).
     await expect(page.getByRole('heading', { name: 'Add your first product' })).toBeVisible();
@@ -86,6 +89,7 @@ test.describe('smoke', () => {
     await page.getByLabel('Email').fill(email);
     await page.getByLabel('Password', { exact: true }).fill(password);
     await page.getByRole('button', { name: 'Create account' }).click();
+    await verifyEmailViaEmulator(page, email);
     await expect(page.getByRole('heading', { name: 'Add your first product' })).toBeVisible();
 
     // Sign out back to the landing page.

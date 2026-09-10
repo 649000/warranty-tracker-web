@@ -5,21 +5,126 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // Only verified email addresses may touch user data. Google sign-in users
+    // carry email_verified = true; password users must confirm their address
+    // before they can read or write their own records.
+    function verified() {
+      return signedIn() && request.auth.token.email_verified == true;
+    }
+
+    function owner(uid) {
+      return verified() && request.auth.uid == uid;
+    }
+
+    function str(v, max) {
+      return v is string && v.size() > 0 && v.size() <= max;
+    }
+
+    function productKeys() {
+      return [
+        'name', 'category', 'brand', 'serialNumber', 'retailer',
+        'purchaseDate', 'price', 'proofOfPurchase', 'ownerId',
+        'createdAt', 'updatedAt'
+      ];
+    }
+
+    function validPrice(price) {
+      return price.keys().hasOnly(['amount', 'currency'])
+        && price.amount is number
+        && price.amount >= 0
+        && price.amount <= 100000000
+        && str(price.currency, 8);
+    }
+
+    function validProof(proof) {
+      return proof.keys().hasOnly(['type', 'text', 'storagePath', 'fileName', 'contentType'])
+        && proof.type in ['text', 'image', 'pdf']
+        && (!proof.keys().hasAny(['text']) || str(proof.text, 500))
+        && (!proof.keys().hasAny(['storagePath']) || str(proof.storagePath, 512))
+        && (!proof.keys().hasAny(['fileName']) || str(proof.fileName, 255))
+        && (!proof.keys().hasAny(['contentType']) || str(proof.contentType, 128));
+    }
+
+    function validProduct(uid) {
+      let d = request.resource.data;
+      return d.keys().hasOnly(productKeys())
+        && str(d.name, 120)
+        && d.purchaseDate is timestamp
+        && d.ownerId == uid
+        && d.createdAt is timestamp
+        && d.updatedAt is timestamp
+        && (!d.keys().hasAny(['category']) || str(d.category, 80))
+        && (!d.keys().hasAny(['brand']) || str(d.brand, 80))
+        && (!d.keys().hasAny(['serialNumber']) || str(d.serialNumber, 80))
+        && (!d.keys().hasAny(['retailer']) || str(d.retailer, 80))
+        && (!d.keys().hasAny(['price']) || validPrice(d.price))
+        && (!d.keys().hasAny(['proofOfPurchase']) || validProof(d.proofOfPurchase));
+    }
+
+    function coverageKeys() {
+      return [
+        'source', 'scope', 'duration', 'startDate', 'expiryDate',
+        'manualExpiry', 'contact', 'notes', 'createdAt', 'updatedAt'
+      ];
+    }
+
+    function validDuration(dur) {
+      return dur.keys().hasOnly(['months', 'lifetime'])
+        && (dur.keys().hasAny(['months']) || dur.keys().hasAny(['lifetime']))
+        && (!dur.keys().hasAny(['months'])
+          || (dur.months is int && dur.months >= 1 && dur.months <= 120))
+        && (!dur.keys().hasAny(['lifetime']) || dur.lifetime is bool);
+    }
+
+    function validContact(contact) {
+      return contact.keys().hasOnly(['hotline', 'email', 'url'])
+        && (!contact.keys().hasAny(['hotline']) || str(contact.hotline, 40))
+        && (!contact.keys().hasAny(['email']) || str(contact.email, 254))
+        && (!contact.keys().hasAny(['url']) || str(contact.url, 2048));
+    }
+
+    function validCoverage() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(coverageKeys())
+        && d.source in ['manufacturer', 'retailer', 'international', 'other']
+        && d.scope in ['local', 'international']
+        && d.startDate is timestamp
+        && (d.expiryDate == null || d.expiryDate is timestamp)
+        && d.manualExpiry is bool
+        && d.createdAt is timestamp
+        && d.updatedAt is timestamp
+        && validDuration(d.duration)
+        && (!d.keys().hasAny(['contact']) || validContact(d.contact))
+        && (!d.keys().hasAny(['notes']) || str(d.notes, 500));
+    }
+
     match /users/{uid}/products/{productId} {
-      allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if owner(uid);
+      allow create: if owner(uid) && validProduct(uid);
+      allow update: if owner(uid)
+        && validProduct(uid)
+        && request.resource.data.ownerId == resource.data.ownerId;
+      allow delete: if owner(uid);
 
       match /coverages/{coverageId} {
-        allow read, write: if signedIn() && request.auth.uid == uid;
+        allow read: if owner(uid);
+        allow create, update: if owner(uid) && validCoverage();
+        allow delete: if owner(uid);
       }
     }
 
     match /claimContacts/{contactId} {
-      allow read: if signedIn();
+      allow read: if verified();
       allow write: if false;
     }
 
     match /users/{uid}/settings/{settingId} {
-      allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if owner(uid);
+      allow write: if owner(uid)
+        && settingId == 'notifications'
+        && request.resource.data.keys().hasOnly(['expiryEmailsEnabled', 'updatedAt'])
+        && request.resource.data.expiryEmailsEnabled is bool
+        && request.resource.data.updatedAt is timestamp;
     }
 
     match /users/{uid}/reminderDeliveries/{deliveryId} {

@@ -42,7 +42,9 @@ export class AuthService {
   private returnUrl = '';
   private resolveReady!: () => void;
 
-  readonly emailVerified = computed(() => this.user()?.emailVerified ?? false);
+  /** Tracks `user.emailVerified` explicitly so a reload can flip it reactively. */
+  private readonly verifiedSignal = signal(false);
+  readonly emailVerified = this.verifiedSignal.asReadonly();
   readonly displayName = computed(
     () => this.user()?.displayName ?? this.user()?.email ?? 'Account',
   );
@@ -66,6 +68,7 @@ export class AuthService {
     }
     onAuthStateChanged(this.auth, (user) => {
       this.user.set(user);
+      this.verifiedSignal.set(user?.emailVerified ?? false);
       this.authReady.set(true);
     });
     this.resolveReady();
@@ -100,6 +103,7 @@ export class AuthService {
       signInWithPopup(this.auth, provider),
     );
     this.user.set(credential.user);
+    this.verifiedSignal.set(credential.user.emailVerified);
     this.analytics.log('sign_in');
   }
 
@@ -108,6 +112,7 @@ export class AuthService {
       createUserWithEmailAndPassword(this.auth, email, password),
     );
     this.user.set(credential.user);
+    this.verifiedSignal.set(credential.user.emailVerified);
     this.analytics.log('sign_in');
     if (!credential.user.emailVerified) {
       await sendEmailVerification(credential.user).catch(() => undefined);
@@ -119,6 +124,7 @@ export class AuthService {
       signInWithEmailAndPassword(this.auth, email, password),
     );
     this.user.set(credential.user);
+    this.verifiedSignal.set(credential.user.emailVerified);
     this.analytics.log('sign_in');
   }
 
@@ -153,11 +159,34 @@ export class AuthService {
     if (mode === 'resetPassword') {
       return 'resetPassword';
     }
+    // Wait for the persisted session to restore so `currentUser` exists and its
+    // token can be refreshed after the code is applied.
+    await this.auth.authStateReady();
     await this.run('applyActionCode', () => applyActionCode(this.auth, oobCode));
-    if (mode === 'verifyEmail' && this.auth.currentUser) {
-      await this.auth.currentUser.reload().catch(() => undefined);
+    if (mode === 'verifyEmail' || mode === 'recoverEmail') {
+      await this.refreshEmailVerification();
     }
     return mode;
+  }
+
+  /**
+   * Reloads the current user and forces an ID-token refresh so the
+   * `email_verified` claim used by security rules updates immediately after a
+   * user confirms their address. Returns the refreshed verification state.
+   */
+  async refreshEmailVerification(): Promise<boolean> {
+    const current = this.auth.currentUser;
+    if (!current) {
+      this.verifiedSignal.set(false);
+      return false;
+    }
+    // Best-effort: a network hiccup should not crash the verification page.
+    await current.reload().catch(() => undefined);
+    await current.getIdToken(true).catch(() => undefined);
+    this.user.set(this.auth.currentUser);
+    const verified = this.auth.currentUser?.emailVerified ?? false;
+    this.verifiedSignal.set(verified);
+    return verified;
   }
 
   async confirmPasswordReset(code: string, newPassword: string): Promise<void> {
@@ -178,6 +207,7 @@ export class AuthService {
     }
     await this.run('removeAccount', () => deleteUser(current));
     this.user.set(null);
+    this.verifiedSignal.set(false);
     this.returnUrl = '';
   }
 

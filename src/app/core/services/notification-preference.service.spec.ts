@@ -19,6 +19,10 @@ vi.mock('firebase/auth', () => ({
   getAuth: vi.fn(),
 }));
 vi.mock('firebase/app', () => ({ initializeApp: vi.fn() }));
+vi.mock('firebase/app-check', () => ({
+  initializeAppCheck: vi.fn(),
+  ReCaptchaV3Provider: class {},
+}));
 vi.mock('firebase/storage', () => ({ connectStorageEmulator: vi.fn(), getStorage: vi.fn() }));
 vi.mock('firebase/analytics', () => ({ getAnalytics: vi.fn(), logEvent: vi.fn() }));
 vi.mock('@sentry/angular', () => ({ captureException: vi.fn(), captureMessage: vi.fn() }));

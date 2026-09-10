@@ -1,0 +1,43 @@
+<app-site-header />
+<main class="auth-shell">
+  <h1 class="visually-hidden">Verify Your Email</h1>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Verify Your Email</mat-card-title>
+      <mat-card-subtitle>One Quick Step Before You Start</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        We sent a verification link to <strong>{{ email() }}</strong
+        >. Open it, then confirm below.
+      </p>
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="full"
+        type="button"
+        [disabled]="checking()"
+        (click)="checkVerified()"
+      >
+        {{ checking() ? 'Checking…' : 'I’ve Verified My Email' }}
+      </button>
+      <button
+        mat-stroked-button
+        class="full"
+        type="button"
+        [disabled]="resending()"
+        (click)="resend()"
+      >
+        {{ resending() ? 'Sending…' : 'Resend Verification Email' }}
+      </button>
+
+      <p role="status" class="sent">{{ status() }}</p>
+
+      <div class="links">
+        <a routerLink="/login">Back to Sign In</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</main>
+<app-site-footer />

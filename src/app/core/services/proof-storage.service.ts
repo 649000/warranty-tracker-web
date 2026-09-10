@@ -6,6 +6,7 @@ import {
   ref,
   uploadBytes,
   type FirebaseStorage,
+  type StorageReference,
 } from 'firebase/storage';
 import imageCompression from 'browser-image-compression';
 import { STORAGE } from '../firebase/firebase.providers';
@@ -82,8 +83,7 @@ export class ProofStorageService {
   async deleteAllUserFiles(uid: string): Promise<void> {
     await this.run('deleteAllUserFiles', async () => {
       const root = ref(this.storage, `users/${uid}/proofs`);
-      const list = await listAll(root);
-      await Promise.all(list.items.map((item) => deleteObject(item)));
+      await deleteAllUnder(root);
     });
   }
 
@@ -99,4 +99,13 @@ export class ProofStorageService {
 
 function sanitizeFileName(name: string): string {
   return name.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 80) || 'file';
+}
+
+/** Recursively deletes every object under a Storage directory. */
+async function deleteAllUnder(dir: StorageReference): Promise<void> {
+  const list = await listAll(dir);
+  await Promise.all([
+    ...list.items.map((item) => deleteObject(item)),
+    ...list.prefixes.map((prefix) => deleteAllUnder(prefix)),
+  ]);
 }

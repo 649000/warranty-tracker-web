@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { verifyEmailViaEmulator } from './helpers/verify-email';
 
 test.describe('claim directory', () => {
   test('suggests a claim route, honours an override, and resets', async ({ page }) => {
@@ -10,7 +11,7 @@ test.describe('claim directory', () => {
     await page.getByLabel('Email').fill(email);
     await page.getByLabel('Password', { exact: true }).fill('password123');
     await page.getByRole('button', { name: 'Create account' }).click();
-    await expect(page).toHaveURL(/\/warranties/);
+    await verifyEmailViaEmulator(page, email);
 
     // Add an Apple product (matches a seeded claim contact).
     await page.getByRole('link', { name: 'Add Product' }).first().click();

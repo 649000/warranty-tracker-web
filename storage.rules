@@ -1,8 +1,17 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    match /users/{uid}/proofs/{allPaths=**} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
+    match /users/{uid}/proofs/{productId}/{fileName} {
+      // Reads and deletes stay owner-only. Deletes must not be size/type gated
+      // because request.resource is null on delete.
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+
+      // Uploads are capped at 5 MB and restricted to images or PDFs so a
+      // scripted client cannot run up Storage bytes/egress.
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*|application/pdf');
     }
   }
 }

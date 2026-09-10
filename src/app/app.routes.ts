@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard, guestGuard } from './core/guards/auth.guard';
+import { authGuard, emailVerifiedGuard, guestGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -31,6 +31,12 @@ export const routes: Routes = [
       import('./features/auth/reset-password.component').then((m) => m.ResetPasswordComponent),
   },
   {
+    path: 'verify-email',
+    canMatch: [authGuard],
+    loadComponent: () =>
+      import('./features/auth/verify-email.component').then((m) => m.VerifyEmailComponent),
+  },
+  {
     path: 'terms',
     loadComponent: () => import('./features/legal/terms.component').then((m) => m.TermsComponent),
   },
@@ -41,7 +47,7 @@ export const routes: Routes = [
   },
   {
     path: 'warranties',
-    canMatch: [authGuard],
+    canMatch: [authGuard, emailVerifiedGuard],
     loadComponent: () => import('./shell/shell.component').then((m) => m.ShellComponent),
     children: [
       {
@@ -76,7 +82,7 @@ export const routes: Routes = [
   },
   {
     path: 'account',
-    canMatch: [authGuard],
+    canMatch: [authGuard, emailVerifiedGuard],
     loadComponent: () => import('./shell/shell.component').then((m) => m.ShellComponent),
     children: [
       {

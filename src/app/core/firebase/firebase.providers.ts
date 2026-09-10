@@ -1,10 +1,11 @@
 import { InjectionToken, type Provider } from '@angular/core';
 import { initializeApp, type FirebaseApp } from 'firebase/app';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth';
 import { connectFirestoreEmulator, getFirestore, type Firestore } from 'firebase/firestore';
 import { connectStorageEmulator, getStorage, type FirebaseStorage } from 'firebase/storage';
 import { getAnalytics, type Analytics } from 'firebase/analytics';
-import { firebaseConfig, useEmulators } from '@env/environment';
+import { appCheckSiteKey, firebaseConfig, useEmulators } from '@env/environment';
 
 export const APP = new InjectionToken<FirebaseApp>('FirebaseApp');
 export const AUTH = new InjectionToken<Auth>('FirebaseAuth');
@@ -13,7 +14,18 @@ export const STORAGE = new InjectionToken<FirebaseStorage>('FirebaseStorage');
 export const ANALYTICS = new InjectionToken<Analytics | null>('FirebaseAnalytics');
 
 function firebaseAppFactory(): FirebaseApp {
-  return initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  if (appCheckSiteKey && !useEmulators) {
+    try {
+      initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider(appCheckSiteKey),
+        isTokenAutoRefreshEnabled: true,
+      });
+    } catch {
+      // App Check is best-effort; never block startup if attestation fails.
+    }
+  }
+  return app;
 }
 
 function authFactory(app: FirebaseApp): Auth {

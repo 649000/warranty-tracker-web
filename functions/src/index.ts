@@ -5,6 +5,7 @@ import { defineBoolean, defineSecret, defineString } from 'firebase-functions/pa
 import { logger } from 'firebase-functions/v2';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import {
+  FUNCTION_MAX_INSTANCES,
   FUNCTION_MEMORY_MIB,
   FUNCTION_REGION,
   FUNCTION_TIMEOUT_SECONDS,
@@ -36,6 +37,7 @@ export const sendExpiryReminders = onSchedule(
     region: FUNCTION_REGION,
     memory: `${FUNCTION_MEMORY_MIB}MiB`,
     timeoutSeconds: FUNCTION_TIMEOUT_SECONDS,
+    maxInstances: FUNCTION_MAX_INSTANCES,
     secrets: [resendApiKey, emailFrom],
   },
   async () => {

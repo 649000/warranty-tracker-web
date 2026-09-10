@@ -13,7 +13,7 @@
     "emulators": "firebase emulators:start --only auth,firestore,storage",
     "seed:claim-contacts": "tsx scripts/seed-claim-contacts.ts",
     "typecheck:scripts": "tsc -p scripts/tsconfig.json",
-    "test:rules": "firebase emulators:exec --only firestore \"vitest run --config test/vitest.config.ts\"",
+    "test:rules": "firebase emulators:exec --only firestore,storage \"vitest run --config test/vitest.config.ts\"",
     "test:functions": "npm test --prefix functions",
     "test:functions:emulator": "firebase emulators:exec --only firestore \"npm test --prefix functions -- --config vitest.emulator.config.ts\"",
     "e2e": "playwright test"

@@ -21,6 +21,22 @@ export const authGuard: CanMatchFn = async () => {
 };
 
 /**
+ * Requires a signed-in user whose email address is verified. Unverified
+ * password users are sent to the verification page; Google users pass through
+ * because their provider asserts a verified address. Security rules enforce
+ * the same requirement server-side.
+ */
+export const emailVerifiedGuard: CanMatchFn = async () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  await auth.readyPromise;
+  if (!auth.user()) {
+    return router.createUrlTree(['/login']);
+  }
+  return auth.emailVerified() ? true : router.createUrlTree(['/verify-email']);
+};
+
+/**
  * Keeps the auth pages (login/signup/etc.) reachable for everyone. Signed-in
  * users are redirected off these pages by `redirectIfAuthenticated` (run by
  * each auth-page component), not here, to avoid an endless guard redirect loop.
