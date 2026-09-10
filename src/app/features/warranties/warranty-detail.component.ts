@@ -12,7 +12,16 @@ import { format, differenceInCalendarDays, differenceInMilliseconds } from 'date
 import { AuthService } from '../../core/services/auth.service';
 import { ProductService, type CoverageDraft } from '../../core/services/product.service';
 import { ProofStorageService } from '../../core/services/proof-storage.service';
-import type { Coverage, Product } from '../../core/models/warranty.model';
+import {
+  ClaimDirectoryService,
+  type ClaimSuggestion,
+} from '../../core/services/claim-directory.service';
+import type {
+  Coverage,
+  CoverageContact,
+  CoverageSource,
+  Product,
+} from '../../core/models/warranty.model';
 import {
   coverageStatus,
   nextExpiry,
@@ -21,7 +30,10 @@ import {
 } from '../../core/utils/coverage-status';
 import { StatusBadgeComponent } from '../../shared/status-badge.component';
 import { ProductThumbComponent } from '../../shared/product-thumb.component';
-import { CoverageDialogComponent } from './coverage-dialog.component';
+import {
+  CoverageDialogComponent,
+  type CoverageDialogData,
+} from './coverage-dialog.component';
 import { ProofLightboxComponent } from './proof-lightbox.component';
 
 @Component({
@@ -46,6 +58,7 @@ import { ProofLightboxComponent } from './proof-lightbox.component';
 export class WarrantyDetailComponent {
   private readonly auth = inject(AuthService);
   private readonly products = inject(ProductService);
+  private readonly directory = inject(ClaimDirectoryService);
   private readonly proofs = inject(ProofStorageService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
@@ -71,6 +84,7 @@ export class WarrantyDetailComponent {
     if (user) {
       this.products.watch(user.uid);
     }
+    void this.directory.ensureLoaded();
     const product = await this.products.getProduct(this.uid(), this.productId());
     if (!product) {
       this.snackbar.open('Product Not Found.', 'Close', { duration: 4000 });
@@ -82,6 +96,27 @@ export class WarrantyDetailComponent {
   }
 
   readonly coverages = computed(() => this.products.coveragesFor(this.productId()));
+
+  /** Claim information (user override or directory suggestion) keyed by coverage id. */
+  readonly claimInfo = computed<ReadonlyMap<string, ClaimSuggestion>>(() => {
+    const product = this.product();
+    const map = new Map<string, ClaimSuggestion>();
+    if (!product) {
+      return map;
+    }
+    for (const coverage of this.coverages()) {
+      map.set(
+        coverage.id,
+        this.directory.resolve(
+          coverage.source,
+          product.brand,
+          product.retailer,
+          coverage.contact,
+        ),
+      );
+    }
+    return map;
+  });
 
   readonly productStatus = computed<CoverageStatus>(() =>
     this.product() ? productStatus(this.products.coveragesFor(this.product()!.id)) : 'expired',
@@ -161,6 +196,29 @@ export class WarrantyDetailComponent {
     return 'Covered';
   }
 
+  /** The contact details to display for a coverage's claim block. */
+  displayContact(claim: ClaimSuggestion): CoverageContact | undefined {
+    if (claim.status === 'user') {
+      return claim.userContact;
+    }
+    const entry = claim.entry;
+    if (!entry) {
+      return undefined;
+    }
+    const contact: CoverageContact = {
+      hotline: entry.hotline,
+      email: entry.email,
+      url: entry.url,
+    };
+    return contact.hotline || contact.email || contact.url ? contact : undefined;
+  }
+
+  async resetContact(coverage: Coverage): Promise<void> {
+    const product = this.product();
+    if (!product) return;
+    await this.products.clearCoverageContact(this.uid(), product.id, coverage.id);
+  }
+
   toggleExpand(id: string): void {
     this.expanded.update((set) => {
       const next = new Set(set);
@@ -173,12 +231,28 @@ export class WarrantyDetailComponent {
     });
   }
 
+  /** The directory's contact suggestion for a coverage source, if any. */
+  private suggestedContactFor(source: CoverageSource): CoverageContact | undefined {
+    const product = this.product();
+    if (!product) return undefined;
+    const entry = this.directory.findEntry(source, product.brand, product.retailer);
+    if (!entry || (!entry.hotline && !entry.email && !entry.url)) return undefined;
+    return { hotline: entry.hotline, email: entry.email, url: entry.url };
+  }
+
   async addCoverage(): Promise<void> {
     const product = this.product();
     if (!product) return;
-    const ref = this.dialog.open<CoverageDialogComponent, { startDate: Date }, CoverageDraft>(
+    const ref = this.dialog.open<CoverageDialogComponent, CoverageDialogData, CoverageDraft>(
       CoverageDialogComponent,
-      { data: { startDate: product.purchaseDate }, width: '480px', maxWidth: '94vw' },
+      {
+        data: {
+          startDate: product.purchaseDate,
+          suggestedContact: this.suggestedContactFor('manufacturer'),
+        },
+        width: '480px',
+        maxWidth: '94vw',
+      },
     );
     const draft = await firstValueFrom(ref.afterClosed());
     if (draft) {
@@ -189,15 +263,18 @@ export class WarrantyDetailComponent {
   async editCoverage(coverage: Coverage): Promise<void> {
     const product = this.product();
     if (!product) return;
-    const ref = this.dialog.open<
+    const ref = this.dialog.open<CoverageDialogComponent, CoverageDialogData, CoverageDraft>(
       CoverageDialogComponent,
-      { startDate: Date; coverage: Coverage },
-      CoverageDraft
-    >(CoverageDialogComponent, {
-      data: { startDate: coverage.startDate, coverage },
-      width: '480px',
-      maxWidth: '94vw',
-    });
+      {
+        data: {
+          startDate: coverage.startDate,
+          coverage,
+          suggestedContact: this.suggestedContactFor(coverage.source),
+        },
+        width: '480px',
+        maxWidth: '94vw',
+      },
+    );
     const draft = await firstValueFrom(ref.afterClosed());
     if (draft) {
       await this.products.updateCoverage(this.uid(), product.id, {

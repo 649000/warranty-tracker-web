@@ -13,6 +13,11 @@ service cloud.firestore {
       }
     }
 
+    match /claimContacts/{contactId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
     match /users/{uid}/settings/{settingId} {
       allow read, write: if signedIn() && request.auth.uid == uid;
     }

@@ -184,30 +184,69 @@
           </button>
 
           @if (expanded().has(coverage.id)) {
+            @let claim = claimInfo().get(coverage.id);
+            @let contact = claim ? displayContact(claim) : undefined;
             <div class="coverage-detail">
-              @if (coverage.contact?.hotline || coverage.contact?.email || coverage.contact?.url) {
-                <div class="contact-block">
-                  <h3>Contact</h3>
-                  @if (coverage.contact?.hotline) {
-                    <p>
-                      <a [href]="'tel:' + coverage.contact!.hotline">{{
-                        coverage.contact!.hotline
-                      }}</a>
+              @if (claim && claim.status !== 'none') {
+                <div class="claim-block">
+                  <div class="claim-block__head">
+                    <h3>How to Claim</h3>
+                    <span
+                      class="claim-block__tag"
+                      [class.claim-block__tag--user]="claim.status === 'user'"
+                    >
+                      {{ claim.status === 'user' ? 'Your Contact' : 'Suggested' }}
+                    </span>
+                  </div>
+
+                  @if (contact?.hotline; as hotline) {
+                    <p class="claim-block__line">
+                      <mat-icon>call</mat-icon>
+                      <a [href]="'tel:' + hotline">{{ hotline }}</a>
                     </p>
                   }
-                  @if (coverage.contact?.email) {
-                    <p>
-                      <a [href]="'mailto:' + coverage.contact!.email">{{
-                        coverage.contact!.email
-                      }}</a>
+                  @if (contact?.email; as email) {
+                    <p class="claim-block__line">
+                      <mat-icon>mail</mat-icon>
+                      <a [href]="'mailto:' + email">{{ email }}</a>
                     </p>
                   }
-                  @if (coverage.contact?.url) {
-                    <p>
-                      <a [href]="coverage.contact!.url" target="_blank" rel="noopener">{{
-                        coverage.contact!.url
-                      }}</a>
+                  @if (contact?.url; as url) {
+                    <p class="claim-block__line">
+                      <mat-icon>language</mat-icon>
+                      <a [href]="url" target="_blank" rel="noopener">{{ url }}</a>
                     </p>
+                  }
+
+                  @if (claim.entry?.claimSteps; as steps) {
+                    <ol class="claim-steps">
+                      @for (step of steps; track step) {
+                        <li>{{ step }}</li>
+                      }
+                    </ol>
+                  }
+
+                  @if (claim.entry?.serviceCenterUrl; as serviceCenterUrl) {
+                    <a
+                      class="claim-block__link"
+                      [href]="serviceCenterUrl"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <mat-icon>location_on</mat-icon>
+                      Find a Service Centre
+                    </a>
+                  }
+                  @if (claim.entry?.registrationUrl; as registrationUrl) {
+                    <a
+                      class="claim-block__link"
+                      [href]="registrationUrl"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <mat-icon>app_registration</mat-icon>
+                      Register Your Product
+                    </a>
                   }
                 </div>
               }
@@ -215,6 +254,11 @@
                 <p class="notes">{{ coverage.notes }}</p>
               }
               <div class="coverage-actions">
+                @if (claim?.status === 'user') {
+                  <button mat-stroked-button type="button" (click)="resetContact(coverage)">
+                    Reset to Suggested
+                  </button>
+                }
                 <button mat-flat-button type="button" (click)="editCoverage(coverage)">Edit</button>
                 <button
                   mat-stroked-button

@@ -11,7 +11,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DURATION_PRESETS } from '../../core/models/catalog';
-import type { Coverage, CoverageScope, CoverageSource } from '../../core/models/warranty.model';
+import type {
+  Coverage,
+  CoverageContact,
+  CoverageScope,
+  CoverageSource,
+} from '../../core/models/warranty.model';
 import type { CoverageDraft } from '../../core/services/product.service';
 import {
   customMonthsError,
@@ -22,6 +27,8 @@ import {
 export interface CoverageDialogData {
   startDate: Date;
   coverage?: Coverage;
+  /** Contact details suggested by the claim directory, used to prefill empty fields. */
+  suggestedContact?: CoverageContact;
 }
 
 export interface CoverageDialogModel {
@@ -34,6 +41,19 @@ export interface CoverageDialogModel {
   contactEmail: string;
   contactUrl: string;
   notes: string;
+}
+
+function hasContact(contact: CoverageContact | undefined): boolean {
+  return !!contact && !!(contact.hotline || contact.email || contact.url);
+}
+
+/** Builds a contact object, omitting empty fields (Firestore rejects undefined). */
+function buildContact(m: CoverageDialogModel): CoverageContact | undefined {
+  const contact: CoverageContact = {};
+  if (m.hotline) contact.hotline = m.hotline;
+  if (m.contactEmail) contact.email = m.contactEmail;
+  if (m.contactUrl) contact.url = m.contactUrl;
+  return hasContact(contact) ? contact : undefined;
 }
 
 const DEFAULT_MODEL: CoverageDialogModel = {
@@ -106,10 +126,34 @@ export class CoverageDialogComponent {
     });
   });
 
+  /** True when the contact fields were prefilled from the directory (not a user override). */
+  private get prefilledFromSuggestion(): boolean {
+    return !hasContact(this.data.coverage?.contact) && !!this.data.suggestedContact;
+  }
+
+  /** True when the contact fields still match the directory suggestion. */
+  private prefillUnchanged(m: CoverageDialogModel): boolean {
+    const s = this.data.suggestedContact;
+    if (!s) {
+      return false;
+    }
+    return (
+      m.hotline === (s.hotline ?? '') &&
+      m.contactEmail === (s.email ?? '') &&
+      m.contactUrl === (s.url ?? '')
+    );
+  }
+
   private resolveInitialModel(): CoverageDialogModel {
     const c = this.data.coverage;
+    // A user override replaces the suggestion entirely; only fall back to the
+    // directory when the coverage has no user-entered contact.
+    const base = hasContact(c?.contact) ? c!.contact : this.data.suggestedContact;
+    const hotline = base?.hotline ?? '';
+    const contactEmail = base?.email ?? '';
+    const contactUrl = base?.url ?? '';
     if (!c) {
-      return { ...DEFAULT_MODEL };
+      return { ...DEFAULT_MODEL, hotline, contactEmail, contactUrl };
     }
     const preset = c.duration.lifetime
       ? undefined
@@ -122,9 +166,9 @@ export class CoverageDialogComponent {
       duration,
       customMonths,
       manualExpiry: c.expiryDate,
-      hotline: c.contact?.hotline ?? '',
-      contactEmail: c.contact?.email ?? '',
-      contactUrl: c.contact?.url ?? '',
+      hotline,
+      contactEmail,
+      contactUrl,
       notes: c.notes ?? '',
     };
   }
@@ -154,14 +198,9 @@ export class CoverageDialogComponent {
           ? { lifetime: true as const }
           : { months: preset.months as number }
         : { months: m.customMonths ?? 12 };
+      // An untouched directory prefill is not stored; it stays a live suggestion.
       const contact =
-        m.hotline || m.contactEmail || m.contactUrl
-          ? {
-              hotline: m.hotline || undefined,
-              email: m.contactEmail || undefined,
-              url: m.contactUrl || undefined,
-            }
-          : undefined;
+        this.prefilledFromSuggestion && this.prefillUnchanged(m) ? undefined : buildContact(m);
       const draft: CoverageDraft = {
         source: m.source,
         scope: m.scope,

@@ -160,6 +160,65 @@ describe('Firestore security rules', () => {
     ).rejects.toThrow();
   });
 
+  it('allows an authenticated user to read the claim directory', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await context
+        .firestore()
+        .collection('claimContacts')
+        .doc('manufacturer_apple')
+        .set({ type: 'manufacturer', name: 'Apple', matchKeys: ['apple'] });
+    });
+
+    const snapshot = await testEnv
+      .authenticatedContext('alice')
+      .firestore()
+      .collection('claimContacts')
+      .doc('manufacturer_apple')
+      .get();
+    expect(snapshot.data()?.['name']).toBe('Apple');
+  });
+
+  it('denies unauthenticated reads of the claim directory', async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await context
+        .firestore()
+        .collection('claimContacts')
+        .doc('manufacturer_apple')
+        .set({ type: 'manufacturer', name: 'Apple', matchKeys: ['apple'] });
+    });
+
+    await expect(
+      testEnv
+        .unauthenticatedContext()
+        .firestore()
+        .collection('claimContacts')
+        .doc('manufacturer_apple')
+        .get(),
+    ).rejects.toThrow();
+  });
+
+  it('denies client writes to the claim directory', async () => {
+    const directory = testEnv
+      .authenticatedContext('alice')
+      .firestore()
+      .collection('claimContacts');
+
+    await expect(
+      directory.doc('manufacturer_apple').set({ type: 'manufacturer', name: 'Apple' }),
+    ).rejects.toThrow();
+
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await context
+        .firestore()
+        .collection('claimContacts')
+        .doc('manufacturer_apple')
+        .set({ type: 'manufacturer', name: 'Apple', matchKeys: ['apple'] });
+    });
+
+    await expect(directory.doc('manufacturer_apple').update({ name: 'Apple Inc' })).rejects.toThrow();
+    await expect(directory.doc('manufacturer_apple').delete()).rejects.toThrow();
+  });
+
   it('denies users access to the reminder delivery ledger', async () => {
     const delivery = testEnv
       .authenticatedContext('alice')

@@ -219,6 +219,16 @@ export class ProductService {
     });
   }
 
+  /** Removes a coverage's user-entered contact so a directory suggestion can show. */
+  async clearCoverageContact(uid: string, productId: string, coverageId: string): Promise<void> {
+    await this.run('clearCoverageContact', async () => {
+      await updateDoc(doc(this.db, 'users', uid, 'products', productId, 'coverages', coverageId), {
+        contact: deleteField(),
+        updatedAt: serverTimestamp(),
+      });
+    });
+  }
+
   async deleteCoverage(uid: string, productId: string, coverageId: string): Promise<void> {
     await this.run('deleteCoverage', async () => {
       await deleteDoc(doc(this.db, 'users', uid, 'products', productId, 'coverages', coverageId));

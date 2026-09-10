@@ -1,7 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { describe, expect, it, vi } from 'vitest';
+import type { Coverage } from '../../core/models/warranty.model';
 import { CoverageDialogComponent, type CoverageDialogData } from './coverage-dialog.component';
+
+const SUGGESTED = {
+  hotline: '+65 1800 123 4567',
+  email: 'support@apple.com',
+  url: 'https://support.apple.com',
+};
+
+const EXISTING_COVERAGE: Coverage = {
+  id: 'c1',
+  source: 'manufacturer',
+  scope: 'local',
+  duration: { months: 12 },
+  startDate: new Date(2024, 0, 1),
+  expiryDate: new Date(2025, 0, 1),
+  manualExpiry: false,
+  contact: { email: 'me@example.com' },
+};
 
 function setup(overrides: Partial<CoverageDialogData> = {}) {
   const dialogRef = { close: vi.fn() };
@@ -116,5 +134,47 @@ describe('CoverageDialogComponent', () => {
       manualExpiry: new Date(2023, 11, 31),
     }));
     expect(component.dialogForm().invalid()).toBe(true);
+  });
+
+  it('prefills contact fields from the directory suggestion', () => {
+    const { component } = setup({ suggestedContact: SUGGESTED });
+    expect(component.model().hotline).toBe(SUGGESTED.hotline);
+    expect(component.model().contactEmail).toBe(SUGGESTED.email);
+    expect(component.model().contactUrl).toBe(SUGGESTED.url);
+  });
+
+  it('does not store an untouched directory prefill', async () => {
+    const { component, dialogRef } = setup({ suggestedContact: SUGGESTED });
+    await component.save();
+    expect(dialogRef.close).toHaveBeenCalledWith(expect.objectContaining({ contact: undefined }));
+  });
+
+  it('stores contact the user edits over the suggestion', async () => {
+    const { component, dialogRef } = setup({ suggestedContact: SUGGESTED });
+    component.model.update((m) => ({ ...m, contactEmail: 'me@example.com' }));
+    await component.save();
+    expect(dialogRef.close).toHaveBeenCalledWith(
+      expect.objectContaining({ contact: expect.objectContaining({ email: 'me@example.com' }) }),
+    );
+  });
+
+  it('keeps an existing user contact over the suggestion when editing', () => {
+    const { component } = setup({
+      coverage: EXISTING_COVERAGE,
+      suggestedContact: SUGGESTED,
+    });
+    expect(component.model().contactEmail).toBe('me@example.com');
+    expect(component.model().contactUrl).toBe('');
+  });
+
+  it('keeps a stored user contact on save when editing', async () => {
+    const { component, dialogRef } = setup({
+      coverage: EXISTING_COVERAGE,
+      suggestedContact: SUGGESTED,
+    });
+    await component.save();
+    expect(dialogRef.close).toHaveBeenCalledWith(
+      expect.objectContaining({ contact: expect.objectContaining({ email: 'me@example.com' }) }),
+    );
   });
 });
