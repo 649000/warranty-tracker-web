@@ -22,10 +22,7 @@ import type {
   CoverageSource,
   Product,
 } from '../../core/models/warranty.model';
-import {
-  buildCoverageGuidance,
-  type CoverageGuidance,
-} from '../../core/models/coverage-guidance';
+import { buildCoverageGuidance, type CoverageGuidance } from '../../core/models/coverage-guidance';
 import {
   coverageStatus,
   nextExpiry,

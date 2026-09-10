@@ -68,8 +68,7 @@ export const COVERAGE_SCENARIOS: CoverageScenario[] = [
     id: 'unauthorized-repair',
     label: 'Unauthorized Repair',
     verdict: 'excluded',
-    explanation:
-      'Repairs or parts from an unauthorized provider can void the remaining warranty.',
+    explanation: 'Repairs or parts from an unauthorized provider can void the remaining warranty.',
   },
   {
     id: 'theft-loss',

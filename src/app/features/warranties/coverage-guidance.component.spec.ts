@@ -46,6 +46,8 @@ describe('CoverageGuidanceComponent', () => {
 
   it('omits the official terms link when no URL is available', () => {
     const fixture = setup('Computers', undefined);
-    expect((fixture.nativeElement as HTMLElement).querySelector('.guidance-block__link')).toBeNull();
+    expect(
+      (fixture.nativeElement as HTMLElement).querySelector('.guidance-block__link'),
+    ).toBeNull();
   });
 });
