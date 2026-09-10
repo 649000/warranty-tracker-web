@@ -23,6 +23,10 @@ import type {
   Product,
 } from '../../core/models/warranty.model';
 import {
+  buildCoverageGuidance,
+  type CoverageGuidance,
+} from '../../core/models/coverage-guidance';
+import {
   coverageStatus,
   nextExpiry,
   productStatus,
@@ -31,6 +35,7 @@ import {
 import { StatusBadgeComponent } from '../../shared/status-badge.component';
 import { ProductThumbComponent } from '../../shared/product-thumb.component';
 import { CoverageDialogComponent, type CoverageDialogData } from './coverage-dialog.component';
+import { CoverageGuidanceComponent } from './coverage-guidance.component';
 import { ProofLightboxComponent } from './proof-lightbox.component';
 
 @Component({
@@ -45,6 +50,7 @@ import { ProofLightboxComponent } from './proof-lightbox.component';
     MatDialogModule,
     StatusBadgeComponent,
     ProductThumbComponent,
+    CoverageGuidanceComponent,
     TitleCasePipe,
     DecimalPipe,
     DatePipe,
@@ -203,6 +209,19 @@ export class WarrantyDetailComponent {
       url: entry.url,
     };
     return contact.hotline || contact.email || contact.url ? contact : undefined;
+  }
+
+  /**
+   * The plain-language coverage guidance for a coverage, or null when none applies.
+   * Reads the claim suggestion so the official-terms link can reuse an existing URL.
+   */
+  coverageGuidance(coverage: Coverage | null | undefined): CoverageGuidance | null {
+    if (!coverage) {
+      return null;
+    }
+    const claim = this.claimInfo().get(coverage.id);
+    const contact = claim ? this.displayContact(claim) : undefined;
+    return buildCoverageGuidance(this.product()?.category, contact?.url);
   }
 
   async resetContact(coverage: Coverage): Promise<void> {

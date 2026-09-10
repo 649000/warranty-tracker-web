@@ -1,0 +1,35 @@
+<div class="guidance-block">
+  <div class="guidance-block__head">
+    <h3>What's Typically Covered</h3>
+    <span class="guidance-block__tag">General</span>
+  </div>
+  <ul class="guidance-scenarios">
+    @for (scenario of guidance().scenarios; track scenario.id) {
+      <li class="guidance-scenario">
+        <span
+          class="guidance-verdict"
+          [class.guidance-verdict--covered]="scenario.verdict === 'covered'"
+          [class.guidance-verdict--excluded]="scenario.verdict === 'excluded'"
+          [class.guidance-verdict--varies]="scenario.verdict === 'varies'"
+        >
+          {{ verdictLabel(scenario.verdict) }}
+        </span>
+        <span class="guidance-scenario__text">
+          <strong>{{ scenario.label }}</strong>
+          <span>{{ scenario.explanation }}</span>
+        </span>
+      </li>
+    }
+  </ul>
+  @if (guidance().categoryNote; as note) {
+    <p class="guidance-note">{{ note }}</p>
+  }
+  <p class="guidance-baseline">{{ guidance().baseline }}</p>
+  <p class="guidance-disclaimer">{{ guidance().disclaimer }}</p>
+  @if (guidance().termsUrl; as url) {
+    <a class="guidance-block__link" [href]="url" target="_blank" rel="noopener">
+      <mat-icon>gavel</mat-icon>
+      View Official Terms
+    </a>
+  }
+</div>

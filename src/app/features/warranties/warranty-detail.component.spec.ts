@@ -43,11 +43,11 @@ const COVERAGE: Coverage = {
   manualExpiry: false,
 };
 
-function setup(resolveResult: unknown, coverage: Coverage = COVERAGE) {
+function setup(resolveResult: unknown, coverages: Coverage[] = [COVERAGE]) {
   const products = {
     watch: vi.fn(),
     getProduct: vi.fn().mockResolvedValue(PRODUCT),
-    coveragesFor: vi.fn().mockReturnValue([coverage]),
+    coveragesFor: vi.fn().mockReturnValue(coverages),
     clearCoverageContact: vi.fn().mockResolvedValue(undefined),
     coverages: signal(new Map()),
   };
@@ -137,5 +137,65 @@ describe('WarrantyDetailComponent claim panel', () => {
     fixture.detectChanges();
     const block = (fixture.nativeElement as HTMLElement).querySelector('.claim-block');
     expect(block).toBeNull();
+  });
+});
+
+describe('WarrantyDetailComponent coverage guidance', () => {
+  it('returns guidance covering the covered, excluded, and varies cases', async () => {
+    const { fixture, component } = setup({ status: 'suggested', entry: SUGGESTED_ENTRY });
+    await fixture.whenStable();
+    const guidance = component.coverageGuidance(COVERAGE);
+    expect(guidance).not.toBeNull();
+    const verdicts = guidance!.scenarios.map((scenario) => scenario.verdict);
+    expect(verdicts).toContain('covered');
+    expect(verdicts).toContain('excluded');
+    expect(verdicts).toContain('varies');
+  });
+
+  it('uses the resolved claim URL as the official terms link', async () => {
+    const { fixture, component } = setup({ status: 'suggested', entry: SUGGESTED_ENTRY });
+    await fixture.whenStable();
+    expect(component.coverageGuidance(COVERAGE)?.termsUrl).toBe('https://support.apple.com');
+  });
+
+  it('omits the official terms link when no URL is available', async () => {
+    const { fixture, component } = setup({ status: 'none' });
+    await fixture.whenStable();
+    expect(component.coverageGuidance(COVERAGE)?.termsUrl).toBeUndefined();
+  });
+
+  it('returns no guidance for a missing coverage', async () => {
+    const { fixture, component } = setup({ status: 'none' });
+    await fixture.whenStable();
+    expect(component.coverageGuidance(null)).toBeNull();
+    expect(component.coverageGuidance(undefined)).toBeNull();
+  });
+
+  it('renders the guidance block for an expanded coverage', async () => {
+    const { fixture, component } = setup({ status: 'suggested', entry: SUGGESTED_ENTRY });
+    await fixture.whenStable();
+    component.toggleExpand('c1');
+    fixture.detectChanges();
+    const block = (fixture.nativeElement as HTMLElement).querySelector('.guidance-block');
+    expect(block).toBeTruthy();
+    const text = block!.textContent ?? '';
+    expect(text).toContain("What's Typically Covered");
+    expect(text).toContain('Typically Covered');
+    expect(text).toContain('Typically Excluded');
+    expect(text).toContain('Varies');
+    expect(text).toContain('consumer law');
+    expect(text).toContain('Battery and display faults');
+    expect(text).toContain('General guidance only');
+    const link = block!.querySelector('.guidance-block__link');
+    expect(link?.getAttribute('href')).toBe('https://support.apple.com');
+  });
+
+  it('renders the panel without a guidance block when there are no coverages', async () => {
+    const { fixture } = setup({ status: 'none' }, []);
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.guidance-block')).toBeNull();
+    expect(el.textContent).toContain('No coverage yet');
   });
 });

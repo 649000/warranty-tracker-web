@@ -68,6 +68,10 @@ test.describe('smoke', () => {
     await page.getByText('Sony WH-1000XM4').click();
     await expect(page.getByRole('heading', { name: 'Product Details' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Coverage' })).toBeVisible();
+
+    // Expand the coverage so the coverage-guidance block is included in the scan.
+    await page.locator('.coverage-summary').first().click();
+    await expect(page.getByRole('heading', { name: "What's Typically Covered" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
     const detailResults = await new AxeBuilder({ page }).analyze();
     expect(detailResults.violations).toEqual([]);

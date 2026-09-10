@@ -186,6 +186,7 @@
           @if (expanded().has(coverage.id)) {
             @let claim = claimInfo().get(coverage.id);
             @let contact = claim ? displayContact(claim) : undefined;
+            @let guidance = coverageGuidance(coverage);
             <div class="coverage-detail">
               @if (claim && claim.status !== 'none') {
                 <div class="claim-block">
@@ -249,6 +250,9 @@
                     </a>
                   }
                 </div>
+              }
+              @if (guidance; as g) {
+                <app-coverage-guidance [guidance]="g" />
               }
               @if (coverage.notes) {
                 <p class="notes">{{ coverage.notes }}</p>
