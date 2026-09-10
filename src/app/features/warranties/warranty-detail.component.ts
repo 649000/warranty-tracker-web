@@ -30,10 +30,7 @@ import {
 } from '../../core/utils/coverage-status';
 import { StatusBadgeComponent } from '../../shared/status-badge.component';
 import { ProductThumbComponent } from '../../shared/product-thumb.component';
-import {
-  CoverageDialogComponent,
-  type CoverageDialogData,
-} from './coverage-dialog.component';
+import { CoverageDialogComponent, type CoverageDialogData } from './coverage-dialog.component';
 import { ProofLightboxComponent } from './proof-lightbox.component';
 
 @Component({
@@ -107,12 +104,7 @@ export class WarrantyDetailComponent {
     for (const coverage of this.coverages()) {
       map.set(
         coverage.id,
-        this.directory.resolve(
-          coverage.source,
-          product.brand,
-          product.retailer,
-          coverage.contact,
-        ),
+        this.directory.resolve(coverage.source, product.brand, product.retailer, coverage.contact),
       );
     }
     return map;
