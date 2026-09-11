@@ -100,8 +100,8 @@ off first (see the env-file override above), then remove that override:
 - Create a **budget alert** in Google Cloud Billing at ~50%/90%/100% of a small
   monthly amount so unexpected email volume or invocations page you.
 - The function uses the minimum practical resources (256 MiB memory, 300 s
-  timeout, `maxInstances: 1`) and runs once/day. Watch Cloud Scheduler, function
-  invocations, and Resend volume in the provider dashboard.
+  timeout) and runs once/day. Watch Cloud Scheduler, function invocations, and
+  Resend volume in the provider dashboard.
 - Consider a provider-side sending limit/alert in Resend for extra safety.
 
 ## Abuse and cost guardrails
@@ -125,7 +125,6 @@ settings that must be configured once per project.
   content types to `image/*` or `application/pdf`, bounding Storage bytes/egress.
 - **Bounded cleanup.** Account deletion recursively removes every proof file so
   Storage is not left billing for orphaned objects.
-- **Single-instance schedule.** The reminder function sets `maxInstances: 1`.
 
 ### Configure once in the Firebase / GCP console
 

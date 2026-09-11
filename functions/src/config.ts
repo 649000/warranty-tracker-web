@@ -3,7 +3,6 @@ export const SCHEDULE_TIME_ZONE = 'Asia/Singapore';
 export const FUNCTION_REGION = 'asia-southeast1';
 export const FUNCTION_MEMORY_MIB = 256;
 export const FUNCTION_TIMEOUT_SECONDS = 300;
-export const FUNCTION_MAX_INSTANCES = 1;
 
 export const RESEND_API_ENDPOINT = 'https://api.resend.com/emails';
 
